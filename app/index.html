@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feira Orgânica Delivery - Entregando amor em forma de alimento.</title>
+    
+    <!-- Icons -->
+    <base href="">
+
+    <!-- Icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-128.png" sizes="128x128" />
+    <meta name="application-name" content="&nbsp;"/>
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
+    <meta name="msapplication-TileImage" content="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/mstile-144x144.png" />
+    <meta name="msapplication-square70x70logo" content="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/mstile-70x70.png" />
+    <meta name="msapplication-square150x150logo" content="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/mstile-150x150.png" />
+    <meta name="msapplication-wide310x150logo" content="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/mstile-310x150.png" />
+    <meta name="msapplication-square310x310logo" content="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/mstile-310x310.png" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bower_components/bootstrap-3.3.2---24grid/css/bootstrap.min.css">
+    <!-- Font Awesome - Icon -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- Custom CSS -->
+    <link href="assets/css/global.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-controller="myAppCtrl">
+  	<a class="local-anchor" name="home"></a>
+    <nav class="navbar navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="">
+            <img style="margin-top: -15px;" ng-src="http://images.elasticbeanstalk.com/55/https://s3-sa-east-1.amazonaws.com/fodev/img/global/wlogo.png">
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#/home">Home</a></li>
+            <li class="active"><a href="" ng-click="gotoElement('organic_baskets', -53)">Cestas orgânicas</a></li>
+            <li><a href="" ng-click="gotoElement('how_it_works', -53)">Como funciona</a></li>
+            <li><a href="" ng-click="gotoElement('week_products', -53)">Produtos da semana</a></li>
+            <li><a href="" ng-click="gotoElement('about', -53)">Sobre</a></li>
+            <li><a href="" ng-click="gotoElement('susteinable_actions', -53)">Ações sustentáveis</a></li>
+            <li><a href="" ng-click="gotoElement('contact', -53)">Contato</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+      <!--[if lt IE 7]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <![endif]-->
+
+    <div class="container-fluid main-container" ng-view></div>
+    <div class="container-fluid">
+      <div class="row" style="background:black; color:white;">
+      	<div class="col-xs-24">
+      		Uma empresa do grupo Tzadi צ
+      		<br><br><br><br><br><br>
+      	</div>
+      </div>          
+    </div>
+
+
+    <!-- In production use:
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular-route.min.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="app.js"></script>
+    <script src="home/home.js"></script>
+    <script src="vitrine/vitrine.js"></script>
+    <script src="components/version/version.js"></script>
+    <script src="components/version/version-directive.js"></script>
+    <script src="components/version/interpolate-filter.js"></script>
+  </body>
+</html>

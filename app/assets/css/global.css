@@ -1,0 +1,26 @@
+/** Default styles **/
+.background-default{ background-color:white;}
+.background-danger{ background-color:#D64541;}
+.background-success{ background-color:#3FC380;}
+.background-info{ background-color:#5BC0DE;}
+.background-primary{ background-color:#22A7F0;}
+.background-warning{ background-color:#F27935;}
+
+/** Estilo do navegador **/
+.navbar-fixed-top{background: white; background: rgba(255, 255, 255, 0.9);}
+.navbar-fixed-top a{color: #50293C; font-weight: 800;}
+
+/** Label colorido **/
+.label-1{background: #e6ec12;}
+
+/** padding top do conteúdo para nao ficar abaixo do navegador **/
+.main-container{padding-top:50px; }
+
+/** Fix para modulo do banco do brasil **/
+object[type^='application/gas-events'] { display: none; }
+
+/** Remove o gutter do row **/
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}

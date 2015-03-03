@@ -1,0 +1,12 @@
+<div class="row" ng-controller="VitrineCtrl as vitrine">
+	<div class="col-xs-24">
+		<h2>Produtos da semana</h2>
+
+		<div class="row">
+			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-8" ng-repeat="product in vitrine.products">
+				<img class="img-responsive" alt="week_product" src="https://s3-sa-east-1.amazonaws.com/fodev/img/global/passaro_voando.gif">
+				<p style="height:60px;">{{product.title}}</p>
+			</div>
+		</div>
+	</div>
+</div>
