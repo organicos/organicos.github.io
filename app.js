@@ -20,10 +20,6 @@ app.config(['$routeProvider', function($routeProvider) {
 app.service('anchorSmoothScroll', function(){
     
     this.scrollTo = function(eID, offset) {
-      
-      console.log('entrou na funcao');
-      console.log('eID: ' + eID);
-      console.log('offset: ' + offset);
 
         // This scrolling function 
         // is from http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript

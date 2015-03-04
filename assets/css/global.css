@@ -7,7 +7,7 @@
 .background-warning{ background-color:#F27935;}
 
 /** Estilo do navegador **/
-.navbar-fixed-top{background: white; background: rgba(255, 255, 255, 0.9);}
+.navbar-fixed-top{background: rgba(244, 205, 224, 0.8);}
 .navbar-fixed-top a{color: #50293C; font-weight: 800;}
 
 /** Label colorido **/
