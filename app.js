@@ -7,6 +7,7 @@ var app = angular.module('myApp', [
   'ngRoute',
   'myApp.home',
   'myApp.vitrine',
+  'myApp.compra',
   'myApp.version'
 ]);
 
