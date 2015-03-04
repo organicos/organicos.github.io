@@ -1,13 +1,13 @@
 'use strict';
 
-var vitrine = angular.module('myApp.vitrine', ['ngRoute'])
+var vitrine = angular.module('myApp.vitrine', ['ngRoute']);
 
 vitrine.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/vitrine', {
     templateUrl: 'vitrine/vitrine.html',
     controller: 'VitrineCtrl'
   });
-}])
+}]);
 
 vitrine.controller('VitrineCtrl', ['$scope','$http', function($scope, $http) {
 	var VitrineCtrl = this;

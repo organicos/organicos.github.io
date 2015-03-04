@@ -1,13 +1,13 @@
 'use strict';
 
-var compra = angular.module('myApp.compra', ['ngRoute'])
+var compra = angular.module('myApp.compra', ['ngRoute']);
 
 compra.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/compra', {
     templateUrl: 'compra/step_1.html',
     controller: 'CompraCtrl'
   });
-}])
+}]);
 
 compra.controller('CompraCtrl', ['$scope','$http', function($scope, $http) {
 	var CompraCtrl = this;

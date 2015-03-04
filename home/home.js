@@ -7,7 +7,7 @@ home.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'home/home.html',
     controller: 'HomeCtrl'
   });
-}])
+}]);
 
 home.controller('HomeCtrl', [function() {
 
