@@ -37,8 +37,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="bower_components/bootstrap-3.3.2---24grid/css/bootstrap.min.css">
     <!-- Font Awesome - Icon -->
-    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
-    <link rel="stylesheet" href="assets/third-party/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- Custom CSS -->
     <link href="assets/css/global.css" rel="stylesheet">
 
@@ -50,22 +49,20 @@
     <![endif]-->
   </head>
   <body ng-controller="myAppCtrl">
-  	<a class="local-anchor" name="home"></a>
-    <nav class="navbar navbar-fixed-top">
+
+    <nav class="navbar navbar-fixed-top" ng-controller="NavBarCtrl">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" ng-click="isCollapsed = !isCollapsed">
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+            <span class="fa fa-bars"></span>
           </button>
           <a class="navbar-brand" href="">
             <!-- <img style="margin-top: -15px;" ng-src="http://images.elasticbeanstalk.com/55/https://s3-sa-east-1.amazonaws.com/fodev/img/global/wlogo.png"> -->
             <img style="margin-top: -15px; height:50px;" src="assets/img/global/wtlogo2.png">
           </a>
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
+        <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
           <ul class="nav navbar-nav">
             <li><a href="#/home">Home</a></li>
             <li class="active"><a href="" ng-click="gotoElement('organic_baskets', -53)">Cestas orgânicas</a></li>
@@ -85,18 +82,17 @@
       <![endif]-->
 
     <div class="container-fluid main-container" ng-view></div>
-    <div class="container-fluid">
-      <div class="row" style="background:black; color:white;">
-      	<div class="col-xs-24">
-      		Uma empresa do grupo Tzadi צ
-      		<br><br><br><br><br><br>
-      	</div>
-      </div>          
+    
+    <div class="footer">
+      <div class="container-fluid">
+        <p class="text-muted">Uma empresa do grupo Tzadi צ</p>
+      </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular-route.min.js"></script>
-    <!-- <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script> -->
+    <!-- Latest compiled and minified JavaScript for Angular -->
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
     <script src="app.js"></script>
     <script src="home/home.js"></script>
     <script src="vitrine/vitrine.js"></script>

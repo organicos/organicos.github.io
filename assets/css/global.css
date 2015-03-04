@@ -1,20 +1,20 @@
 /** Default styles **/
 .background-default{ background-color:white;}
 .background-danger{ background-color:#D64541;}
-.background-success{ background-color:#3FC380;}
+.background-success{ background-color:#3FC380; color:white;}
 .background-info{ background-color:#5BC0DE;}
 .background-primary{ background-color:#22A7F0;}
 .background-warning{ background-color:#F27935;}
 
 /** Estilo do navegador **/
-.navbar-fixed-top{background: rgba(244, 205, 224, 0.8);}
+.navbar-fixed-top{background: rgba(255, 240, 255, 0.9);}
 .navbar-fixed-top a{color: #50293C; font-weight: 800;}
 
 /** Label colorido **/
 .label-1{background: #e6ec12;}
 
 /** padding top do conteúdo para nao ficar abaixo do navegador **/
-.main-container{padding-top:50px; }
+.main-container{padding-top:60px; }
 
 /** Fix para modulo do banco do brasil **/
 object[type^='application/gas-events'] { display: none; }
@@ -23,4 +23,24 @@ object[type^='application/gas-events'] { display: none; }
 .no-gutter > [class*='col-'] {
     padding-right:0;
     padding-left:0;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background:black;
+    color:white;
 }

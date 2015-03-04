@@ -8,7 +8,8 @@ var app = angular.module('myApp', [
   'myApp.home',
   'myApp.vitrine',
   'myApp.compra',
-  'myApp.version'
+  'myApp.version',
+  'ui.bootstrap'
 ]);
 
 // remove # from url
@@ -18,6 +19,24 @@ app.config(['$routeProvider', function($routeProvider) {
 
 }]);
 
+app.controller('NavBarCtrl', function($scope) {
+    
+    $scope.isCollapsed = true;
+});
+
+app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll) {
+    
+    $scope.gotoElement = function (eID, offset){
+      // set the location.hash to the id of
+      // the element you wish to scroll to.
+      $location.hash(eID);
+ 
+      // call $anchorScroll()
+      anchorSmoothScroll.scrollTo(eID, offset);
+      
+    };
+});
+               
 app.service('anchorSmoothScroll', function(){
     
     this.scrollTo = function(eID, offset) {
@@ -75,17 +94,3 @@ app.service('anchorSmoothScroll', function(){
     };
     
 });
-
-app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll) {
-    
-    $scope.gotoElement = function (eID, offset){
-      // set the location.hash to the id of
-      // the element you wish to scroll to.
-      $location.hash(eID);
- 
-      // call $anchorScroll()
-      anchorSmoothScroll.scrollTo(eID, offset);
-      
-    };
-});
-               
