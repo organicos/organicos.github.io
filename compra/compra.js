@@ -4,15 +4,15 @@ var compra = angular.module('myApp.compra', ['ngRoute']);
 
 compra.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/compra', {
-    templateUrl: 'compra/location.html',
+    templateUrl: 'compra/new_basket.html',
     controller: 'HomeCtrl'
   });
-  $routeProvider.when('/location', {
-    templateUrl: 'compra/location.html',
+  $routeProvider.when('/new_basket', {
+    templateUrl: 'compra/new_basket.html',
     controller: 'HomeCtrl'
   });
-  $routeProvider.when('/montar_cesta', {
-    templateUrl: 'compra/montar_cesta.html',
+  $routeProvider.when('/add_products', {
+    templateUrl: 'compra/add_products.html',
     controller: 'HomeCtrl'
   });
   $routeProvider.when('/confirmation', {
