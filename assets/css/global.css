@@ -1,14 +1,21 @@
 /** Default styles **/
 .background-default{ background-color:white;}
 .background-danger{ background-color:#D64541;}
-.background-success{ background-color:#3FC380; color:white;}
+.background-success{ background-color:#1D9E74; color:white;}
 .background-info{ background-color:#5BC0DE;}
 .background-primary{ background-color:#22A7F0;}
 .background-warning{ background-color:#F27935;}
 
 /** Estilo do navegador **/
-.navbar-fixed-top{background: rgba(255, 240, 255, 0.9);}
-.navbar-fixed-top a{color: #50293C; font-weight: 800;}
+.navbar-fixed-top{
+    background: rgba(255, 255, 255, 0.9);
+    /** border-bottom: .1em solid rgba(163, 73, 164, 0.9); **/
+}
+/** .navbar-fixed-top{background: rgba(255, 240, 255, 0.9);} **/
+.navbar-fixed-top a{color: rgba(163, 73, 164, 0.9); font-weight: 800;}
+
+/** Centraliza imagens responsivas **/
+.img-responsive { margin: 0 auto; }
 
 /** Label colorido **/
 .label-1{background: #e6ec12;}
@@ -18,6 +25,9 @@
 
 /** Fix para modulo do banco do brasil **/
 object[type^='application/gas-events'] { display: none; }
+
+.font-50{ font-size: 50px;}
+
 
 /** Remove o gutter do row **/
 .no-gutter > [class*='col-'] {
