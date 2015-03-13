@@ -3,7 +3,16 @@
 var $scope, $location;
 
 // Declare app level module which depends on views, and components
+var app = angular.module('myApp.myConfig', []).constant('myConfig', {
+  'backendUrl': 'https://104.154.82.56/api/',
+  'assetsUrl': 'https://s3-sa-east-1.amazonaws.com/fodev/',
+  'imageResizeServiceUrl': 'https://images.elasticbeanstalk.com/',
+  'version': 0.2
+});
+
+// Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
+  'myApp.myConfig',
   'ngRoute',
   'myApp.home',
   'myApp.vitrine',
@@ -24,7 +33,9 @@ app.controller('NavBarCtrl', function($scope) {
     $scope.isCollapsed = true;
 });
 
-app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll) {
+app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll, myConfig) {
+    
+    console.log(myConfig.backend_url);
     
     $scope.gotoElement = function (eID, offset){
       // set the location.hash to the id of
