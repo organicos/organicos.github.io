@@ -29,12 +29,11 @@ app.config(['$routeProvider', function($routeProvider) {
 
 }]);
 
-app.config(['$httpProvider', function ($httpProvider) {
-    $httpProvider.defaults.headers.post['Access-Control-Allow-Headers'] = "X-Custom-Header";
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
-    $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
-    $httpProvider.defaults.useXDomain = true;
-}]);
+app.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+]);
 
 app.controller('NavBarCtrl', function($scope) {
     
