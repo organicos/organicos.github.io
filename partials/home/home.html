@@ -148,26 +148,26 @@
 	</div>
 </div>
 
-<div id="contact" class="row background-primary">
+<div id="contact" class="row background-primary" ng-controller="ContactCtrl">
 	<div class="col-xs-offset-1 col-xs-22">
-		<h2 class="text-center">Interessado?</h2>
+		<h2 class="text-center">Deixar uma mensagem</h2>
 		<p class="text-center">Deixe seu email que entraremos em contato em breve.</p>
-		<form class="form" action="" method="POST">
+		<form class="form" method="POST" role="form" name="contactForm" ng-submit="submit(contactForm)">
 			<div class="form-group">
 				<label for="contact-email">Email *</label>
-				<input class="form-control" type="text" name="email" id="contact-email"/>
+				<input class="form-control" type="text" name="email" ng-model="email" id="contact-email"/>
 			</div>
 			<div class="form-group">
 				<label for="contact-name">Nome</label>
-				<input class="form-control" type="text" name="name" id="contact-name"/>
+				<input class="form-control" type="text" name="name" ng-model="name" id="contact-name"/>
 			</div>
 			<div class="form-group">
 				<label for="contact-phone">Telefone</label>
-				<input class="form-control" type="text" name="phone" id="contact-phone"/>
+				<input class="form-control" type="text" name="phone" ng-model="phone" id="contact-phone"/>
 			</div>
 			<div class="form-group">
 				<label for="contact-msg">Mensagem</label>
-				<textarea class="form-control" rows="5" name="msg" id="contact-msg"></textarea>
+				<textarea class="form-control" rows="5" name="msg" ng-model="msg" id="contact-msg"></textarea>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-success">Enviar</button>

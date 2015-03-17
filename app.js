@@ -4,7 +4,7 @@ var $scope, $location;
 
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp.myConfig', []).constant('myConfig', {
-  'backendUrl': 'https://104.154.82.56/api/',
+  'api': 'https://104.154.82.56/api/',
   'assetsUrl': 'https://s3-sa-east-1.amazonaws.com/fodev/',
   'imageResizeServiceUrl': 'https://images.elasticbeanstalk.com/',
   'version': 0.2
@@ -18,6 +18,7 @@ var app = angular.module('myApp', [
   'myApp.vitrine',
   'myApp.compra',
   'myApp.version',
+  'myApp.contact',
   'ui.bootstrap'
 ]);
 
@@ -26,6 +27,13 @@ app.config(['$routeProvider', function($routeProvider) {
 
     $routeProvider.otherwise({redirectTo: '/home'});
 
+}]);
+
+app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.defaults.headers.post['Access-Control-Allow-Headers'] = "X-Custom-Header";
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
+    $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
+    $httpProvider.defaults.useXDomain = true;
 }]);
 
 app.controller('NavBarCtrl', function($scope) {
