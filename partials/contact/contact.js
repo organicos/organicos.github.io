@@ -14,7 +14,7 @@ contact.controller('ContactCtrl', ['$scope','$http', function($scope, $http) {
 	var VitrineCtrl = this;
 	ContactCtrl.contacts = [];
     // http://104.154.82.56/api/products - URL do recurso
-    $http.get('http://104.154.82.56/api/todos').then(function(resp) {
+    $http.get('//fodev-api-vinagreti.c9.io/api/tickets').then(function(resp) {
       ContactCtrl.contacts = resp.data;
     }, function(err) {
       console.error('ERR', err);
@@ -23,7 +23,7 @@ contact.controller('ContactCtrl', ['$scope','$http', function($scope, $http) {
     $scope.submit = function(contactForm) {
         console.log($scope);
         if (contactForm.phone.$viewValue && contactForm.email.$viewValue && contactForm.name.$viewValue && contactForm.msg.$viewValue) {
-            $http.post('https://fodev-api-vinagreti.c9.io/api/tickets',{
+            $http.post('//fodev-api-vinagreti.c9.io/api/tickets',{
                 text: contactForm.phone.$viewValue
                 , email: contactForm.email.$viewValue
                 , name: contactForm.name.$viewValue
