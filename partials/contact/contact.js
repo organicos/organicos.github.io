@@ -14,7 +14,7 @@ contact.controller('ContactCtrl', ['$scope','$http', function($scope, $http) {
 	var VitrineCtrl = this;
 	ContactCtrl.contacts = [];
     // http://104.154.82.56/api/products - URL do recurso
-    $http.get('//fodev-api-vinagreti.c9.io/api/tickets').then(function(resp) {
+    $http.get('//fodev-api-vinagreti.c9.io/api/todos').then(function(resp) {
       ContactCtrl.contacts = resp.data;
     }, function(err) {
       console.error('ERR', err);
