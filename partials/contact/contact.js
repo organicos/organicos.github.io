@@ -25,7 +25,8 @@ contact.controller('ContactCtrl', ['$scope','$http', function($scope, $http) {
             })
             .success(function(data, status, headers, config){
                 console.log(data, status, headers, config);
-                alert('enviado');
+                
+                alert('enviado - apagar formulario');
             })
             .error(function(data, status, headers, config){
                 alert('erro ao enviar');
