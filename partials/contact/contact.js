@@ -15,7 +15,7 @@ contact.controller('ContactCtrl', ['$scope','$http', function($scope, $http) {
 
     $scope.submit = function(contactForm) {
         console.log($scope);
-        if (contactForm.phone.$viewValue && contactForm.email.$viewValue && contactForm.name.$viewValue && contactForm.msg.$viewValue) {
+        if (contactForm.email.$viewValue && contactForm.msg.$viewValue) {
             $http.post('//fodev-api-vinagreti.c9.io/api/tickets',{
                 email: contactForm.email.$viewValue
                 , name: contactForm.name.$viewValue
