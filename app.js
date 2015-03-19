@@ -42,8 +42,6 @@ app.controller('NavBarCtrl', function($scope) {
 
 app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll, myConfig) {
     
-    console.log(myConfig.backend_url);
-    
     $scope.gotoElement = function (eID, offset){
       // set the location.hash to the id of
       // the element you wish to scroll to.
@@ -52,6 +50,12 @@ app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll, myCo
       // call $anchorScroll()
       anchorSmoothScroll.scrollTo(eID, offset);
       
+    };
+    
+    $scope.appAlert = function(msg, duration) {
+      
+        alert(msg.join('<br>'));
+        
     };
 });
                

@@ -24,12 +24,16 @@ contact.controller('ContactCtrl', ['$scope','$http', function($scope, $http) {
                 , kind: 'contact'
             })
             .success(function(data, status, headers, config){
-                console.log(data, status, headers, config);
-                
                 alert('enviado - apagar formulario');
             })
             .error(function(data, status, headers, config){
-                alert('erro ao enviar');
+                
+                var log = [];
+                angular.forEach(data.errors, function(error, error_key) {
+                  this.push(error_key + ': ' + error.message);
+                }, log);
+                
+                $scope.appAlert(log);
             });
         } else {
             alert('Por favor, preencha ao menos o seu e-mail e sua mesagem.');
