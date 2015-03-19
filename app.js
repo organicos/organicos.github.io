@@ -58,7 +58,19 @@ app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll, myCo
         
     };
 });
-               
+
+app.controller('AlertCtrl', function ($scope) {
+$scope.alerts = [ ];
+
+$scope.addAlert = function() {
+$scope.alerts.push({type: 'danger', msg: 'Another alert!'});
+};
+
+$scope.closeAlert = function(index) {
+$scope.alerts.splice(index, 1);
+};
+})
+
 app.service('anchorSmoothScroll', function(){
     
     this.scrollTo = function(eID, offset) {

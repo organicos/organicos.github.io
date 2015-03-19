@@ -75,11 +75,18 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    
+    <div class="container-fluid">
+      <div ng-controller="AlertCtrl">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        <button class='btn btn-default' ng-click="addAlert()">Add Alert</button>
+      </div>
+    </div>
 
-      <!--[if lt IE 7]>
-          <p class="browsehappy">You are us
-          ing an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-      <![endif]-->
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are us
+      ing an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
     <div class="container-fluid main-container" ng-view></div>
     
