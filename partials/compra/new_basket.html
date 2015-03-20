@@ -3,6 +3,8 @@
 	<div class="col-xs-6 text-left" style='min-height:100em;'>
 		
 		<h2 class="text-center">Cesta</h2>
+		
+		<p ng-if="!basket.products.length">Ainda não foram adicionados produtos na cesta. Clice no produto ao lado para colocá-lo na cesta.</p>
 
         <div class="row">
 			<div class="col-lg-4 col-md-6 col-sm-8 col-xs-12" ng-repeat="product in basket.products">
