@@ -66,7 +66,7 @@
 		<br><br>
 
 		<div class="row">
-			<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="product in FeiraCtrl.products| filter:{ highlight: true }">
+			<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="product in products| filter:{ highlight: true }">
 				<img class="img-responsive" alt="week_product" ng-src="{{product.img}}">
 				<p style="height:60px;">{{product.name}}</p>
 			</div>
