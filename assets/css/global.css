@@ -1,17 +1,44 @@
 /** Default styles **/
-.background-default{ background-color:white; color:black;}
-.background-danger{ background-color:#D64541; color:white;}
-.background-success{ background-color:#1D9E74; color:white;}
-.background-info{ background-color:#5BC0DE; color:white;}
-.background-primary{ background-color:#22A7F0; color:white;}
-.background-warning{ background-color:#F27935; color:white;}
+.background-black{ background-color:black;}
+.background-blue{ background-color:#5BC0DE;}
+.background-blue-dark{ background-color:#22A7F0;}
+.background-green{ background-color:#1D9E74;}
+.background-orange{ background-color:#F27935;}
+.background-red{ background-color:#D64541;}
+.background-white{ background-color:white;}
+.background-violet{ background-color:#A348A3;}
+
+/** Default styles **/
+.text-black{ color:black;}
+.text-blue{ color:#5BC0DE;}
+.text-blue-dark{ color:#22A7F0;}
+.text-green{ color:#1D9E74;}
+.text-orange{ color:#F27935;}
+.text-red{ color:#D64541;}
+.text-white{ color:white;}
+.text-violet{ color:#A348A3;}
+a.text-black{ color:black;}
+a.text-blue{ color:#5BC0DE;}
+a.text-blue-dark{ color:#22A7F0;}
+a.text-green{ color:#1D9E74;}
+a.text-orange{ color:#F27935;}
+a.text-red{ color:#D64541;}
+a.text-white{ color:white}
+a.text-violet{ color:#A348A3;}
 
 /** Font sizes **/
 .font-20{ font-size: 20px;}
+.font-30{ font-size: 30px;}
+.font-35{ font-size: 35px;}
 .font-40{ font-size: 40px;}
 .font-50{ font-size: 50px;}
 .font-60{ font-size: 60px;}
 .font-200{ font-size: 200px;}
+
+/** Estilo do navegador **/
+.main-container a{
+    text-decoration:none;
+}
 
 /** Estilo do navegador **/
 .navbar-fixed-top{
@@ -28,9 +55,6 @@
 .server-action-menu {
     padding: 5px;
 }
-
-/** Label colorido **/
-.label-1{background: #e6ec12;}
 
 /** padding top do conteúdo para nao ficar abaixo do navegador **/
 .main-container{padding-top:60px; }

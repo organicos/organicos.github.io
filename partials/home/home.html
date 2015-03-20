@@ -1,6 +1,6 @@
 <h1 class="hide">Home</h1>
 
-<div class="row no-gutter background-default">
+<div class="row no-gutter">
 	<div class="col-xs-24">
 		<img class="img-responsive img-centered" ng-src="http://images.elasticbeanstalk.com/1000/https://s3-sa-east-1.amazonaws.com/fodev/img/global/marca.png">
 
@@ -29,28 +29,31 @@
 	</div>
 </div>
 
-<div id="how_it_works" class="row background-success">
+<div id="how_it_works" class="row background-green text-white">
 	<div class="col-xs-24">
 
 		<h2 class="text-center">Como funciona</h2>
-		<br><br>
+		<br>
 
 		<div class="row">
 			<div class="col-sm-8 text-center">
 				<br>
-				<h4 style="padding-bottom:10px;"><span class="label label-1">1</span> Monte sua cesta. </h4>
+				<p style="padding-bottom:10px;" class="font-35 text-violet"><span class="badge background-white text-violet font-30">1</span> <a class="text-violet" href="#/montar_cesta">Monte sua cesta.</a></p>
+				<p>Em nossa feira você encontra somente produtos que foram produzidos com muito amor e respeito a você e ao meio ambiente.</p>
 				<i class="fa fa-cubes font-200"></i>
 				<br><br>
 			</div>
 			<div class="col-sm-8 text-center">
 				<br>
-				<h4 style="padding-bottom:10px;"><span class="label label-1">2</span> Efetue o pagamento. </h4>
+				<p style="padding-bottom:10px;" class="font-35 text-violet"><span class="badge background-white text-violet font-30">2</span> Efetue o pagamento.</p>
+				<p>Compra 100% segura! Você escolhe a melhor forma de pagar. Aceitamos cartões de crédito e débito, transferência e boleto bancário.</p>
 				<i class="fa fa-credit-card fa-5x font-200"></i>
 				<br><br>
 			</div>
 			<div class="col-sm-8 text-center">
 				<br>
-				<h4 style="padding-bottom:10px;"><span class="label label-1">3</span> Receba o produto no endereço fornecido.</h4>
+				<p style="padding-bottom:10px;" class="font-35 text-violet"><span class="badge background-white text-violet font-30">3</span> Receba o produto.</p>
+				<p>Fazemos o que chamamos de Entrega Inteligente. Muita logística, menor custo, baixa emissão de carbono e horários alternativos.</p>
 				<i class="fa fa-truck fa-5x fa-flip-horizontal font-200"></i>
 				<br><br>
 			</div>
@@ -60,7 +63,7 @@
 	</div>
 </div>
 
-<div id="week_products" class="row background-default" ng-controller="FeiraCtrl as FeiraCtrl">
+<div id="week_products" class="row" ng-controller="FeiraCtrl as FeiraCtrl">
 	<div class="col-xs-offset-1 col-xs-22">
 		<h2 class="text-center">Destaques da semana</h2>
 		<br><br>
@@ -74,43 +77,44 @@
 	</div>
 </div>
 
-<div id="about" class="row background-info">
+<div id="about" class="row background-blue text-white">
 	<div class="col-xs-offset-1 col-xs-22 text-center">
 		<h2>Sobre a Feira Orgânica Delivery</h2>
 		<br><br>
 		
 		<div class="row">
-			<div class="col-xs-8">
+			<div class="col-sm-8 col-xs-24">
 				<img class="img-responsive img-rounded" ng-src="http://images.elasticbeanstalk.com/440/https://s3-sa-east-1.amazonaws.com/fodev/img/global/o_que_fazemos.jpg"></img>
 			</div>
-			<div class="col-xs-16 text-justify">
-				<h3>O QUE FAZEMOS?</h3>
+			<div class="col-sm-16 col-xs-24 text-justify">
+				<h3 class="text-left">O QUE FAZEMOS?</h3>
 				<p>Entregamos alimento em forma de amor!</p>
-				<p>Literalmente? Entregamos alimentos orgânicos certificados, organizados em cestas, contendo todos os grupos alimentares indicados pelos nutricionistas para pessoas com interesse em ter uma vida saudável e uma alimentação equilibrada. De quebra... ajudamos o meio ambiente e ajudamos você a ajudar o meio ambiente, além de facilitar aos produtores orgânicos a comercialização de seus produtos certificados.</p>				
+				<p>Literalmente? Entregamos alimentos orgânicos certificados, organizados em cestas que você mesmo monta. Oferecemos produtos de todos os grupos alimentares indicados pelos nutricionistas para pessoas com interesse em ter uma vida saudável e uma alimentação equilibrada. Temos a preocupação de entregar apenas produtos certificados pelo Ministério da Agricultura e órgãos fiscalizadores, com a garantia de qualidade e confiabilidade. Afinal, de todos os alimentos que comemos, quantos podemos comer despreocupados?</p>				
+				<p>De quebra... ajudamos o meio ambiente e ajudamos você a ajudar o meio ambiente, além de contribuir com questões socioambientais e facilitar aos produtores orgânicos a comercialização de seus produtos certificados.</p>
 			</div>
 		</div>
 		<br><br>
 		<div class="row">
-			<div class="col-xs-16 text-justify">
-				<h3>COMO FAZEMOS?</h3>
-				<p>As nossas cestas são opções garantidas de que você receberá na sua casa alimentos orgânicos fresquinhos, certificados, selecionados, higienizados e embalados com carinho.</p> 
-				<p>Pensando em economizar na emissão de gases poluentes, como o CO2, agendamos as entregas em cada região de Florianópolis uma vez por semana gratuitamente, com veículos movidos a gás natural, de bicicleta e a pé, no horário de entrega que for mais conveniente e com a melhor forma de pagamento para o seu bolso.</p>
-				<p>Os nossos produtos orgânicos provêm do Box de Orgânicos do Ceasa de São José, o BOX 721. Essa parceria nasceu de uma proposta de fidelidade e ajuda mútua, visando incentivar e fortalecer a comercialização de produtos orgânicos certificados de agricultores locais.</p>
-			</div>
-			<div class="col-xs-8">
+			<div class="col-sm-8 col-xs-24 pull-right">
 				<img class="img-responsive img-rounded" ng-src="http://images.elasticbeanstalk.com/440/https://s3-sa-east-1.amazonaws.com/fodev/img/global/como_fazemos.jpg"></img>
 			</div>
+			<div class="col-sm-16 col-xs-24 text-justify pull-left">
+				<h3 class="text-left">COMO FAZEMOS?</h3>
+				<p>As cestas da Feira Orgânica Delivery são opções garantidas de que você receberá na sua casa alimentos orgânicos fresquinhos, certificados, selecionados, higienizados e embalados com carinho.</p> 
+				<p>Os nossos produtos orgânicos provêm do box de orgânicos do Ceasa de São José, SC, o BOX 721. Essa parceria nasceu de uma proposta de fidelidade e ajuda mútua.</p>
+				<p>Pensando em economizar na emissão de gases poluentes, como o CO2, agendamos as entregas em cada região de Florianópolis uma vez por semana gratuitamente, com veículos abastecidos à gás natural, de bicicleta e a pé, no horário de entrega que for mais conveniente e com a melhor forma de pagamento para o seu bolso.</p>
+			</div>
 		</div>
 		<br><br>
 		<div class="row">
-			<div class="col-xs-7">
+			<div class="col-sm-7 col-xs-24">
 				<img class="img-responsive img-rounded" ng-src="http://images.elasticbeanstalk.com/440/https://s3-sa-east-1.amazonaws.com/fodev/img/global/porque_fazemos.jpg"></img>
 			</div>
-			<div class="col-xs-17 text-justify">
-				<h3>POR QUE FAZEMOS?</h3>
+			<div class="col-sm-17 col-xs-24 text-justify">
+				<h3 class="text-left">POR QUE FAZEMOS?</h3>
 				<p>Começamos o nosso negócio aos poucos... mas com grandes sonhos!</p>
-				<p>Encontramos na Feira Orgânica Delivery uma forma de ajudar diversas pessoas, tanto produtores orgânicos locais, quanto aqueles que precisam manter de forma saudável a sua alimentação e a da sua família. Afinal, de todos os alimentos que comemos, quantos podemos comer despreocupados? </p>
-				<p>Seguimos os preceitos da economia solidária, onde parceiros, produtores e consumidores, juntos, promovem a sustentabilidade da vida no campo permitindo com que pequenos núcleos familiares se desenvolvam e tenham uma renda digna. Logo, o que buscamos é muito mais que um simples "delivery" de produtos orgânicos, mas estar sempre lembrando aos nossos clientes que, para receber cada um dos alimentos orgânicos que fornecemos, alguém plantou e cuidou, várias luas e dias de sol se passaram, chuvas caíram, insetos polinizaram e os frutos cresceram, respeitando a época do ano adequada ao crescimento natural de cada alimento. O agricultor produziu enxergando como parceiros todos os agentes da natureza. A partir disso, nossa felicidade é compartilhar com nossos clientes todo esse esforço empreendido para que todos possam consumir alimentos saudáveis de forma consciente e sustentável!</p>
+				<p>Encontramos na Feira Orgânica Delivery uma forma de ajudar diversas pessoas, os agricultores orgânicos locais e os consumidores que queiram manter de forma saudável a sua alimentação e a da sua família. Através disso, também realizamos nosso desejo de projetos socioambientais, como a campanha de entrega de Cestas Solidárias em instituições carentes, levando alimentos doados por nós e por vocês todo final de mês, para melhorar a alimentação básica dos que dali dependem. *** Saiba como doar alimentos para as Cestas Solidárias.***</p>
+				<p>Seguimos ainda, os preceitos da economia solidária, onde parceiros, produtores e consumidores, juntos, promovem a sustentabilidade da vida no campo permitindo com que pequenos núcleos familiares se desenvolvam e tenham uma renda digna. Logo, o que buscamos é muito mais que um simples "delivery" de produtos orgânicos, mas estar sempre lembrando aos nossos clientes que, para receber cada um dos alimentos orgânicos que fornecemos, alguém plantou e cuidou, várias luas e dias de sol se passaram, chuvas caíram, insetos polinizaram e os frutos cresceram, respeitando a época do ano adequada ao crescimento natural de cada alimento. O agricultor produziu enxergando como parceiros todos os agentes da natureza. A partir disso, nossa felicidade é compartilhar com nossos clientes todo esse esforço empreendido para que todos possam consumir alimentos saudáveis de forma consciente e sustentável!</p>
 			</div>
 		</div>
 
@@ -118,7 +122,7 @@
 	</div>
 </div>
 
-<div id="susteinable_actions" class="row background-default">
+<div id="susteinable_actions" class="row">
 	<div class="col-xs-24">
 		<h2 class="text-center">Ações sustentáveis</h2>
 		<br><br>
@@ -127,7 +131,7 @@
 	</div>
 </div>
 
-<div id="certification" class="row background-success">
+<div id="certification" class="row background-green text-white">
 	<div class="col-xs-offset-1 col-xs-22">
 		<div class="row">
 			<h2 class="text-center">Certificação</h2>
@@ -148,10 +152,11 @@
 	</div>
 </div>
 
-<div id="contact" class="row background-primary" ng-controller="ContactCtrl">
+<div id="contact" class="row background-blue-dark text-white" ng-controller="ContactCtrl">
 	<div class="col-xs-offset-1 col-xs-22">
 		<h2 class="text-center">Deixar uma mensagem</h2>
 		<p class="text-center">Deixe seu email que entraremos em contato em breve.</p>
+		
 		<form class="form" method="POST" role="form" name="contactForm" ng-submit="submit(contactForm)">
 			<div class="form-group">
 				<label for="contact-email">Email *</label>
