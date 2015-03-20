@@ -14,6 +14,7 @@ feira.controller('FeiraCtrl', ['$scope','$http', function($scope, $http) {
 	$scope.products = [];
 
 	$scope.basket = {
+	  total: 0,
 	  name: 'Minha cesta',
 	  products: []
 	};
@@ -34,14 +35,38 @@ feira.controller('FeiraCtrl', ['$scope','$http', function($scope, $http) {
     var productIndex = $scope.basket.products.indexOf(product);
 
     if (productIndex >= 0) {
-      var productInBasket = $scope.basket.products[productIndex];
-      productInBasket.quantity++;
+
+      $scope.basket.products[productIndex].quantity++;
+
+
     } else {
+
       product.quantity = 1;
+
       $scope.basket.products.push(product);
+
     }
+    
+    $scope.basket.total += parseFloat(product.price);
     
   };
 
+  $scope.dropFromBasket = function (product) {
+    
+    var productIndex = $scope.basket.products.indexOf(product);
+
+    if (productIndex >= 0) {
+      
+      $scope.basket.products.splice(productIndex, 1);
+      
+      $scope.basket.total -= parseFloat(product.price) * product.quantity;
+      
+    }
+
+  };
+  
+  $scope.calculateBasketTotal = function () {
+    
+  };
   
 }]);

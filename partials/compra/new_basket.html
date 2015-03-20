@@ -4,7 +4,13 @@
 		
 		<h2 class="text-center">Cesta</h2>
 		
+		<h4><strong>Total: </strong>R{{basket.total | currency}}</h4>
+		
 		<p ng-if="!basket.products.length">Ainda não foram adicionados produtos na cesta. Clice no produto ao lado para colocá-lo na cesta.</p>
+		
+		<p ng-if="basket.products.length">
+			<buton class="btn btn-danger btn-block btn-lg">Enviar pedido</buton>
+		</p>
 
         <div class="row">
 			<div class="col-lg-4 col-md-6 col-sm-8 col-xs-12" ng-repeat="product in basket.products">
@@ -18,11 +24,16 @@
 						popover-trigger="mouseenter"
 						popover-placement="right" 
 						popover-append-to-body="true"
+						ng-click="dropFromBasket(product)"
 					>
 					<p><strong>Qt: </strong> {{product.quantity}}</p>
 				</div>
 			</div>
         </div>
+
+		<p ng-if="basket.products.length">
+			<buton class="btn btn-danger btn-block btn-lg">Enviar pedido</buton>
+		</p>
 
 	</div>
 
