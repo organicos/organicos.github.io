@@ -1,10 +1,10 @@
 /** Default styles **/
-.background-default{ background-color:white;}
-.background-danger{ background-color:#D64541;}
+.background-default{ background-color:white; color:black;}
+.background-danger{ background-color:#D64541; color:white;}
 .background-success{ background-color:#1D9E74; color:white;}
 .background-info{ background-color:#5BC0DE; color:white;}
 .background-primary{ background-color:#22A7F0; color:white;}
-.background-warning{ background-color:#F27935;}
+.background-warning{ background-color:#F27935; color:white;}
 
 /** Font sizes **/
 .font-20{ font-size: 20px;}
@@ -23,6 +23,11 @@
 
 /** Centraliza imagens responsivas **/
 .img-responsive { margin: 0 auto; }
+
+/** Padding para numero indefinido de colunas **/
+.server-action-menu {
+    padding: 5px;
+}
 
 /** Label colorido **/
 .label-1{background: #e6ec12;}

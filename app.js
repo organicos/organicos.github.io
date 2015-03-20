@@ -3,7 +3,7 @@
 var $scope, $location;
 
 // Declare app level module which depends on views, and components
-var app = angular.module('myApp.myConfig', []).constant('myConfig', {
+angular.module('myApp.myConfig', []).constant('myConfig', {
   'api': 'https://104.154.82.56/api/',
   'assetsUrl': 'https://s3-sa-east-1.amazonaws.com/fodev/',
   'imageResizeServiceUrl': 'https://images.elasticbeanstalk.com/',
@@ -15,14 +15,14 @@ var app = angular.module('myApp', [
   'myApp.myConfig',
   'ngRoute',
   'myApp.home',
-  'myApp.vitrine',
+  'myApp.feira',
   'myApp.compra',
   'myApp.version',
   'myApp.contact',
   'ui.bootstrap'
 ]);
 
-// remove # from url
+
 app.config(['$routeProvider', function($routeProvider) {
 
     $routeProvider.otherwise({redirectTo: '/home'});
@@ -41,6 +41,31 @@ app.controller('NavBarCtrl', function($scope) {
 });
 
 app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll, myConfig) {
+
+    $scope.alerts = [];
+    
+    $scope.addAlert = function(kind, msg, durationMs) {
+        
+        if (typeof(durationMs) === 'undefined' || isNaN(durationMs)) durationMs = 5000;
+        
+        var message = msg;
+        
+        $scope.alerts.push({kind: kind, msg: msg});
+        
+        setTimeout(function(){
+            var messageIndex = $scope.alerts.indexOf(message);
+            $scope.closeAlert(messageIndex);
+        }, durationMs);
+    };
+    
+    $scope.closeAlert = function(index) {
+        $scope.alerts.splice(index, 1);
+    };
+        
+    $scope.$on('alert', function(event, alertObj) {
+        if (typeof(alertObj.timeout) === 'undefined' || isNaN(alertObj.timeout)) alertObj.timeout = 5000;
+        $scope.addAlert( alertObj.kind, alertObj.msg, alertObj.timeout);
+    });
     
     $scope.gotoElement = function (eID, offset){
       // set the location.hash to the id of
@@ -58,18 +83,6 @@ app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll, myCo
         
     };
 });
-
-app.controller('AlertCtrl', function ($scope) {
-$scope.alerts = [ ];
-
-$scope.addAlert = function() {
-$scope.alerts.push({type: 'danger', msg: 'Another alert!'});
-};
-
-$scope.closeAlert = function(index) {
-$scope.alerts.splice(index, 1);
-};
-})
 
 app.service('anchorSmoothScroll', function(){
     

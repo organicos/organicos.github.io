@@ -77,9 +77,8 @@
     </nav>
     
     <div class="container-fluid">
-      <div ng-controller="AlertCtrl">
+      <div id="alertWrapper">
         <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
-        <button class='btn btn-default' ng-click="addAlert()">Add Alert</button>
       </div>
     </div>
 
@@ -102,7 +101,7 @@
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
     <script src="app.js"></script>
     <script src="partials/home/home.js"></script>
-    <script src="partials/vitrine/vitrine.js"></script>
+    <script src="partials/feira/feira.js"></script>
     <script src="partials/compra/compra.js"></script>
     <script src="partials/contact/contact.js"></script>
     <script src="components/version/version.js"></script>

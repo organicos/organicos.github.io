@@ -1,34 +1,60 @@
-<div id="buy_step_1" class="row">
-	<div class="col-lg-offset-8 col-lg-8 col-sm-offset-0 col-sm-24 text-left background-success">
-	    <h3 class="text-center">
-            <p>
-                <span class="label label-1">1</span>
-                <span class="label label-default"><a href="#/add_products">2</a></span>
-                <span class="label label-default"><a href="#/confirmation">3</a></span>
-                <span class="label label-default"><a href="#/payment">4</a></span>
-            </p>
-            <p>Montar uma nova cesta</p>
-        </h3>
-        
-        <hr>
-        
-        <form class="form">
+<div id="buy_step_1" class="row background-success" ng-controller="FeiraCtrl as FeiraCtrl">
 
-            <div class="form-group">
-                <label for="basket_name">Nome da nova cesta</label>
-                <input class="form-control" type="text" name="basket_name" />
-            </div>
+	<div class="col-xs-6 text-left" style='min-height:100em;'>
+		
+		<h2 class="text-center">Cesta</h2>
 
-            <div class="form-group">
-                <label for="email">Seu e-mail</label>
-                <input class="form-control" type="text" name="email" />
-            </div>
-            
-            <div class="form-group text-right clearfix">
-                <a class="btn btn-success" href="#/add_products">Adicionar produtos</a>
-            </div>
-            
-        </form>
+        <div class="row">
+			<div class="col-lg-4 col-md-6 col-sm-8 col-xs-12" ng-repeat="product in basket.products">
+				<div class="server-action-menu">
+					<img 
+						class="img-responsive img-rounded" 
+						alt="week_product" 
+						ng-src="{{product.img}}" 
+						popover="{{product.dscr}}" 
+						popover-title="{{product.name}}" 
+						popover-trigger="mouseenter"
+						popover-placement="right" 
+						popover-append-to-body="true"
+					>
+					<p><strong>Qt: </strong> {{product.quantity}}</p>
+				</div>
+			</div>
+        </div>
 
 	</div>
+
+	<div class="col-xs-18 text-left background-default">
+		
+        <h1 class="text-center" 	ng-click="addToBasket()">Produtos da semana</h1>
+
+        <form class="form-inline text-right">
+            <div class="form-group">
+            	<label for="productQuery">Buscar produto</label>
+				<input class="form-control input-xs" id="productQuery" name="productQuery" ng-model="productQuery" type="text" placeholder="Buscar produto" autofocus>
+            </div>
+        </form>
+        
+        <br></br>
+
+		<div class="row">
+			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="product in products | filter:productQuery | orderBy: 'name'">
+				<img 
+					class="img-responsive img-thumbnail" 
+					alt="week_product" 
+					ng-src="{{product.img}}" 
+					popover="{{product.dscr}}" 
+					popover-title="{{product.name}}"
+					popover-trigger="mouseenter"
+					popover-placement="right" 
+					popover-append-to-body="true"
+					ng-click="addToBasket(product)"
+				>
+				<p style="height:60px;">{{product.name}}</p>
+			</div>
+			
+	    </div>
+	    
+	</div>
+
 </div>

@@ -60,13 +60,13 @@
 	</div>
 </div>
 
-<div id="week_products" class="row background-default" ng-controller="VitrineCtrl as vitrine">
+<div id="week_products" class="row background-default" ng-controller="FeiraCtrl as FeiraCtrl">
 	<div class="col-xs-offset-1 col-xs-22">
 		<h2 class="text-center">Destaques da semana</h2>
 		<br><br>
 
 		<div class="row">
-			<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="product in vitrine.products">
+			<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="product in FeiraCtrl.products| filter:{ highlight: true }">
 				<img class="img-responsive" alt="week_product" ng-src="{{product.img}}">
 				<p style="height:60px;">{{product.name}}</p>
 			</div>
