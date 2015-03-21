@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Feira Orgânica Delivery - Entregando amor em forma de alimento.</title>
+    
+    <!-- Icons -->
+    <base href="">
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="icon" sizes="16x16 32x32 64x64" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="196x196" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-192.png">
+    <link rel="icon" type="image/png" sizes="160x160" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-160.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-96.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-16.png">
+    <link rel="apple-touch-icon" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-180.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-144.png">
+    <meta name="msapplication-config" content="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/browserconfig.xml">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bower_components/bootstrap-3.3.2---24grid/css/bootstrap.min.css">
+    <!-- Font Awesome - Icon -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- Custom CSS -->
+    <link href="assets/css/global.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-controller="myAppCtrl">
+
+    <nav class="navbar navbar-fixed-top" ng-controller="NavBarCtrl">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" ng-click="isCollapsed = !isCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="fa fa-bars"></span>
+          </button>
+          <a class="navbar-brand" href="#/home">
+            <img style="margin-top: -13px; height:46px; " ng-src="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-57.png">
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
+          <ul class="nav navbar-nav">
+            <li><a href="#/home#how_it_works" ng-click="gotoElement('how_it_works', -53)">Como funciona</a></li>
+            <li><a href="#/home#week_products" ng-click="gotoElement('week_products', -53)">Destaques da semana</a></li>
+            <li><a href="#/home#about" ng-click="gotoElement('about', -53)">Sobre</a></li>
+            <li><a href="#/home#susteinable_actions" ng-click="gotoElement('susteinable_actions', -53)">Sustentabilidade</a></li>
+            <li><a href="#/home#certification" ng-click="gotoElement('certification', -53)">Certificação</a></li>
+            <li><a href="#/home#contact" ng-click="gotoElement('contact', -53)">Contato</a></li>
+            <li><a href="#/fair">Montar minha cesta orgânica</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    
+    <div class="container-fluid">
+      <div id="alertWrapper">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+          <strong>{{alert.title}}</strong>
+          <ul>
+            <li ng-repeat="message in alert.msg">{{message}}</li>
+          </ul>
+        </alert>
+      </div>
+    </div>
+
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are us
+      ing an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="container-fluid main-container" ng-view></div>
+    
+    <div class="footer">
+      <div class="container-fluid">
+        <p class="text-muted">Uma empresa do grupo Tzadi צ</p>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular-route.min.js"></script>
+    <!-- Latest compiled and minified JavaScript for Angular -->
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="app.js"></script>
+    <script src="partials/home/home.js"></script>
+    <script src="partials/fair/fair.js"></script>
+    <script src="partials/fair/fair.js"></script>
+    <script src="partials/contact/contact.js"></script>
+    <script src="components/version/version.js"></script>
+    <script src="components/version/version-directive.js"></script>
+    <script src="components/version/interpolate-filter.js"></script>
+  </body>
+</html>

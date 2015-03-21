@@ -15,8 +15,7 @@ var app = angular.module('myApp', [
   'myApp.myConfig',
   'ngRoute',
   'myApp.home',
-  'myApp.feira',
-  'myApp.compra',
+  'myApp.fair',
   'myApp.version',
   'myApp.contact',
   'ui.bootstrap'
@@ -42,29 +41,22 @@ app.controller('NavBarCtrl', function($scope) {
 
 app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll, myConfig) {
 
+      $scope.$back = function() { 
+        window.history.back();
+      };
+  
     $scope.alerts = [];
     
-    $scope.addAlert = function(kind, msg, durationMs) {
-        
-        if (typeof(durationMs) === 'undefined' || isNaN(durationMs)) durationMs = 5000;
-        
-        var message = msg;
-        
-        $scope.alerts.push({kind: kind, msg: msg});
-        
-        setTimeout(function(){
-            var messageIndex = $scope.alerts.indexOf(message);
-            $scope.closeAlert(messageIndex);
-        }, durationMs);
+    $scope.addAlert = function(alertObj) {
+        $scope.alerts.push(alertObj);
     };
     
-    $scope.closeAlert = function(index) {
+      $scope.closeAlert = function(index) {
         $scope.alerts.splice(index, 1);
-    };
+      }
         
     $scope.$on('alert', function(event, alertObj) {
-        if (typeof(alertObj.timeout) === 'undefined' || isNaN(alertObj.timeout)) alertObj.timeout = 5000;
-        $scope.addAlert( alertObj.kind, alertObj.msg, alertObj.timeout);
+        $scope.addAlert(alertObj);
     });
     
     $scope.gotoElement = function (eID, offset){

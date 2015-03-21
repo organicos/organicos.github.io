@@ -39,6 +39,14 @@ a.text-violet{ color:#A348A3;}
 .main-container a{
     text-decoration:none;
 }
+/** alert **/
+#alertWrapper {
+    position: fixed;
+    top: 0px;
+    left: 10px;
+    right: 10px;
+    z-index:9999;
+}
 
 /** Estilo do navegador **/
 .navbar-fixed-top{
