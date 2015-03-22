@@ -20,6 +20,32 @@ fair.config(['$routeProvider', function($routeProvider) {
 fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', function($scope, $http, $routeParams, $filter) {
   
 	$scope.products = [];
+	$scope.selectedCategory = '';
+  $scope.categories = [
+		'Frutas',
+		'Verduras',
+		'Legumes',
+		'Temperos',
+		'Grãos',
+		'Farinhas e Cereais',
+		'Geléias',
+		'Óleos',
+		'Super Alimentos',
+		'Conservas',
+		'Bebidas',
+		'Chás',
+		'Pães',
+		'Embalagens'
+  ];
+  
+  $scope.selectCategory = function (category) {
+    
+    $scope.selectedCategory = category;
+    
+    console.log($scope.selectedCategory);
+    console.log(category);
+    
+  }
 
 	$scope.basket = {
 	  total: 0,
