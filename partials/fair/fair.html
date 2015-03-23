@@ -67,14 +67,14 @@
 				<div class="btn-group" role="group" aria-label="productKind">
 					<button 
 						type="button" 
-						class="btn btn-default btn-xs" 
+						class="btn btn-default btn-xs btn-info" 
 						ng-class="selectedCategory == '' ? 'active' : ''"
 						ng-click="selectCategory()"
 					>Tudo</button>
 					<button 
 						ng-repeat="category in categories" 
 						type="button" 
-						class="btn btn-default btn-xs" 
+						class="btn btn-default btn-xs btn-info" 
 						ng-class="selectedCategory == category ? 'active' : ''"
 						ng-click="selectCategory(category)"
 					>{{category}}</button>
@@ -93,18 +93,16 @@
 									class="img-responsive" 
 									alt="week_product" 
 									ng-src="http://images.elasticbeanstalk.com/200/{{product.img}}" 
-									popover="{{product.dscr}}" 
-									popover-title="{{product.name}}"
-									popover-trigger="mouseenter"
-									popover-placement="right" 
-									popover-append-to-body="true"
 									ng-dblclick="addToBasket(product)"
 								>
 							</a>
 							
-							<div class="caption" style="heigth:180px;">
-								<a ng-if="product.category" ng-click="selectCategory(product.category)">{{product.category}}</a>
-								<p>{{product.name}}</p>
+							<div class="caption">
+								<div style="height:100px;">
+									<a ng-if="product.category" ng-click="selectCategory(product.category)">{{product.category}}</a>
+									<p>R{{product.price | currency}}</p>
+									<h4 class="text-violet">{{product.name}}</h4>
+								</div>
 								<button class="btn btn-danger btn-block" ng-click="addToBasket(product)">Colocar na cesta</button>
 							</div>
 					    </div>

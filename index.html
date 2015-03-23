@@ -77,7 +77,7 @@
     
     <div class="container-fluid">
       <div id="alertWrapper" ng-if="alerts.length">
-        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+        <alert ng-repeat="alert in alerts" type="{{alert.kind}}" close="closeAlert($index)">
           <strong>{{alert.title}}</strong>
           <ul>
             <li ng-repeat="message in alert.msg">{{message}}</li>

@@ -17,10 +17,12 @@ fair.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', function($scope, $http, $routeParams, $filter) {
+fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$location', function($scope, $http, $routeParams, $filter, $location) {
   
 	$scope.products = [];
+	$scope.saving_product = false;
 	$scope.selectedCategory = '';
+	$scope.productFormModalObject = {};
   $scope.categories = [
 		'Frutas',
 		'Verduras',
@@ -30,7 +32,6 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', functi
 		'Farinhas e Cereais',
 		'Geléias',
 		'Óleos',
-		'Super Alimentos',
 		'Conservas',
 		'Bebidas',
 		'Chás',
@@ -41,9 +42,6 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', functi
   $scope.selectCategory = function (category) {
     
     $scope.selectedCategory = category;
-    
-    console.log($scope.selectedCategory);
-    console.log(category);
     
   }
 
@@ -67,15 +65,50 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', functi
 
   });
   
-  $scope.productModalFormSubmit = function (product) {
-    
-    if(product._id){
+  $scope.dropProduct = function(product) {
+    var confirmed = confirm('Deseja realmente excluir o produto ' + product.name + "?");
       
-       $scope.productPut(product);
+    if (confirmed) {
+
+      $scope.saving_product = true;
+        $http.delete('//fodev-api-vinagreti.c9.io/v1/products/' + product._id)
+        .success(function() {
+          window.location = ("#/fair");
+        })
+        .error(function (resp) {
+          
+          var error_list = [];
+    
+          angular.forEach(resp.errors, function(error, path) {
+            this.push(error.message);
+          }, error_list);
+          
+          $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
+          });
+    
+      })
+      .finally(function () {
+        $scope.saving_product = false;
+      });
+      
+    };
+    
+  }
+
+  $scope.productModalFormSubmit = function () {
+    
+    $scope.saving_product = true;
+    
+    if($scope.productFormModalObject._id){
+      
+       $scope.productPut($scope.productFormModalObject);
       
     } else {
 
-      $scope.productPost(product); 
+      $scope.productPost($scope.productFormModalObject); 
 
     }
 
@@ -87,9 +120,10 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', functi
     .success(function(resp) {
       
         $scope.products = resp.data;
+        window.location = ("#/product/" + resp._id);
         
     })
-    .error( function(resp) {
+    .error(function (resp) {
       
       var error_list = [];
 
@@ -103,6 +137,9 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', functi
           title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
       });
   
+    })
+    .finally(function () {
+      $scope.saving_product = false;
     });
   
   };
@@ -112,8 +149,14 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', functi
     $http.put('//fodev-api-vinagreti.c9.io/v1/products/'+product._id, product)
     .success(function(resp) {
       
-        $scope.products = resp.data;
-        
+      $scope.products = resp.data;
+
+      $scope.$emit('alert', {
+          kind: 'success',
+          msg: '',
+          title: "Prodto editado com sucesso"
+      });
+
     })
     .error( function(resp) {
       
@@ -129,6 +172,9 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', functi
           title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
       });
   
+    })
+    .finally(function () {
+      $scope.saving_product = false;
     });
   }
 

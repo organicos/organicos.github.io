@@ -39,11 +39,34 @@ app.controller('NavBarCtrl', function($scope) {
     $scope.isCollapsed = true;
 });
 
+app.directive('contenteditable', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, elm, attrs, ctrl) {
+            // view -> model
+            elm.bind('blur', function() {~
+              console.log(scope);
+                scope.$apply(function() {
+                    ctrl.$setViewValue(elm.html());
+                });
+            });
+
+            // model -> view
+            ctrl.$render = function() {
+                elm.html(ctrl.$viewValue);
+            };
+
+            // load init value from DOM
+            ctrl.$setViewValue(elm.html());
+        }
+    };
+});
+
 app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll, myConfig) {
 
-      $scope.$back = function() { 
-        window.history.back();
-      };
+    $scope.$back = function() { 
+     window.history.back();
+    };
   
     $scope.alerts = [];
     

@@ -1,62 +1,94 @@
-<button class="btn btn-default" ng-click="$back()">Voltar</button>
+<a class="btn btn-default" href="#/fair">Voltar</a>
+<button class="btn btn-danger pull-right" 
+    ng-class="saving_product ? 'disabled' : ''"
+    ng-if="productFormModalObject._id" 
+    ng-click="dropProduct(productFormModalObject)">
+    <i class="fa fa-trash"></i>
+</button>
 
 <hr>
 
 <form class="form" role="form" name="productFormModal">
 
     <div class="row">
-        <div class="col-xs-12">
-            <div class="form-group">
-                <label for="name">Nome</label>
-                <input class="form-control" type="text" name="name" ng-model="productFormModalObject.name"/>
-            </div>
-            <div class="form-group">
-                <label for="price">Preço</label>
-                <input class="form-control" type="text" name="price" ng-model="productFormModalObject.price"/>
-            </div>
-            <div class="form-group">
-                <label for="dscr">Descrição</label>
-                <textarea class="form-control" rows="3" name="dscr" ng-model="productFormModalObject.dscr"></textarea>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="active" ng-model="productFormModalObject.highlight"> Destaque
-                </label>
-                <label>
-                    <input type="checkbox" name="active" ng-model="productFormModalObject.active"> Ativo
-                </label>
-            </div>
-        </div>
-        <div class="col-xs-12">
-            <div class="form-group">
-                <label for="category">Categoria</label>
-                <input class="form-control" type="text" name="category" ng-model="productFormModalObject.category"/>
-            </div>
-            <div class="form-group">
-                <label for="img">Imagem</label>
-                <input class="form-control" type="text" name="img" ng-model="productFormModalObject.img"/>
-            </div>
-            <div class="form-group">
-                <label for="season">Época</label>
-                <input class="form-control" type="text" name="season" ng-model="productFormModalObject.season"/>
-            </div>
-            <div class="form-group">
-                <label for="recipes">Receitas</label>
-                <input class="form-control" type="text" name="recipes" ng-model="productFormModalObject.recipes"/>
-            </div>
-        </div>
-    </div>
+        
+        <div class="col-xs-6">
+            
+            <img class="img-responsive" ng-src="{{productFormModalObject.img}}" ></img>
 
-    <div class="form-group">
-        <button type="button" class="btn btn-success" ng-click="productModalFormSubmit(productFormModalObject)" >Salvar</button>
+        </div>
+        
+        <div class="col-xs-18">
+            
+            <h1 contenteditable="true" ng-model="productFormModalObject.name"></h1>
+            
+            <br>
+            
+            <dl class="dl-horizontal">
+                <dt>Preço (R$): </dt>
+                <dd contenteditable="true" ng-model="productFormModalObject.price"></dd>
+            </dl>
+            
+            <dl class="dl-horizontal">
+                <dt>Descrição: </dt>
+                <dd contenteditable="true" ng-model="productFormModalObject.dscr"></dd>
+            </dl>
+            
+            <dl class="dl-horizontal">
+                <dt>Categoria: </dt>
+                <dd contenteditable="true" ng-model="productFormModalObject.category"></dd>
+            </dl>
+            
+            <dl class="dl-horizontal">
+                <dt>Época: </dt>
+                <dd contenteditable="true" ng-model="productFormModalObject.season"></dd>
+            </dl>
+            
+            <dl class="dl-horizontal">
+                <dt>Receitas: </dt>
+                <dd contenteditable="true" ng-model="productFormModalObject.recipes"></dd>
+            </dl>
+            
+            <dl class="dl-horizontal">
+                <dt>Imagem: </dt>
+                <dd contenteditable="true" ng-model="productFormModalObject.img"></dd>
+            </dl>
+
+            <dl class="dl-horizontal">
+                <dt></dt>
+                <dd>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="active" ng-model="productFormModalObject.highlight"> Destaque
+                        </label>
+                        <label>
+                            <input type="checkbox" name="active" ng-model="productFormModalObject.active"> Ativo
+                        </label>
+                    </div>
+                </dd>
+            </dl>
+
+            <dl class="dl-horizontal">
+                <dt></dt>
+                <dd><button type="button" class="btn btn-success" ng-click="productModalFormSubmit()"
+                ng-class="saving_product ? 'disabled' : ''"
+                >Salvar</button></dd>
+            </dl>
+            
+
+            
+        </div>
+
     </div>
+    
 </form>
 
-<br>
+<hr>
+
 <h3>Outros produtos da mesma categoria {{productFormModalObject.kind}}</h3>
 <div class="row">
 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in products | filter: {category: productFormModalObject.category} | orderBy: 'name'">
-		<a class="btn btn-default" ng-class="product.highlight ? 'background-orange' : product.active ? 'background-white' : 'background-red'" href="#/product/{{product._id}}">
+		<a class="btn btn-default" href="#/product/{{product._id}}">
 			<img 
 				class="img-responsive img-thumbnail" 
 				alt="week_product" 
