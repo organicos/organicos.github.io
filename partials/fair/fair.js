@@ -2,7 +2,7 @@
 
 var fair = angular.module('myApp.fair', ['ngRoute']);
 
-fair.config(['$routeProvider', function($routeProvider) {
+fair.config(['$routeProvider', '$httpProvider', function($routeProvider) {
   $routeProvider.when('/fair', {
     templateUrl: 'partials/fair/fair.html',
     controller: 'FairCtrl'
@@ -15,6 +15,7 @@ fair.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/fair/productFormModal.html',
     controller: 'FairCtrl'
   });
+
 }]);
 
 fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$location', function($scope, $http, $routeParams, $filter, $location) {

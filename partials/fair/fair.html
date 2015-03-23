@@ -83,12 +83,12 @@
 		        <br></br>
 		
 				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {category : selectedCategory} | orderBy: 'name')">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {category : selectedCategory, active: 'true'} | orderBy: 'name')">
 
 
 					    <div class="thumbnail">
 
-							<a class="btn btn-default" ng-class="product.highlight ? 'background-green' : product.active ? 'background-white' : 'background-red'" href="#/product/{{product._id}}">
+							<a class="btn btn-default" ng-class="$storage.user.kind == 'admin' ? product.highlight ? 'background-green' : product.active ? 'background-white' : 'background-red' : 'background-white'" href="#/product/{{product._id}}">
 								<img 
 									class="img-responsive" 
 									alt="week_product" 

@@ -20,41 +20,41 @@
         
         <div class="col-xs-18">
             
-            <h1 contenteditable="true" ng-model="productFormModalObject.name"></h1>
+            <h1 ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.name"></h1>
             
             <br>
             
             <dl class="dl-horizontal">
                 <dt>Preço (R$): </dt>
-                <dd contenteditable="true" ng-model="productFormModalObject.price"></dd>
+                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.price"></dd>
             </dl>
             
             <dl class="dl-horizontal">
                 <dt>Descrição: </dt>
-                <dd contenteditable="true" ng-model="productFormModalObject.dscr"></dd>
+                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.dscr"></dd>
             </dl>
             
             <dl class="dl-horizontal">
                 <dt>Categoria: </dt>
-                <dd contenteditable="true" ng-model="productFormModalObject.category"></dd>
+                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.category"></dd>
             </dl>
             
             <dl class="dl-horizontal">
                 <dt>Época: </dt>
-                <dd contenteditable="true" ng-model="productFormModalObject.season"></dd>
+                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.season"></dd>
             </dl>
             
             <dl class="dl-horizontal">
                 <dt>Receitas: </dt>
-                <dd contenteditable="true" ng-model="productFormModalObject.recipes"></dd>
+                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.recipes"></dd>
             </dl>
             
-            <dl class="dl-horizontal">
+            <dl class="dl-horizontal" ng-if="$storage.user.kind == 'admin'">
                 <dt>Imagem: </dt>
-                <dd contenteditable="true" ng-model="productFormModalObject.img"></dd>
+                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.img"></dd>
             </dl>
 
-            <dl class="dl-horizontal">
+            <dl class="dl-horizontal"  ng-if="$storage.user.kind == 'admin'">
                 <dt></dt>
                 <dd>
                     <div class="checkbox">
@@ -68,7 +68,7 @@
                 </dd>
             </dl>
 
-            <dl class="dl-horizontal">
+            <dl class="dl-horizontal"  ng-if="$storage.user.kind == 'admin'">
                 <dt></dt>
                 <dd><button type="button" class="btn btn-success" ng-click="productModalFormSubmit()"
                 ng-class="saving_product ? 'disabled' : ''"

@@ -16,60 +16,108 @@ var app = angular.module('myApp', [
   'ngRoute',
   'myApp.home',
   'myApp.fair',
+  'myApp.security',
   'myApp.version',
   'myApp.contact',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngStorage'
 ]);
 
-
-app.config(['$routeProvider', function($routeProvider) {
-
-    $routeProvider.otherwise({redirectTo: '/home'});
-
-}]);
-
-app.config(['$httpProvider', function($httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+app.factory('Main', ['$http', '$localStorage', function($http, $localStorage){
+        var baseUrl = "//fodev-api-vinagreti.c9.io/v1";
+        function changeUser(user) {
+            angular.extend(currentUser, user);
+        }
+ 
+        function urlBase64Decode(str) {
+            var output = str.replace('-', '+').replace('_', '/');
+            switch (output.length % 4) {
+                case 0:
+                    break;
+                case 2:
+                    output += '==';
+                    break;
+                case 3:
+                    output += '=';
+                    break;
+                default:
+                    throw 'Cadeia de caracteres base64url inválida!';
+            }
+            return window.atob(output);
+        }
+ 
+        function getUserFromToken() {
+            var token = $localStorage.user.token;
+            var user = {};
+            if (typeof token !== 'undefined') {
+                var encoded = token.split('.')[1];
+                user = JSON.parse(urlBase64Decode(encoded));
+            }
+            return user;
+        }
+ 
+        var currentUser = getUserFromToken();
+ 
+        return {
+            signup: function(data, success, error) {
+                $http.post(baseUrl + '/signup', data).success(success).error(error)
+            },
+            signin: function(data, success, error) {
+                $http.post(baseUrl + '/signin', data).success(success).error(error)
+            },
+            me: function(success, error) {
+                $http.get(baseUrl + '/me').success(success).error(error)
+            },
+            logout: function(success) {
+                changeUser({});
+                success();
+            }
+        };
     }
 ]);
 
-app.controller('NavBarCtrl', function($scope) {
+app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+
+    $routeProvider.otherwise({redirectTo: '/home'});
     
-    $scope.isCollapsed = true;
-});
+    // Append the Authenticated hash to the header
+    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
+      return {
+          'request': function (config) {
+              config.headers = config.headers || {};
+              if ($localStorage.user && $localStorage.user.token) {
+                  config.headers.Authorization = 'Organic ' + $localStorage.user.token;
+              }
+              return config;
+          },
+          'responseError': function(response) {
+              if(response.status === 401 || response.status === 403) {
+                  $location.path('/signin');
+              }
+              return $q.reject(response);
+          }
+      };
+    }]);
 
-app.directive('contenteditable', function() {
-    return {
-        require: 'ngModel',
-        link: function(scope, elm, attrs, ctrl) {
-            // view -> model
-            elm.bind('blur', function() {~
-              console.log(scope);
-                scope.$apply(function() {
-                    ctrl.$setViewValue(elm.html());
-                });
-            });
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        
+}]);
 
-            // model -> view
-            ctrl.$render = function() {
-                elm.html(ctrl.$viewValue);
-            };
+app.controller('myAppCtrl'
+    , ['$scope', '$location', 'anchorSmoothScroll', 'myConfig', '$localStorage'
+    , function($scope, $location, anchorSmoothScroll, myConfig, $localStorage) {
 
-            // load init value from DOM
-            ctrl.$setViewValue(elm.html());
-        }
-    };
-});
-
-app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll, myConfig) {
+    $scope.$storage = $localStorage.$default({
+        user: {}
+    });
 
     $scope.$back = function() { 
      window.history.back();
     };
   
     $scope.alerts = [];
-    
+
     $scope.addAlert = function(alertObj) {
         $scope.alerts.push(alertObj);
     };
@@ -96,6 +144,34 @@ app.controller('myAppCtrl', function($scope, $location, anchorSmoothScroll, myCo
       
         alert(msg.join('<br>'));
         
+    };
+}]);
+
+app.controller('NavBarCtrl', function($scope) {
+    
+    $scope.isCollapsed = true;
+});
+
+app.directive('contenteditable', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, elm, attrs, ctrl) {
+            // view -> model
+            elm.bind('blur', function() {~
+              console.log(scope);
+                scope.$apply(function() {
+                    ctrl.$setViewValue(elm.html());
+                });
+            });
+
+            // model -> view
+            ctrl.$render = function() {
+                elm.html(ctrl.$viewValue);
+            };
+
+            // load init value from DOM
+            ctrl.$setViewValue(elm.html());
+        }
     };
 });
 

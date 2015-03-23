@@ -70,6 +70,9 @@
             <li><a href="#/home#certification" ng-click="gotoElement('certification', -53)">Certificação</a></li>
             <li><a href="#/home#contact" ng-click="gotoElement('contact', -53)">Contato</a></li>
             <li><a href="#/fair">Montar minha cesta orgânica</a></li>
+            <li><a href="#/logout" ng-if="$storage.user.token">Sair</a></li>
+            <li><a href="#/signin" ng-if="!$storage.user.token">Entrar</a></li>
+            
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -101,12 +104,13 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular-route.min.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.min.js"></script>
     <!-- Latest compiled and minified JavaScript for Angular -->
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
     <script src="app.js"></script>
     <script src="partials/home/home.js"></script>
     <script src="partials/fair/fair.js"></script>
-    <script src="partials/fair/fair.js"></script>
+    <script src="partials/security/security.js"></script>
     <script src="partials/contact/contact.js"></script>
     <script src="components/version/version.js"></script>
     <script src="components/version/version-directive.js"></script>
