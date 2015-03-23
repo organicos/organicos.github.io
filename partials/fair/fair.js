@@ -154,7 +154,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
       $scope.$emit('alert', {
           kind: 'success',
           msg: '',
-          title: "Prodto editado com sucesso"
+          title: "Produto editado com sucesso"
       });
 
     })
