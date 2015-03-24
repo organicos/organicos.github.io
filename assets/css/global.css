@@ -53,6 +53,11 @@ a.text-violet{ color:#A348A3;}
     background: rgba(255, 255, 255, 0.9);
     /** border-bottom: .1em solid rgba(163, 73, 164, 0.9); **/
 }
+.navbar-fixed-top-admin{
+    background: rgba(200, 200, 200, 0.9);
+    /** border-bottom: .1em solid rgba(163, 73, 164, 0.9); **/
+}
+
 /** .navbar-fixed-top{background: rgba(255, 240, 255, 0.9);} **/
 .navbar-fixed-top a{color: rgba(163, 73, 164, 0.9); font-weight: 800;}
 
@@ -65,7 +70,7 @@ a.text-violet{ color:#A348A3;}
 }
 
 /** padding top do conteúdo para nao ficar abaixo do navegador **/
-.main-container{padding-top:60px; }
+.main-container{padding-top:50px; }
 
 /** Fix para modulo do banco do brasil **/
 object[type^='application/gas-events'] { display: none; }

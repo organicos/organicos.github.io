@@ -50,7 +50,7 @@
   </head>
   <body ng-controller="myAppCtrl">
 
-    <nav class="navbar navbar-fixed-top" ng-controller="NavBarCtrl">
+    <nav class="navbar navbar-fixed-top" ng-class="$storage.user.kind == 'admin' ? 'navbar-fixed-top-admin' : ''" ng-controller="NavBarCtrl">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" ng-click="isCollapsed = !isCollapsed">
@@ -58,7 +58,7 @@
             <span class="fa fa-bars"></span>
           </button>
           <a class="navbar-brand" href="#/home">
-            <img style="margin-top: -13px; height:46px; " ng-src="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-57.png">
+            <img style="margin-top: -13px; height:46px;" ng-src="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-57.png">
           </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
@@ -72,13 +72,12 @@
             <li><a href="#/fair">Montar minha cesta orgânica</a></li>
             <li><a href="#/logout" ng-if="$storage.user.token">Sair</a></li>
             <li><a href="#/signin" ng-if="!$storage.user.token">Entrar</a></li>
-            
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
     
-    <div class="container-fluid">
+    <div class="container-fluid" ng-cloak>
       <div id="alertWrapper">
         <alert ng-repeat="alert in alerts" type="{{alert.kind}}" close="closeAlert($index)">
           <strong ng-bind="alert.title"></strong>
@@ -107,6 +106,7 @@
     <script src="bower_components/ngstorage/ngStorage.min.js"></script>
     <!-- Latest compiled and minified JavaScript for Angular -->
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
     <script src="app.js"></script>
     <script src="partials/home/home.js"></script>
     <script src="partials/fair/fair.js"></script>

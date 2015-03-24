@@ -24,7 +24,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 	$scope.saving_product = false;
 	$scope.selectedCategory = '';
 	$scope.productFormModalObject = {};
-  $scope.categories = [
+	$scope.categories = [
 		'Frutas',
 		'Verduras',
 		'Legumes',
@@ -39,18 +39,19 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 		'Pães',
 		'Embalagens'
   ];
-  
+	if(!$scope.$storage.basket){
+  	$scope.$storage.basket = {
+  	  total: 0,
+  	  name: 'Minha cesta',
+  	  products: []
+  	};	  
+	}  
+
   $scope.selectCategory = function (category) {
     
     $scope.selectedCategory = category;
     
   }
-
-	$scope.basket = {
-	  total: 0,
-	  name: 'Minha cesta',
-	  products: []
-	};
 
   // http://104.154.82.56/api/products - URL do recurso
   //$http.get('//fodev-api-vinagreti.c9.io/v1/products').then(function(resp) {
@@ -181,34 +182,34 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 
   $scope.addToBasket = function (product) {
     
-    var productIndex = $scope.basket.products.indexOf(product);
+    var productIndex = $scope.$storage.basket.products.indexOf(product);
 
     if (productIndex >= 0) {
 
-      $scope.basket.products[productIndex].quantity++;
+      $scope.$storage.basket.products[productIndex].quantity++;
 
 
     } else {
 
       product.quantity = 1;
 
-      $scope.basket.products.push(product);
+      $scope.$storage.basket.products.push(product);
 
     }
     
-    $scope.basket.total += parseFloat(product.price);
+    $scope.$storage.basket.total += parseFloat(product.price);
     
   };
 
   $scope.dropFromBasket = function (product) {
     
-    var productIndex = $scope.basket.products.indexOf(product);
+    var productIndex = $scope.$storage.basket.products.indexOf(product);
 
     if (productIndex >= 0) {
       
-      $scope.basket.products.splice(productIndex, 1);
+      $scope.$storage.basket.products.splice(productIndex, 1);
       
-      $scope.basket.total -= parseFloat(product.price) * product.quantity;
+      $scope.$storage.basket.total -= parseFloat(product.price) * product.quantity;
       
     }
 

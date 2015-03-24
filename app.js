@@ -20,7 +20,8 @@ var app = angular.module('myApp', [
   'myApp.version',
   'myApp.contact',
   'ui.bootstrap',
-  'ngStorage'
+  'ngStorage',
+  'angular.filter'
 ]);
 
 app.factory('Main', ['$http', '$localStorage', function($http, $localStorage){
@@ -111,6 +112,7 @@ app.controller('myAppCtrl'
     $scope.$storage = $localStorage.$default({
         user: {}
     });
+    $scope.admin = $scope.$storage.user.kind == 'admin' ? '' : true;
 
     $scope.$back = function() { 
      window.history.back();
