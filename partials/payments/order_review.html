@@ -1,0 +1,42 @@
+<div class="row background-violet text-white">
+    <div class="col-xs-22 col-xs-offset-1">
+        <h1>Revisar pedido</h1>
+        
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <td>Produto</td>
+                    <td align="right">Quantidade</td>
+                    <td align="right">Preço unitário</td>
+                    <td align="right">Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in $storage.basket.products">
+                    <td ng-bind="product.name"
+                		popover="{{product.dscr}}" 
+                		popover-title="{{product.name}}" 
+                		popover-trigger="mouseenter"
+                		popover-placement="right" 
+                		popover-append-to-body="true"
+                    ></td>
+                    <td ng-bind="product.quantity" align="right"></td>
+                    <td ng-bind="product.price | currency:'R$':2" align="right"></td>
+                    <td ng-bind="product.quantity*product.price | currency:'R$':2" align="right"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td align="right"><h4>Total:</h4></td>
+                    <td align="right"><h4 ng-bind="$storage.basket.total | currency:'R$':2"></h4></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p class="clearfix">
+            <button class="btn btn-link text-white">Alterar cesta</button>
+            <button class="btn btn-success pull-right">Pagar</button>
+        </p>
+
+    </div>
+</div>

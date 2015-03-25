@@ -41,6 +41,11 @@
             </dl>
             
             <dl class="dl-horizontal">
+                <dt>Fornecedor: </dt>
+                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.supplier"></dd>
+            </dl>
+            
+            <dl class="dl-horizontal">
                 <dt>Época: </dt>
                 <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.season"></dd>
             </dl>

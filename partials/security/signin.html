@@ -1,17 +1,42 @@
-<div class="row background-violet text-white">
-    <div class="col-sm-offset-6 col-sm-12">
+<div class="row background-violet text-white" ng-controller="SigninCtrl as SigninCtrl">
+    <div class="col-sm-offset-1 col-sm-8">
         <h1>Identifique-se</h1>
         <form class="form" role="form" ng-submit="signin()">
             <div class="form-group">
-                <label for="email" class="control-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Email" ng-model="email">
+                <label for="email" class="control-label">E-mail</label>
+                <input type="email" class="form-control" id="email" placeholder="E-mail" ng-model="email">
             </div>
             <div class="form-group">
-                <label for="password" class="control-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password">
+                <label for="password" class="control-label">Senha</label>
+                <input type="password" class="form-control" id="password" placeholder="Senha" ng-model="password">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-default">Sign in</button>
+                <button type="submit" class="btn btn-default">Identiricar-me</button>
+            </div>
+        </form>
+        <br>
+    </div>
+    <div class="col-sm-offset-2 col-sm-12 background-blue-dark" ng-controller="SignupCtrl as SignupCtrl">
+        <h1>Crie uma nova conta</h1>
+        <form class="form" role="form" ng-submit="signup()">
+            <div class="form-group col-xs-12">
+                <label for="name" class="control-label">Nome</label>
+                <input type="text" class="form-control" id="name" placeholder="Nome" ng-model="name">
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="email" class="control-label">E-mail</label>
+                <input type="email" class="form-control" id="email" placeholder="E-mail" ng-model="email">
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="password" class="control-label">Senha</label>
+                <input type="password" class="form-control" id="password" placeholder="Senha" ng-model="password">
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="password_hint" class="control-label">Confirmação de senha</label>
+                <input type="password" class="form-control" id="password_hint" placeholder="Confirmação de senha" ng-model="password_hint">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Cadastrar-me</button>
             </div>
         </form>
         <br>

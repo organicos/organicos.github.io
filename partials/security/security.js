@@ -6,27 +6,23 @@ security.config(['$routeProvider', '$httpProvider', function ($routeProvider, $h
  
     $routeProvider.
         when('/signin', {
-            templateUrl: 'partials/security/signin.html',
-            controller: 'SecurityCtrl'
+            templateUrl: 'partials/security/signin.html'
         }).
-        when('/signup', {
-            templateUrl: 'partials/security/signup.html',
-            controller: 'SecurityCtrl'
+        when('/signin/:return_url', {
+            templateUrl: 'partials/security/signin.html'
         }).
         when('/me', {
             templateUrl: 'partials/security/me.html',
             controller: 'SecurityCtrl'
         }).
         when('/logout', {
-            templateUrl: 'partials/security/me.html',
+            templateUrl: 'partials/security/signup.html',
             controller: 'SecurityCtrl'
         });
         
 }]);
 
-security.controller('SecurityCtrl', ['$rootScope', '$scope', 'Main', '$localStorage', '$location', function($rootScope, $scope, Main, $localStorage, $location) {
-    
-    var locationPath = $location.path();
+security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http', function ($scope, $location, $routeParams, $http) {
     
     $scope.signin = function() {
         var formData = {
@@ -34,37 +30,77 @@ security.controller('SecurityCtrl', ['$rootScope', '$scope', 'Main', '$localStor
             password: $scope.password
         };
 
-        Main.signin(formData, function(res) {
-            if (res.type == false) {
-                alert(res.data);
-            } else {
-                $scope.$storage.user = res.data;
-                window.location = "#/me";
-            }
-        }, function() {
-            $rootScope.error = 'Falha ao tentar acessar';
+        $http.post('//fodev-api-vinagreti.c9.io/v1/signin', formData)
+        .success(function (res) {
+            $scope.$storage.user = res.data;
+            $location.path($routeParams.return_url || "#/me");
         })
+        .error(function (err) {
+            $scope.$emit('alert', {
+                kind: 'danger',
+                msg: err,
+                title: "Falha:"
+            });
+        });
     };
+    
+}]);
+
+security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
 
     $scope.signup = function() {
         var formData = {
+            name: $scope.name,
             email: $scope.email,
-            password: $scope.password
+            password: $scope.password,
+            password_hint: $scope.password_hint
         };
+        
+        if($scope.name && $scope.email && $scope.password && $scope.password_hint){
+            
+            if($scope.password == $scope.password_hint){
 
-        Main.signup(formData, function(res) {
-            if (res.type == false) {
-                alert(res.data);
+                $http.post('//fodev-api-vinagreti.c9.io/v1/signup', formData)
+                .success(function (res) {
+                    $scope.$storage.user = res.data;
+                    $location.path($routeParams.return_url || "#/me");
+                })
+                .error(function (err) {
+                    $scope.$emit('alert', {
+                        kind: 'danger',
+                        msg: err,
+                        title: "Falha:"
+                    });
+                });
+                
             } else {
-                $scope.$storage.user = res.data;
-                window.location = "/";
+                
+                $scope.$emit('alert', {
+                      kind: 'danger',
+                      msg: ['A senha e a confirmação da senha devem ser idênticas.'],
+                      title: "Falha:"
+                });
+                
             }
-        }, function() {
-            $rootScope.error = 'Falha ao registrar-se';
-        });
+            
+        } else {
+            
+            $scope.$emit('alert', {
+                  kind: 'danger',
+                  msg: ['Preencha todos os campos para criar sua conta.'],
+                  title: "Falha:"
+            });
+            
+        }
 
     };
+    
+}]);
 
+security.controller('SecurityCtrl', ['$rootScope', '$scope', 'Main', '$localStorage', '$location', '$routeParams', function($rootScope, $scope, Main, $localStorage, $location, $routeParams) {
+    
+    var locationPath = $location.path();
+    
     $scope.me = function() {
         Main.me(function(res) {
             $scope.$storage.user = res.data;
@@ -76,9 +112,13 @@ security.controller('SecurityCtrl', ['$rootScope', '$scope', 'Main', '$localStor
     $scope.logout = function() {
         Main.logout(function() {
             $scope.$storage.user = {};
-            window.location = "#/signin"
+            $location.path("#/signin");
         }, function() {
-            alert("Falha ao sair!");
+            $scope.$emit('alert', {
+                  kind: 'danger',
+                  msg: 'Não foi possível encerrar a sessão.',
+                  title: "Falha:"
+            });
         });
     };
 
@@ -91,7 +131,7 @@ security.controller('SecurityCtrl', ['$rootScope', '$scope', 'Main', '$localStor
         break;
         case '/signin':
             if ($scope.$storage.user.token) {
-                window.location = "#/me";
+                $location.path("#/me");
             }
         break;
     }

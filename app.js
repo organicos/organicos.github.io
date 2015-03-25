@@ -3,21 +3,13 @@
 var $scope, $location;
 
 // Declare app level module which depends on views, and components
-angular.module('myApp.myConfig', []).constant('myConfig', {
-  'api': 'https://104.154.82.56/api/',
-  'assetsUrl': 'https://s3-sa-east-1.amazonaws.com/fodev/',
-  'imageResizeServiceUrl': 'https://images.elasticbeanstalk.com/',
-  'version': 0.2
-});
-
-// Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
-  'myApp.myConfig',
   'ngRoute',
   'myApp.home',
   'myApp.fair',
   'myApp.security',
   'myApp.version',
+  'myApp.payments',
   'myApp.contact',
   'ui.bootstrap',
   'ngStorage',
@@ -106,8 +98,39 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
 }]);
 
 app.controller('myAppCtrl'
-    , ['$scope', '$location', 'anchorSmoothScroll', 'myConfig', '$localStorage'
-    , function($scope, $location, anchorSmoothScroll, myConfig, $localStorage) {
+    , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage'
+    , function($scope, $location, anchorSmoothScroll, $localStorage) {
+
+    $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
+        
+        var privateRoutes = [
+            '/me'
+            , '/order_review'
+        ];
+
+        if(privateRoutes.indexOf(newValue) > -1){
+
+            if ($scope.$storage.user.token){
+                
+                $scope.ping(function (err, res) {
+
+                    if(err) { // is not logged anymore. invalid token
+                    
+                        $location.path('/signin'+newValue);
+                        
+                    }
+
+                });
+                
+            } else {
+                
+                $location.path('/signin'+newValue);
+                    
+            } 
+        
+        }
+ 
+    });
 
     $scope.$storage = $localStorage.$default({
         user: {}
@@ -143,7 +166,7 @@ app.controller('myAppCtrl'
     };
     
     $scope.appAlert = function(msg, duration) {
-      
+
         alert(msg.join('<br>'));
         
     };
@@ -234,3 +257,4 @@ app.service('anchorSmoothScroll', function(){
     };
     
 });
+
