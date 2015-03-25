@@ -28,14 +28,51 @@ payments.controller('OrderReviewCtrl', ['$scope', function ($scope) {
 
 }]);
 
+payments.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams', function($scope, $http, $filter, $routeParams) {
+  
+    $scope.country = 'Brasil';
+    
+    function jsonp_callback(data){
+      
+      console.log('jsonpcall');
+      
+    }
+
+    $scope.$watch('cep', function(newValue, oldValue) {
+      
+      var cep = newValue ? newValue.match(/\d+/) : '';
+
+      if(cep.toString().length == 8){
+        
+        $http.jsonp('//api.postmon.com.br/v1/cep/'+cep+'?callback=JSON_CALLBACK')
+        .success(function(res) {
+          
+          $scope.street = res.logradouro || '';
+          $scope.district = res.bairro || '';
+          $scope.city = res.cidade || '';
+          $scope.state = res.estado || '';
+        
+        })
+        .error(function(err) {
+        
+            console.error('ERR', err);
+        
+        });
+        
+      }
+
+    });
+
+}]);
+
 payments.controller('PaymentsCtrl', ['$scope','$http', '$filter', '$routeParams', function($scope, $http, $filter, $routeParams) {
 
     $scope.payments = [];
     $scope.paymentFormModalObject = {};
     
-    $http.get('//fodev-api-vinagreti.c9.io/v1/payments').then(function(resp) {
+    $http.get('//fodev-api-vinagreti.c9.io/v1/payments').then(function(res) {
     
-        $scope.payments = resp.data;
+        $scope.payments = res.data;
         
         $scope.paymentFormModalObject = ($filter('filter')($scope.payments, {_id: $routeParams.id}, false))[0];
     

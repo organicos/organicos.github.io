@@ -93,13 +93,18 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
     }]);
 
     $httpProvider.defaults.useXDomain = true;
+
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
         
 }]);
 
-app.controller('myAppCtrl'
-    , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage'
-    , function($scope, $location, anchorSmoothScroll, $localStorage) {
+app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage' , function($scope, $location, anchorSmoothScroll, $localStorage) {
+    
+    $scope.ping = function(callback) {
+        
+        callback();
+        
+    }
 
     $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
         

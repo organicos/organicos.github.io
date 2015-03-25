@@ -16,7 +16,7 @@ security.config(['$routeProvider', '$httpProvider', function ($routeProvider, $h
             controller: 'SecurityCtrl'
         }).
         when('/logout', {
-            templateUrl: 'partials/security/signup.html',
+            templateUrl: 'partials/security/signin.html',
             controller: 'SecurityCtrl'
         });
         

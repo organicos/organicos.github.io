@@ -43,7 +43,7 @@
             </div>
             <div class="form-group col-sm-11">
                 <label for="street" class="control-label">Rua</label>
-                <input type="email" class="form-control" id="street" placeholder="Rua" ng-model="street">
+                <input type="text" class="form-control" id="street" placeholder="Rua" ng-model="street">
             </div>
             <div class="form-group col-sm-2">
                 <label for="number" class="control-label">Número</label>
@@ -67,7 +67,7 @@
             </div>
             <div class="form-group col-sm-6">
                 <label for="country" class="control-label">País</label>
-                <input type="text" class="form-control" id="country" placeholder="País" ng-model="country">
+                <input type="text" class="form-control" id="country" placeholder="País" ng-model="country" disabled>
             </div>
             <div class="form-group col-sm-16">
                 <label for="address_ref" class="control-label">Referências</label>
@@ -80,7 +80,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <button class="btn btn-link text-white">Alterar cesta</button>
+                <a class="btn btn-link text-white" href="#/fair">Alterar cesta</a>
                 <button class="btn btn-success pull-right">Finalizar pedido</button>
             </div>
         </form>
