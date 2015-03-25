@@ -19,7 +19,12 @@ payments.config(['$routeProvider', function($routeProvider) {
 
 payments.controller('OrderReviewCtrl', ['$scope', function ($scope) {
 
-  $scope.$storage.user.token
+  $scope.DeliveryDayAndTimeOptions = [
+    'Quinta-feira a tarde'
+    , 'Quinta-feira a noite'
+    , 'Sábado pela manhã'
+    , 'Sábado a tarde'
+  ];
 
 }]);
 

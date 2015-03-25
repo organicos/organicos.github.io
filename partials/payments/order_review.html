@@ -1,7 +1,8 @@
 <div class="row background-violet text-white">
     <div class="col-xs-22 col-xs-offset-1">
-        <h1>Revisar pedido</h1>
+        <h1>Revise seu pedido</h1>
         
+        <h2>Resumo da cesta orgânica</h2>
         <table class="table table-condensed">
             <thead>
                 <tr>
@@ -33,10 +34,56 @@
             </tbody>
         </table>
         
-        <p class="clearfix">
-            <button class="btn btn-link text-white">Alterar cesta</button>
-            <button class="btn btn-success pull-right">Pagar</button>
-        </p>
+        <h2>Dados de entrega</h2>
+        
+        <form class="form" role="form" ng-submit="signup()">
+            <div class="form-group col-sm-5">
+                <label for="cep" class="control-label">CEP</label>
+                <input type="text" class="form-control" id="cep" placeholder="CEP" ng-model="cep">
+            </div>
+            <div class="form-group col-sm-11">
+                <label for="street" class="control-label">Rua</label>
+                <input type="email" class="form-control" id="street" placeholder="Rua" ng-model="street">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="number" class="control-label">Número</label>
+                <input type="text" class="form-control" id="number" placeholder="Número" ng-model="number">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="complement" class="control-label">Complemento</label>
+                <input type="text" class="form-control" id="complement" placeholder="Complemento" ng-model="complement">
+            </div>
+                <div class="form-group col-sm-6">
+                <label for="district" class="control-label">Bairro</label>
+                <input type="text" class="form-control" id="district" placeholder="Bairro" ng-model="district">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="city" class="control-label">Cidade</label>
+                <input type="text" class="form-control" id="city" placeholder="Cidade" ng-model="city">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="state" class="control-label">Estado</label>
+                <input type="text" class="form-control" id="state" placeholder="Estado" ng-model="state">
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="country" class="control-label">País</label>
+                <input type="text" class="form-control" id="country" placeholder="País" ng-model="country">
+            </div>
+            <div class="form-group col-sm-16">
+                <label for="address_ref" class="control-label">Referências</label>
+                <input type="text" class="form-control" id="address_ref" placeholder="Referências" ng-model="address_ref">
+            </div>
+            <div class="form-group col-sm-8">
+                <label for="deliveryOption" class="control-label">Data e horário de entrega</label>
+                <select class="form-control" id="deliveryOption" placeholder="Nome" ng-model="deliveryOption">
+                    <option ng-repeat="deliveryOption in DeliveryDayAndTimeOptions" ng-value="deliveryOption" ng-bind="deliveryOption"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-link text-white">Alterar cesta</button>
+                <button class="btn btn-success pull-right">Finalizar pedido</button>
+            </div>
+        </form>
 
     </div>
 </div>
