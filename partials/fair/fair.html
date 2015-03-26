@@ -80,7 +80,7 @@
 		            	<label for="productQuery">Buscar produto</label>
 						<input class="form-control input-xs" id="productQuery" name="productQuery" ng-model="productQuery" type="text" placeholder="Buscar produto" autofocus>
 		            </div>
-		            <span class="pull-right" ng-if="$storage.user.kind == 'admin'"><a class="btn btn-default" href="#/product">+</a></span>
+		            <span ng-if="$storage.user.kind == 'admin'"><a class="btn btn-default" href="#/product">+</a></span>
 		        </form>
 		        
 		        <br>
