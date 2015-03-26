@@ -30,7 +30,6 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeP
     
     // Append the Authenticated hash to the header
     $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
-        $localStorage.user.token = undefined;
       return {
           'request': function (config) {
               config.headers = config.headers || {};
