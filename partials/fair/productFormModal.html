@@ -1,114 +1,182 @@
-<br>
-<a class="btn btn-default" href="#/fair">Voltar</a>
-<button class="btn btn-danger pull-right" 
-    ng-class="saving_product ? 'disabled' : ''"
-    ng-if="productFormModalObject._id" 
-    ng-click="dropProduct(productFormModalObject)">
-    <i class="fa fa-trash"></i>
-</button>
+<div id="buy_step_1" class="row background-violet">
 
-<hr>
+	<div class="col-xs-6 text-left text-white" style='min-height:90vh;'>
 
-<form class="form" role="form" name="productFormModal">
 
-    <div class="row">
-        
-        <div class="col-xs-6">
-            
-            <img class="img-responsive" ng-src="{{productFormModalObject.img}}" ></img>
+		<h2 class="text-center clearfix">Minha cesta orgânica</h2>
 
-        </div>
-        
-        <div class="col-xs-18">
-            
-            <h1 ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.name"></h1>
-            
-            <br>
-            
-            <dl class="dl-horizontal">
-                <dt>Preço (R$): </dt>
-                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.price"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal">
-                <dt>Descrição: </dt>
-                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.dscr"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal">
-                <dt>Categoria: </dt>
-                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.category"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal">
-                <dt>Fornecedor: </dt>
-                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.supplier"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal">
-                <dt>Época: </dt>
-                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.season"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal">
-                <dt>Receitas: </dt>
-                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.recipes"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal" ng-if="$storage.user.kind == 'admin'">
-                <dt>Imagem: </dt>
-                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.img"></dd>
-            </dl>
+		<hr>
 
-            <dl class="dl-horizontal"  ng-if="$storage.user.kind == 'admin'">
-                <dt></dt>
-                <dd>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="active" ng-model="productFormModalObject.highlight"> Destaque
-                        </label>
-                        <label>
-                            <input type="checkbox" name="active" ng-model="productFormModalObject.active"> Ativo
-                        </label>
-                    </div>
-                </dd>
-            </dl>
+		<div ng-if="!$storage.basket.products.length">
+			<h4>A sua cesta está vazia!</h4>
+			<p>Adicione novos produtos clicando no botão "Colocar na cesta".</p>
+		</div>
+		<div ng-if="$storage.basket.products.length">
+			
+	        <div class="row small" ng-repeat="product in $storage.basket.products">
+				<div class="col-xs-2 text-right" ng-bind="product.quantity"></div>
+				<div class="col-xs-12" ng-bind="product.name"
+					popover="{{product.dscr}}" 
+					popover-title="{{product.name}}" 
+					popover-trigger="mouseenter"
+					popover-placement="right" 
+					popover-append-to-body="true"
+					ng-dblclick="dropFromBasket(product)"
+				></div>
+				<div class="col-xs-4 text-right" ng-bind="product.price | currency:'R$':2"></div>
+				<div class="col-xs-4 text-right" ng-bind="product.quantity*product.price | currency:'R$':2"></div>
+				<div class="col-xs-2 text-right">
+					<a class="text-white" href="javascript:void(0)" ng-click="dropFromBasket(product)">X</a>
+				</div>
 
-            <dl class="dl-horizontal"  ng-if="$storage.user.kind == 'admin'">
-                <dt></dt>
-                <dd><button type="button" class="btn btn-success" ng-click="productModalFormSubmit()"
-                ng-class="saving_product ? 'disabled' : ''"
-                >Salvar</button></dd>
-            </dl>
-            
+	        </div>
+	        
+	        <hr>
 
-            
-        </div>
+			<h4><strong>Total: </strong>{{$storage.basket.total | currency:'R$':2}}</h4>
+			
+			<hr>
 
-    </div>
-    
-</form>
+			<a class="btn btn-success btn-block btn-lg" href="#/order_review">
+				Fechar meu pedido <br>
+				<small>Compra 100% segura.</small>
+			</a>
+			<br>
+			<small>* A Feira Orgânica Delivery utiliza o Pagseguro como gateway de pagamentos, garantindo assim uma compra segura e muito simples.</small>
+			<br>
+			<small>** As entregas realizadas nas sextas e sábados são gratuitas.</small>
 
-<hr>
-
-<h3>Outros produtos da mesma categoria {{productFormModalObject.kind}}</h3>
-<div class="row">
-	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in products | filter: {category: productFormModalObject.category} | orderBy: 'name'">
-		<a class="btn btn-default" href="#/product/{{product._id}}">
-			<img 
-				class="img-responsive img-thumbnail" 
-				alt="week_product" 
-				ng-src="{{product.img}}" 
-				popover="{{product.dscr}}" 
-				popover-title="{{product.name}}"
-				popover-trigger="mouseenter"
-				popover-placement="right" 
-				popover-append-to-body="true"
-				ng-dblclick="addToBasket(product)"
-				ng-click="addToBasket(product)"
-			>
-		</a>
-		<p style="height:60px;">{{product.name}}</p>
+		</div>
+		
 	</div>
-	
+
+	<div class="col-xs-18 text-left background-white">
+	    
+	    <br>
+
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-22">
+        			    
+                <button class="btn btn-default" ng-click="$back()">Voltar</button>
+                <button class="btn btn-danger pull-right" 
+                    ng-class="saving_product ? 'disabled' : ''"
+                    ng-if="productFormModalObject._id && $storage.user.kind == 'admin'" 
+                    ng-click="dropProduct(productFormModalObject)">
+                    <i class="fa fa-trash"></i>
+                </button>
+                
+                <hr>
+                
+                <form class="form" role="form" name="productFormModal">
+                
+                    <div class="row">
+                        
+                        <div class="col-xs-6">
+                            
+                            <img class="img-responsive" ng-src="{{productFormModalObject.img}}" ></img>
+                            
+                            <button class="btn btn-danger btn-block" ng-click="addToBasket(productFormModalObject)">Colocar na cesta</button>
+                
+                        </div>
+                        
+                        <div class="col-xs-18">
+                            
+                            <h2 ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.name"></h2>
+                            
+                            <br>
+                            
+                            <dl class="dl-horizontal" ng-show="productFormModalObject || $storage.user.kind == 'admin'">
+                                <dt>Preço R$: </dt>
+                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.price"></dd>
+                            </dl>
+                            
+                            <dl class="dl-horizontal" ng-show="productFormModalObject.dscr || $storage.user.kind == 'admin'">
+                                <dt>Descrição: </dt>
+                                <dd class="text-justify" ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.dscr"></dd>
+                            </dl>
+                            
+                            <dl class="dl-horizontal" ng-show="productFormModalObject.category || $storage.user.kind == 'admin'">
+                                <dt>Categoria: </dt>
+                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.category"></dd>
+                            </dl>
+                            
+                            <dl class="dl-horizontal" ng-show="productFormModalObject.supplier || $storage.user.kind == 'admin'">
+                                <dt>Fornecedor: </dt>
+                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.supplier"></dd>
+                            </dl>
+                            
+                            <dl class="dl-horizontal" ng-show="productFormModalObject.season || $storage.user.kind == 'admin'">
+                                <dt>Época: </dt>
+                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.season"></dd>
+                            </dl>
+                            
+                            <dl class="dl-horizontal" ng-show="productFormModalObject.recipes || $storage.user.kind == 'admin'">
+                                <dt>Receitas: </dt>
+                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.recipes"></dd>
+                            </dl>
+                            
+                            <dl class="dl-horizontal" ng-if="$storage.user.kind == 'admin'">
+                                <dt>Imagem: </dt>
+                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.img"></dd>
+                            </dl>
+                
+                            <dl class="dl-horizontal"  ng-if="$storage.user.kind == 'admin'">
+                                <dt></dt>
+                                <dd>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="active" ng-model="productFormModalObject.highlight"> Destaque
+                                        </label>
+                                        <label>
+                                            <input type="checkbox" name="active" ng-model="productFormModalObject.active"> Ativo
+                                        </label>
+                                    </div>
+                                </dd>
+                            </dl>
+                
+                            <dl class="dl-horizontal"  ng-if="$storage.user.kind == 'admin'">
+                                <dt></dt>
+                                <dd><button type="button" class="btn btn-success" ng-click="productModalFormSubmit()"
+                                ng-class="saving_product ? 'disabled' : ''"
+                                >Salvar</button></dd>
+                            </dl>
+                            
+                
+                            
+                        </div>
+                
+                    </div>
+                    
+                </form>
+                
+                <hr>
+                
+                <h3>Outros produtos da mesma categoria {{productFormModalObject.kind}}</h3>
+                <div class="row">
+                	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in products | filter: {category: productFormModalObject.category} | orderBy: 'name'">
+                		<a class="btn btn-default" href="#/product/{{product._id}}">
+                			<img 
+                				class="img-responsive img-thumbnail" 
+                				alt="week_product" 
+                				ng-src="{{product.img}}" 
+                				popover="{{product.dscr}}" 
+                				popover-title="{{product.name}}"
+                				popover-trigger="mouseenter"
+                				popover-placement="right" 
+                				popover-append-to-body="true"
+                				ng-dblclick="addToBasket(product)"
+                				ng-click="addToBasket(product)"
+                			>
+                		</a>
+                		<p style="height:60px;">{{product.name}}</p>
+                	</div>
+                	
+                </div>
+                
+            </div>
+            
+        </div>
+
+	</div>
+
 </div>

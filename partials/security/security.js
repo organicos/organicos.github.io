@@ -2,7 +2,7 @@
 
 var security = angular.module('myApp.security', ['ngRoute']);
 
-security.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
+security.config(['$routeProvider', function ($routeProvider) {
  
     $routeProvider.
         when('/signin', {
@@ -17,9 +17,17 @@ security.config(['$routeProvider', '$httpProvider', function ($routeProvider, $h
         }).
         when('/logout', {
             templateUrl: 'partials/security/signin.html',
-            controller: 'SecurityCtrl'
+            controller: 'LogoutCtrl'
         });
         
+}]);
+
+security.controller('LogoutCtrl', ['$scope', '$location', function ($scope, $location) {
+
+    $scope.$storage.user = {};
+    
+    $location.path("#/signin");
+
 }]);
 
 security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http', function ($scope, $location, $routeParams, $http) {
@@ -97,42 +105,6 @@ security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams
     
 }]);
 
-security.controller('SecurityCtrl', ['$rootScope', '$scope', 'Main', '$localStorage', '$location', '$routeParams', function($rootScope, $scope, Main, $localStorage, $location, $routeParams) {
+security.controller('MeCtrl', ['$scope', '$location', function($scope, $location) {
     
-    var locationPath = $location.path();
-    
-    $scope.me = function() {
-        Main.me(function(res) {
-            $scope.$storage.user = res.data;
-        }, function() {
-            $rootScope.error = 'Falha ao buscar os dados';
-        });
-    };
-
-    $scope.logout = function() {
-        Main.logout(function() {
-            $scope.$storage.user = {};
-            $location.path("#/signin");
-        }, function() {
-            $scope.$emit('alert', {
-                  kind: 'danger',
-                  msg: 'Não foi possível encerrar a sessão.',
-                  title: "Falha:"
-            });
-        });
-    };
-
-    switch(locationPath) {
-        case "/me":
-            $scope.me();
-        break;
-        case "/logout":
-            $scope.logout();
-        break;
-        case '/signin':
-            if ($scope.$storage.user.token) {
-                $location.path("#/me");
-            }
-        break;
-    }
 }]);

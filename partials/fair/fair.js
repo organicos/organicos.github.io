@@ -2,7 +2,7 @@
 
 var fair = angular.module('myApp.fair', ['ngRoute']);
 
-fair.config(['$routeProvider', '$httpProvider', function($routeProvider) {
+fair.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/fair', {
     templateUrl: 'partials/fair/fair.html',
     controller: 'FairCtrl'

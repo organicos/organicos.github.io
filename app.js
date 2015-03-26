@@ -5,76 +5,32 @@ var $scope, $location;
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'ngRoute',
+  'ui.bootstrap',
+  'ngStorage',
+  'angular.filter',
+  'satellizer',
   'myApp.home',
   'myApp.fair',
   'myApp.security',
   'myApp.version',
   'myApp.payments',
   'myApp.contact',
-  'ui.bootstrap',
-  'ngStorage',
-  'angular.filter'
+  'myApp.auth'
 ]);
 
-app.factory('Main', ['$http', '$localStorage', function($http, $localStorage){
-        var baseUrl = "//fodev-api-vinagreti.c9.io/v1";
-        function changeUser(user) {
-            angular.extend(currentUser, user);
-        }
- 
-        function urlBase64Decode(str) {
-            var output = str.replace('-', '+').replace('_', '/');
-            switch (output.length % 4) {
-                case 0:
-                    break;
-                case 2:
-                    output += '==';
-                    break;
-                case 3:
-                    output += '=';
-                    break;
-                default:
-                    throw 'Cadeia de caracteres base64url inválida!';
-            }
-            return window.atob(output);
-        }
- 
-        function getUserFromToken() {
-            var token = $localStorage.user.token;
-            var user = {};
-            if (typeof token !== 'undefined') {
-                var encoded = token.split('.')[1];
-                user = JSON.parse(urlBase64Decode(encoded));
-            }
-            return user;
-        }
- 
-        var currentUser = getUserFromToken();
- 
-        return {
-            signup: function(data, success, error) {
-                $http.post(baseUrl + '/signup', data).success(success).error(error)
-            },
-            signin: function(data, success, error) {
-                $http.post(baseUrl + '/signin', data).success(success).error(error)
-            },
-            me: function(success, error) {
-                $http.get(baseUrl + '/me').success(success).error(error)
-            },
-            logout: function(success) {
-                changeUser({});
-                success();
-            }
-        };
-    }
-]);
+app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeProvider, $httpProvider, $authProvider) {
 
-app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
+    // define the google api token
+    $authProvider.google({
+      clientId: '741540784926-5973e11m7n43r2hd1333e72nrv1mvjma.apps.googleusercontent.com'
+    });
 
+    // define default route
     $routeProvider.otherwise({redirectTo: '/home'});
     
     // Append the Authenticated hash to the header
     $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
+        $localStorage.user.token = undefined;
       return {
           'request': function (config) {
               config.headers = config.headers || {};
@@ -92,8 +48,10 @@ app.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpPro
       };
     }]);
 
+    // add cross-domain to the header
     $httpProvider.defaults.useXDomain = true;
 
+    // remove some http header to use CORS
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
         
 }]);
@@ -140,10 +98,11 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
     $scope.$storage = $localStorage.$default({
         user: {}
     });
-    $scope.admin = $scope.$storage.user.kind == 'admin' ? '' : true;
 
-    $scope.$back = function() { 
-     window.history.back();
+    $scope.$back = function() {
+        
+        window.history.back();
+
     };
   
     $scope.alerts = [];
