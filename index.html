@@ -63,6 +63,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/admin_panel" ng-if="$storage.user.kind == 'admin'">Admin</a></li>
             <li><a href="#/home#how_it_works" ng-click="gotoElement('how_it_works', -53)">Como funciona</a></li>
             <li><a href="#/home#week_products" ng-click="gotoElement('week_products', -53)">Destaques</a></li>
             <li><a href="#/home#about" ng-click="gotoElement('about', -53)">Sobre</a></li>
@@ -115,6 +116,7 @@
     <script src="partials/contact/contact.js"></script>
     <script src="partials/payments/payments.js"></script>
     <script src="partials/auth/auth.js"></script>
+    <script src="partials/admin/admin.js"></script>
     <script src="components/version/version.js"></script>
     <script src="components/version/version-directive.js"></script>
     <script src="components/version/interpolate-filter.js"></script>
