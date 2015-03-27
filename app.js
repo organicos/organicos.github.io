@@ -2,6 +2,12 @@
 
 var $scope, $location;
 
+// configurations
+var config = angular.module('myApp.config', [])
+.constant('myConfig', {
+  'apiUrl': '//fodev-api-vinagreti-1.c9.io/v1',
+});
+
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'ngRoute',
@@ -15,7 +21,8 @@ var app = angular.module('myApp', [
   'myApp.version',
   'myApp.payments',
   'myApp.contact',
-  'myApp.auth'
+  'myApp.auth',
+  'myApp.config'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeProvider, $httpProvider, $authProvider) {
@@ -140,27 +147,53 @@ app.controller('NavBarCtrl', function($scope) {
     $scope.isCollapsed = true;
 });
 
+/**
+ * Two-way data binding for contenteditable elements with ng-model.
+ * @example
+ *   <p contenteditable="true" ng-model="text"></p>
+ */
 app.directive('contenteditable', function() {
-    return {
-        require: 'ngModel',
-        link: function(scope, elm, attrs, ctrl) {
-            // view -> model
-            elm.bind('blur', function() {~
-              console.log(scope);
-                scope.$apply(function() {
-                    ctrl.$setViewValue(elm.html());
-                });
-            });
-
-            // model -> view
-            ctrl.$render = function() {
-                elm.html(ctrl.$viewValue);
-            };
-
-            // load init value from DOM
-            ctrl.$setViewValue(elm.html());
+  return {
+    require: '?ngModel',
+    link: function(scope, element, attrs, ctrl) {
+ 
+      // Do nothing if this is not bound to a model
+      if (!ctrl) { return; }
+ 
+      // Checks for updates (input or pressing ENTER)
+      // view -> model
+      element.bind('input enterKey', function() {
+        var rerender = false;
+        var html = element.html();
+ 
+        if (attrs.noLineBreaks) {
+          html = html.replace(/<div>/g, '').replace(/<br>/g, '').replace(/<\/div>/g, '');
+          rerender = true;
         }
-    };
+ 
+        scope.$apply(function() {
+          ctrl.$setViewValue(html);
+          if(rerender) {
+            ctrl.$render();
+          }
+        });
+      });
+ 
+      element.keyup(function(e){
+        if(e.keyCode === 13){
+          element.trigger('enterKey');
+        }
+      });
+ 
+      // model -> view
+      ctrl.$render = function() {
+        element.html(ctrl.$viewValue);
+      };
+ 
+      // load init value from DOM
+      ctrl.$render();
+    }
+  };
 });
 
 app.service('anchorSmoothScroll', function(){

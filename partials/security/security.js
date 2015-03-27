@@ -30,7 +30,7 @@ security.controller('LogoutCtrl', ['$scope', '$location', function ($scope, $loc
 
 }]);
 
-security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http', function ($scope, $location, $routeParams, $http) {
+security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http', 'myConfig', function ($scope, $location, $routeParams, $http, myConfig) {
     
     $scope.signin = function() {
         var formData = {
@@ -38,7 +38,7 @@ security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http'
             password: $scope.password
         };
 
-        $http.post('//fodev-api-vinagreti.c9.io/v1/signin', formData)
+        $http.post(myConfig.apiUrl+'/signin', formData)
         .success(function (res) {
             $scope.$storage.user = res.data;
             $location.path($routeParams.return_url || "#/me");
@@ -54,7 +54,7 @@ security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http'
     
 }]);
 
-security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
+security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams', 'myConfig', function ($scope, $http, $location, $routeParams, myConfig) {
 
     $scope.signup = function() {
         var formData = {
@@ -68,7 +68,7 @@ security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams
             
             if($scope.password == $scope.password_hint){
 
-                $http.post('//fodev-api-vinagreti.c9.io/v1/signup', formData)
+                $http.post(myConfig.apiUrl+'/signup', formData)
                 .success(function (res) {
                     $scope.$storage.user = res.data;
                     $location.path($routeParams.return_url || "#/me");

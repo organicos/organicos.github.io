@@ -9,13 +9,13 @@ contact.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-contact.controller('ContactCtrl', ['$scope','$http', function($scope, $http) {
+contact.controller('ContactCtrl', ['$scope','$http', 'myConfig', function($scope, $http, myConfig) {
 
 	var ContactCtrl = this;
 
     $scope.submit = function(contactForm) {
         if (contactForm.email.$viewValue && contactForm.msg.$viewValue) {
-            $http.post('//fodev-api-vinagreti.c9.io/api/tickets',{
+            $http.post(myConfig.apiUrl+'/tickets',{
                 email: contactForm.email.$viewValue
                 , name: contactForm.name.$viewValue
                 , phone: contactForm.phone.$viewValue

@@ -1,11 +1,6 @@
 #bg-topo-home{
-    background:url('http://images.elasticbeanstalk.com/2000x800/http://i.huffpost.com/gen/1703432/images/o-VEGETABLES-facebook.jpg') no-repeat center center;
-    height: 500px;
+    background:url('http://i.huffpost.com/gen/1703432/images/o-VEGETABLES-facebook.jpg') no-repeat center center;
     background-size:100% auto;
-}
-
-.img-rounded-lg-bottom{
-    border-radius:80px;
 }
 
 /** Default styles **/

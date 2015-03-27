@@ -18,7 +18,7 @@ fair.config(['$routeProvider', function($routeProvider) {
 
 }]);
 
-fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$location', function($scope, $http, $routeParams, $filter, $location) {
+fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$location', 'myConfig', function($scope, $http, $routeParams, $filter, $location, myConfig) {
   
 	$scope.products = [];
 	$scope.saving_product = false;
@@ -55,7 +55,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 
   // http://104.154.82.56/api/products - URL do recurso
   //$http.get('//fodev-api-vinagreti.c9.io/v1/products').then(function(resp) {
-  $http.get('//fodev-api-vinagreti.c9.io/v1/products').then(function(resp) {
+  $http.get(myConfig.apiUrl + '/products').then(function(resp) {
     
       $scope.products = resp.data;
 
@@ -73,7 +73,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
     if (confirmed) {
 
       $scope.saving_product = true;
-        $http.delete('//fodev-api-vinagreti.c9.io/v1/products/' + product._id)
+        $http.delete(myConfig.apiUrl + '/products/' + product._id)
         .success(function() {
           window.location = ("#/fair");
         })
@@ -118,7 +118,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
   
   $scope.productPost = function(product) {
     
-    $http.post('//fodev-api-vinagreti.c9.io/v1/products', product)
+    $http.post(myConfig.apiUrl + '/products', product)
     .success(function(resp) {
       
         $scope.products = resp.data;
@@ -148,7 +148,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 
   $scope.productPut = function(product) {
     
-    $http.put('//fodev-api-vinagreti.c9.io/v1/products/'+product._id, product)
+    $http.put(myConfig.apiUrl + '/products/'+product._id, product)
     .success(function(resp) {
       
       $scope.products = resp.data;

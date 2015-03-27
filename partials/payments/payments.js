@@ -65,12 +65,12 @@ payments.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routePara
 
 }]);
 
-payments.controller('PaymentsCtrl', ['$scope','$http', '$filter', '$routeParams', function($scope, $http, $filter, $routeParams) {
+payments.controller('PaymentsCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
 
     $scope.payments = [];
     $scope.paymentFormModalObject = {};
     
-    $http.get('//fodev-api-vinagreti.c9.io/v1/payments').then(function(res) {
+    $http.get(myConfig.apiUrl+'/payments').then(function(res) {
     
         $scope.payments = res.data;
         
