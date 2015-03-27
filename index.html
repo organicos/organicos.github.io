@@ -62,14 +62,14 @@
           </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav navbar-right">
             <li><a href="#/home#how_it_works" ng-click="gotoElement('how_it_works', -53)">Como funciona</a></li>
-            <li><a href="#/home#week_products" ng-click="gotoElement('week_products', -53)">Destaques da semana</a></li>
+            <li><a href="#/home#week_products" ng-click="gotoElement('week_products', -53)">Destaques</a></li>
             <li><a href="#/home#about" ng-click="gotoElement('about', -53)">Sobre</a></li>
             <li><a href="#/home#susteinable_actions" ng-click="gotoElement('susteinable_actions', -53)">Sustentabilidade</a></li>
             <li><a href="#/home#certification" ng-click="gotoElement('certification', -53)">Certificação</a></li>
             <li><a href="#/home#contact" ng-click="gotoElement('contact', -53)">Contato</a></li>
-            <li><a href="#/fair">Minha cesta orgânica</a></li>
+            <li class=""><a href="#/fair" class="background-violet text-white">Minha cesta</a></li>
             <li><a href="#/logout" ng-if="$storage.user.token">Sair</a></li>
             <li><a href="#/signin" ng-if="!$storage.user.token">Entrar</a></li>
           </ul>
