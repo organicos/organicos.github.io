@@ -85,7 +85,12 @@
                             
                             <br>
                             
-                            <dl class="dl-horizontal" ng-show="productFormModalObject || $storage.user.kind == 'admin'">
+                            <dl class="dl-horizontal" ng-show="$storage.user.kind == 'admin'">
+                                <dt>Custo R$: </dt>
+                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.cost"></dd>
+                            </dl>
+                            
+                            <dl class="dl-horizontal" ng-show="productFormModalObject.price || $storage.user.kind == 'admin'">
                                 <dt>Preço R$: </dt>
                                 <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.price"></dd>
                             </dl>
