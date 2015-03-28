@@ -21,13 +21,18 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
 
     $scope.products = [];
 
-    $http.get(myConfig.apiUrl+'/products').then(function(res) {
+    $http.get(myConfig.apiUrl+'/products')
+    .success(function(res){
+      
+      $scope.products = res;
+      
+    }).error(function(err) {
     
-        $scope.products = res;
-
-    }, function(err) {
-    
-        console.error('ERR', err);
+        $scope.$emit('alert', {
+            kind: 'danger',
+            msg: err,
+            title: "Não foi possível acessar a lista de produtos. Verifique o motivo abaixo:"
+        });
     
     });
 
@@ -36,18 +41,17 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
 products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
 
   $scope.saving_product = false;
+  
+  $scope.product = {};
 
-  if(!$routeParams.id){
+  if($routeParams.id){
     
-    $scope.product = {};
-    
-  } else {
-    
-    $http.get(myConfig.apiUrl+'/product/'+$routeParams.id).then(function(res) {
+    $http.get(myConfig.apiUrl+'/product/'+$routeParams.id)
+    .success(function(res) {
 
       $scope.product = res.data;
     
-    }, function(err) {
+    }).error(function(err) {
     
         $scope.$emit('alert', {
             kind: 'danger',
@@ -140,6 +144,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
   };
   
   $scope.dropProduct = function(product) {
+    
     var confirmed = confirm('Deseja realmente excluir o produto ' + product.name + "?");
       
     if (confirmed) {
