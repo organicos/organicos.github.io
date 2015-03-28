@@ -42,15 +42,15 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
 
   $scope.saving_product = false;
   
-  $scope.product = {};
+  $scope.selectedProduct = {};
 
   if($routeParams.id){
     
     $http.get(myConfig.apiUrl+'/product/'+$routeParams.id)
     .success(function(res) {
 
-      $scope.product = res.data;
-    
+      $scope.selectedProduct = res;
+
     }).error(function(err) {
     
         $scope.$emit('alert', {
