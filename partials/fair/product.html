@@ -58,12 +58,6 @@
 			<div class="col-xs-offset-1 col-xs-22">
         			    
                 <button class="btn btn-default" ng-click="$back()">Voltar</button>
-                <button class="btn btn-danger pull-right" 
-                    ng-class="saving_product ? 'disabled' : ''"
-                    ng-if="productFormModalObject._id && $storage.user.kind == 'admin'" 
-                    ng-click="dropProduct(productFormModalObject)">
-                    <i class="fa fa-trash"></i>
-                </button>
                 
                 <hr>
                 
@@ -81,73 +75,45 @@
                         
                         <div class="col-xs-18">
                             
-                            <h2 ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.name"></h2>
+                            <h2 ng-bind="productFormModalObject.name"></h2>
                             
                             <br>
                             
                             <dl class="dl-horizontal" ng-show="$storage.user.kind == 'admin'">
-                                <dt>Custo R$: </dt>
-                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.cost"></dd>
+                                <dt>Custo: </dt>
+                                <dd ng-bind="productFormModalObject.cost | currency"></dd>
                             </dl>
                             
                             <dl class="dl-horizontal" ng-show="productFormModalObject.price || $storage.user.kind == 'admin'">
                                 <dt>Preço R$: </dt>
-                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.price"></dd>
+                                <dd ng-bind="productFormModalObject.price"></dd>
                             </dl>
                             
                             <dl class="dl-horizontal" ng-show="productFormModalObject.dscr || $storage.user.kind == 'admin'">
                                 <dt>Descrição: </dt>
-                                <dd class="text-justify" ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.dscr"></dd>
+                                <dd class="text-justify" ng-bind="productFormModalObject.dscr"></dd>
                             </dl>
                             
                             <dl class="dl-horizontal" ng-show="productFormModalObject.category || $storage.user.kind == 'admin'">
                                 <dt>Categoria: </dt>
-                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.category"></dd>
+                                <dd ng-bind="productFormModalObject.category"></dd>
                             </dl>
                             
                             <dl class="dl-horizontal" ng-show="productFormModalObject.supplier || $storage.user.kind == 'admin'">
                                 <dt>Fornecedor: </dt>
-                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.supplier"></dd>
+                                <dd ng-bind="productFormModalObject.supplier"></dd>
                             </dl>
                             
                             <dl class="dl-horizontal" ng-show="productFormModalObject.season || $storage.user.kind == 'admin'">
                                 <dt>Época: </dt>
-                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.season"></dd>
+                                <dd ng-bind="productFormModalObject.season"></dd>
                             </dl>
                             
                             <dl class="dl-horizontal" ng-show="productFormModalObject.recipes || $storage.user.kind == 'admin'">
                                 <dt>Receitas: </dt>
-                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.recipes"></dd>
+                                <dd ng-bind="productFormModalObject.recipes"></dd>
                             </dl>
-                            
-                            <dl class="dl-horizontal" ng-if="$storage.user.kind == 'admin'">
-                                <dt>Imagem: </dt>
-                                <dd ng-attr-contenteditable="{{$storage.user.kind == 'admin' ? 'true' : 'false'}}" ng-model="productFormModalObject.img"></dd>
-                            </dl>
-                
-                            <dl class="dl-horizontal"  ng-if="$storage.user.kind == 'admin'">
-                                <dt></dt>
-                                <dd>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="active" ng-model="productFormModalObject.highlight"> Destaque
-                                        </label>
-                                        <label>
-                                            <input type="checkbox" name="active" ng-model="productFormModalObject.active"> Ativo
-                                        </label>
-                                    </div>
-                                </dd>
-                            </dl>
-                
-                            <dl class="dl-horizontal"  ng-if="$storage.user.kind == 'admin'">
-                                <dt></dt>
-                                <dd><button type="button" class="btn btn-success" ng-click="productModalFormSubmit()"
-                                ng-class="saving_product ? 'disabled' : ''"
-                                >Salvar</button></dd>
-                            </dl>
-                            
-                
-                            
+            
                         </div>
                 
                     </div>

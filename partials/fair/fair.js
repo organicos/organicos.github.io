@@ -7,12 +7,8 @@ fair.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/fair/fair.html',
     controller: 'FairCtrl'
   });
-  $routeProvider.when('/product', {
-    templateUrl: 'partials/fair/productFormModal.html',
-    controller: 'FairCtrl'
-  });
-  $routeProvider.when('/product/:id', {
-    templateUrl: 'partials/fair/productFormModal.html',
+  $routeProvider.when('/fair/product/:id', {
+    templateUrl: 'partials/fair/product.html',
     controller: 'FairCtrl'
   });
 
@@ -24,37 +20,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 	$scope.saving_product = false;
 	$scope.selectedCategory = '';
 	$scope.productFormModalObject = {};
-	$scope.categories = [
-		'Frutas',
-		'Verduras',
-		'Legumes',
-		'Temperos',
-		'Grãos',
-		'Farinhas e Cereais',
-		'Geléias',
-		'Óleos',
-		'Conservas',
-		'Bebidas',
-		'Chás',
-		'Pães',
-		'Embalagens'
-  ];
-	if(!$scope.$storage.basket){
-  	$scope.$storage.basket = {
-  	  total: 0,
-  	  name: 'Minha cesta',
-  	  products: []
-  	};	  
-	}  
 
-  $scope.selectCategory = function (category) {
-    
-    $scope.selectedCategory = category;
-    
-  }
-
-  // http://104.154.82.56/api/products - URL do recurso
-  //$http.get('//fodev-api-vinagreti.c9.io/v1/products').then(function(resp) {
   $http.get(myConfig.apiUrl + '/products').then(function(resp) {
     
       $scope.products = resp.data;
@@ -67,117 +33,18 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 
   });
   
-  $scope.dropProduct = function(product) {
-    var confirmed = confirm('Deseja realmente excluir o produto ' + product.name + "?");
-      
-    if (confirmed) {
+	if(!$scope.$storage.basket){
+  	$scope.$storage.basket = {
+  	  total: 0,
+  	  name: 'Minha cesta',
+  	  products: []
+  	};	  
+	}  
 
-      $scope.saving_product = true;
-        $http.delete(myConfig.apiUrl + '/products/' + product._id)
-        .success(function() {
-          window.location = ("#/fair");
-        })
-        .error(function (resp) {
-          
-          var error_list = [];
+  $scope.selectCategory = function (category) {
     
-          angular.forEach(resp.errors, function(error, path) {
-            this.push(error.message);
-          }, error_list);
-          
-          $scope.$emit('alert', {
-              kind: 'danger',
-              msg: error_list,
-              title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
-          });
+    $scope.selectedCategory = category;
     
-      })
-      .finally(function () {
-        $scope.saving_product = false;
-      });
-      
-    };
-    
-  }
-
-  $scope.productModalFormSubmit = function () {
-    
-    $scope.saving_product = true;
-    
-    if($scope.productFormModalObject._id){
-      
-       $scope.productPut($scope.productFormModalObject);
-      
-    } else {
-
-      $scope.productPost($scope.productFormModalObject); 
-
-    }
-
-  }
-  
-  $scope.productPost = function(product) {
-    
-    $http.post(myConfig.apiUrl + '/products', product)
-    .success(function(resp) {
-      
-        $scope.products = resp.data;
-        window.location = ("#/product/" + resp._id);
-        
-    })
-    .error(function (resp) {
-      
-      var error_list = [];
-
-      angular.forEach(resp.errors, function(error, path) {
-        this.push(error.message);
-      }, error_list);
-      
-      $scope.$emit('alert', {
-          kind: 'danger',
-          msg: error_list,
-          title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
-      });
-  
-    })
-    .finally(function () {
-      $scope.saving_product = false;
-    });
-  
-  };
-
-  $scope.productPut = function(product) {
-    
-    $http.put(myConfig.apiUrl + '/products/'+product._id, product)
-    .success(function(resp) {
-      
-      $scope.products = resp.data;
-
-      $scope.$emit('alert', {
-          kind: 'success',
-          msg: '',
-          title: "Produto editado com sucesso"
-      });
-
-    })
-    .error( function(resp) {
-      
-      var error_list = [];
-
-      angular.forEach(resp.errors, function(error, path) {
-        this.push(error.message);
-      }, error_list);
-      
-      $scope.$emit('alert', {
-          kind: 'danger',
-          msg: error_list,
-          title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
-      });
-  
-    })
-    .finally(function () {
-      $scope.saving_product = false;
-    });
   }
 
   $scope.addToBasket = function (product) {
