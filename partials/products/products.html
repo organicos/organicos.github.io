@@ -9,6 +9,7 @@
             <td>Margem</td>
             <td>Categoria</td>
             <td>Ativo</td>
+            <td>Destaque</td>
             <td>Ultima modificação</td>
             <td>Ações</td>
         </tr>
@@ -21,6 +22,7 @@
             <td>{{product.price / product.cost / 100 || 0}}</td>
             <td ng-bind="product.catecory"></td>
             <td ng-bind="product.active"></td>
+            <td ng-bind="product.highlight"></td>
             <td ng-bind="product.updated | date:'dd/MM/yyyy'"></td>
             <td>x</td>
         </tr>

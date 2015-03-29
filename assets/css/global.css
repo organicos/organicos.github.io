@@ -3,6 +3,9 @@
     background-size:100% auto;
 }
 
+/** bootstrap-ui **/
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
 /** Default styles **/
 .background-black{ background-color:black;}
 .background-blue{ background-color:#5BC0DE;}
