@@ -58,7 +58,7 @@
             <td><a class="text-violet" href="#/product/{{product._id}}" ng-bind="product.name"></a></td>
             <td ng-bind="product.cost | currency"></td>
             <td ng-bind="product.price | currency"></td>
-            <td>{{product.price / product.cost / 100 || 0}}</td>
+            <td>{{(product.price / (product.cost / 100)) - 100 || 0 | number:1}}%</td>
             <td ng-bind="product.catecory"></td>
             <td><i ng-if="product.active" class="fa fa-check"></i></td>
             <td><i ng-if="product.highlight" class="fa fa-check"></i></td>
