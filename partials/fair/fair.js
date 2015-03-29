@@ -39,13 +39,13 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
   	  name: 'Minha cesta',
   	  products: []
   	};	  
-	}  
+	};
 
   $scope.selectCategory = function (category) {
     
     $scope.selectedCategory = category;
     
-  }
+  };
 
   $scope.addToBasket = function (product) {
     

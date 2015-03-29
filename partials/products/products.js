@@ -19,23 +19,33 @@ products.config(['$routeProvider', function($routeProvider) {
 
 products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
 
-    $scope.products = [];
+  $scope.products = [];
+  $scope.selectedFilterField = 'category';
+  $scope.selectedFilterValue = 'Óleos';
+  $scope.selectedOrder = 'name';
 
-    $http.get(myConfig.apiUrl+'/products')
-    .success(function(res){
-      
-      $scope.products = res;
-      
-    }).error(function(err) {
+  $http.get(myConfig.apiUrl+'/products')
+  .success(function(res){
     
-        $scope.$emit('alert', {
-            kind: 'danger',
-            msg: err,
-            title: "Não foi possível acessar a lista de produtos. Verifique o motivo abaixo:"
-        });
+    $scope.products = res;
     
-    });
+  }).error(function(err) {
+  
+      $scope.$emit('alert', {
+          kind: 'danger',
+          msg: err,
+          title: "Não foi possível acessar a lista de produtos. Verifique o motivo abaixo:"
+      });
+  
+  });
 
+  $scope.selectFilter = function (field, value) {
+    
+    $scope.selectedFilterField = field;
+    $scope.selectedFilterValue = value;
+    
+  }
+  
 }]);
 
 products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
