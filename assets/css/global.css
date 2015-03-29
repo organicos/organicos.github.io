@@ -7,9 +7,9 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 /** tooltip **/
- .tooltip {
-   text-align:left;
- }
+.tooltip > .tooltip-inner {
+    text-align:left;
+}
 
 /** Default styles **/
 .background-black{ background-color:black;}
