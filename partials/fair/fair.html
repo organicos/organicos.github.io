@@ -16,11 +16,9 @@
 	        <div class="row small" ng-repeat="product in $storage.basket.products">
 				<div class="col-xs-2 text-right" ng-bind="product.quantity"></div>
 				<div class="col-xs-12" ng-bind="product.name"
-					popover="{{product.dscr}}" 
-					popover-title="{{product.name}}" 
-					popover-trigger="mouseenter"
-					popover-placement="right" 
-					popover-append-to-body="true"
+					tooltip-placement="right"
+					tooltip-html-unsafe="{{product.name}} <br> {{product.dscr}}" 
+					tooltip-append-to-body="true" 
 					ng-dblclick="dropFromBasket(product)"
 				></div>
 				<div class="col-xs-4 text-right" ng-bind="product.price | currency:'R$':2"></div>

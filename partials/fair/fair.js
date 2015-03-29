@@ -50,14 +50,13 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 
   $scope.addToBasket = function (product) {
     
-    var productIndex = $scope.$storage.basket.products.indexOf(product);
-
-    if (productIndex >= 0) {
-
-      $scope.$storage.basket.products[productIndex].quantity++;
-
-
-    } else {
+    var basketProduct = ($filter('filter')($scope.$storage.basket.products, {_id: product._id}, false))[0];
+    
+    if(basketProduct){
+      
+      basketProduct.quantity ++;
+      
+    }  else {
 
       product.quantity = 1;
 

@@ -6,6 +6,11 @@
 /** bootstrap-ui **/
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
+/** tooltip **/
+ .tooltip {
+   text-align:left;
+ }
+
 /** Default styles **/
 .background-black{ background-color:black;}
 .background-blue{ background-color:#5BC0DE;}
