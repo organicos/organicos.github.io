@@ -56,18 +56,36 @@
 			<div class="col-xs-offset-1 col-xs-22">
 				
 				<br>
+
+		        <form class="form-inline text-right">
+		            <div class="form-group">
+		            	<label for="productQuery">Buscar produto</label>
+						<input class="form-control input-xs" id="productQuery" name="productQuery" ng-model="productQuery" type="text" placeholder="Buscar produto" autofocus>
+		            </div>
+			    	<div class="form-group">
+			    	    <label for="selectedOrder">Ordem</label>
+			            <select class="form-control" id="selectedOrder" name="selectedOrder" ng-model="selectedOrder">
+			                <option value="name">Nome</option>
+			                <option value="price">Preço</option>
+			                <option value="custo">Categoria</option>
+			                <option value="highlight">Destaque</option>
+			            </select>
+			    	</div>
+		        </form>
+		        
+				<br>
 				
 				<div class="btn-group" role="group" aria-label="productKind">
 					<button 
 						type="button" 
-						class="btn btn-sm btn-default" 
+						class="btn btn-sm btn-primary" 
 						ng-class="selectedCategory == '' ? 'active' : ''"
 						ng-click="selectCategory('')"
 					>Tudo</button>
 					<button 
 						ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'category' | groupBy: 'category')" 
 						type="button" 
-						class="btn btn-sm btn-default" 
+						class="btn btn-sm btn-primary" 
 						ng-class="selectedCategory == product[0].category ? 'active' : ''"
 						ng-click="selectCategory(product[0].category)"
 					>{{product[0].category}}</button>
@@ -75,18 +93,8 @@
 
 				<br><br>
 
-		        <form class="form-inline text-right">
-		            <div class="form-group">
-		            	<label for="productQuery">Buscar produto</label>
-						<input class="form-control input-xs" id="productQuery" name="productQuery" ng-model="productQuery" type="text" placeholder="Buscar produto" autofocus>
-		            </div>
-		            <span ng-if="$storage.user.kind == 'admin'"><a class="btn btn-default" href="#/product">+</a></span>
-		        </form>
-		        
-		        <br>
-
 				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {category : selectedCategory} | orderBy: 'name')">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {category : selectedCategory} | orderBy: selectedOrder)">
 
 
 					    <div class="thumbnail">

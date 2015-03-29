@@ -20,8 +20,8 @@ products.config(['$routeProvider', function($routeProvider) {
 products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
 
   $scope.products = [];
+  $scope.selectedFilterValue = '';
   $scope.selectedFilterField = 'category';
-  $scope.selectedFilterValue = 'Óleos';
   $scope.selectedOrder = 'name';
 
   $http.get(myConfig.apiUrl+'/products')

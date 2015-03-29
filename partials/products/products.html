@@ -1,38 +1,43 @@
 <h1>{{products.length}} Produtos</h1>
 
-    <form class="form-inline text-right">
-        <div class="form-group">
-        	<label for="productQuery">Buscar produto</label>
-			<input class="form-control input-xs" id="productQuery" name="productQuery" ng-model="productQuery" type="text" placeholder="Buscar produto" autofocus>
-        </div>
-        <span ng-if="$storage.user.kind == 'admin'"><a class="btn btn-default" href="#/product">+</a></span>
-    </form>
-    
-    <br>
-
-	<div class="btn-group" role="group" aria-label="productKind">
-		<button 
-			type="button" 
-			class="btn btn-sm btn-default" 
-			ng-class="selectedFilterField == 'category' && selectedFilterValue == '' ? 'active' : ''"
-			ng-click="selectFilter('category', '')"
-		>Tudo</button>
-		<button 
-			ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'category' | groupBy: 'category')" 
-			type="button" 
-			class="btn btn-sm btn-default" 
-			ng-class="selectedFilterField == 'category' && selectedFilterValue == product[0].category ? 'active' : ''"
-			ng-click="selectFilter('category', product[0].category)"
-		>{{product[0].category}}</button>
+<form class="form-inline text-right">
+    <div class="form-group">
+    	<label for="productQuery">Buscar produto</label>
+		<input class="form-control input-xs" id="productQuery" name="productQuery" ng-model="productQuery" type="text" placeholder="Buscar produto" autofocus>
+    </div>
+	<div class="form-group">
+	    <label for="order">Ordem</label>
+        <select class="form-control" id="order" ng-model="selectedOrder">
+            <option value="name" selected>Nome</option>
+            <option value="custo">Custo</option>
+            <option value="price">Preço</option>
+            <option value="custo">Categoria</option>
+            <option value="active">Ativo</option>
+            <option value="highlight">Destaque</option>
+        </select>
 	</div>
+    <span ng-if="$storage.user.kind == 'admin'"><a class="btn btn-default" href="#/product">+</a></span>
+</form>
 
-	<br>
-	
-	<select class="form-group">
-	    <option></option>
-	</select>
-	
-	<br>
+<br>
+
+<div class="btn-group" role="group">
+	<button 
+		type="button" 
+		class="btn btn-sm btn-primary" 
+		ng-class="selectedFilterField == 'category' && selectedFilterValue == '' ? 'active' : ''"
+		ng-click="selectFilter('category', '')"
+	>Tudo</button>
+	<button 
+		ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'category' | groupBy: 'category')" 
+		type="button" 
+		class="btn btn-sm btn-primary" 
+		ng-class="selectedFilterField == 'category' && selectedFilterValue == product[0].category ? 'active' : ''"
+		ng-click="selectFilter('category', product[0].category)"
+	>{{product[0].category}}</button>
+</div>
+
+<br><br>
 				
 <table class="table table-condensed table-stripped table-hover">
     <thead>
