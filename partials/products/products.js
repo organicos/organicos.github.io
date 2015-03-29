@@ -63,17 +63,17 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
     
   }
 
-  $scope.productModalFormSubmit = function () {
+  $scope.selectedProducFormSubmit = function () {
     
     $scope.saving_product = true;
     
-    if($scope.productFormModalObject._id){
+    if($scope.selectedProduct._id){
       
-       $scope.productPut($scope.productFormModalObject);
+       $scope.productPut($scope.selectedProduct);
       
     } else {
 
-      $scope.productPost($scope.productFormModalObject); 
+      $scope.productPost($scope.selectedProduct); 
 
     }
 
