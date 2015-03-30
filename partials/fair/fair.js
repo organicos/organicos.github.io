@@ -21,20 +21,23 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 	$scope.selectedCategory = '';
 	$scope.selectedOrder = "name";
 	$scope.productFormModalObject = {};
+	
 
-  $http.get(myConfig.apiUrl + '/products').then(function(resp) {
+  $http.get(myConfig.apiUrl + '/products')
+  .success(function(resp) {
     
-      $scope.products = resp.data;
+      $scope.products = resp;
 
       $scope.productFormModalObject = ($filter('filter')($scope.products, {_id: $routeParams.id}, false))[0];
   
-  }, function(err) {
+  }).error(function(err) {
     
       console.error('ERR', err);
 
   });
+
   
-	if(!$scope.$storage.basket){
+	if(!$scope.$storage.basket.products){
   	$scope.$storage.basket = {
   	  total: 0,
   	  name: 'Minha cesta',
@@ -53,6 +56,8 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
     var basketProduct = ($filter('filter')($scope.$storage.basket.products, {_id: product._id}, false))[0];
     
     if(basketProduct){
+      
+      basketProduct.quantity = basketProduct.quantity >= 0 ? basketProduct.quantity : 1;
       
       basketProduct.quantity ++;
       

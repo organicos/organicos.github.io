@@ -24,6 +24,7 @@ var app = angular.module('myApp', [
   'myApp.auth',
   'myApp.admin',
   'myApp.users',
+  'myApp.order',
   'myApp.products',
   'myApp.config'
 ]);

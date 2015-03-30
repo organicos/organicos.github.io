@@ -122,7 +122,7 @@
                 
                 <hr>
                 
-                <h3>Outros produtos da mesma categoria {{productFormModalObject.kind}}</h3>
+                <h3>Outros produtos da categoria {{productFormModalObject.category}}</h3>
                 <div class="row">
                 	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in products | filter: {category: productFormModalObject.category} | orderBy: 'name'">
                 		<a class="btn btn-default" href="#/product/{{product._id}}">
