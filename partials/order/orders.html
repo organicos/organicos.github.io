@@ -1,0 +1,76 @@
+<h1>Pedidos</h1>
+
+<form class="form-inline text-right">
+    <div class="form-group">
+		<input class="form-control input-xs" id="orderQuery" name="orderQuery" ng-model="orderQuery" type="text" placeholder="Buscar pedido" autofocus>
+    </div>
+	<div class="form-group">
+        <select class="form-control" id="order" ng-model="selectedOrder">
+            <option value="updated" selected>Data</option>
+            <option value="customer.email">Cliente</option>
+            <option value="district">Bairro</option>
+            <option value="city">Cidade</option>
+            <option value="deliveryOption">Entrega</option>
+            <option value="products">Produto</option>
+            <option value="payment_status">Pagamento</option>
+            <option value="invalid">Inválido</option>
+        </select>
+	</div>
+    <span ng-if="$storage.user.kind == 'admin'"><a class="btn btn-default" href="#/product">+</a></span>
+</form>
+
+<br>
+
+<div class="btn-group" role="group">
+	<button 
+		type="button" 
+		class="btn btn-sm btn-primary" 
+		ng-class="selectedFilterInvalidValue === '' ? 'active' : ''"
+		ng-click="selectFilterInvalidValue('')"
+	>Tudo</button>
+	<button 
+		type="button" 
+		class="btn btn-sm btn-primary" 
+		ng-class="selectedFilterInvalidValue === false ? 'active' : ''"
+		ng-click="selectFilterInvalidValue(false)"
+	>Válidos</button>
+	<button 
+		type="button" 
+		class="btn btn-sm btn-primary" 
+		ng-class="selectedFilterInvalidValue === true ? 'active' : ''"
+		ng-click="selectFilterInvalidValue(true)"
+	>Inválidos</button>
+</div>
+
+<br><br>
+
+<table class="table table-condensed table-stripped table-hover small">
+    <thead>
+        <tr>
+            <td>Ref</td>
+            <td>Cliente</td>
+            <td>Bairro</td>
+            <td>Cidade</td>
+            <td>Entrega</td>
+            <td>Produtos</td>
+            <td>Data</td>
+            <td>Pagamento</td>
+            <td ng-if="selectedFilterInvalidValue === ''">Inválido</td>
+            <td>Ações</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="order in filteredProducts = (orders | filter: orderQuery | orderBy: selectedOrder | filter: {invalid : selectedFilterInvalidValue})">
+            <td><a href="#/order/{{order._id}}" ng-bind="order._id"></a></td>
+            <td ng-bind="order.customer.email"></td>
+            <td ng-bind="order.district"></td>
+            <td ng-bind="order.city"></td>
+            <td ng-bind="order.deliveryOption"></td>
+            <td ng-bind="order.products.length"></td>
+            <td ng-bind="order.updated | date:'dd/MM/yyyy'"></td>
+            <td ng-bind="order.payment_status"></td>
+            <td ng-if="selectedFilterInvalidValue === ''"><i class="fa fa-check" ng-if="order.invalid"></i></td>
+            <td><a ng-click="dropOrder(order)" href="javascrip:void(0)">x</a></td>
+        </tr>
+    </tbody>
+</table>

@@ -74,14 +74,14 @@
                 <input type="text" class="form-control" id="address_ref" placeholder="Referências" ng-model="address_ref">
             </div>
             <div class="form-group col-sm-8">
-                <label for="deliveryOption" class="control-label">Data e horário de entrega</label>
+                <label for="deliveryOption" class="control-label" ng-model="deliveryOption">Data e horário de entrega</label>
                 <select class="form-control" id="deliveryOption" placeholder="Nome" ng-model="deliveryOption">
-                    <option ng-repeat="deliveryOption in DeliveryDayAndTimeOptions" ng-value="deliveryOption" ng-bind="deliveryOption"></option>
+                    <option ng-repeat="deliveryOptionObj in DeliveryDayAndTimeOptions" ng-value="deliveryOptionObj" ng-bind="deliveryOptionObj"></option>
                 </select>
             </div>
             <div class="form-group">
                 <a class="btn btn-link text-white" href="#/fair">Alterar cesta</a>
-                <a class="btn btn-success pull-right" ng-disabled="!orderReady" href="#/order_process">Finalizar pedido</a>
+                <button class="btn btn-success pull-right" ng-disabled="!orderReady" ng-click="processOrder()">Finalizar pedido</button>
             </div>
         </form>
 

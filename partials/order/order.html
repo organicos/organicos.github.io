@@ -1,1 +1,76 @@
-<h1>Ordem</h1>
+<div class="row background-violet text-white">
+    <div class="col-xs-22 col-xs-offset-1">
+        
+        <br>
+        
+        <button class="btn btn-default" ng-click="$back()">Voltar</button>
+        
+        <hr>
+                
+        <h1>Pedido <span ng-bind="order._id"></span></h1>
+
+        <div class="row">
+            <div class="col-sm-12">
+                
+                <h2>Dados</h2>
+                <p><strong>Ativo: </strong> <span ng-bind="order.active"></span></p>
+                <p><strong>Cliente: </strong> <a class="text-white" href="#/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></p>
+                <p><strong>Inválido: </strong> <span ng-bind="order.invalid"></span></p>
+                <p><strong>Pagamento: </strong> <span ng-bind="order.payment_status"></span></p>
+                <p><strong>Total: </strong> <span ng-bind="order.total | currency:'R$':2"></span></p>
+                <p><strong>Data: </strong> <span ng-bind="order.updated | date:'dd/MM/yyyy'"></span></p>
+                
+            </div>
+            <div class="col-sm-12">
+                
+                <h2>Entrega</h2>
+                <p><strong>CEP: </strong> <span ng-bind="order.cep"></span></p>
+                <p><strong>Rua: </strong> <span ng-bind="order.street"></span></p>
+                <p><strong>Número: </strong> <span ng-bind="order.number"></span></p>
+                <p><strong>Complemento: </strong> <span ng-bind="order.complement"></span></p>
+                <p><strong>Bairro: </strong> <span ng-bind="order.district"></span></p>
+                <p><strong>Cidade: </strong> <span ng-bind="order.city"></span></p>
+                <p><strong>Estado: </strong> <span ng-bind="order.state"></span></p>
+                <p><strong>Entrega: </strong> <span ng-bind="order.deliveryOption"></span></p>
+                <p><strong>Referência: </strong> <span ng-bind="order.address_ref"></span></p>                
+                
+            </div>
+        </div>
+
+
+        <h2>Produtos</h2>
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <td>Produto</td>
+                    <td align="right">Quantidade</td>
+                    <td align="right">Preço unitário</td>
+                    <td align="right">Total</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in order.products">
+                    <td ng-bind="product.name"
+    					tooltip-placement="right"
+    					tooltip-html-unsafe="{{product.name}} <hr> {{product.dscr}}" 
+    					tooltip-append-to-body="true" 
+                    ></td>
+                    <td ng-bind="product.quantity" align="right"></td>
+                    <td ng-bind="product.price | currency:'R$':2" align="right"></td>
+                    <td ng-bind="product.quantity*product.price | currency:'R$':2" align="right"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td align="right"><h4>Total:</h4></td>
+                    <td align="right"><h4 ng-bind="order.total | currency:'R$':2"></h4></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <a href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code={{order.pagseguro.code}}"></a>
+        
+
+
+    </div>
+</div>

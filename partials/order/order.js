@@ -7,25 +7,113 @@ order.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/order/order_review.html',
     controller: 'OrderReviewCtrl'
   });
-  $routeProvider.when('/order_process', {
-    templateUrl: 'partials/order/order_process.html',
-    controller: 'OrderProcessCtrl'
-  });
   $routeProvider.when('/order/:id', {
     templateUrl: 'partials/order/order.html',
     controller: 'OrderCtrl'
   });
+  $routeProvider.when('/orders', {
+    templateUrl: 'partials/order/orders.html',
+    controller: 'OrdersCtrl'
+  });
+}]);
+
+order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+
+    $scope.selectedFilterInvalidValue = false;
+    $scope.selectedOrder = 'updated';
+    $scope.orders = [];
+    $scope.userFormModalObject = {};
+    
+    $http.get(myConfig.apiUrl+'/orders')
+    .success(function(res) {
+    
+        $scope.orders = res;
+        
+        $scope.orderFormModalObject = ($filter('filter')($scope.orders, {_id: $routeParams.id}, false))[0];
+    
+    }).error(function(err) {
+    
+        console.error('ERR', err);
+    
+    });
+
+    $scope.selectFilterInvalidValue = function(value){
+      
+      $scope.selectedFilterInvalidValue = value;
+      
+    }
+    
+  $scope.dropOrder = function(order){
+      
+    var confirmed = confirm('Deseja realmente excluir o produto ' + order._id + "?");
+      
+    if (confirmed) {
+
+      $scope.saving_product = true;
+        $http.delete(myConfig.apiUrl + '/order/' + order._id)
+        .success(function() {
+          $scope.$emit('alert', {
+              kind: 'success',
+              msg: [],
+              title: "Ordem removida com sucesso!"
+          });
+          var order_index = $scope.orders.indexOf(order);
+          $scope.orders.splice(order_index,1);
+        })
+        .error(function (resp) {
+          
+          var error_list = [];
+    
+          angular.forEach(resp.errors, function(error, path) {
+            this.push(error.message);
+          }, error_list);
+          
+          $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
+          });
+    
+      })
+      .finally(function () {
+        $scope.saving_product = false;
+      });
+      
+    };
+    
+  };
+    
 }]);
 
 order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
-  console.log($routeParams);
+  
+  $scope.order
+  
+  $http.get(myConfig.apiUrl+'/order/'+$routeParams.id)
+  .success(function(res) {
+  
+      $scope.order = res;
+  
+  }).error(function(err) {
+  
+      console.error('ERR', err);
+  
+  });
 }]);
 
-order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
   
     $scope.country = 'Brasil';
     $scope.orderReady = false;
     $scope.inactive_products = [];
+    $scope.DeliveryDayAndTimeOptions = [
+      'Terça pela manhã',
+      'Terça pela tarde',
+      'Terça pela noite',
+      'Sábado pela manhã',
+      'Sábado pela tarde',
+      'Sábado pela noite'
+    ];
     
     $http.post(myConfig.apiUrl + '/order_review', {
         basket: $scope.$storage.basket
@@ -100,26 +188,32 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
 
     });
 
-}]);
-
-order.controller('OrderProcessCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
-  
+  $scope.processOrder = function(){
+    
     $scope.country = 'Brasil';
-    $scope.paymentReady = false;
-    $scope.needReview = false;
     $scope.inactive_products = [];
     
-    $http.post(myConfig.apiUrl + '/order_process', {
-        basket: $scope.$storage.basket
+    $http.post(myConfig.apiUrl + '/order', {
+        basket: $scope.$storage.basket,
+        shipping_data: {
+          cep: $scope.cep,
+          street: $scope.street,
+          number: $scope.number,
+          complement: $scope.complement,
+          district: $scope.district,
+          city: $scope.city,
+          state: $scope.state,
+          country: $scope.country,
+          address_ref: $scope.address_ref,
+          deliveryOption: $scope.deliveryOption
+        }
     })
     .success(function(order) {
         
-      $scope.paymentReady = true;
-      $scope.needReview = false;
       $scope.$storage.basket.products = [];
       $scope.$storage.basket.total = 0;
       
-      $location.path("/order/"+11);
+      $location.path("/order/"+order._id);
 
       $scope.$emit('alert', {
         kind: 'success',
@@ -128,7 +222,7 @@ order.controller('OrderProcessCtrl', ['$scope','$http', '$filter', '$routeParams
       });
             
     }).error(function(err) {
-      
+
       var error_list = [];
 
       angular.forEach(err.errors, function(error, path) {
@@ -142,5 +236,9 @@ order.controller('OrderProcessCtrl', ['$scope','$http', '$filter', '$routeParams
       });  
     
     });
+    
+  }
 
 }]);
+
+
