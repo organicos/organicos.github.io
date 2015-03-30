@@ -7,6 +7,18 @@ order.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/order/order_review.html',
     controller: 'OrderReviewCtrl'
   });
+  $routeProvider.when('/order_process', {
+    templateUrl: 'partials/order/order_process.html',
+    controller: 'OrderProcessCtrl'
+  });
+  $routeProvider.when('/order/:id', {
+    templateUrl: 'partials/order/order.html',
+    controller: 'OrderCtrl'
+  });
+}]);
+
+order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+  console.log($routeParams);
 }]);
 
 order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
@@ -26,7 +38,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     
     }).error(function(err) {
         
-        if(err.inactive_products.length > 0){
+        if(err.inactive_products){
             
             $scope.$storage.basket.products = err.products;
             $scope.$storage.basket.total = err.total;
@@ -86,6 +98,49 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
         
       }
 
+    });
+
+}]);
+
+order.controller('OrderProcessCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
+  
+    $scope.country = 'Brasil';
+    $scope.paymentReady = false;
+    $scope.needReview = false;
+    $scope.inactive_products = [];
+    
+    $http.post(myConfig.apiUrl + '/order_process', {
+        basket: $scope.$storage.basket
+    })
+    .success(function(order) {
+        
+      $scope.paymentReady = true;
+      $scope.needReview = false;
+      $scope.$storage.basket.products = [];
+      $scope.$storage.basket.total = 0;
+      
+      $location.path("/order/"+11);
+
+      $scope.$emit('alert', {
+        kind: 'success',
+        title: "Pedido processado com sucesso.",
+        msg: ['Seu pedido foi processado e já pode ser pago. Ao clicar no botão Pagar, você será direcionado para o site do Pagseguro para realizar uma compra segura e muito prática.']
+      });
+            
+    }).error(function(err) {
+      
+      var error_list = [];
+
+      angular.forEach(err.errors, function(error, path) {
+        this.push(error.message);
+      }, error_list);
+      
+      $scope.$emit('alert', {
+          kind: 'danger',
+          msg: error_list,
+          title: "Seu pedido precisa ser revisado. Verifique os motivos abaixo:"
+      });  
+    
     });
 
 }]);

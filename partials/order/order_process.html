@@ -1,6 +1,6 @@
 <div class="row background-violet text-white">
     <div class="col-xs-22 col-xs-offset-1">
-        <h1>Revise seu pedido</h1>
+        <h1>Pedido processado</h1>
         
         <h2>Resumo da cesta orgânica</h2>
         <table class="table table-condensed">
@@ -80,8 +80,8 @@
                 </select>
             </div>
             <div class="form-group">
-                <a class="btn btn-link text-white" href="#/fair">Alterar cesta</a>
-                <a class="btn btn-success pull-right" ng-disabled="!orderReady" href="#/order_process">Finalizar pedido</a>
+                <a class="btn btn-default pull-left" ng-disabled="!orderReady" href="#/fair">Revisar pedido</a>
+                <a class="btn btn-success pull-right" ng-disabled="!paymentReady" href="#botao_pagseguro">Pagar</a>
             </div>
         </form>
 
