@@ -37,7 +37,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
   });
 
   
-	if(!$scope.$storage.basket.products){
+	if(!$scope.$storage.basket || !$scope.$storage.basket.products){
   	$scope.$storage.basket = {
   	  total: 0,
   	  name: 'Minha cesta',

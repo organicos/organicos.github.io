@@ -232,7 +232,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
       $scope.$emit('alert', {
         kind: 'success',
         title: "Pedido processado com sucesso.",
-        msg: ['Seu pedido foi processado e já pode ser pago. Ao clicar no botão Pagar, você será direcionado para o site do Pagseguro para realizar uma compra segura e muito prática.']
+        msg: ['Seu pedido foi processado e já pode ser pago. Ao clicar no botão Pagar, você será direcionado para o site do Pagseguro para realizar uma compra prática e segura.']
       });
             
     }).error(function(err) {
