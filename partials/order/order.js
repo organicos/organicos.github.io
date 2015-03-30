@@ -17,12 +17,25 @@ order.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
+var statuses = {
+  '1':	'Aguardando pagamento: o comprador iniciou a transação, mas até o momento o PagSeguro não recebeu nenhuma informação sobre o pagamento.',
+  '2':	'Em análise: o comprador optou por pagar com um cartão de crédito e o PagSeguro está analisando o risco da transação.',
+  '3':	'Paga: a transação foi paga pelo comprador e o PagSeguro já recebeu uma confirmação da instituição financeira responsável pelo processamento.',
+  '4':	'Disponível: a transação foi paga e chegou ao final de seu prazo de liberação sem ter sido retornada e sem que haja nenhuma disputa aberta.',
+  '5':	'Em disputa: o comprador, dentro do prazo de liberação da transação, abriu uma disputa.',
+  '6':	'Devolvida: o valor da transação foi devolvido para o comprador.',
+  '7':	'Cancelada: a transação foi cancelada sem ter sido finalizada.',
+  '8':	'Chargeback debitado: o valor da transação foi devolvido para o comprador.',
+  '9':	'Em contestação: o comprador abriu uma solicitação de chargeback junto à operadora do cartão de crédito.'
+};
+
 order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
 
     $scope.selectedFilterInvalidValue = false;
     $scope.selectedOrder = 'updated';
     $scope.orders = [];
     $scope.userFormModalObject = {};
+    $scope.statuses = statuses;
     
     $http.get(myConfig.apiUrl+'/orders')
     .success(function(res) {
@@ -88,6 +101,7 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
 order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
   
   $scope.order
+  $scope.statuses = statuses;
   
   $http.get(myConfig.apiUrl+'/order/'+$routeParams.id)
   .success(function(res) {
