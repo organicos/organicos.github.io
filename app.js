@@ -119,12 +119,25 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
     $scope.alerts = [];
 
     $scope.addAlert = function(alertObj) {
-        $scope.alerts.push(alertObj);
+        
+        var alertObject = alertObj;
+        
+        $scope.alerts.push(alertObject);
+        
+        setTimeout(function(){
+            
+            $scope.closeAlert(alertObject);
+            
+        },
+        5000)
     };
     
-      $scope.closeAlert = function(index) {
-        $scope.alerts.splice(index, 1);
-      }
+    $scope.closeAlert = function(alertObj) {
+        $scope.$apply(function(){
+            var index = $scope.alerts.indexOf(alertObj);
+            $scope.alerts.splice(index, 1);            
+        });
+    }
         
     $scope.$on('alert', function(event, alertObj) {
         $scope.addAlert(alertObj);
