@@ -1,3 +1,70 @@
+body {
+	padding-top:50px;
+}
+
+#masthead {
+	min-height:270px;
+	background-color:#000044;
+  	color:#aaaacc;
+}
+
+#masthead h1 {
+	font-size: 55px;
+	line-height: 1;
+}
+
+#masthead .well {
+	margin-top:13%;
+	background-color:#111155;
+  	border-color:#000033;
+}
+
+.icon-bar {
+	background-color:#fff;
+}
+
+@media screen and (min-width: 768px) {
+	#masthead h1 {
+		font-size: 100px;
+	}
+}
+
+.navbar-bright {
+	background-color:#111155;
+    color:#fff;
+}
+  
+.navbar-bright a, #masthead a, #masthead .lead {
+  	color:#aaaacc;
+}
+
+.navbar-bright li > a:hover {
+    background-color:#000033;
+}
+
+.affix-top,.affix{
+	position: static;
+}
+
+@media (min-width: 979px) {
+  #sidebar.affix-top {
+    position: static;
+  	margin-top:30px;
+  	width:300px;
+  }
+  
+  #sidebar.affix {
+    position: fixed;
+    top:70px;
+    width:228px;
+  }
+}
+
+#sidebar li.active {
+  	border:0 #eee solid;
+  	border-right-width:4px;
+}
+
 #bg-topo-home{
     background:url('http://i.huffpost.com/gen/1703432/images/o-VEGETABLES-facebook.jpg') no-repeat center center;
     background-size:100% auto;
@@ -86,9 +153,6 @@ a.text-violet{ color:#A348A3;}
 .server-action-menu {
     padding: 5px;
 }
-
-/** padding top do conteúdo para nao ficar abaixo do navegador **/
-.main-container{padding-top:50px; }
 
 /** Fix para modulo do banco do brasil **/
 object[type^='application/gas-events'] { display: none; }

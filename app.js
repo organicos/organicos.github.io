@@ -26,7 +26,8 @@ var app = angular.module('myApp', [
   'myApp.users',
   'myApp.order',
   'myApp.products',
-  'myApp.config'
+  'myApp.config',
+  'myApp.articles'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeProvider, $httpProvider, $authProvider) {
