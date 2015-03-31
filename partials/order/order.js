@@ -117,6 +117,7 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
 
 order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
   
+    $scope.processingOrder = false;
     $scope.country = 'Brasil';
     $scope.orderReady = false;
     $scope.inactive_products = [];
@@ -206,6 +207,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     
     $scope.country = 'Brasil';
     $scope.inactive_products = [];
+    $scope.processingOrder = true;
     
     $http.post(myConfig.apiUrl + '/order', {
         basket: $scope.$storage.basket,
@@ -249,6 +251,10 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
           title: "Seu pedido precisa ser revisado. Verifique os motivos abaixo:"
       });  
     
+    }).finally(function(){
+      
+      $scope.processingOrder = false;
+      
     });
     
   }

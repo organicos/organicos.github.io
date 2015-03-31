@@ -32,7 +32,12 @@ security.controller('LogoutCtrl', ['$scope', '$location', function ($scope, $loc
 
 security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http', 'myConfig', function ($scope, $location, $routeParams, $http, myConfig) {
     
+    $scope.processingSignInUp = false;
+    
     $scope.signin = function() {
+        
+        $scope.processingSignInUp = true;
+        
         var formData = {
             email: $scope.email,
             password: $scope.password
@@ -49,14 +54,24 @@ security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http'
                 msg: err,
                 title: "Falha:"
             });
+        })
+        .finally(function(){
+            
+            $scope.processingSignInUp = false;
+            
         });
     };
     
 }]);
 
 security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams', 'myConfig', function ($scope, $http, $location, $routeParams, myConfig) {
+    
+    $scope.processingSignInUp = false;
 
     $scope.signup = function() {
+        
+        $scope.processingSignInUp = true;
+        
         var formData = {
             name: $scope.name,
             email: $scope.email,
@@ -79,9 +94,16 @@ security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams
                         msg: err,
                         title: "Falha:"
                     });
+                })
+                .finally(function(){
+
+                    $scope.processingSignInUp = false;
+
                 });
                 
             } else {
+                
+                $scope.processingSignInUp = false;
                 
                 $scope.$emit('alert', {
                       kind: 'danger',
@@ -92,6 +114,8 @@ security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams
             }
             
         } else {
+            
+            $scope.processingSignInUp = false;
             
             $scope.$emit('alert', {
                   kind: 'danger',
