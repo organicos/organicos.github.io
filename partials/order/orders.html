@@ -54,7 +54,7 @@
             <td>Entrega</td>
             <td>Produtos</td>
             <td>Data</td>
-            <td>Pagamento</td>
+            <td>Pago</td>
             <td ng-if="selectedFilterInvalidValue === ''">Inválido</td>
             <td>Ações</td>
         </tr>
@@ -62,13 +62,13 @@
     <tbody>
         <tr ng-repeat="order in filteredProducts = (orders | filter: orderQuery | orderBy: selectedOrder | filter: {invalid : selectedFilterInvalidValue})">
             <td><a href="#/order/{{order._id}}" ng-bind="order._id"></a></td>
-            <td ng-bind="order.customer.email"></td>
+            <td><a href="#/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></td>
             <td ng-bind="order.district"></td>
             <td ng-bind="order.city"></td>
             <td ng-bind="order.deliveryOption"></td>
             <td ng-bind="order.products.length"></td>
             <td ng-bind="order.updated | date:'dd/MM/yyyy'"></td>
-            <td ng-bind="order.payment_status"></td>
+            <td><i nf-if="order.pagseguro.transaction.status[0]" class="fa fa-check"></i></td>
             <td ng-if="selectedFilterInvalidValue === ''"><i class="fa fa-check" ng-if="order.invalid"></i></td>
             <td><a ng-click="dropOrder(order)" href="javascrip:void(0)">x</a></td>
         </tr>
