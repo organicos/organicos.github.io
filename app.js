@@ -120,13 +120,11 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
 
     $scope.addAlert = function(alertObj) {
         
-        var alertObject = alertObj;
-        
-        $scope.alerts.push(alertObject);
+        $scope.alerts.unshift(alertObj);
         
         setTimeout(function(){
             
-            $scope.closeAlert(alertObject);
+            $scope.closeAlert(alertObj);
             
         },
         5000)

@@ -132,6 +132,11 @@ a.text-violet{ color:#A348A3;}
     z-index:9999;
 }
 
+.alert{
+    margin:2px;
+    padding:5px 5px 0px 5px;
+}
+
 /** Estilo do navegador **/
 .navbar-fixed-top{
     background: rgba(255, 255, 255, 0.9);
