@@ -68,7 +68,27 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeP
 }]);
 
 app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage' , function($scope, $location, anchorSmoothScroll, $localStorage) {
+
+    $scope.$storage = $localStorage.$default({
+        user: {},
+        basket: {total: 0,name: '',products: []}
+    });
     
+    $scope.ensureBasket = function() {
+        
+    	if(!$scope.$storage.basket){
+    	 
+    	    $scope.$storage.basket = {total: 0,name: '',products: []};
+    	 
+    	} else {
+        	if(!$scope.$storage.basket.products) $scope.$storage.basket.products = {};
+        	if(!$scope.$storage.basket.total) $scope.$storage.basket.total = 0;
+        	if(!$scope.$storage.basket.name) $scope.$storage.basket.name = '';
+    	}
+        
+    }();
+
+
     $scope.ping = function(callback) {
         
         callback();
@@ -104,10 +124,6 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
         
         }
  
-    });
-
-    $scope.$storage = $localStorage.$default({
-        user: {}
     });
 
     $scope.$back = function() {
@@ -161,6 +177,15 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
 app.controller('NavBarCtrl', function($scope) {
     
     $scope.isCollapsed = true;
+    
+    $scope.totalBasketItens = function(){
+        var total = 0;
+        for(count=0;count<$scope.items.length;count++){
+            total += $scope.items[count].Price + $scope.items[count].Price;
+        }
+        return total;
+    };
+
 });
 
 /**

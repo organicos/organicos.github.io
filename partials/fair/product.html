@@ -69,7 +69,10 @@
                             
                             <img class="img-responsive" ng-src="{{productFormModalObject.img}}" ></img>
                             
-                            <button class="btn btn-primary btn-block" ng-click="addToBasket(productFormModalObject)">Colocar na cesta</button>
+                            <button class="btn btn-primary btn-block" ng-click="addToBasket(productFormModalObject)">
+                                Colocar na cesta
+                                <span class="label label-warning" ng-repeat="buttonProduct in $storage.basket.products | filter : {_id: productFormModalObject._id}" ng-bind="buttonProduct.quantity"></span>
+                            </button>
                 
                         </div>
                         

@@ -135,7 +135,6 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     })
     .success(function(basket) {
         
-        $scope.orderReady = true;
         $scope.$storage.basket.products = basket.products;
         $scope.$storage.basket.total = basket.total;
     
@@ -146,8 +145,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
             $scope.$storage.basket.products = err.products;
             $scope.$storage.basket.total = err.total;
             $scope.inactive_products = err.inactive_products;
-            $scope.orderReady = true;
-            
+
             var error_list = [];
 
             angular.forEach(err.inactive_products, function(error, path) {
@@ -176,6 +174,9 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
             
         }
     
+    })
+    .finally(function(){
+      $scope.orderReady = true;
     });
     
     $scope.$watch('cep', function(newValue, oldValue) {
@@ -257,7 +258,57 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
       
     });
     
-  }
+  };
+  
+  $scope.addToBasket = function (product) {
+    
+    var basketProduct = ($filter('filter')($scope.$storage.basket.products, {_id: product._id}, false))[0];
+    
+    if(basketProduct){
+      
+      basketProduct.quantity = basketProduct.quantity >= 0 ? basketProduct.quantity : 1;
+      
+      basketProduct.quantity ++;
+      
+    }  else {
+
+      product.quantity = 1;
+
+      $scope.$storage.basket.products.push(product);
+
+    }
+    
+    $scope.$storage.basket.total += parseFloat(product.price);
+    
+  };
+
+  $scope.dropFromBasket = function (product, decreasingAmount) {
+    
+    var productIndex = $scope.$storage.basket.products.indexOf(product);
+    
+    var product = $scope.$storage.basket.products[productIndex];
+
+    if (productIndex >= 0) {
+
+      if (decreasingAmount > 0 & product.quantity > decreasingAmount) {
+        
+        product.quantity -= decreasingAmount;
+        
+        $scope.$storage.basket.total -= product.price * decreasingAmount;
+        
+      } else {
+        
+        $scope.$storage.basket.total -= parseFloat(product.price) * product.quantity;
+        
+        $scope.$storage.basket.products.splice(productIndex, 1);   
+        
+      }
+      
+      
+      
+    }
+
+  };
 
 }]);
 

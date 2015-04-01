@@ -59,7 +59,11 @@
 			</div>
 		</div>
 
-		<br><br><br>
+		<br>
+		
+		<p class="text-right"><a class="text-white" href="#/article/terms">Saiba mais aqui...</a></p>
+		
+		<br>
 	</div>
 </div>
 
@@ -70,7 +74,9 @@
 
 		<div class="row">
 			<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="product in products| filter:{ highlight: true }">
-				<img class="img-responsive" alt="week_product" ng-src="{{product.img}}">
+				<a href="#/fair/product/{{product._id}}">
+					<img class="img-responsive" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200/{{product.img}}" ng-dblclick="addToBasket(product)">
+				</a>
 				<p style="height:60px;">{{product.name}}</p>
 			</div>
 		</div>
@@ -102,7 +108,7 @@
 				<h3 class="text-left">COMO FAZEMOS?</h3>
 				<p>As cestas da Feira Orgânica Delivery são opções garantidas de que você receberá na sua casa alimentos orgânicos fresquinhos, certificados, selecionados, higienizados e embalados com carinho.</p> 
 				<p>Os nossos produtos orgânicos provêm do box de orgânicos do Ceasa de São José, SC, o BOX 721. Essa parceria nasceu de uma proposta de fidelidade e ajuda mútua.</p>
-				<p>Pensando em economizar na emissão de gases e  poluentes como o CO2, agendamos as entregas em cada região de Florianópolis uma vez por semana gratuitamente, com veículos abastecidos à gás natural, de bicicleta e a pé, no horário de entrega que for mais conveniente e com a melhor forma de pagamento para o seu bolso.</p>
+				<p>Pensando em economizar na emissão de gases e poluentes como o CO2, agendamos as entregas em cada região de Florianópolis uma vez por semana gratuitamente, com veículos abastecidos à gás natural, de bicicleta e a pé, no horário de entrega que for mais conveniente e com a melhor forma de pagamento para o seu bolso.</p>
 			</div>
 		</div>
 		<br><br>
@@ -157,25 +163,25 @@
 		<h2 class="text-center">Deixar uma mensagem</h2>
 		<p class="text-center">Deixe seu recado que entraremos em contato em breve.</p>
 		
-		<form class="form" method="POST" role="form" name="contactForm" ng-submit="submit(contactForm)">
+		<form class="form" method="POST" role="form" name="contactForm" ng-submit="submitContact()">
 			<div class="form-group">
 				<label for="contact-name">Nome</label>
-				<input class="form-control" type="text" name="name" ng-model="name" id="contact-name" placeholder="Nome"/>
+				<input class="form-control" type="text" name="name" ng-model="name" id="name" placeholder="Nome"/>
 			</div>
 			<div class="form-group">
 				<label for="contact-email">E-mail *</label>
-				<input class="form-control" type="text" name="email" ng-model="email" id="contact-email" placeholder="E-mail"/>
+				<input class="form-control" type="text" name="email" ng-model="email" id="email" placeholder="E-mail"/>
 			</div>
 			<div class="form-group">
 				<label for="contact-phone">Telefone</label>
-				<input class="form-control" type="text" name="phone" ng-model="phone" id="contact-phone" placeholder="Telefone"/>
+				<input class="form-control" type="text" name="phone" ng-model="phone" id="phone" placeholder="Telefone"/>
 			</div>
 			<div class="form-group">
 				<label for="contact-msg">Mensagem</label>
-				<textarea class="form-control" rows="5" name="msg" ng-model="msg" id="contact-msg" placeholder="Mensagem"></textarea>
+				<textarea class="form-control" rows="5" name="msg" ng-model="msg" id="msg" placeholder="Mensagem"></textarea>
 			</div>
 			<div class="form-group">
-				<button type="submit" class="btn btn-success">Enviar</button>
+				<button type="submit" class="btn btn-success" ng-disabled="submitingContact">Enviar</button>
 			</div>
 		</form>
 	</div>

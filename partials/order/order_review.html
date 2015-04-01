@@ -6,7 +6,7 @@
             <thead>
                 <tr>
                     <td>Produto</td>
-                    <td align="right">Quantidade</td>
+                    <td align="center">Quantidade</td>
                     <td align="right">Preço unitário</td>
                     <td align="right">Total</td>
                 </tr>
@@ -20,7 +20,13 @@
                 		popover-placement="right" 
                 		popover-append-to-body="true"
                     ></td>
-                    <td ng-bind="product.quantity" align="right"></td>
+                    <td align="center">
+        				<span class="btn-group" role="group" aria-label="productKind">
+                            <button class="btn btn-default btn-xs" ng-click="dropFromBasket(product, 1)"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-default btn-xs" ng-bind="product.quantity" disabled></button>
+                            <button class="btn btn-default btn-xs" ng-click="addToBasket(product)"><i class="fa fa-plus"></i></button>
+        				</span>
+                    </td>
                     <td ng-bind="product.price | currency:'R$':2" align="right"></td>
                     <td ng-bind="product.quantity*product.price | currency:'R$':2" align="right"></td>
                 </tr>
@@ -32,6 +38,8 @@
                 </tr>
             </tbody>
         </table>
+        
+        <div class="alert alert-danger" ng-if="$storage.basket.total < 35">O valor mínimo para a compra de produtos é de R$35,00.</div>
         
         <h2>Dados de entrega</h2>
         
@@ -80,8 +88,11 @@
             </div>
             <div class="form-group">
                 <a class="btn btn-link text-white" href="#/fair">Alterar cesta</a>
-                <button class="btn btn-success pull-right" ng-disabled="!orderReady || processingOrder" ng-click="processOrder()">
-                    <i class="fa fa-spinner fa-spin" ng-if="processingOrder"></i> Finalizar pedido</button>
+                <button 
+                    class="btn btn-success pull-right" 
+                    ng-disabled="!orderReady || processingOrder || $storage.basket.total < 35" ng-click="processOrder()">
+                    <i class="fa fa-spinner fa-spin" ng-if="processingOrder"></i>
+                Finalizar pedido</button>
             </div>
         </form>
 

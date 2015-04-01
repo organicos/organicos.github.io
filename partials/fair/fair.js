@@ -36,15 +36,6 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 
   });
 
-  
-	if(!$scope.$storage.basket || !$scope.$storage.basket.products){
-  	$scope.$storage.basket = {
-  	  total: 0,
-  	  name: 'Minha cesta',
-  	  products: []
-  	};	  
-	};
-
   $scope.selectCategory = function (category) {
     
     $scope.selectedCategory = category;
@@ -73,15 +64,29 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
     
   };
 
-  $scope.dropFromBasket = function (product) {
+  $scope.dropFromBasket = function (product, decreasingAmount) {
     
     var productIndex = $scope.$storage.basket.products.indexOf(product);
+    
+    var product = $scope.$storage.basket.products[productIndex];
 
     if (productIndex >= 0) {
+
+      if (decreasingAmount > 0 & product.quantity > decreasingAmount) {
+        
+        product.quantity -= decreasingAmount;
+        
+        $scope.$storage.basket.total -= product.price * decreasingAmount;
+        
+      } else {
+        
+        $scope.$storage.basket.total -= parseFloat(product.price) * product.quantity;
+        
+        $scope.$storage.basket.products.splice(productIndex, 1);   
+        
+      }
       
-      $scope.$storage.basket.products.splice(productIndex, 1);
       
-      $scope.$storage.basket.total -= parseFloat(product.price) * product.quantity;
       
     }
 
