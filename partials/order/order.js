@@ -206,12 +206,8 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
 
   $scope.processOrder = function(){
     
-    $scope.country = 'Brasil';
-    $scope.inactive_products = [];
     $scope.processingOrder = true;
-    $scope.shipping_data = $
-    
-    
+
     $http.post(myConfig.apiUrl + '/order', {
         basket: $scope.$storage.basket,
         shipping_data: {
