@@ -93,12 +93,12 @@
 							<hr>
 							<div style="height:100px;">
 								<p>
-									<span>{{product.price | currency:'R$':2}}</span>
+									<span ng-bind="product.price | currency:'R$':2"></span>
 									<span class="pull-right">
-										<a ng-if="product.category" ng-click="selectCategory(product.category)">{{product.category}}</a>
+										<a ng-if="product.category" ng-click="selectCategory(product.category)" ng-bind="product.category"></a>
 									</span>
 								</p>
-								<h4 class="text-violet"><a href="#/fair/product/{{product._id}}">{{product.name}}<a href="#/fair/product/{{product._id}}"></h4>
+								<h4 class="text-violet"><a href="#/fair/product/{{product._id}}" ng-bind="product.name"></a></h4>
 							</div>
 
 							<button class="btn btn-primary btn-block" ng-click="addToBasket(product)">Colocar na cesta 
