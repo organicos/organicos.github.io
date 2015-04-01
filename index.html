@@ -64,6 +64,7 @@
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#/admin_panel" ng-if="$storage.user.kind == 'admin'">Admin</a></li>
+            <li><a href="#/blog">Blog</a></li>
             <li><a href="#/home#how_it_works" ng-click="gotoElement('how_it_works', -53)">Como funciona</a></li>
             <li><a href="#/home#week_products" ng-click="gotoElement('week_products', -53)">Destaques</a></li>
             <li><a href="#/home#about" ng-click="gotoElement('about', -53)">Sobre</a></li>
@@ -126,7 +127,7 @@
               </div>
               <div class="col-sm-5 text-muted">
                 <h4 class="text-center">Termos e Condições</h4>
-                <p>Ao utilizar o site feiraorgânica.com você concorda com os <a href="#/article/terms">Termos e Condições de Uso.</a>
+                <p>Ao utilizar o site feiraorgânica.com você concorda com os <a href="#/blog/terms">Termos e Condições de Uso.</a>
                 <p>A lista de produtos e preços é atualizada semanalmente sem aviso prévio.</p>
                 </p>
               </div>
@@ -155,6 +156,7 @@
     <script src="partials/users/users.js"></script>
     <script src="partials/order/order.js"></script>
     <script src="partials/articles/articles.js"></script>
+    <script src="partials/blog/blog.js"></script>
     <script src="partials/products/products.js"></script>
     <script src="components/version/version.js"></script>
     <script src="components/version/version-directive.js"></script>

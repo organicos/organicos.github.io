@@ -1,39 +1,31 @@
 <br>
-{{$storage.user.kind}}
-<div ng-if="$storage.user.kind == 'admin'">
-    
-    <button class="btn btn-default" ng-click="$back()">Voltar</button>
-                    
-    <hr>
-    
-    <form class="form" role="form" ng-submit="articleFormSubmit()">
-        <div class="form-group">
-            <input class="form-control" type="text" ng-model="article.title" placeholder="Título">
-        </div>
-        <div class="form-group">
-            <textarea class="form-control" rows="8" ng-model="article.content" placeholder="Conteúdo do artigo"></textarea>
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="text" ng-model="article.img" placeholder="Imagem">
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="text" ng-model="article.encoded_url" placeholder="Url">
-        </div>
-        <div class="form-group">
-            <button class="btn btn-success" type="submit" ng-model="title" placeholder="Título">Salvar</button>
-        </div>
-    </form>
-    
-</div>
 
-<div class="row" ng-if="$storage.user.kind != 'admin'">
-    <div class="col-xs-offset-1 col-xs-22 col-sm-offset-2 col-sm-20 col-md-offset-4 col-md-16">
-        <h1 ng-bind="article.title"></h1>
-        
-        <img class="img-responsive img-responsive-wide" ng-if="article.img" ng-src="{{article.img}}"></img>
-        
-        <br>
-        
-        <p class="text-justify" ng-bind-html="article.content" style="white-space: pre-wrap;"></p>
+<button class="btn btn-default" ng-click="$back()">Voltar</button>
+                
+<hr>
+
+<form class="form" role="form" ng-submit="articleFormSubmit()">
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="article.title" placeholder="Título">
     </div>
-</div>
+    <div class="form-group">
+        <textarea class="form-control" rows="8" ng-model="article.content" placeholder="Conteúdo do artigo"></textarea>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="article.img" placeholder="Imagem">
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" ng-model="article.encoded_url" placeholder="Url">
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="active" ng-model="article.highlight"> Destaque
+        </label>
+        <label>
+            <input type="checkbox" name="active" ng-model="article.active"> Ativo
+        </label>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success" type="submit" ng-model="title" placeholder="Título">Salvar</button>
+    </div>
+</form>

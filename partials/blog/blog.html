@@ -1,0 +1,15 @@
+<h1>Bem vindo ao blog da Feira Orgânica Delivery</h1>
+
+<div class="row">
+    <div class="col-xs-offset-1 col-xs-22">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4" ng-repeat="article in articles" style="height: 300px;">
+                <a href="#/blog/{{article.encoded_url}}">
+                    <img ng-if="article.img" class="img-responsive img-responsive-wide" ng-src="http://images.elasticbeanstalk.com/300x300/{{article.img}}"></img>
+                    <img ng-if="!article.img" class="img-responsive img-responsive-wide" ng-src="http://images.elasticbeanstalk.com/300x300"></img>
+                    <p ng-bind="article.title"></p>                    
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

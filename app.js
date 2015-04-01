@@ -28,7 +28,8 @@ var app = angular.module('myApp', [
   'myApp.order',
   'myApp.products',
   'myApp.config',
-  'myApp.articles'
+  'myApp.articles',
+  'myApp.blog'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeProvider, $httpProvider, $authProvider) {
