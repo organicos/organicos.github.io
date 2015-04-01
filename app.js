@@ -68,11 +68,13 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeP
 }]);
 
 app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage' , function($scope, $location, anchorSmoothScroll, $localStorage) {
-
+    
     $scope.$storage = $localStorage.$default({
         user: {},
         basket: {total: 0,name: '',products: []}
     });
+    
+    $scope.$storage.user = {};
     
     $scope.ensureBasket = function() {
         

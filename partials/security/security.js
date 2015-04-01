@@ -24,8 +24,8 @@ security.config(['$routeProvider', function ($routeProvider) {
 
 security.controller('LogoutCtrl', ['$scope', '$location', function ($scope, $location) {
 
-    $scope.$storage.user = {};
-    
+
+    $scope.$storage.user = {kind: ''};
     $location.path("#/signin");
 
 }]);

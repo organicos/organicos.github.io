@@ -25,9 +25,6 @@
                         </a>
                     </div>
                     <div class="col-xs-12">
-                        <a href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code={{order.pagseguro.checkout.code}}" target="_blank">
-                            <img class="img-responsive" src="https://s3-sa-east-1.amazonaws.com/fodev/img/global/pagseguro.png">
-                        </a>
                     </div>
                 </div>
                 
@@ -35,15 +32,22 @@
             <div class="col-sm-12">
                 
                 <h2>Entrega</h2>
-                <p><strong>CEP: </strong> <span ng-bind="order.cep"></span></p>
-                <p><strong>Rua: </strong> <span ng-bind="order.street"></span></p>
-                <p><strong>Número: </strong> <span ng-bind="order.number"></span></p>
-                <p><strong>Complemento: </strong> <span ng-bind="order.complement"></span></p>
-                <p><strong>Bairro: </strong> <span ng-bind="order.district"></span></p>
-                <p><strong>Cidade: </strong> <span ng-bind="order.city"></span></p>
-                <p><strong>Estado: </strong> <span ng-bind="order.state"></span></p>
-                <p><strong>Entrega: </strong> <span ng-bind="order.deliveryOption"></span></p>
-                <p><strong>Referência: </strong> <span ng-bind="order.address_ref"></span></p>                
+
+                <div class="row" ng-if="order.pagseguro.transaction.status[0] != '3'">
+                    <div class="col-sm-12">
+                        <p><strong>CEP: </strong> <span ng-bind="order.cep"></span></p>
+                        <p><strong>Rua: </strong> <span ng-bind="order.street"></span></p>
+                        <p><strong>Número: </strong> <span ng-bind="order.number"></span></p>
+                        <p><strong>Complemento: </strong> <span ng-bind="order.complement"></span></p>
+                        <p><strong>Bairro: </strong> <span ng-bind="order.district"></span></p>
+                    </div>
+                    <div class="col-sm-12">
+                        <p><strong>Cidade: </strong> <span ng-bind="order.city"></span></p>
+                        <p><strong>Estado: </strong> <span ng-bind="order.state"></span></p>
+                        <p><strong>Entrega: </strong> <span ng-bind="order.deliveryOption"></span></p>
+                        <p><strong>Referência: </strong> <span ng-bind="order.address_ref"></span></p>   
+                    </div>
+                </div>
                 
             </div>
         </div>
