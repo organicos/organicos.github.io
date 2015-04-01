@@ -15,6 +15,7 @@ var app = angular.module('myApp', [
   'ngStorage',
   'angular.filter',
   'satellizer',
+  'ngSanitize',
   'myApp.home',
   'myApp.fair',
   'myApp.security',
@@ -70,11 +71,13 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeP
 app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage' , function($scope, $location, anchorSmoothScroll, $localStorage) {
     
     $scope.$storage = $localStorage.$default({
-        user: {},
+        user: {kind: ''},
         basket: {total: 0,name: '',products: []}
     });
     
-    $scope.$storage.user = {};
+    $scope.ensureUser = function() {
+        $scope.$storage.user = $scope.$storage.user ? $scope.$storage.user : {kind: ''};
+    }();
     
     $scope.ensureBasket = function() {
         

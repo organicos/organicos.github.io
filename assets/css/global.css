@@ -1,11 +1,11 @@
 body {
 	padding-top:50px;
-	
 }
 
 /** Estilo do conteudo **/
 .main-container{
     min-height:80vh;
+    padding-bottom: 30px;
 }
 .main-container a{
     text-decoration:none;
@@ -99,6 +99,7 @@ a.text-violet{ color:#A348A3;}
 
 /** Centraliza imagens responsivas **/
 .img-responsive { margin: 0 auto; }
+.img-responsive.img-responsive-wide { width:100%; }
 
 /** Padding para numero indefinido de colunas **/
 .server-action-menu {

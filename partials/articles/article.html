@@ -26,10 +26,12 @@
     
 </div>
 
-<div ng-if="$storage.user.kind != 'admin'">
-    <h1 ng-bind="article.title"></h1>
-    
-    <img ng-if="article.img" ng-src="article.img"></img>
-    
-    <div ng-bind="article.content"></div>
+<div class="row" ng-if="$storage.user.kind != 'admin'">
+    <div class="col-xs-offset-1 col-xs-22 col-sm-offset-2 col-sm-20 col-md-offset-4 col-md-16"">
+        <h1 ng-bind="article.title"></h1>
+        
+        <img class="img-responsive img-responsive-wide" ng-if="article.img" ng-src="{{article.img}}"></img>
+        
+        <p class="text-justify" ng-bind-html="article.content" style="white-space: pre-wrap;"></p>
+    </div>
 </div>
