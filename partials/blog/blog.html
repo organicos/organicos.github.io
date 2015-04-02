@@ -1,15 +1,29 @@
-<h1>Bem vindo ao blog da Feira Orgânica Delivery</h1>
+<h1 class="sr-only">Blog da Feira Orgânica Delivery</h1>
 
-<div class="row">
-    <div class="col-xs-offset-1 col-xs-22">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4" ng-repeat="article in articles" style="height: 300px;">
-                <a href="#/blog/{{article.encoded_url}}">
-                    <img ng-if="article.img" class="img-responsive img-responsive-wide" ng-src="http://images.elasticbeanstalk.com/300x300/{{article.img}}"></img>
-                    <img ng-if="!article.img" class="img-responsive img-responsive-wide" ng-src="http://images.elasticbeanstalk.com/300x300"></img>
-                    <p ng-bind="article.title"></p>                    
-                </a>
-            </div>
-        </div>
+<div class="row visible-md-block visible-lg-block">
+    <div class="col-xs-12 col-sm-8 blog-post-thumb-wrap" ng-repeat="article in articles">
+        <a class="blog-post-thumb" href="#/blog/{{article.encoded_url}}">
+            <img class="blog-post-thumb-img" ng-if="article.img" ng-src="http://images.elasticbeanstalk.com/300x300/{{article.img}}"></img>
+            <img class="blog-post-thumb-img" id="navi" ng-if="!article.img" ng-src="http://images.elasticbeanstalk.com/300x300"></img>
+            <p class="blog-post-thumb-title">
+                <small ng-bind="article.updated | date: 'dd/MM/yyyy'"></small>
+                <br>
+                <span class="font-30" ng-bind="article.title"></span>
+            </p>                    
+        </a>
+    </div>
+</div>
+
+<div class="row visible-xs-block visible-sm-block">
+    <div class="col-xs-12 col-sm-8 blog-post-thumb-wrap-sm" ng-repeat="article in articles">
+        <a class="blog-post-thumb" href="#/blog/{{article.encoded_url}}">
+            <img class="blog-post-thumb-img" ng-if="article.img" ng-src="http://images.elasticbeanstalk.com/300x300/{{article.img}}"></img>
+            <img class="blog-post-thumb-img" id="navi" ng-if="!article.img" ng-src="http://images.elasticbeanstalk.com/300x300"></img>
+            <p class="blog-post-thumb-title">
+                <small ng-bind="article.updated | date: 'dd/MM/yyyy'"></small>
+                <br>
+                <span class="font-30" ng-bind="article.title"></span>
+            </p>                    
+        </a>
     </div>
 </div>
