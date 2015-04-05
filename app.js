@@ -172,6 +172,10 @@ app.controller('NavBarCtrl', function($scope) {
     
     $scope.isCollapsed = true;
     
+    $scope.$on('$routeChangeSuccess', function(){
+        $scope.isCollapsed = true;
+    });
+    
     $scope.totalBasketItens = function(){
         var total = 0;
         for(count=0;count<$scope.items.length;count++){

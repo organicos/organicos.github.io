@@ -14,7 +14,7 @@
                 <p><strong>Valor final: </strong> <span ng-bind="order.total + order.shipping.price | currency:'R$':2"></span></p>
                 <p><strong>Data: </strong> <span ng-bind="order.updated | date:'dd/MM/yyyy'"></span></p>
                 <div class="row" ng-if="order.pagseguro.transaction.status[0] != '3'">
-                    <div class="col-xs-12">
+                    <div class="col-sm-12">
                         <a class="btn btn-success btn-block" href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code={{order.pagseguro.checkout.code}}" target="_blank">
                             Pagar
                             <br>Compra 100% segura.
