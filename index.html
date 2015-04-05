@@ -50,43 +50,41 @@
   </head>
   <body ng-controller="myAppCtrl">
     
-    
-    <button
-      id="basket-button"
-      class="btn btn-primary"
-      ng-click="openBasket()"
-    >
-      Minha cesta 
-      <span class="label label-success" 
-        ng-if="$storage.basket.products.length" 
-        ng-bind="$storage.basket.products.length"
-      ></span>
-    </button>
-    
-    
-    
     <nav class="navbar navbar-fixed-top" ng-class="$storage.user.kind == 'admin' ? 'navbar-fixed-top-admin' : ''" ng-controller="NavBarCtrl">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" ng-click="isCollapsed = !isCollapsed">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="fa fa-bars"></span>
+            <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
           </button>
+          
+          <button
+            class="btn btn-primary navbar-btn"
+            ng-click="openBasket()"
+          >
+            Minha cesta 
+            <span class="label label-success" 
+              ng-if="$storage.basket.products.length" 
+              ng-bind="$storage.basket.products.length"
+            ></span>
+          </button>
+            
+          <a href="#/fair" class="btn btn-primary navbar-btn visible-xs-inline-block pull-right">Feira</a>
+          
           <a class="navbar-brand" href="#/home">
             <img style="margin-top: -13px; height:46px;" ng-src="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-57.png">
           </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
           <ul class="nav navbar-nav navbar-right">
-            <a href="#/fair" class="btn btn-primary navbar-btn pull-left">Feira</a>
+            <li><p class="navbar-btn"><a href="#/fair" class="btn btn-primary hidden-xs">Feira</a></p></li>
             <li><a href="#/admin_panel" ng-if="$storage.user.kind == 'admin'">Admin</a></li>
             <li><a href="#/blog">Blog</a></li>
-            <li><a href="#/home#how_it_works" ng-click="gotoElement('how_it_works', -53)">Como funciona</a></li>
-            <li><a href="#/home#week_products" ng-click="gotoElement('week_products', -53)">Destaques</a></li>
-            <li><a href="#/home#about" ng-click="gotoElement('about', -53)">Sobre</a></li>
-            <li><a href="#/home#susteinable_actions" ng-click="gotoElement('susteinable_actions', -53)">Sustentabilidade</a></li>
-            <li><a href="#/home#certification" ng-click="gotoElement('certification', -53)">Certificação</a></li>
-            <li><a href="#/home#contact" ng-click="gotoElement('contact', -53)">Contato</a></li>
+            <li><a href="#/home#how_it_works" ng-click="gotoElement('how_it_works', -63)">Como funciona</a></li>
+            <li><a href="#/home#week_products" ng-click="gotoElement('week_products', -63)">Destaques</a></li>
+            <li><a href="#/home#about" ng-click="gotoElement('about', -63)">Sobre</a></li>
+            <li><a href="#/home#susteinable_actions" ng-click="gotoElement('susteinable_actions', -63)">Sustentabilidade</a></li>
+            <li><a href="#/home#certification" ng-click="gotoElement('certification', -63)">Certificação</a></li>
+            <li><a href="#/home#contact" ng-click="gotoElement('contact', -63)">Contato</a></li>
             <li><a href="#/logout" ng-if="$storage.user.token">Sair</a></li>
             <li><a href="#/signin" ng-if="!$storage.user.token">Entrar</a></li>
           </ul>

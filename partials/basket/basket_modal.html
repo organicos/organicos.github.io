@@ -6,12 +6,12 @@
   
 	<div ng-if="!basket.products.length">
 		<h4>A sua cesta está vazia!</h4>
-		<p>Adicione novos produtos clicando no botão "Colocar na cesta".</p>
+		<p>Vá até a <a href="#/fair">Feira</a> e adicione novos produtos clicando no botão "Colocar na cesta".</p>
 	</div>
 	
 	<div ng-if="basket.products.length">
 
-    <table class="table table-condensed">
+    <table class="table table-condensed table-stripped table-hover small">
         <thead>
             <tr>
                 <td>Produto</td>
@@ -23,18 +23,16 @@
         <tbody>
             <tr ng-repeat="product in basket.products">
                 <td ng-bind="product.name"
-            		popover="{{product.dscr}}" 
-            		popover-title="{{product.name}}" 
-            		popover-trigger="mouseenter"
-            		popover-placement="right" 
-            		popover-append-to-body="true"
+        					tooltip-placement="right"
+        					tooltip-html-unsafe="{{product.name}} <hr> {{product.dscr}}" 
+        					tooltip-append-to-body="true" 
                 ></td>
                 <td align="center">
-    				<span class="btn-group" role="group" aria-label="productKind">
-                        <button class="btn btn-default btn-xs" ng-click="dropFromBasket(product, 1)"><i class="fa fa-minus"></i></button>
-                        <button class="btn btn-default btn-xs" ng-bind="product.quantity" disabled></button>
-                        <button class="btn btn-default btn-xs" ng-click="addToBasket(product)"><i class="fa fa-plus"></i></button>
-    				</span>
+          				<span class="btn-group" role="group" aria-label="productKind">
+                    <button class="btn btn-default btn-xs" ng-click="dropFromBasket(product, 1)"><i class="fa fa-minus"></i></button>
+                    <button class="btn btn-default btn-xs" ng-bind="product.quantity" disabled></button>
+                    <button class="btn btn-default btn-xs" ng-click="addToBasket(product)"><i class="fa fa-plus"></i></button>
+          				</span>
                 </td>
                 <td ng-bind="product.price | currency:'R$':2" align="right"></td>
                 <td ng-bind="product.quantity*product.price | currency:'R$':2" align="right"></td>

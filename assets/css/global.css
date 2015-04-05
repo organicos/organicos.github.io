@@ -10,14 +10,6 @@ body {
     text-decoration:none;
 }
 
-/** Basket button **/
-#basket-button { 
-    position: fixed; 
-    top: 62px; 
-    right: 10px; 
-    z-index:2;
-}
-
 /** Estilo do rodape **/
 .footer {
     bottom: 0;

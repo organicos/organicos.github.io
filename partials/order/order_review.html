@@ -14,11 +14,9 @@
             <tbody>
                 <tr ng-repeat="product in $storage.basket.products">
                     <td ng-bind="product.name"
-                		popover="{{product.dscr}}" 
-                		popover-title="{{product.name}}" 
-                		popover-trigger="mouseenter"
-                		popover-placement="right" 
-                		popover-append-to-body="true"
+    					tooltip-placement="right"
+    					tooltip-html-unsafe="{{product.name}} <hr> {{product.dscr}}" 
+    					tooltip-append-to-body="true" 
                     ></td>
                     <td align="center">
         				<span class="btn-group" role="group" aria-label="productKind">
