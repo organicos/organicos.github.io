@@ -48,7 +48,7 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
   
 }]);
 
-products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService) {
 
   $scope.saving_product = false;
   
@@ -154,37 +154,40 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
   };
   
   $scope.dropProduct = function(product) {
-    
-    var confirmed = confirm('Deseja realmente excluir o produto ' + product.name + "?");
-      
-    if (confirmed) {
 
-      $scope.saving_product = true;
-        $http.delete(myConfig.apiUrl + '/products/' + product._id)
-        .success(function() {
-          window.location = ("#/fair");
-        })
-        .error(function (resp) {
-          
-          var error_list = [];
-    
-          angular.forEach(resp.errors, function(error, path) {
-            this.push(error.message);
-          }, error_list);
-          
-          $scope.$emit('alert', {
-              kind: 'danger',
-              msg: error_list,
-              title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
-          });
-    
-      })
-      .finally(function () {
-        $scope.saving_product = false;
-      });
-      
+    var modalOptions = {
+        closeButtonText: 'Cancelar',
+        actionButtonText: 'Excluir produto',
+        actionButtonKind: 'btn-danger',
+        headerText: 'excluir o produto ' + product.name + "?",
+        bodyText: 'Deseja realmente excluir o produto ' + product.name + "?"
     };
-    
+
+    confirmModalService.showModal({}, modalOptions)
+    .then(function (result) {
+
+      $http.delete(myConfig.apiUrl + '/products/' + product._id)
+      .success(function() {
+        window.location = ("#/products");
+      })
+      .error(function (resp) {
+        
+        var error_list = [];
+  
+        angular.forEach(resp.errors, function(error, path) {
+          this.push(error.message);
+        }, error_list);
+        
+        $scope.$emit('alert', {
+            kind: 'danger',
+            msg: error_list,
+            title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
+        });
+  
+      });
+
+    });
+
   };
 
 }]);

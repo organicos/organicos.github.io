@@ -1,14 +1,21 @@
 body {
-	padding-top:50px;
+	padding-top:60px;
 }
 
 /** Estilo do conteudo **/
 .main-container{
     min-height:80vh;
-    padding-bottom: 30px;
 }
 .main-container a{
     text-decoration:none;
+}
+
+/** Basket button **/
+#basket-button { 
+    position: fixed; 
+    bottom: 0px; 
+    left: 10px; 
+    z-index:9999;
 }
 
 /** Estilo do rodape **/
@@ -73,8 +80,6 @@ a.text-violet{ color:#A348A3;}
 .font-60{ font-size: 60px;}
 .font-200{ font-size: 200px;}
 
-
-
 .blog-post-thumb-wrap{
     height: 350px;
 }
@@ -109,9 +114,6 @@ a.text-violet{ color:#A348A3;}
     background: rgba(29, 158, 116, 0.5);
 }
 
-
-
-
 /** alert **/
 #alertWrapper {
     position: fixed;
@@ -131,9 +133,6 @@ a.text-violet{ color:#A348A3;}
     background: rgba(200, 200, 200, 0.9);
     /** border-bottom: .1em solid rgba(163, 73, 164, 0.9); **/
 }
-
-/** .navbar-fixed-top{background: rgba(255, 240, 255, 0.9);} **/
-.navbar-fixed-top a{color: rgba(163, 73, 164, 0.9); font-weight: 800;}
 
 /** Centraliza imagens responsivas **/
 .img-responsive { margin: 0 auto; }

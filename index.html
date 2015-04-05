@@ -49,7 +49,22 @@
     <![endif]-->
   </head>
   <body ng-controller="myAppCtrl">
-
+    
+    
+    <button
+      id="basket-button"
+      class="btn btn-primary"
+      ng-click="openBasket()"
+    >
+      Minha cesta 
+      <span class="label label-success" 
+        ng-if="$storage.basket.products.length" 
+        ng-bind="$storage.basket.products.length"
+      ></span>
+    </button>
+    
+    
+    
     <nav class="navbar navbar-fixed-top" ng-class="$storage.user.kind == 'admin' ? 'navbar-fixed-top-admin' : ''" ng-controller="NavBarCtrl">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -63,6 +78,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
           <ul class="nav navbar-nav navbar-right">
+            <a href="#/fair" class="btn btn-primary navbar-btn pull-left">Feira</a>
             <li><a href="#/admin_panel" ng-if="$storage.user.kind == 'admin'">Admin</a></li>
             <li><a href="#/blog">Blog</a></li>
             <li><a href="#/home#how_it_works" ng-click="gotoElement('how_it_works', -53)">Como funciona</a></li>
@@ -71,7 +87,6 @@
             <li><a href="#/home#susteinable_actions" ng-click="gotoElement('susteinable_actions', -53)">Sustentabilidade</a></li>
             <li><a href="#/home#certification" ng-click="gotoElement('certification', -53)">Certificação</a></li>
             <li><a href="#/home#contact" ng-click="gotoElement('contact', -53)">Contato</a></li>
-            <li class=""><a href="#/fair" class="background-violet text-white">Minha cesta <span class="label label-success" ng-if="$storage.basket.products.length" ng-bind="$storage.basket.products.length"></span></a></li>
             <li><a href="#/logout" ng-if="$storage.user.token">Sair</a></li>
             <li><a href="#/signin" ng-if="!$storage.user.token">Entrar</a></li>
           </ul>
