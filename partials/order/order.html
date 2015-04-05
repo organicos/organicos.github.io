@@ -8,7 +8,7 @@
                 
                 <h2>Dados</h2>
                 <p><strong>Status do pagamento: </strong> <span ng-bind="statuses[order.pagseguro.transaction.status[0]] || 'Aguardando pagamento'"></span></p>
-                <p><strong>Cliente: </strong> <a class="text-white" href="#/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></p>
+                <p><strong>Cliente: </strong> <a href="#/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></p>
                 <p><strong>Total: </strong> <span ng-bind="order.total | currency:'R$':2"></span></p>
                 <p><strong>Data: </strong> <span ng-bind="order.updated | date:'dd/MM/yyyy'"></span></p>
                 <div class="row" ng-if="order.pagseguro.transaction.status[0] != '3'">
@@ -29,17 +29,17 @@
 
                 <div class="row" ng-if="order.pagseguro.transaction.status[0] != '3'">
                     <div class="col-sm-12">
-                        <p><strong>CEP: </strong> <span ng-bind="order.cep"></span></p>
-                        <p><strong>Rua: </strong> <span ng-bind="order.street"></span></p>
-                        <p><strong>Número: </strong> <span ng-bind="order.number"></span></p>
-                        <p><strong>Complemento: </strong> <span ng-bind="order.complement"></span></p>
-                        <p><strong>Bairro: </strong> <span ng-bind="order.district"></span></p>
+                        <p><strong>CEP: </strong> <span ng-bind="order.shipping.cep"></span></p>
+                        <p><strong>Rua: </strong> <span ng-bind="order.shipping.street"></span></p>
+                        <p><strong>Número: </strong> <span ng-bind="order.shipping.number"></span></p>
+                        <p><strong>Complemento: </strong> <span ng-bind="order.shipping.complement"></span></p>
+                        <p><strong>Bairro: </strong> <span ng-bind="order.shipping.district"></span></p>
                     </div>
                     <div class="col-sm-12">
-                        <p><strong>Cidade: </strong> <span ng-bind="order.city"></span></p>
-                        <p><strong>Estado: </strong> <span ng-bind="order.state"></span></p>
-                        <p><strong>Entrega: </strong> <span ng-bind="order.deliveryOption"></span></p>
-                        <p><strong>Referência: </strong> <span ng-bind="order.address_ref"></span></p>   
+                        <p><strong>Cidade: </strong> <span ng-bind="order.shipping.city"></span></p>
+                        <p><strong>Estado: </strong> <span ng-bind="order.shipping.state"></span></p>
+                        <p><strong>Entrega: </strong> <span ng-bind="order.shipping.deliveryOption"></span></p>
+                        <p><strong>Referência: </strong> <span ng-bind="order.shipping.address_ref"></span></p>   
                     </div>
                 </div>
                 

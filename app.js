@@ -188,11 +188,12 @@ app.service('basketService', ['$modal', '$localStorage', '$filter', function ($m
     
    this.ensureBasket = function() {
     	if(!$localStorage.basket){
-    	    $localStorage.basket = {total: 0,name: '',products: []};
+    	    $localStorage.basket = {total: 0,name: '',products: [], shipping: {price: 6, country: 'Brasil'}};
     	} else {
         	if(!$localStorage.basket.products) $localStorage.basket.products = {};
         	if(!$localStorage.basket.total) $localStorage.basket.total = 0;
         	if(!$localStorage.basket.name) $localStorage.basket.name = '';
+        	if(!$localStorage.basket.shipping) $localStorage.basket.shipping = {price: 6, country: 'Brasil'};
     	}
     }();
 

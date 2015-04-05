@@ -121,14 +121,10 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     $scope.country = 'Brasil';
     $scope.orderReady = false;
     $scope.inactive_products = [];
-    $scope.DeliveryDayAndTimeOptions = [
-      'Terça pela manhã',
-      'Terça pela tarde',
-      'Terça pela noite',
-      'Sábado pela manhã',
-      'Sábado pela tarde',
-      'Sábado pela noite'
-    ];
+    $scope.DeliveryOptions = [
+    { label: 'Terça-feira', value: 'Terça-feira' },
+    { label: 'Sábado', value: 'Terça-feira' }
+  ]
     
     $http.post(myConfig.apiUrl + '/order_review', {
         basket: $scope.$storage.basket
@@ -179,20 +175,21 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
       $scope.orderReady = true;
     });
     
-    $scope.$watch('cep', function(newValue, oldValue) {
+    $scope.$watch('$storage.basket.shipping.cep', function(newValue, oldValue) {
       
       var cep = newValue ? newValue.match(/\d+/) : '';
-
+      
       if(cep.toString().length == 8){
         
         $http.jsonp('//api.postmon.com.br/v1/cep/'+cep+'?callback=JSON_CALLBACK')
         .success(function(res) {
           
-          $scope.street = res.logradouro || '';
-          $scope.district = res.bairro || '';
-          $scope.city = res.cidade || '';
-          $scope.state = res.estado || '';
-        
+          $scope.$storage.basket.shipping.street = res.logradouro || '';
+          $scope.$storage.basket.shipping.district = res.bairro || '';
+          $scope.$storage.basket.shipping.city = res.cidade || '';
+          $scope.$storage.basket.shipping.state = res.estado || '';
+          $scope.$storage.basket.shipping.country = res.pais || 'Brasil';
+          
         })
         .error(function(err) {
         
@@ -209,19 +206,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     $scope.processingOrder = true;
 
     $http.post(myConfig.apiUrl + '/order', {
-        basket: $scope.$storage.basket,
-        shipping_data: {
-          cep: $scope.cep,
-          street: $scope.street,
-          number: $scope.number,
-          complement: $scope.complement,
-          district: $scope.district,
-          city: $scope.city,
-          state: $scope.state,
-          country: $scope.country,
-          address_ref: $scope.address_ref,
-          deliveryOption: $scope.deliveryOption
-        }
+        basket: $scope.$storage.basket
     })
     .success(function(order) {
         

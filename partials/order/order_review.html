@@ -31,60 +31,73 @@
                     <td ng-bind="product.quantity*product.price | currency:'R$':2" align="right"></td>
                 </tr>
                 <tr>
+                    <td colspan="2" ng-class="$storage.basket.total < 35 ? 'danger' : ''">
+                        <span ng-if="$storage.basket.total < 35" >O valor mínimo para a compra de produtos é de R$35,00.</span>
+                    </td>
+                    <td align="right">Total:</h5></td>
+                    <td align="right" ng-bind="$storage.basket.total | currency:'R$':2"</td>
+                </tr>
+                <tr>
                     <td></td>
                     <td></td>
-                    <td align="right"><h4>Total:</h4></td>
-                    <td align="right"><h4 ng-bind="$storage.basket.total | currency:'R$':2"></h4></td>
+                    <td align="right">Frete:</td>
+                    <td align="right" ng-bind="$storage.basket.shipping.price | currency:'R$':2">></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td align="right"><h4>Preço final:</h4></td>
+                    <td align="right"><h4 ng-bind="$storage.basket.total + $storage.basket.shipping.price | currency:'R$':2"></h4></td>
                 </tr>
             </tbody>
         </table>
         
-        <div class="alert alert-danger" ng-if="$storage.basket.total < 35">O valor mínimo para a compra de produtos é de R$35,00.</div>
         
+
         <h2>Dados de entrega</h2>
         
         <form class="form well well-mini" role="form">
             <div class="row">
                 <div class="form-group col-sm-5">
                     <label for="cep" class="control-label">CEP</label>
-                    <input type="text" class="form-control" id="cep" placeholder="CEP" ng-model="cep">
+                    <input type="text" class="form-control" id="cep" placeholder="CEP" ng-model="$storage.basket.shipping.cep">
                 </div>
                 <div class="form-group col-sm-11">
                     <label for="street" class="control-label">Rua</label>
-                    <input type="text" class="form-control" id="street" placeholder="Rua" ng-model="street">
+                    <input type="text" class="form-control" id="street" placeholder="Rua" ng-model="$storage.basket.shipping.street">
                 </div>
                 <div class="form-group col-sm-2">
                     <label for="number" class="control-label">Número</label>
-                    <input type="text" class="form-control" id="number" placeholder="Número" ng-model="number">
+                    <input type="text" class="form-control" id="number" placeholder="Número" ng-model="$storage.basket.shipping.number">
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="complement" class="control-label">Complemento</label>
-                    <input type="text" class="form-control" id="complement" placeholder="Complemento" ng-model="complement">
+                    <input type="text" class="form-control" id="complement" placeholder="Complemento" ng-model="$storage.basket.shipping.complement">
                 </div>
                     <div class="form-group col-sm-6">
                     <label for="district" class="control-label">Bairro</label>
-                    <input type="text" class="form-control" id="district" placeholder="Bairro" ng-model="district">
+                    <input type="text" class="form-control" id="district" placeholder="Bairro" ng-model="$storage.basket.shipping.district">
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="city" class="control-label">Cidade</label>
-                    <input type="text" class="form-control" id="city" placeholder="Cidade" ng-model="city">
+                    <input type="text" class="form-control" id="city" placeholder="Cidade" ng-model="$storage.basket.shipping.city">
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="state" class="control-label">Estado</label>
-                    <input type="text" class="form-control" id="state" placeholder="Estado" ng-model="state">
+                    <input type="text" class="form-control" id="state" placeholder="Estado" ng-model="$storage.basket.shipping.state">
                 </div>
                 <div class="form-group col-sm-6">
                     <label for="country" class="control-label">País</label>
-                    <input type="text" class="form-control" id="country" placeholder="País" ng-model="country" disabled>
+                    <input type="text" class="form-control" id="country" placeholder="País" ng-model="$storage.basket.shipping.country" disabled>
                 </div>
                 <div class="form-group col-sm-16">
                     <label for="address_ref" class="control-label">Referências</label>
-                    <input type="text" class="form-control" id="address_ref" placeholder="Referências" ng-model="address_ref">
+                    <input type="text" class="form-control" id="address_ref" placeholder="Referências" ng-model="$storage.basket.shipping.address_ref">
                 </div>
                 <div class="form-group col-sm-8">
-                    <label for="deliveryOption" class="control-label" ng-model="deliveryOption">Data e horário de entrega</label>
-                    <select class="form-control" id="deliveryOption" placeholder="Nome" ng-model="deliveryOption">
-                        <option ng-repeat="deliveryOptionObj in DeliveryDayAndTimeOptions" ng-value="deliveryOptionObj" ng-bind="deliveryOptionObj"></option>
+                    <label for="deliveryOption" class="control-label">Data e horário de entrega ({{$storage.basket.shipping.deliveryOption}})</label>
+                    <select class="form-control" ng-model="$storage.basket.shipping.deliveryOption" ng-options="option.label as option.label for option in DeliveryOptions">
+                      <option value="">-- Selecione uma data de entrega --</option>
                     </select>
                 </div>
             </div>
