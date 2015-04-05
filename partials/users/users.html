@@ -1,24 +1,28 @@
-<h1>Usuários</h1>
-
-<table class="table table-condensed table-stripped table-hover">
-    <thead>
-        <tr>
-            <td>Nome</td>
-            <td>E-mail</td>
-            <td>Telefone</td>
-            <td>Compras</td>
-            <td>Ultima modificação</td>
-            <td>Ações</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="user in users">
-            <td ng-bind="user.name"></td>
-            <td ng-bind="user.email"></td>
-            <td ng-bind="user.phone"></td>
-            <td ng-bind="user.orders"></td>
-            <td ng-bind="user.updated"></td>
-            <td>x</td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-sm-22 col-sm-offset-1">
+        <h1>Usuários</h1>
+        
+        <table class="table table-condensed table-stripped table-hover">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>E-mail</td>
+                    <td>Telefone</td>
+                    <td>Compras</td>
+                    <td>Ultima modificação</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users">
+                    <td ng-bind="user.name"></td>
+                    <td ng-bind="user.email"></td>
+                    <td ng-bind="user.phone"></td>
+                    <td ng-bind="user.orders"></td>
+                    <td ng-bind="user.updated"></td>
+                    <td>x</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,150 +1,91 @@
-<div id="buy_step_1" class="row background-violet">
+<div class="row">
 
-	<div class="col-xs-6 text-left text-white" style='min-height:90vh;'>
-
-
-		<h2 class="text-center clearfix">Minha cesta orgânica</h2>
-
-		<hr>
-
-		<div ng-if="!$storage.basket.products.length">
-			<h4>A sua cesta está vazia!</h4>
-			<p>Adicione novos produtos clicando no botão "Colocar na cesta".</p>
-		</div>
-		<div ng-if="$storage.basket.products.length">
-			
-	        <div class="row small" ng-repeat="product in $storage.basket.products">
-				<div class="col-xs-2 text-right" ng-bind="product.quantity"></div>
-				<div class="col-xs-12" ng-bind="product.name"
-					popover="{{product.dscr}}" 
-					popover-title="{{product.name}}" 
-					popover-trigger="mouseenter"
-					popover-placement="right" 
-					popover-append-to-body="true"
-					ng-dblclick="dropFromBasket(product)"
-				></div>
-				<div class="col-xs-4 text-right" ng-bind="product.price | currency:'R$':2"></div>
-				<div class="col-xs-4 text-right" ng-bind="product.quantity*product.price | currency:'R$':2"></div>
-				<div class="col-xs-2 text-right">
-					<a class="text-white" href="javascript:void(0)" ng-click="dropFromBasket(product)">X</a>
-				</div>
-
-	        </div>
-	        
-	        <hr>
-
-			<h4><strong>Total: </strong>{{$storage.basket.total | currency:'R$':2}}</h4>
-			
-			<hr>
-
-			<a class="btn btn-success btn-block btn-lg" href="#/order_review">
-				Fechar meu pedido <br>
-				<small>Compra 100% segura.</small>
-			</a>
-			<br>
-			<small>* A Feira Orgânica Delivery utiliza o Pagseguro como gateway de pagamentos, garantindo assim uma compra segura e muito simples.</small>
-			<br>
-			<small>** As entregas realizadas nas sextas e sábados são gratuitas.</small>
-
-		</div>
-		
-	</div>
-
-	<div class="col-xs-18 text-left background-white">
-	    
-	    <br>
-
-		<div class="row">
-			<div class="col-xs-offset-1 col-xs-22">
+    <div class="col-sm-22 col-sm-offset-1">
                 
-                <form class="form" role="form" name="productFormModal">
+        <form class="form" role="form" name="productFormModal">
+        
+            <div class="row">
                 
-                    <div class="row">
-                        
-                        <div class="col-xs-6">
-                            
-                            <img class="img-responsive" ng-src="{{productFormModalObject.img}}" ></img>
-                            
-                            <button class="btn btn-primary btn-block" ng-click="addToBasket(productFormModalObject)">
-                                Colocar na cesta
-                                <span class="label label-warning" ng-repeat="buttonProduct in $storage.basket.products | filter : {_id: productFormModalObject._id}" ng-bind="buttonProduct.quantity"></span>
-                            </button>
-                
-                        </div>
-                        
-                        <div class="col-xs-18">
-                            
-                            <h2 ng-bind="productFormModalObject.name"></h2>
-                            
-                            <br>
-                            
-                            <dl class="dl-horizontal" ng-show="$storage.user.kind == 'admin'">
-                                <dt>Custo: </dt>
-                                <dd ng-bind="productFormModalObject.cost | currency"></dd>
-                            </dl>
-                            
-                            <dl class="dl-horizontal" ng-show="productFormModalObject.price || $storage.user.kind == 'admin'">
-                                <dt>Preço R$: </dt>
-                                <dd ng-bind="productFormModalObject.price"></dd>
-                            </dl>
-                            
-                            <dl class="dl-horizontal" ng-show="productFormModalObject.dscr || $storage.user.kind == 'admin'">
-                                <dt>Descrição: </dt>
-                                <dd class="text-justify" ng-bind="productFormModalObject.dscr"></dd>
-                            </dl>
-                            
-                            <dl class="dl-horizontal" ng-show="productFormModalObject.category || $storage.user.kind == 'admin'">
-                                <dt>Categoria: </dt>
-                                <dd ng-bind="productFormModalObject.category"></dd>
-                            </dl>
-                            
-                            <dl class="dl-horizontal" ng-show="productFormModalObject.supplier || $storage.user.kind == 'admin'">
-                                <dt>Fornecedor: </dt>
-                                <dd ng-bind="productFormModalObject.supplier"></dd>
-                            </dl>
-                            
-                            <dl class="dl-horizontal" ng-show="productFormModalObject.season || $storage.user.kind == 'admin'">
-                                <dt>Época: </dt>
-                                <dd ng-bind="productFormModalObject.season"></dd>
-                            </dl>
-                            
-                            <dl class="dl-horizontal" ng-show="productFormModalObject.recipes || $storage.user.kind == 'admin'">
-                                <dt>Receitas: </dt>
-                                <dd ng-bind="productFormModalObject.recipes"></dd>
-                            </dl>
-            
-                        </div>
-                
-                    </div>
+                <div class="col-xs-6">
                     
-                </form>
-                
-                <hr>
-                
-                <h3>Outros produtos da categoria {{productFormModalObject.category}}</h3>
-                <div class="row">
-                	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in products | filter: {category: productFormModalObject.category} | orderBy: 'name'">
-                		<a class="btn btn-default" href="#/fair/product/{{product._id}}">
-                			<img 
-                				class="img-responsive img-thumbnail" 
-                				alt="week_product" 
-                				ng-src="{{product.img}}" 
-             					tooltip-placement="right"
-            					tooltip-html-unsafe="{{product.name}} <br> {{product.dscr}}" 
-            					tooltip-append-to-body="true" 
-                				ng-dblclick="addToBasket(product)"
-                				ng-click="addToBasket(product)"
-                			>
-                		</a>
-                		<p style="height:60px;">{{product.name}}</p>
-                	</div>
-                	
+                    <img class="img-responsive" ng-src="{{productFormModalObject.img}}" ></img>
+                    
+                    <button class="btn btn-success btn-block" ng-click="addToBasket(productFormModalObject)">
+                        Colocar na cesta
+                        <span class="label label-warning" ng-repeat="buttonProduct in $storage.basket.products | filter : {_id: productFormModalObject._id}" ng-bind="buttonProduct.quantity"></span>
+                    </button>
+        
                 </div>
                 
+                <div class="col-xs-18">
+                    
+                    <h2 ng-bind="productFormModalObject.name"></h2>
+                    
+                    <br>
+                    
+                    <dl class="dl-horizontal" ng-show="$storage.user.kind == 'admin'">
+                        <dt>Custo: </dt>
+                        <dd ng-bind="productFormModalObject.cost | currency"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.price || $storage.user.kind == 'admin'">
+                        <dt>Preço R$: </dt>
+                        <dd ng-bind="productFormModalObject.price"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.dscr || $storage.user.kind == 'admin'">
+                        <dt>Descrição: </dt>
+                        <dd class="text-justify" ng-bind="productFormModalObject.dscr"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.category || $storage.user.kind == 'admin'">
+                        <dt>Categoria: </dt>
+                        <dd ng-bind="productFormModalObject.category"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.supplier || $storage.user.kind == 'admin'">
+                        <dt>Fornecedor: </dt>
+                        <dd ng-bind="productFormModalObject.supplier"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.season || $storage.user.kind == 'admin'">
+                        <dt>Época: </dt>
+                        <dd ng-bind="productFormModalObject.season"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.recipes || $storage.user.kind == 'admin'">
+                        <dt>Receitas: </dt>
+                        <dd ng-bind="productFormModalObject.recipes"></dd>
+                    </dl>
+    
+                </div>
+        
             </div>
             
+        </form>
+        
+        <hr>
+        
+        <h3>Outros produtos da categoria {{productFormModalObject.category}}</h3>
+        <div class="row">
+        	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in products | filter: {category: productFormModalObject.category} | orderBy: 'name'">
+        		<a href="#/fair/product/{{product._id}}">
+        			<img 
+        				class="img-responsive" 
+        				alt="week_product" 
+        				ng-src="{{product.img}}" 
+     					tooltip-placement="right"
+    					tooltip-html-unsafe="{{product.name}} <br> {{product.dscr}}" 
+    					tooltip-append-to-body="true" 
+        				ng-dblclick="addToBasket(product)"
+        				ng-click="addToBasket(product)"
+        			>
+        		</a>
+        		<p style="height:60px;">{{product.name}}</p>
+        	</div>
+        	
         </div>
-
-	</div>
+        
+    </div>
 
 </div>

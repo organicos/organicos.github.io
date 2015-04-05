@@ -1,69 +1,73 @@
-<h1>{{products.length}} Produtos</h1>
-
-<form class="form-inline text-right">
-    <div class="form-group">
-    	<label for="productQuery">Buscar produto</label>
-		<input class="form-control input-xs" id="productQuery" name="productQuery" ng-model="productQuery" type="text" placeholder="Buscar produto" autofocus>
+<div class="row">
+    <div class="col-sm-22 col-sm-offset-1">
+        <h1>{{products.length}} Produtos</h1>
+        
+        <form class="form-inline text-right">
+            <div class="form-group">
+            	<label for="productQuery">Buscar produto</label>
+        		<input class="form-control input-xs" id="productQuery" name="productQuery" ng-model="productQuery" type="text" placeholder="Buscar produto" autofocus>
+            </div>
+        	<div class="form-group">
+        	    <label for="order">Ordem</label>
+                <select class="form-control" id="order" ng-model="selectedOrder">
+                    <option value="name" selected>Nome</option>
+                    <option value="custo">Custo</option>
+                    <option value="price">Preço</option>
+                    <option value="category">Categoria</option>
+                    <option value="active">Ativo</option>
+                    <option value="highlight">Destaque</option>
+                </select>
+        	</div>
+            <a class="btn btn-default" href="#/product">+</a>
+        </form>
+        
+        <br>
+        
+        <div class="btn-group" role="group">
+        	<button 
+        		type="button" 
+        		class="btn btn-sm btn-primary" 
+        		ng-class="selectedFilterField == 'category' && selectedFilterValue == '' ? 'active' : ''"
+        		ng-click="selectFilter('category', '')"
+        	>Tudo</button>
+        	<button 
+        		ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'category' | groupBy: 'category')" 
+        		type="button" 
+        		class="btn btn-sm btn-primary" 
+        		ng-class="selectedFilterField == 'category' && selectedFilterValue == product[0].category ? 'active' : ''"
+        		ng-click="selectFilter('category', product[0].category)"
+        	>{{product[0].category}}</button>
+        </div>
+        
+        <br><br>
+        				
+        <table class="table table-condensed table-stripped table-hover">
+            <thead>
+                <tr>
+                    <td>Nome</td>
+                    <td>Custo</td>
+                    <td>Preço</td>
+                    <td>Margem</td>
+                    <td>Categoria</td>
+                    <td>Ativo</td>
+                    <td>Destaque</td>
+                    <td>Ultima modificação</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {category : selectedFilterValue} | orderBy: selectedOrder)">
+                    <td><a class="text-violet" href="#/product/{{product._id}}" ng-bind="product.name"></a></td>
+                    <td ng-bind="product.cost | currency"></td>
+                    <td ng-bind="product.price | currency"></td>
+                    <td ng-class="((product.price / (product.cost / 100)) - 100) < 30 ? 'danger' : ((product.price / (product.cost / 100)) - 100) < 50 ? 'warning' : ((product.price / (product.cost / 100)) - 100) >= 50 ? 'success' : ''">{{(product.price / (product.cost / 100)) - 100 || 0 | number:1}}%</td>
+                    <td ng-bind="product.catecory"></td>
+                    <td><i ng-if="product.active" class="fa fa-check"></i></td>
+                    <td><i ng-if="product.highlight" class="fa fa-check"></i></td>
+                    <td ng-bind="product.updated | date:'dd/MM/yyyy'"></td>
+                    <td>x</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-	<div class="form-group">
-	    <label for="order">Ordem</label>
-        <select class="form-control" id="order" ng-model="selectedOrder">
-            <option value="name" selected>Nome</option>
-            <option value="custo">Custo</option>
-            <option value="price">Preço</option>
-            <option value="category">Categoria</option>
-            <option value="active">Ativo</option>
-            <option value="highlight">Destaque</option>
-        </select>
-	</div>
-    <a class="btn btn-default" href="#/product">+</a>
-</form>
-
-<br>
-
-<div class="btn-group" role="group">
-	<button 
-		type="button" 
-		class="btn btn-sm btn-primary" 
-		ng-class="selectedFilterField == 'category' && selectedFilterValue == '' ? 'active' : ''"
-		ng-click="selectFilter('category', '')"
-	>Tudo</button>
-	<button 
-		ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'category' | groupBy: 'category')" 
-		type="button" 
-		class="btn btn-sm btn-primary" 
-		ng-class="selectedFilterField == 'category' && selectedFilterValue == product[0].category ? 'active' : ''"
-		ng-click="selectFilter('category', product[0].category)"
-	>{{product[0].category}}</button>
 </div>
-
-<br><br>
-				
-<table class="table table-condensed table-stripped table-hover">
-    <thead>
-        <tr>
-            <td>Nome</td>
-            <td>Custo</td>
-            <td>Preço</td>
-            <td>Margem</td>
-            <td>Categoria</td>
-            <td>Ativo</td>
-            <td>Destaque</td>
-            <td>Ultima modificação</td>
-            <td>Ações</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {category : selectedFilterValue} | orderBy: selectedOrder)">
-            <td><a class="text-violet" href="#/product/{{product._id}}" ng-bind="product.name"></a></td>
-            <td ng-bind="product.cost | currency"></td>
-            <td ng-bind="product.price | currency"></td>
-            <td ng-class="((product.price / (product.cost / 100)) - 100) < 30 ? 'danger' : ((product.price / (product.cost / 100)) - 100) < 50 ? 'warning' : ((product.price / (product.cost / 100)) - 100) >= 50 ? 'success' : ''">{{(product.price / (product.cost / 100)) - 100 || 0 | number:1}}%</td>
-            <td ng-bind="product.catecory"></td>
-            <td><i ng-if="product.active" class="fa fa-check"></i></td>
-            <td><i ng-if="product.highlight" class="fa fa-check"></i></td>
-            <td ng-bind="product.updated | date:'dd/MM/yyyy'"></td>
-            <td>x</td>
-        </tr>
-    </tbody>
-</table>

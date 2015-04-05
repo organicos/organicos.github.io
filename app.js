@@ -69,35 +69,18 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeP
         
 }]);
 
-app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketModalService' , function($scope, $location, anchorSmoothScroll, $localStorage, basketModalService) {
+app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService) {
     
     $scope.$storage = $localStorage.$default({
         user: {kind: ''},
-        basket: {total: 0,name: '',products: []}
     });
     
     $scope.ensureUser = function() {
         $scope.$storage.user = $scope.$storage.user ? $scope.$storage.user : {kind: ''};
     }();
     
-    $scope.ensureBasket = function() {
-        
-    	if(!$scope.$storage.basket){
-    	 
-    	    $scope.$storage.basket = {total: 0,name: '',products: []};
-    	 
-    	} else {
-        	if(!$scope.$storage.basket.products) $scope.$storage.basket.products = {};
-        	if(!$scope.$storage.basket.total) $scope.$storage.basket.total = 0;
-        	if(!$scope.$storage.basket.name) $scope.$storage.basket.name = '';
-    	}
-        
-    }();
-
     $scope.ping = function(callback) {
-        
         callback();
-        
     }
 
     $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
@@ -178,17 +161,10 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
         
     };
 
-    $scope.openBasket = function () {
-
-        var modalOptions = {
-            closeButtonText: 'Cancel',
-            actionButtonText: 'Fechar meu pedido',
-            headerText: 'Minha cesta orgânica',
-            bodyText: 'Are you sure you want to delete this customer?'
-        };
-
-        basketModalService.showModal();
-    }
+    // Basket 
+    $scope.openBasket = basketService.showModal;
+    $scope.addToBasket = basketService.addToBasket;
+    $scope.dropFromBasket = basketService.dropFromBasket;
     
 }]);
 
@@ -206,6 +182,78 @@ app.controller('NavBarCtrl', function($scope) {
 
 });
 
+app.service('basketService', ['$modal', '$localStorage', '$filter', function ($modal, $localStorage, $filter) {
+    
+    var self = this;
+    
+   this.ensureBasket = function() {
+    	if(!$localStorage.basket){
+    	    $localStorage.basket = {total: 0,name: '',products: []};
+    	} else {
+        	if(!$localStorage.basket.products) $localStorage.basket.products = {};
+        	if(!$localStorage.basket.total) $localStorage.basket.total = 0;
+        	if(!$localStorage.basket.name) $localStorage.basket.name = '';
+    	}
+    }();
+
+    this.addToBasket = function (product) {
+        var basket = $localStorage.basket;
+        var basketProduct = ($filter('filter')(basket.products, {_id: product._id}, false))[0];
+        if(basketProduct){
+            basketProduct.quantity = basketProduct.quantity >= 0 ? basketProduct.quantity : 1;
+            basketProduct.quantity ++;
+        }  else {
+            product.quantity = 1;
+            basket.products.push(product);
+        }
+        basket.total += parseFloat(product.price);
+    };
+    
+    this.dropFromBasket = function (product, decreasingAmount) {
+        var basket = $localStorage.basket;
+        var productIndex = basket.products.indexOf(product);
+        var product = basket.products[productIndex];
+        if (productIndex >= 0) {
+            if (decreasingAmount > 0 & product.quantity > decreasingAmount) {
+                product.quantity -= decreasingAmount;
+                basket.total -= product.price * decreasingAmount;
+            } else {
+                basket.total -= parseFloat(product.price) * product.quantity;
+                basket.products.splice(productIndex, 1);   
+            }
+        }
+    };
+    
+    this.showModal = function(){
+        return $modal.open({
+            backdrop: true,
+            keyboard: true,
+            modalFade: true,
+            size: 'lg',
+            templateUrl: '/partials/basket/basket_modal.html',
+            controller: function ($scope, $location, $modalInstance) {
+                $scope.basket = $localStorage.basket;
+                $scope.addToBasket = self.addToBasket;
+                $scope.dropFromBasket = self.dropFromBasket;
+                $scope.modalOptions = {
+                    ok: function (result) {
+                        $location.path('/order_review');
+                        $modalInstance.dismiss('order_review');
+                    },
+                    close: function (result) {
+                        $modalInstance.dismiss('cancel');
+                    },
+                    goToFair: function(){
+                        $location.path('/fair');
+                        $modalInstance.dismiss('fair');
+                    }
+                };
+            }
+        }).result;
+    };
+    
+}]);
+
 app.service('confirmModalService', ['$modal', function ($modal) {
 
     var modalDefaults = {
@@ -219,56 +267,6 @@ app.service('confirmModalService', ['$modal', function ($modal) {
         closeButtonText: 'Close',
         actionButtonText: 'OK',
         actionButtonKind: 'btn-primary',
-        headerText: 'Continuar?',
-        bodyText: 'Realizar esta ação?'
-    };
-
-    this.showModal = function (customModalDefaults, customModalOptions) {
-        if (!customModalDefaults) customModalDefaults = {};
-        customModalDefaults.backdrop = 'static';
-        return this.show(customModalDefaults, customModalOptions);
-    };
-
-    this.show = function (customModalDefaults, customModalOptions) {
-        //Create temp objects to work with since we're in a singleton service
-        var tempModalDefaults = {};
-        var tempModalOptions = {};
-
-        //Map angular-ui modal custom defaults to modal defaults defined in service
-        angular.extend(tempModalDefaults, modalDefaults, customModalDefaults);
-
-        //Map modal.html $scope custom properties to defaults defined in service
-        angular.extend(tempModalOptions, modalOptions, customModalOptions);
-
-        if (!tempModalDefaults.controller) {
-            tempModalDefaults.controller = function ($scope, $modalInstance) {
-                $scope.modalOptions = tempModalOptions;
-                $scope.modalOptions.ok = function (result) {
-                    $modalInstance.close(result);
-                };
-                $scope.modalOptions.close = function (result) {
-                    $modalInstance.dismiss('cancel');
-                };
-            }
-        }
-
-        return $modal.open(tempModalDefaults).result;
-    };
-
-}]);
-
-app.service('basketModalService', ['$modal', function ($modal) {
-
-    var modalDefaults = {
-        backdrop: true,
-        keyboard: true,
-        modalFade: true,
-        templateUrl: '/partials/basket/basket_modal.html'
-    };
-
-    var modalOptions = {
-        closeButtonText: 'Close',
-        actionButtonText: 'OK',
         headerText: 'Continuar?',
         bodyText: 'Realizar esta ação?'
     };

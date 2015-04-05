@@ -1,43 +1,48 @@
-<h1>Artigos</h1>
-
-<form class="form-inline text-right">
-    <div class="form-group">
-		<input class="form-control input-xs" id="orderQuery" name="orderQuery" ng-model="orderQuery" type="text" placeholder="Buscar artigo" autofocus>
+<div class="row">
+    <div class="col-sm-22 col-sm-offset-1">
+        
+        <h1>Artigos</h1>
+        
+        <form class="form-inline text-right">
+            <div class="form-group">
+        		<input class="form-control input-xs" id="orderQuery" name="orderQuery" ng-model="orderQuery" type="text" placeholder="Buscar artigo" autofocus>
+            </div>
+        	<div class="form-group">
+                <select class="form-control" id="order" ng-model="selectedOrder">
+                    <option value="updated" selected>Data</option>
+                    <option value="customer.email">Cliente</option>
+                    <option value="district">Bairro</option>
+                    <option value="city">Cidade</option>
+                    <option value="deliveryOption">Entrega</option>
+                    <option value="products">Produto</option>
+                    <option value="payment_status">Pagamento</option>
+                    <option value="invalid">Inválido</option>
+                </select>
+        	</div>
+            <a class="btn btn-default" href="#/article">+</a>
+        </form>
+        
+        <br><br>
+        
+        <table class="table table-condensed table-stripped table-hover small">
+            <thead>
+                <tr>
+                    <td>Título</td>
+                    <td>Conteúdo</td>
+                    <td>Url</td>
+                    <td>Modificado</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="article in filteredArticles = (articles | filter: orderQuery | orderBy: selectedOrder | filter: {invalid : selectedFilterInvalidValue})">
+                    <td><a href="#/article/{{article._id}}" ng-bind="article.title"></a></td>
+                    <td><span ng-bind="article.content | limitTo: 150"></span><span ng-if="article.content.length > 150">...</span></td>
+                    <td ng-bind="article.encoded_url"></td>
+                    <td ng-bind="article.updated | date:'dd/MM/yyyy'"></td>
+                    <td><a ng-click="dropArticle(article)" href="javascrip:void(0)">x</a></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-	<div class="form-group">
-        <select class="form-control" id="order" ng-model="selectedOrder">
-            <option value="updated" selected>Data</option>
-            <option value="customer.email">Cliente</option>
-            <option value="district">Bairro</option>
-            <option value="city">Cidade</option>
-            <option value="deliveryOption">Entrega</option>
-            <option value="products">Produto</option>
-            <option value="payment_status">Pagamento</option>
-            <option value="invalid">Inválido</option>
-        </select>
-	</div>
-    <a class="btn btn-default" href="#/article">+</a>
-</form>
-
-<br><br>
-
-<table class="table table-condensed table-stripped table-hover small">
-    <thead>
-        <tr>
-            <td>Título</td>
-            <td>Conteúdo</td>
-            <td>Url</td>
-            <td>Modificado</td>
-            <td>Ações</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="article in filteredArticles = (articles | filter: orderQuery | orderBy: selectedOrder | filter: {invalid : selectedFilterInvalidValue})">
-            <td><a href="#/article/{{article._id}}" ng-bind="article.title"></a></td>
-            <td><span ng-bind="article.content | limitTo: 150"></span><span ng-if="article.content.length > 150">...</span></td>
-            <td ng-bind="article.encoded_url"></td>
-            <td ng-bind="article.updated | date:'dd/MM/yyyy'"></td>
-            <td><a ng-click="dropArticle(article)" href="javascrip:void(0)">x</a></td>
-        </tr>
-    </tbody>
-</table>
+</div>

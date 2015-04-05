@@ -1,88 +1,91 @@
-<br>
+<div class="row">
+    <div class="col-sm-22 col-sm-offset-1">
 
-<div class="text-right">
-    <button class="btn btn-danger" ng-click="dropProduct(selectedProduct)"><i class="fa fa-trash"></i></button>
-</div>
-
-<form class="form" role="form" name="selectedProduct">
-
-    <div class="row">
-        
-        <div class="col-xs-6">
-            
-            <img class="img-responsive" ng-src="{{selectedProduct.img}}" ></img>
-
+        <div class="text-right">
+            <button class="btn btn-danger" ng-click="dropProduct(selectedProduct)"><i class="fa fa-trash"></i></button>
         </div>
         
-        <div class="col-xs-18">
+        <form class="form" role="form" name="selectedProduct">
+        
+            <div class="row">
+                
+                <div class="col-xs-6">
+                    
+                    <img class="img-responsive" ng-src="{{selectedProduct.img}}" ></img>
+        
+                </div>
+                
+                <div class="col-xs-18">
+                    
+                    <h2 contenteditable="true" ng-model="selectedProduct.name"></h2>
+                    
+                    <br>
+                    
+                    <dl class="dl-horizontal" ng-show="$storage.user.kind == 'admin'">
+                        <dt>Custo R$: </dt>
+                        <dd contenteditable="true" ng-model="selectedProduct.cost"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="selectedProduct.price || $storage.user.kind == 'admin'">
+                        <dt>Preço R$: </dt>
+                        <dd contenteditable="true" ng-model="selectedProduct.price"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="selectedProduct.dscr || $storage.user.kind == 'admin'">
+                        <dt>Descrição: </dt>
+                        <dd contenteditable="true" ng-model="selectedProduct.dscr" class="text-justify"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="selectedProduct.category || $storage.user.kind == 'admin'">
+                        <dt>Categoria: </dt>
+                        <dd contenteditable="true" ng-model="selectedProduct.category"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="selectedProduct.supplier || $storage.user.kind == 'admin'">
+                        <dt>Fornecedor: </dt>
+                        <dd contenteditable="true" ng-model="selectedProduct.supplier"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="selectedProduct.season || $storage.user.kind == 'admin'">
+                        <dt>Época: </dt>
+                        <dd contenteditable="true" ng-model="selectedProduct.season"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-show="selectedProduct.recipes || $storage.user.kind == 'admin'">
+                        <dt>Receitas: </dt>
+                        <dd contenteditable="true" ng-model="selectedProduct.recipes"></dd>
+                    </dl>
+                    
+                    <dl class="dl-horizontal" ng-if="$storage.user.kind == 'admin'">
+                        <dt>Imagem: </dt>
+                        <dd contenteditable="true" ng-model="selectedProduct.img"></dd>
+                    </dl>
+        
+                    <dl class="dl-horizontal">
+                        <dt></dt>
+                        <dd>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="active" ng-model="selectedProduct.highlight"> Destaque
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="active" ng-model="selectedProduct.active"> Ativo
+                                </label>
+                            </div>
+                        </dd>
+                    </dl>
+        
+                    <dl class="dl-horizontal">
+                        <dt></dt>
+                        <dd><button type="button" class="btn btn-primary" ng-click="selectedProducFormSubmit()"
+                        ng-class="saving_selectedProduct ? 'disabled' : ''"
+                        >Salvar</button></dd>
+                    </dl>
+                    
+                </div>
+        
+            </div>
             
-            <h2 contenteditable="true" ng-model="selectedProduct.name"></h2>
-            
-            <br>
-            
-            <dl class="dl-horizontal" ng-show="$storage.user.kind == 'admin'">
-                <dt>Custo R$: </dt>
-                <dd contenteditable="true" ng-model="selectedProduct.cost"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal" ng-show="selectedProduct.price || $storage.user.kind == 'admin'">
-                <dt>Preço R$: </dt>
-                <dd contenteditable="true" ng-model="selectedProduct.price"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal" ng-show="selectedProduct.dscr || $storage.user.kind == 'admin'">
-                <dt>Descrição: </dt>
-                <dd contenteditable="true" ng-model="selectedProduct.dscr" class="text-justify"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal" ng-show="selectedProduct.category || $storage.user.kind == 'admin'">
-                <dt>Categoria: </dt>
-                <dd contenteditable="true" ng-model="selectedProduct.category"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal" ng-show="selectedProduct.supplier || $storage.user.kind == 'admin'">
-                <dt>Fornecedor: </dt>
-                <dd contenteditable="true" ng-model="selectedProduct.supplier"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal" ng-show="selectedProduct.season || $storage.user.kind == 'admin'">
-                <dt>Época: </dt>
-                <dd contenteditable="true" ng-model="selectedProduct.season"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal" ng-show="selectedProduct.recipes || $storage.user.kind == 'admin'">
-                <dt>Receitas: </dt>
-                <dd contenteditable="true" ng-model="selectedProduct.recipes"></dd>
-            </dl>
-            
-            <dl class="dl-horizontal" ng-if="$storage.user.kind == 'admin'">
-                <dt>Imagem: </dt>
-                <dd contenteditable="true" ng-model="selectedProduct.img"></dd>
-            </dl>
-
-            <dl class="dl-horizontal">
-                <dt></dt>
-                <dd>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="active" ng-model="selectedProduct.highlight"> Destaque
-                        </label>
-                        <label>
-                            <input type="checkbox" name="active" ng-model="selectedProduct.active"> Ativo
-                        </label>
-                    </div>
-                </dd>
-            </dl>
-
-            <dl class="dl-horizontal">
-                <dt></dt>
-                <dd><button type="button" class="btn btn-primary" ng-click="selectedProducFormSubmit()"
-                ng-class="saving_selectedProduct ? 'disabled' : ''"
-                >Salvar</button></dd>
-            </dl>
-            
-        </div>
-
+        </form>
     </div>
-    
-</form>
+</div>
