@@ -1,9 +1,8 @@
 <div class="row background-violet text-white">
     <div class="col-sm-offset-6 col-sm-12">
         <h1>Meus dados</h1>
-        <p><strong>Nome:</strong> {{$storage.user.name}}</p>
-        <p><strong>E-mail:</strong> {{$storage.user.email}}</p>
-        <p><strong>Tipo:</strong> {{$storage.user.kind}}</p>
+        <p><strong>Nome:</strong> <span ng-bind="user.name"></span></p>
+        <p><strong>E-mail:</strong> <span ng-bind="user.email"></span></p>
         <br>
     </div>
 </div>

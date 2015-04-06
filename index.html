@@ -49,7 +49,7 @@
     <![endif]-->
   </head>
   <body ng-controller="myAppCtrl">
-    
+  
     <nav class="navbar navbar-fixed-top" ng-class="$storage.user.kind == 'admin' ? 'navbar-fixed-top-admin' : ''" ng-controller="NavBarCtrl">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -57,15 +57,9 @@
             <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
           </button>
           
-          <button
-            class="btn btn-primary navbar-btn"
-            ng-click="openBasket()"
-          >
+          <button class="btn btn-primary navbar-btn" ng-click="openBasket()">
             Minha cesta 
-            <span class="label label-success" 
-              ng-if="$storage.basket.products.length" 
-              ng-bind="$storage.basket.products.length"
-            ></span>
+            <span class="label label-success" ng-if="$storage.basket.products.length" ng-bind="$storage.basket.products.length"></span>
           </button>
             
           <a href="#/fair" class="btn btn-primary navbar-btn visible-xs-inline-block pull-right">Feira</a>
@@ -85,8 +79,17 @@
             <li><a href="#/home#susteinable_actions" ng-click="gotoElement('susteinable_actions', -63)">Sustentabilidade</a></li>
             <li><a href="#/home#certification" ng-click="gotoElement('certification', -63)">Certificação</a></li>
             <li><a href="#/home#contact" ng-click="gotoElement('contact', -63)">Contato</a></li>
-            <li><a href="#/logout" ng-if="$storage.user.token">Sair</a></li>
             <li><a href="#/signin" ng-if="!$storage.user.token">Entrar</a></li>
+            <li dropdown ng-if="$storage.user.token">
+              <a href="#" dropdown-toggle><i class="fa fa-user"></i> <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#/me">Meus dados</a></li>
+                <li><a href="#/me/orders">Meus pedidos</a></li>
+                <li><a href="#/reset_password">alterar senha</a></li>
+                <li class="divider" role="presentation"></li>
+                <li><a href="#/logout">Sair</a></li>
+              </ul>
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

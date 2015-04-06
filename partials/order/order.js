@@ -15,6 +15,14 @@ order.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/order/orders.html',
     controller: 'OrdersCtrl'
   });
+  $routeProvider.when('/me/users/:id', {
+    templateUrl: 'partials/order/order.html',
+    controller: 'OrderCtrl'
+  });
+  $routeProvider.when('/me/orders', {
+    templateUrl: 'partials/users/orders.html',
+    controller: 'OrdersCtrl'
+  });
 }]);
 
 var statuses = {

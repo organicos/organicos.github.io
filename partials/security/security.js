@@ -17,7 +17,7 @@ security.config(['$routeProvider', function ($routeProvider) {
         }).
         when('/me', {
             templateUrl: 'partials/security/me.html',
-            controller: 'SecurityCtrl'
+            controller: 'MeCtrl'
         }).
         when('/logout', {
             templateUrl: 'partials/security/signin.html',
@@ -175,6 +175,6 @@ security.controller('RetrievePasswordCtrl', ['$scope', '$http', 'myConfig', func
     
 }]);
 
-security.controller('MeCtrl', ['$scope', '$location', function($scope, $location) {
-    
+security.controller('MeCtrl', ['$scope', '$localStorage', function($scope, $localStorage) {
+    $scope.user = $localStorage.user;
 }]);
