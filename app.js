@@ -173,9 +173,11 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
     
 }]);
 
-app.controller('NavBarCtrl', function($scope) {
+app.controller('NavBarCtrl', function($scope, $localStorage) {
     
     $scope.isCollapsed = true;
+    
+    $scope.user = $localStorage.user;
     
     $scope.$on('$routeChangeSuccess', function(){
         $scope.isCollapsed = true;

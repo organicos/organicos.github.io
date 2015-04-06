@@ -83,9 +83,10 @@
             <li dropdown ng-if="$storage.user.token">
               <a href="#" dropdown-toggle><i class="fa fa-user"></i> <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
+                <li role="presentation" class="dropdown-header" ng-bind="user.name || user.email"></li>
                 <li><a href="#/me">Meus dados</a></li>
                 <li><a href="#/me/orders">Meus pedidos</a></li>
-                <li><a href="#/reset_password">alterar senha</a></li>
+                <li><a href="#/change_password">Alterar senha</a></li>
                 <li class="divider" role="presentation"></li>
                 <li><a href="#/logout">Sair</a></li>
               </ul>
