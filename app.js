@@ -126,15 +126,20 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
         
         $scope.alerts.unshift(alertObj);
         
-        setTimeout(function(){
-            
-            $scope.$apply(function(){
-                var index = $scope.alerts.indexOf(alertObj);
-                $scope.alerts.splice(index, 1);            
-            });
-            
-        },
-        5000)
+        if(alertObj.duration == undefined || alertObj.duration > 0){
+
+            setTimeout(function(){
+                
+                $scope.$apply(function(){
+                    var index = $scope.alerts.indexOf(alertObj);
+                    $scope.alerts.splice(index, 1);            
+                });
+                
+            },
+            alertObj.duration || 5000)
+        }
+        
+
     };
     
     $scope.closeAlert = function(index) {
