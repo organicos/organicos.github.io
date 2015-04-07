@@ -7,12 +7,15 @@
             <div class="col-sm-12">
                 
                 <h2>Dados</h2>
-                <p><strong>Status do pagamento: </strong> <span class="label" 
-                    ng-class="order.status == 1 ? 'label-success' : 'label-default'" 
-                    ng-cloak 
-                    ng-if="order.status == 1" 
-                    ng-bind="statuses[order.status]"
-                ></span></p>
+                <p><strong>Status do pagamento: </strong> 
+                    <span class="label" 
+                        ng-class="order.status == 1 ? 'label-success' : 'label-default'" 
+                        ng-cloak 
+                        ng-if="order.status == 1" 
+                        ng-bind="statuses[order.status].name"
+                    ></span>
+                    <small ng-class="order.status == 1 ? 'text-success' : 'text-danger'"  ng-bind="statuses[order.status].desc"></small>
+                </p>
                 <p><strong>Cliente: </strong> <a href="#/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></p>
                 <p><strong>Valor da cesta: </strong> <span ng-bind="order.total | currency:'R$':2"></span></p>
                 <p><strong>Valor do frete: </strong> <span ng-bind="order.shipping.price | currency:'R$':2"></span></p>

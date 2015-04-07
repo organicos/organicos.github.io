@@ -26,8 +26,8 @@ order.config(['$routeProvider', function($routeProvider) {
 }]);
 
 var statuses = {
-  '0':	'Aguardando pagamento.',
-  '1':	'Pago. Aguardando entrega.'
+  '0':	{name: 'Não pago', desc: 'Aguardando pagamento.'},
+  '1':	{name: 'Pago', desc: 'Aguardando entrega.'}
 };
 
 order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
