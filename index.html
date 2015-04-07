@@ -59,7 +59,7 @@
           
           <button class="btn btn-primary navbar-btn" ng-click="openBasket()">
             Minha cesta 
-            <span class="label label-success" ng-if="$storage.basket.products.length" ng-bind="$storage.basket.products.length"></span>
+            <span class="label label-success" ng-cloak ng-if="$storage.basket.products.length" ng-bind="$storage.basket.products.length"></span>
           </button>
             
           <a href="#/fair" class="btn btn-primary navbar-btn visible-xs-inline-block pull-right">Feira</a>
@@ -71,7 +71,7 @@
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
           <ul class="nav navbar-nav navbar-right">
             <li><p class="navbar-btn"><a href="#/fair" class="btn btn-primary hidden-xs">Feira</a></p></li>
-            <li><a href="#/admin_panel" ng-if="$storage.user.kind == 'admin'">Admin</a></li>
+            <li><a href="#/admin_panel" ng-cloak ng-if="$storage.user.kind == 'admin'">Admin</a></li>
             <li><a href="#/blog">Blog</a></li>
             <li><a href="#/home#how_it_works" ng-click="gotoElement('how_it_works', -63)">Como funciona</a></li>
             <li><a href="#/home#week_products" ng-click="gotoElement('week_products', -63)">Destaques</a></li>
@@ -79,8 +79,8 @@
             <li><a href="#/home#susteinable_actions" ng-click="gotoElement('susteinable_actions', -63)">Sustentabilidade</a></li>
             <li><a href="#/home#certification" ng-click="gotoElement('certification', -63)">Certificação</a></li>
             <li><a href="#/home#contact" ng-click="gotoElement('contact', -63)">Contato</a></li>
-            <li><a href="#/signin" ng-if="!$storage.user.token">Entrar</a></li>
-            <li dropdown ng-if="$storage.user.token">
+            <li><a href="#/signin" ng-cloak ng-if="!$storage.user.token">Entrar</a></li>
+            <li dropdown ng-cloak ng-if="$storage.user.token">
               <a href="#" dropdown-toggle><i class="fa fa-user"></i> <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li role="presentation" class="dropdown-header" ng-bind="user.name || user.email"></li>

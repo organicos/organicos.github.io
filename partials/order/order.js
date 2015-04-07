@@ -121,6 +121,19 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
       console.error('ERR', err);
   
   });
+  
+  $scope.checkPagseguroPayment = function(order_id){
+    $http.get(myConfig.apiUrl+'/check_pagseguro_payment/'+order_id)
+    .success(function(res) {
+    
+        console.log(res);
+    
+    }).error(function(err) {
+    
+        console.error('ERR', err);
+    
+    });
+  };
 }]);
 
 order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
