@@ -1,91 +1,110 @@
 <div class="row">
     <div class="col-sm-22 col-sm-offset-1">
 
-        <div class="text-right">
-            <button class="btn btn-danger" ng-click="dropProduct(selectedProduct)"><i class="fa fa-trash"></i></button>
-        </div>
-        
-        <form class="form" role="form" name="selectedProduct">
-        
-            <div class="row">
+        <div class="row">
+            
+            <div class="col-xs-6">
                 
-                <div class="col-xs-6">
-                    
-                    <img class="img-responsive" ng-src="{{selectedProduct.img}}" ></img>
-        
-                </div>
-                
-                <div class="col-xs-18">
-                    
-                    <h2 contenteditable="true" ng-model="selectedProduct.name"></h2>
-                    
-                    <br>
-                    
-                    <dl class="dl-horizontal" ng-show="$storage.user.kind == 'admin'">
-                        <dt>Custo R$: </dt>
-                        <dd contenteditable="true" ng-model="selectedProduct.cost"></dd>
-                    </dl>
-                    
-                    <dl class="dl-horizontal" ng-show="selectedProduct.price || $storage.user.kind == 'admin'">
-                        <dt>Preço R$: </dt>
-                        <dd contenteditable="true" ng-model="selectedProduct.price"></dd>
-                    </dl>
-                    
-                    <dl class="dl-horizontal" ng-show="selectedProduct.dscr || $storage.user.kind == 'admin'">
-                        <dt>Descrição: </dt>
-                        <dd contenteditable="true" ng-model="selectedProduct.dscr" class="text-justify"></dd>
-                    </dl>
-                    
-                    <dl class="dl-horizontal" ng-show="selectedProduct.category || $storage.user.kind == 'admin'">
-                        <dt>Categoria: </dt>
-                        <dd contenteditable="true" ng-model="selectedProduct.category"></dd>
-                    </dl>
-                    
-                    <dl class="dl-horizontal" ng-show="selectedProduct.supplier || $storage.user.kind == 'admin'">
-                        <dt>Fornecedor: </dt>
-                        <dd contenteditable="true" ng-model="selectedProduct.supplier"></dd>
-                    </dl>
-                    
-                    <dl class="dl-horizontal" ng-show="selectedProduct.season || $storage.user.kind == 'admin'">
-                        <dt>Época: </dt>
-                        <dd contenteditable="true" ng-model="selectedProduct.season"></dd>
-                    </dl>
-                    
-                    <dl class="dl-horizontal" ng-show="selectedProduct.recipes || $storage.user.kind == 'admin'">
-                        <dt>Receitas: </dt>
-                        <dd contenteditable="true" ng-model="selectedProduct.recipes"></dd>
-                    </dl>
-                    
-                    <dl class="dl-horizontal" ng-if="$storage.user.kind == 'admin'">
-                        <dt>Imagem: </dt>
-                        <dd contenteditable="true" ng-model="selectedProduct.img"></dd>
-                    </dl>
-        
-                    <dl class="dl-horizontal">
-                        <dt></dt>
-                        <dd>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="active" ng-model="selectedProduct.highlight"> Destaque
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="active" ng-model="selectedProduct.active"> Ativo
-                                </label>
-                            </div>
-                        </dd>
-                    </dl>
-        
-                    <dl class="dl-horizontal">
-                        <dt></dt>
-                        <dd><button type="button" class="btn btn-primary" ng-click="selectedProducFormSubmit()"
-                        ng-class="saving_selectedProduct ? 'disabled' : ''"
-                        >Salvar</button></dd>
-                    </dl>
-                    
-                </div>
-        
+                <img class="img-responsive" ng-src="{{product.img}}" ></img>
+    
             </div>
             
-        </form>
+            <div class="col-xs-18">
+                
+                <p class="text-right">
+                    <button class="btn btn-danger" ng-click="dropProduct(product)"><i class="fa fa-trash"></i></button>
+                </p>
+                
+                <form class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="name">Nome</label>
+                        <div class="col-sm-20">
+                            <input class="form-control" type="text" id="name" ng-model="product.name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="cost">Custo</label>
+                        <div class="col-sm-20">
+                            <input class="form-control" type="text" id="cost" ng-model="product.cost">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="price">Preço</label>
+                        <div class="col-sm-20">
+                            <input class="form-control" type="text" id="price" ng-model="product.price">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="category">Categoria</label>
+                        <div class="col-sm-20">
+                            <input class="form-control" type="text" id="category" ng-model="product.category" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="supplier">Fornecedor</label>
+                        <div class="col-sm-20">
+                            <input class="form-control" type="text" id="supplier" ng-model="product.supplier">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="season">Época</label>
+                        <div class="col-sm-20">
+                            <input class="form-control" type="text" id="season" ng-model="product.season">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="recipes">Receitas</label>
+                        <div class="col-sm-20">
+                            <input class="form-control" type="text" id="recipes" ng-model="product.recipes">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="img">Imagem (url)</label>
+                        <div class="col-sm-20">
+                            <input class="form-control" type="text" id="img" ng-model="product.img" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="dscr">Descrição</label>
+                        <div class="col-sm-20">
+                            <textarea class="form-control" rows="5" id="dscr" ng-model="product.dscr"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-20">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="active" ng-model="product.highlight"> Destaque
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="active" ng-model="product.active"> Ativo
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-sm-offset-4 col-sm-20">
+                            <button type="button" class="btn btn-primary" ng-click="producFormSubmit()" ng-class="saving_selectedProduct ? 'disabled' : ''">Salvar</button>
+                        </div>
+                    </div>
+
+                </form>
+                
+            </div>
+    
+        </div>
+
+
     </div>
 </div>

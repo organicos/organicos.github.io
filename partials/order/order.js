@@ -4,23 +4,23 @@ var order = angular.module('myApp.order', ['ngRoute']);
 
 order.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/order_review', {
-    templateUrl: 'partials/order/order_review.html',
+    templateUrl: '/partials/order/order_review.html',
     controller: 'OrderReviewCtrl'
   });
   $routeProvider.when('/order/:id', {
-    templateUrl: 'partials/order/order.html',
+    templateUrl: '/partials/order/order.html',
     controller: 'OrderCtrl'
   });
   $routeProvider.when('/orders', {
-    templateUrl: 'partials/order/orders.html',
+    templateUrl: '/partials/order/orders.html',
     controller: 'OrdersCtrl'
   });
   $routeProvider.when('/me/users/:id', {
-    templateUrl: 'partials/order/order.html',
+    templateUrl: '/partials/order/order.html',
     controller: 'OrderCtrl'
   });
   $routeProvider.when('/me/orders', {
-    templateUrl: 'partials/users/orders.html',
+    templateUrl: '/partials/users/orders.html',
     controller: 'OrdersCtrl'
   });
 }]);

@@ -8,7 +8,7 @@
                 
                 <h2>Dados</h2>
                 <p><strong>Status do pagamento: </strong> <span ng-bind="statuses[order.pagseguro.transaction.status[0]] || 'Aguardando pagamento'"></span></p>
-                <p><strong>Cliente: </strong> <a href="#/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></p>
+                <p><strong>Cliente: </strong> <a href="/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></p>
                 <p><strong>Valor da cesta: </strong> <span ng-bind="order.total | currency:'R$':2"></span></p>
                 <p><strong>Valor do frete: </strong> <span ng-bind="order.shipping.price | currency:'R$':2"></span></p>
                 <p><strong>Valor final: </strong> <span ng-bind="order.total + order.shipping.price | currency:'R$':2"></span></p>

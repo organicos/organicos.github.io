@@ -4,7 +4,7 @@ var auth = angular.module('myApp.auth', ['ngRoute']);
 
 auth.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/authenticate', {
-    templateUrl: 'partials/auth/authenticate.html',
+    templateUrl: '/partials/auth/authenticate.html',
     controller: 'LoginCtrl'
   });
 }]);

@@ -19,7 +19,7 @@
                     <option value="invalid">Inválido</option>
                 </select>
         	</div>
-            <a class="btn btn-default" href="#/article">+</a>
+            <a class="btn btn-default" href="/article">+</a>
         </form>
         
         <br><br>
@@ -36,7 +36,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="article in filteredArticles = (articles | filter: orderQuery | orderBy: selectedOrder | filter: {invalid : selectedFilterInvalidValue})">
-                    <td><a href="#/article/{{article._id}}" ng-bind="article.title"></a></td>
+                    <td><a href="/article/{{article._id}}" ng-bind="article.title"></a></td>
                     <td><span ng-bind="article.content | limitTo: 150"></span><span ng-if="article.content.length > 150">...</span></td>
                     <td ng-bind="article.encoded_url"></td>
                     <td ng-bind="article.updated | date:'dd/MM/yyyy'"></td>

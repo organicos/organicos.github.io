@@ -35,11 +35,11 @@
     <meta name="msapplication-config" content="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/browserconfig.xml">
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="bower_components/bootstrap-24grid-violet/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap-24grid-violet/css/bootstrap.min.css">
     <!-- Font Awesome - Icon -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- Custom CSS -->
-    <link href="assets/css/global.css" rel="stylesheet">
+    <link href="/assets/css/global.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -62,33 +62,33 @@
             <span class="label label-success" ng-cloak ng-if="$storage.basket.products.length" ng-bind="$storage.basket.products.length"></span>
           </button>
             
-          <a href="#/fair" class="btn btn-primary navbar-btn visible-xs-inline-block pull-right">Feira</a>
+          <a href="/fair" class="btn btn-primary navbar-btn visible-xs-inline-block pull-right">Feira</a>
           
-          <a class="navbar-brand" href="#/home">
+          <a class="navbar-brand" href="/home">
             <img style="margin-top: -13px; height:46px;" ng-src="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/favicon-57.png">
           </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
           <ul class="nav navbar-nav navbar-right">
-            <li><p class="navbar-btn"><a href="#/fair" class="btn btn-primary hidden-xs">Feira</a></p></li>
-            <li><a href="#/admin_panel" ng-cloak ng-if="$storage.user.kind == 'admin'">Admin</a></li>
-            <li><a href="#/blog">Blog</a></li>
-            <li><a href="#/home#how_it_works" ng-click="gotoElement('how_it_works', -63)">Como funciona</a></li>
-            <li><a href="#/home#week_products" ng-click="gotoElement('week_products', -63)">Destaques</a></li>
-            <li><a href="#/home#about" ng-click="gotoElement('about', -63)">Sobre</a></li>
-            <li><a href="#/home#susteinable_actions" ng-click="gotoElement('susteinable_actions', -63)">Sustentabilidade</a></li>
-            <li><a href="#/home#certification" ng-click="gotoElement('certification', -63)">Certificação</a></li>
-            <li><a href="#/home#contact" ng-click="gotoElement('contact', -63)">Contato</a></li>
-            <li><a href="#/signin" ng-cloak ng-if="!$storage.user.token">Entrar</a></li>
+            <li><p class="navbar-btn"><a href="/fair" class="btn btn-primary hidden-xs">Feira</a></p></li>
+            <li><a href="/admin_panel" ng-cloak ng-if="$storage.user.kind == 'admin'">Admin</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/home#how_it_works" ng-click="gotoElement('how_it_works', -63)">Como funciona</a></li>
+            <li><a href="/home#week_products" ng-click="gotoElement('week_products', -63)">Destaques</a></li>
+            <li><a href="/home#about" ng-click="gotoElement('about', -63)">Sobre</a></li>
+            <li><a href="/home#susteinable_actions" ng-click="gotoElement('susteinable_actions', -63)">Sustentabilidade</a></li>
+            <li><a href="/home#certification" ng-click="gotoElement('certification', -63)">Certificação</a></li>
+            <li><a href="/home#contact" ng-click="gotoElement('contact', -63)">Contato</a></li>
+            <li><a href="/signin" ng-cloak ng-if="!$storage.user.token">Entrar</a></li>
             <li dropdown ng-cloak ng-if="$storage.user.token">
               <a href="#" dropdown-toggle><i class="fa fa-user"></i> <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li role="presentation" class="dropdown-header" ng-bind="user.name || user.email"></li>
-                <li><a href="#/me">Meus dados</a></li>
-                <li><a href="#/me/orders">Meus pedidos</a></li>
-                <li><a href="#/change_password">Alterar senha</a></li>
+                <li><a href="/me">Meus dados</a></li>
+                <li><a href="/me/orders">Meus pedidos</a></li>
+                <li><a href="/change_password">Alterar senha</a></li>
                 <li class="divider" role="presentation"></li>
-                <li><a href="#/logout">Sair</a></li>
+                <li><a href="/logout">Sair</a></li>
               </ul>
             </li>
           </ul>
@@ -144,7 +144,7 @@
               </div>
               <div class="col-sm-5 text-muted">
                 <h4 class="text-center">Termos e Condições</h4>
-                <p>Ao utilizar o site feiraorgânica.com você concorda com os <a href="#/blog/terms">Termos e Condições de Uso.</a>
+                <p>Ao utilizar o site feiraorgânica.com você concorda com os <a href="/blog/terms">Termos e Condições de Uso.</a>
                 <p>A lista de produtos e preços é atualizada semanalmente sem aviso prévio.</p>
                 </p>
               </div>
@@ -154,30 +154,30 @@
       </div>
     </div>
     
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="bower_components/angular-route/angular-route.min.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.min.js"></script>
-    <script src="bower_components/satellizer/satellizer.min.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-filter/dist/angular-filter.min.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
-    <script src="app.js"></script>
-    <script src="partials/home/home.js"></script>
-    <script src="partials/fair/fair.js"></script>
-    <script src="partials/security/security.js"></script>
-    <script src="partials/contact/contact.js"></script>
-    <script src="partials/payments/payments.js"></script>
-    <script src="partials/auth/auth.js"></script>
-    <script src="partials/admin/admin.js"></script>
-    <script src="partials/users/users.js"></script>
-    <script src="partials/order/order.js"></script>
-    <script src="partials/articles/articles.js"></script>
-    <script src="partials/blog/blog.js"></script>
-    <script src="partials/products/products.js"></script>
-    <script src="components/version/version.js"></script>
-    <script src="components/version/version-directive.js"></script>
-    <script src="components/version/interpolate-filter.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-route/angular-route.min.js"></script>
+    <script src="/bower_components/ngstorage/ngStorage.min.js"></script>
+    <script src="/bower_components/satellizer/satellizer.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/angular-filter/dist/angular-filter.min.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="/app.js"></script>
+    <script src="/partials/home/home.js"></script>
+    <script src="/partials/fair/fair.js"></script>
+    <script src="/partials/security/security.js"></script>
+    <script src="/partials/contact/contact.js"></script>
+    <script src="/partials/payments/payments.js"></script>
+    <script src="/partials/auth/auth.js"></script>
+    <script src="/partials/admin/admin.js"></script>
+    <script src="/partials/users/users.js"></script>
+    <script src="/partials/order/order.js"></script>
+    <script src="/partials/articles/articles.js"></script>
+    <script src="/partials/blog/blog.js"></script>
+    <script src="/partials/products/products.js"></script>
+    <script src="/components/version/version.js"></script>
+    <script src="/components/version/version-directive.js"></script>
+    <script src="/components/version/interpolate-filter.js"></script>
         
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

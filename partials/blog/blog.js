@@ -4,11 +4,11 @@ var blog = angular.module('myApp.blog', ['ngRoute']);
 
 blog.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/blog', {
-    templateUrl: 'partials/blog/blog.html',
+    templateUrl: '/partials/blog/blog.html',
     controller: 'BlogArticlesCtrl'
   });
   $routeProvider.when('/blog/:id', {
-    templateUrl: 'partials/blog/article.html',
+    templateUrl: '/partials/blog/article.html',
     controller: 'BlogArticleCtrl'
   });
 }]);

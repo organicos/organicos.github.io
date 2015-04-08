@@ -4,7 +4,7 @@ var admin = angular.module('myApp.admin', ['ngRoute']);
 
 admin.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/admin_panel', {
-    templateUrl: 'partials/admin/admin_panel.html',
+    templateUrl: '/partials/admin/admin_panel.html',
     controller: 'AdminPanelCtrl'
   });
 }]);
@@ -12,7 +12,5 @@ admin.config(['$routeProvider', function($routeProvider) {
 admin.controller('AdminPanelCtrl', ['$scope', function ($scope) {
     
     $scope.usuarios = {};
-    
-    
 
 }]);

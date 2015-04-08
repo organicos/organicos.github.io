@@ -4,11 +4,11 @@ var fair = angular.module('myApp.fair', ['ngRoute']);
 
 fair.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/fair', {
-    templateUrl: 'partials/fair/fair.html',
+    templateUrl: '/partials/fair/fair.html',
     controller: 'FairCtrl'
   });
   $routeProvider.when('/fair/product/:id', {
-    templateUrl: 'partials/fair/product.html',
+    templateUrl: '/partials/fair/product.html',
     controller: 'FairCtrl'
   });
 

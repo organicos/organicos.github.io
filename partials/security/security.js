@@ -6,21 +6,21 @@ security.config(['$routeProvider', function ($routeProvider) {
  
     $routeProvider.
         when('/signin', {
-            templateUrl: 'partials/security/signin.html'
+            templateUrl: '/partials/security/signin.html'
         }).
         when('/signin/:return_url', {
-            templateUrl: 'partials/security/signin.html'
+            templateUrl: '/partials/security/signin.html'
         }).
         when('/retrieve_password', {
-            templateUrl: 'partials/security/retrieve_password.html',
+            templateUrl: '/partials/security/retrieve_password.html',
             controller: 'RetrievePasswordCtrl'
         }).
         when('/me', {
-            templateUrl: 'partials/security/me.html',
+            templateUrl: '/partials/security/me.html',
             controller: 'MeCtrl'
         }).
         when('/logout', {
-            templateUrl: 'partials/security/signin.html',
+            templateUrl: '/partials/security/signin.html',
             controller: 'LogoutCtrl'
         });
         
@@ -29,7 +29,7 @@ security.config(['$routeProvider', function ($routeProvider) {
 security.controller('LogoutCtrl', ['$scope', '$location', function ($scope, $location) {
 
     $scope.$storage.user = {kind: ''};
-    $location.path("#/signin");
+    $location.path("/signin");
 
 }]);
 

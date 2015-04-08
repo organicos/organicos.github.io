@@ -4,11 +4,11 @@ var payments = angular.module('myApp.payments', ['ngRoute']);
 
 payments.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/payments', {
-    templateUrl: 'partials/payments/payments.html',
+    templateUrl: '/partials/payments/payments.html',
     controller: 'PaymentsCtrl'
   });
   $routeProvider.when('/payments/:id', {
-    templateUrl: 'partials/payments/payments.html',
+    templateUrl: '/partials/payments/payments.html',
     controller: 'PaymentsCtrl'
   });
 }]);

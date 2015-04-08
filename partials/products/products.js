@@ -4,15 +4,15 @@ var products = angular.module('myApp.products', ['ngRoute']);
 
 products.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/products', {
-    templateUrl: 'partials/products/products.html',
+    templateUrl: '/partials/products/products.html',
     controller: 'ProductsCtrl'
   });
   $routeProvider.when('/product', {
-    templateUrl: 'partials/products/product.html',
+    templateUrl: '/partials/products/product.html',
     controller: 'ProductCtrl'
   });
   $routeProvider.when('/product/:id', {
-    templateUrl: 'partials/products/product.html',
+    templateUrl: '/partials/products/product.html',
     controller: 'ProductCtrl'
   });
 }]);
@@ -48,18 +48,18 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
   
 }]);
 
-products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService) {
+products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', '$location', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, $location) {
 
   $scope.saving_product = false;
   
-  $scope.selectedProduct = {};
+  $scope.product = {};
 
   if($routeParams.id){
     
     $http.get(myConfig.apiUrl+'/product/'+$routeParams.id)
     .success(function(res) {
 
-      $scope.selectedProduct = res;
+      $scope.product = res;
 
     }).error(function(err) {
     
@@ -73,17 +73,17 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
     
   }
 
-  $scope.selectedProducFormSubmit = function () {
+  $scope.producFormSubmit = function () {
     
     $scope.saving_product = true;
     
-    if($scope.selectedProduct._id){
+    if($scope.product._id){
       
-       $scope.productPut($scope.selectedProduct);
+       $scope.productPut($scope.product);
       
     } else {
 
-      $scope.productPost($scope.selectedProduct); 
+      $scope.productPost($scope.product); 
 
     }
 
@@ -95,7 +95,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
     .success(function(resp) {
       
         $scope.products = resp.data;
-        window.location = ("#/product/" + resp._id);
+        $location.path("/product/" + resp._id);
         
     })
     .error(function (resp) {
@@ -168,7 +168,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
 
       $http.delete(myConfig.apiUrl + '/products/' + product._id)
       .success(function() {
-        window.location = ("#/products");
+        $location.path("/products");
       })
       .error(function (resp) {
         

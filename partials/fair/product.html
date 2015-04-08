@@ -23,41 +23,36 @@
                     
                     <br>
                     
-                    <dl class="dl-horizontal" ng-show="$storage.user.kind == 'admin'">
-                        <dt>Custo: </dt>
-                        <dd ng-bind="productFormModalObject.cost | currency"></dd>
-                    </dl>
-                    
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.price || $storage.user.kind == 'admin'">
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.price">
                         <dt>Preço R$: </dt>
                         <dd ng-bind="productFormModalObject.price"></dd>
                     </dl>
                     
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.dscr || $storage.user.kind == 'admin'">
-                        <dt>Descrição: </dt>
-                        <dd class="text-justify" ng-bind="productFormModalObject.dscr"></dd>
-                    </dl>
-                    
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.category || $storage.user.kind == 'admin'">
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.category">
                         <dt>Categoria: </dt>
                         <dd ng-bind="productFormModalObject.category"></dd>
                     </dl>
                     
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.supplier || $storage.user.kind == 'admin'">
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.supplier">
                         <dt>Fornecedor: </dt>
                         <dd ng-bind="productFormModalObject.supplier"></dd>
                     </dl>
                     
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.season || $storage.user.kind == 'admin'">
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.season">
                         <dt>Época: </dt>
                         <dd ng-bind="productFormModalObject.season"></dd>
                     </dl>
                     
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.recipes || $storage.user.kind == 'admin'">
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.recipes">
                         <dt>Receitas: </dt>
                         <dd ng-bind="productFormModalObject.recipes"></dd>
                     </dl>
     
+                    <dl class="dl-horizontal" ng-show="productFormModalObject.dscr">
+                        <dt>Descrição: </dt>
+                        <dd class="text-justify" ng-bind-html="productFormModalObject.dscr" style="white-space: pre-wrap;"></dd>
+                    </dl>
+                    
                 </div>
         
             </div>
@@ -69,7 +64,7 @@
         <h3>Outros produtos da categoria {{productFormModalObject.category}}</h3>
         <div class="row">
         	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in products | filter: {category: productFormModalObject.category} | orderBy: 'name'">
-        		<a href="#/fair/product/{{product._id}}">
+        		<a href="/fair/product/{{product._id}}">
         			<img 
         				class="img-responsive" 
         				alt="week_product" 

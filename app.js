@@ -32,7 +32,7 @@ var app = angular.module('myApp', [
   'myApp.blog'
 ]);
 
-app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeProvider, $httpProvider, $authProvider) {
+app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider', function($routeProvider, $httpProvider, $authProvider, $locationProvider) {
 
     // define the google api token
     $authProvider.google({
@@ -66,6 +66,9 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', function($routeP
 
     // remove some http header to use CORS
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    
+    
+    $locationProvider.html5Mode(true).hashPrefix('!');
         
 }]);
 

@@ -4,15 +4,15 @@ var articles = angular.module('myApp.articles', ['ngRoute']);
 
 articles.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/articles', {
-    templateUrl: 'partials/articles/articles.html',
+    templateUrl: '/partials/articles/articles.html',
     controller: 'ArticlesCtrl'
   });
   $routeProvider.when('/article', {
-    templateUrl: 'partials/articles/article.html',
+    templateUrl: '/partials/articles/article.html',
     controller: 'ArticleCtrl'
   });
   $routeProvider.when('/article/:id', {
-    templateUrl: 'partials/articles/article.html',
+    templateUrl: '/partials/articles/article.html',
     controller: 'ArticleCtrl'
   });
 }]);
@@ -48,7 +48,7 @@ articles.controller('ArticlesCtrl', ['$scope','$http', '$filter', '$routeParams'
   
 }]);
 
-articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
 
   $scope.saving_article = false;
   $scope.article = {};
@@ -161,7 +161,7 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
       $scope.saving_article = true;
         $http.delete(myConfig.apiUrl + '/articles/' + article._id)
         .success(function() {
-          window.location = ("#/fair");
+          $location.path("/fair");
         })
         .error(function (resp) {
           

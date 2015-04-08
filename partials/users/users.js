@@ -4,11 +4,11 @@ var users = angular.module('myApp.users', ['ngRoute']);
 
 users.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/users', {
-    templateUrl: 'partials/users/users.html',
+    templateUrl: '/partials/users/users.html',
     controller: 'AdminUsersCtrl'
   });
   $routeProvider.when('/change_password', {
-    templateUrl: 'partials/users/change_password.html',
+    templateUrl: '/partials/users/change_password.html',
     controller: 'ChangePasswordCtrl'
   });
 }]);
