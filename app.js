@@ -5,7 +5,7 @@ var $scope, $location;
 // configurations
 var config = angular.module('myApp.config', [])
 .constant('myConfig', {
-  'apiUrl': '//fodev-api-vinagreti-1.c9.io/v1',
+  'apiUrl': 'https://feiraorganica.com/v1',
 });
 
 // Declare app level module which depends on views, and components
