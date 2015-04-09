@@ -2,12 +2,6 @@
 
 var $scope, $location;
 
-// configurations
-var config = angular.module('myApp.config', [])
-.constant('myConfig', {
-  'apiUrl': 'https://feiraorganica.com/v1',
-});
-
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'ngRoute',
