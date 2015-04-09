@@ -72,7 +72,9 @@
                     <label for="complement" class="control-label">Complemento</label>
                     <input type="text" class="form-control" id="complement" placeholder="Complemento" ng-model="$storage.basket.shipping.complement">
                 </div>
-                    <div class="form-group col-sm-6">
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
                     <label for="district" class="control-label">Bairro</label>
                     <input type="text" class="form-control" id="district" placeholder="Bairro" ng-model="$storage.basket.shipping.district">
                 </div>
@@ -88,9 +90,12 @@
                     <label for="country" class="control-label">País</label>
                     <input type="text" class="form-control" id="country" placeholder="País" ng-model="$storage.basket.shipping.country" disabled>
                 </div>
+            </div>
+            <div class="row">
                 <div class="form-group col-sm-16">
-                    <label for="address_ref" class="control-label">Referências</label>
-                    <input type="text" class="form-control" id="address_ref" placeholder="Referências" ng-model="$storage.basket.shipping.address_ref">
+                    <label for="address_ref" class="control-label">Dados complementares de entrega.</label>
+                    <textarea rows="3" class="form-control" id="address_ref" placeholder="Dados complementares de entrega" ng-model="$storage.basket.shipping.address_ref"></textarea>
+                    <p class="help-block">Forneça dados que nos auxiliem na entrega, como pontos de referência próximos a sua casa, horário preferencial para o recebimento, pessoas autorizadas a receber a cesta... neste espaço</p>
                 </div>
                 <div class="form-group col-sm-8">
                     <label for="deliveryOption" class="control-label">Data e horário de entrega ({{$storage.basket.shipping.deliveryOption}})</label>
