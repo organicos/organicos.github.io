@@ -105,14 +105,25 @@
                 </div>
             </div>
         </form>
-
         <div class="form-group">
-            <a class="btn btn-primary" href="/fair">Feira</a>
+            <a class="btn btn-primary" href="/fair"><i class="fa fa-chevron-left"></i> Feira</a>
             <button 
                 class="btn btn-success pull-right" 
                 ng-disabled="!orderReady || processingOrder || $storage.basket.total < 35" ng-click="processOrder()">
                 <i class="fa fa-spinner fa-spin" ng-if="processingOrder"></i>
-            Finalizar pedido</button>
+                Finalizar pedido
+                <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-primary" href="/fair"><i class="fa fa-chevron-left"></i> Feira</a>
+            <button 
+                class="btn btn-success pull-right" 
+                ng-disabled="!orderReady || processingOrder || $storage.basket.total < 35" ng-click="processOrder()">
+                <i class="fa fa-spinner fa-spin" ng-if="processingOrder"></i>
+                Finalizar pedido
+                <i class="fa fa-chevron-right"></i>
+            </button>
         </div>
             
     </div>
