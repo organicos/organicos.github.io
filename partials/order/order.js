@@ -119,7 +119,7 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
     $http.get(myConfig.apiUrl+'/check_pagseguro_payment/'+order_id)
     .success(function(res) {
     
-        console.log(res);
+        $scope.order = res;
     
     }).error(function(err) {
     
