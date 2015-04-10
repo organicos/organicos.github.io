@@ -3,11 +3,43 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-<head>
+<head ng-controller="headCtrl">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Feira Orgânica Delivery - Entregando amor em forma de alimento.</title>
+    
+    <!-- START:  Social meta tags -->
+
+      <title ng-bind="MetaService.tag('title')">Feira orgânica Delivery</title>
+      <meta name="description" content="Produtos orgânicos entregues em sua porta." />
+      
+      <link rel="author" href="https://plus.google.com/+BrunoJoão1"/>
+      <a href="https://plus.google.com/+BrunoJoão1?rel=author" style="display:none;"></a>
+      <a href="https://plus.google.com/+BrunoJoão1" rel="me" style="display:none;"></a>
+      <link rel='publisher' href="https://plus.google.com/107566665570039529018" />
+    
+      <!-- Schema.org markup for Google+ -->
+      <meta itemprop="name" content="Feira orgânica Delivery">
+      <meta itemprop="description" content="Produtos orgânicos entregues em sua porta.">
+      <meta itemprop="image" content="https://s3-sa-east-1.amazonaws.com/fodev/img/global/marca.png">
+
+      <!-- Twitter Card data -->
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@feira_organica">
+      <meta name="twitter:title" content="Feira orgânica Delivery">
+      <meta name="twitter:description" content="Produtos orgânicos entregues em sua porta.">
+
+      <!-- Open Graph data -->
+      <meta property="og:title" content="Feira orgânica Delivery" />
+      <meta property="og:description" content="Produtos orgânicos entregues em sua porta." />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://fodev-api-vinagreti-1.c9.io" />
+      <meta property="og:image" content="https://s3-sa-east-1.amazonaws.com/fodev/img/global/marca_wide.png" />
+      <meta property="og:site_name" content="Feira orgânica Delivery" />
+      <meta property="fb:admins" content="100000036122524" />
+      
+    <!-- END: Social meta tags -->
+
     
     <!-- Icons -->
     <base href="">
@@ -47,6 +79,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
   </head>
   <body ng-controller="myAppCtrl">
   

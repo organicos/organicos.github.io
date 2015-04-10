@@ -66,8 +66,42 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvid
         
 }]);
 
-app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService) {
+app.service('MetaService', ['$location', function($location) {
     
+    var MetaService = this;
+    var metaData = {};
+
+    return {
+        resetData: function() {
+            metaData = {
+                title: 'Feira Orgânica Delivery'
+            };
+            return MetaService;
+        },
+        tag: function (tag, value) {
+            if (!tag && !value) {
+                return metaData;
+            } else if (!value) {
+                return metaData[tag];
+            } else {
+                metaData[tag] = value;
+                return MetaService;
+            }
+        }
+   }
+  
+}]);
+
+app.controller('headCtrl' , ['$scope', 'MetaService' , function($scope, MetaService) {
+
+    // Social media tags reset    
+    MetaService.resetData();
+    $scope.MetaService = MetaService;
+    
+}]);
+
+app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'MetaService' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, MetaService) {
+
     $scope.$storage = $localStorage.$default({
         user: {kind: ''},
     });
@@ -85,6 +119,11 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
         var privateRoutes = [
             '/me'
             , '/order_review'
+            , '/admin_panel'
+            , '/users'
+            , '/products'
+            , '/orders'
+            , '/articles'
         ];
 
         if(privateRoutes.indexOf(newValue) > -1){
