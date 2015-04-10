@@ -71,7 +71,7 @@
                     <td ng-bind="order.products.length"></td>
                     <td ng-bind="order.updated | date:'dd/MM/yyyy'"></td>
                     <td><i nf-if="order.pagseguro.transaction.status[0]" class="fa fa-check"></i></td>
-                    <td ng-if="selectedFilterInvalidValue === ''"><i ng-if="order.status == 0" class="fa fa-check"></i></td>
+                    <td ng-if="selectedFilterInvalidValue === ''"><i ng-if="order.status == 1" class="fa fa-check"></i></td>
                     <td><a ng-click="dropOrder(order)" href="javascrip:void(0)">x</a></td>
                 </tr>
             </tbody>
