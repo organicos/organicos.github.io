@@ -27,7 +27,7 @@ var app = angular.module('myApp', [
   'bnx.module.facebook'
 ]);
 
-app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider', 'facebookProvider', function($routeProvider, $httpProvider, $authProvider, $locationProvider, facebookProvider) {
+app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider', function($routeProvider, $httpProvider, $authProvider, $locationProvider) {
 
     // define the google api token
     $authProvider.google({
@@ -39,21 +39,23 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvid
     
     // Append the Authenticated hash to the header
     $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
-      return {
-          'request': function (config) {
-              config.headers = config.headers || {};
-              if ($localStorage.user && $localStorage.user.token) {
+        
+        return {
+            'request': function (config) {
+                
+                config.headers = config.headers || {};
+                if ($localStorage.user && $localStorage.user.token) {
                   config.headers.Authorization = 'Organic ' + $localStorage.user.token;
-              }
-              return config;
-          },
-          'responseError': function(response) {
-              if(response.status === 401 || response.status === 403) {
+                }
+                return config;
+            },
+            'responseError': function(response) {
+                if(response.status === 401 || response.status === 403) {
                   $location.path('/signin');
-              }
-              return $q.reject(response);
-          }
-      };
+                }
+                return $q.reject(response);
+            }
+        };
     }]);
 
     // add cross-domain to the header

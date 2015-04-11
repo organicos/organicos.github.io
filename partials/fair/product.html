@@ -21,7 +21,11 @@
                     
                     <h2 ng-bind="productFormModalObject.name"></h2>
                     
-                    <br>
+                    <hr>
+                    
+                    <facebook-like layout="button_count" share=true></facebook-like>
+                    
+                    <hr>
                     
                     <dl class="dl-horizontal" ng-show="productFormModalObject.price">
                         <dt>Preço R$: </dt>
@@ -81,7 +85,12 @@
         	
         </div>
 
-        <div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-numposts="5" data-colorscheme="light"></div>                
+        <div class="fb-comments" 
+            data-href="https://feiraorganica.com/fair/product/{{product._id}}" 
+            data-numposts="10" 
+            data-width="100%" 
+            data-colorscheme="light">
+        </div>
         
     </div>
 
