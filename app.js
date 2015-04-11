@@ -106,6 +106,7 @@ app.controller('headCtrl' , ['$scope', 'MetaService' , function($scope, MetaServ
 app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'MetaService', 'facebook' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, MetaService, facebook) {
 
     $scope.$on('$routeChangeSuccess', function(next, current) { 
+        facebook.initialized = true;
         window.fbAsyncInit();
     });
  
