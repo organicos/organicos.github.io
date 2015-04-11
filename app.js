@@ -103,8 +103,12 @@ app.controller('headCtrl' , ['$scope', 'MetaService' , function($scope, MetaServ
     
 }]);
 
-app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'MetaService' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, MetaService) {
+app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'MetaService', 'facebook' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, MetaService, facebook) {
 
+    $scope.$on('$routeChangeSuccess', function(next, current) { 
+        window.fbAsyncInit();
+    });
+ 
     $scope.$storage = $localStorage.$default({
         user: {kind: ''},
     });
