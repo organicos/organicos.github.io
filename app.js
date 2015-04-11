@@ -34,9 +34,6 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvid
       clientId: '741540784926-5973e11m7n43r2hd1333e72nrv1mvjma.apps.googleusercontent.com'
     });
     
-    // define the fb api token
-    facebookProvider.init ({appId: "1062165583797773"});
-
     // define default route
     $routeProvider.otherwise({redirectTo: '/home'});
     

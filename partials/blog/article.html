@@ -3,7 +3,13 @@
 
     <h1 ng-bind="article.title"></h1>
     
+    <hr>
+    
+    <facebook-like layout="button_count" share=true></facebook-like>
+    
+    <hr>
+    
     <p class="text-justify" ng-bind-html="article.content" style="white-space: pre-wrap;"></p>
     
-    <div class="fb-comments" data-href="https://feiraorganica.com/blog/{{article.encoded_url}}" data-numposts="5" data-colorscheme="light"></div>
+    <div class="fb-comments" data-href="https://feiraorganica.com/blog/{{article.encoded_url}}" data-numposts="10" data-colorscheme="light"></div>
 </div>
