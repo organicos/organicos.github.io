@@ -1,9 +1,13 @@
-<div class="col-xs-offset-1 col-xs-22 col-sm-offset-2 col-sm-20 col-md-offset-4 col-md-16">
+<div class="col-xs-offset-1 col-xs-22 col-sm-offset-4 col-sm-16 col-md-offset-6 col-md-12">
+    <img class="img-responsive img-responsive-wide" ng-if="article.img" ng-src="{{article.img}}"></img>
+
     <h1 ng-bind="article.title"></h1>
     
-    <img class="img-responsive img-responsive-wide" ng-if="article.img" ng-src="{{article.img}}"></img>
-    
-    <br>
-    
+    <div ng-app="myFacebookApp">
+        <facebook app-id="1062165583797773"></facebook>
+    </div>
+
     <p class="text-justify" ng-bind-html="article.content" style="white-space: pre-wrap;"></p>
+    
+    <div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-numposts="5" data-colorscheme="light"></div>
 </div>

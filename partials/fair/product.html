@@ -6,7 +6,7 @@
         
             <div class="row">
                 
-                <div class="col-xs-6">
+                <div class="col-sm-6">
                     
                     <img class="img-responsive" ng-src="{{productFormModalObject.img}}" ></img>
                     
@@ -17,7 +17,7 @@
         
                 </div>
                 
-                <div class="col-xs-18">
+                <div class="col-sm-18">
                     
                     <h2 ng-bind="productFormModalObject.name"></h2>
                     
@@ -80,7 +80,18 @@
         	</div>
         	
         </div>
+
+        <div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-numposts="5" data-colorscheme="light"></div>                
         
     </div>
 
 </div>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=532888376778430";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

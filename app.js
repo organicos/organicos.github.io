@@ -23,7 +23,8 @@ var app = angular.module('myApp', [
   'myApp.products',
   'myApp.config',
   'myApp.articles',
-  'myApp.blog'
+  'myApp.blog',
+  'bnx.module.facebook'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider', function($routeProvider, $httpProvider, $authProvider, $locationProvider) {
@@ -433,4 +434,3 @@ app.service('anchorSmoothScroll', function(){
     };
     
 });
-
