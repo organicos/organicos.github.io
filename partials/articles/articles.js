@@ -51,7 +51,7 @@ articles.controller('ArticlesCtrl', ['$scope','$http', '$filter', '$routeParams'
 articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
 
   $scope.saving_article = false;
-  $scope.article = {};
+  $scope.article = {products: []};
   $scope.loadingLocations = false;
   $scope.articleProductsRaw = [];
   
