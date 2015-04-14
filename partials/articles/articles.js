@@ -52,6 +52,47 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
 
   $scope.saving_article = false;
   $scope.article = {};
+  $scope.loadingLocations = false;
+  $scope.articleProductsRaw = [];
+  
+  $scope.getProducts = function(name){
+    return $http.get(myConfig.apiUrl+'/products', {
+      params: {
+        name: name
+      }
+    }).then(function(res) {
+      
+      return res.data;
+
+    });
+  }
+
+  $scope.selectProduct = function (item, model, label) {
+    
+    var product = ($filter('filter')($scope.articleProductsRaw, {_id: item._id}, false))[0];
+    
+    var productIndex = $scope.articleProductsRaw.indexOf(product);
+    if (productIndex == -1) {
+      $scope.articleProductsRaw.push(item);        
+    }
+    
+    var productIndex = $scope.article.products.indexOf(item._id);
+    if (productIndex == -1) {
+      $scope.article.products.push(item._id);
+    }
+    
+  };
+  
+  $scope.dropFromArticle = function(product){
+    var productIndex = $scope.articleProductsRaw.indexOf(product);
+    if (productIndex >= 0) {
+        $scope.articleProductsRaw.splice(productIndex, 1);
+    }
+    var productIndex = $scope.article.products.indexOf(product._id);
+    if (productIndex >= 0) {
+        $scope.article.products.splice(productIndex, 1);
+    }
+  };
 
   if($routeParams.id){
     
@@ -59,6 +100,8 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     .success(function(res) {
 
       $scope.article = res;
+      
+      $scope.loadProducts();
 
     }).error(function(err) {
     
@@ -66,6 +109,25 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
             kind: 'danger',
             msg: err,
             title: "Não foi possível acessar os dados do artigo. Verifique o motivo abaixo:"
+        });
+    
+    });
+    
+  }
+  
+  $scope.loadProducts = function () {
+    
+    $http.get(myConfig.apiUrl+'/article/'+$scope.article._id+'/products')
+    .success(function(res) {
+
+      $scope.articleProductsRaw = res;
+      
+    }).error(function(err) {
+    
+        $scope.$emit('alert', {
+            kind: 'danger',
+            msg: err,
+            title: "Não foi possível carregar os produtos do artigo. Verifique o motivo abaixo:"
         });
     
     });
