@@ -1,20 +1,49 @@
-<div class="col-xs-offset-1 col-xs-22 col-sm-offset-4 col-sm-16 col-md-offset-6 col-md-12">
-    <img class="img-responsive img-responsive-wide" ng-if="article.img" ng-src="{{article.img}}"></img>
-
-    <h1 ng-bind="article.title"></h1>
+<div class="row">
     
-    <hr>
+    <div ng-class="articleProductsRaw ? 'col-xs-24 col-sm-offset-2 col-sm-16 col-md-offset-5 col-md-11' : col-xs-24 col-sm-offset-4 col-sm-16 col-md-offset-6 col-md-12">
+        <img class="img-responsive img-responsive-wide" ng-if="article.img" ng-src="{{article.img}}"></img>
     
-    <facebook-like layout="button_count" share=true></facebook-like>
-    
-    <hr>
-    
-    <p class="text-justify" ng-bind-html="article.content" style="white-space: pre-wrap;"></p>
-    
-    <div class="fb-comments" 
-        data-href="https://feiraorganica.com/blog/{{article.encoded_url}}" 
-        data-numposts="10" 
-        data-width="100%" 
-        data-colorscheme="light">
+        <h1 ng-bind="article.title"></h1>
+        
+        <hr>
+        
+        <facebook-like layout="button_count" share=true></facebook-like>
+        
+        <hr>
+        
+        <p class="text-justify" ng-bind-html="article.content" style="white-space: pre-wrap;"></p>
+        
+        <hr>
+        
+        <div class="fb-comments" 
+            data-href="https://feiraorganica.com/blog/{{article.encoded_url}}" 
+            data-numposts="10" 
+            data-width="100%" 
+            data-colorscheme="light">
+        </div>
     </div>
+
+    <div class="hidden-xs col-sm-4 col-md-3" ng-if="articleProductsRaw">
+		<div class="thumbnail" ng-repeat="product in articleProductsRaw">
+			<a href="/fair/product/{{product._id}}">
+				<img class="img-responsive" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}" ng-dblclick="addToBasket(product)">
+			</a>
+			<hr>
+			<div style="height:100px;">
+				<p>
+					<span ng-bind="product.price | currency:'R$':2"></span>
+					<span class="pull-right">
+						<a ng-if="product.category" ng-click="selectCategory(product.category)" ng-bind="product.category"></a>
+					</span>
+				</p>
+				<h4 class="text-violet"><a href="/fair/product/{{product._id}}" ng-bind="product.name"></a></h4>
+			</div>
+
+			<button class="btn btn-success btn-block" ng-click="addToBasket(product)">Colocar na cesta 
+				<span class="label label-warning" ng-repeat="buttonProduct in $storage.basket.products | filter : {_id: product._id}" ng-bind="buttonProduct.quantity"></span>
+			</button>
+
+		</div>
+    </div>
+
 </div>

@@ -91,9 +91,9 @@
             <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
           </button>
           
-          <button class="btn btn-primary navbar-btn" ng-click="openBasket()">
+          <button class="btn btn-primary navbar-btn" ng-click="openBasket()" ng-if="$storage.basket.products.length">
             Minha cesta 
-            <span class="label label-success" ng-cloak ng-if="$storage.basket.products.length" ng-bind="$storage.basket.products.length"></span>
+            <span class="label label-success" ng-cloak ng-bind="$storage.basket.products.length"></span>
           </button>
             
           <a href="/fair" class="btn btn-primary navbar-btn visible-xs-inline-block pull-right">Feira</a>
@@ -107,12 +107,12 @@
             <li><p class="navbar-btn"><a href="/fair" class="btn btn-primary hidden-xs">Feira</a></p></li>
             <li><a href="/admin_panel" ng-cloak ng-if="$storage.user.kind == 'admin'">Admin</a></li>
             <li><a href="/blog">Blog</a></li>
-            <li><a href="/home#how_it_works" ng-click="gotoElement('how_it_works', -63)">Como funciona</a></li>
-            <li><a href="/home#week_products" ng-click="gotoElement('week_products', -63)">Destaques</a></li>
-            <li><a href="/home#about" ng-click="gotoElement('about', -63)">Sobre</a></li>
-            <li><a href="/home#susteinable_actions" ng-click="gotoElement('susteinable_actions', -63)">Sustentabilidade</a></li>
-            <li><a href="/home#certification" ng-click="gotoElement('certification', -63)">Certificação</a></li>
-            <li><a href="/home#contact" ng-click="gotoElement('contact', -63)">Contato</a></li>
+            <li><a href="/home#how_it_works">Como funciona</a></li>
+            <li><a href="/home#week_products">Destaques</a></li>
+            <li><a href="/home#about">Sobre</a></li>
+            <li><a href="/home#susteinable_actions">Sustentabilidade</a></li>
+            <li><a href="/home#certification">Certificação</a></li>
+            <li><a href="/home#contact">Contato</a></li>
             <li><a href="/signin" ng-cloak ng-if="!$storage.user.token">Entrar</a></li>
             <li dropdown ng-cloak ng-if="$storage.user.token">
               <a href="#" dropdown-toggle><i class="fa fa-user"></i> <span class="caret"></span></a>
@@ -189,6 +189,7 @@
     </div>
     
     <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-i18n/angular-locale_pt-br.js"></script>
     <script src="/assets/js/facebook.js"></script>
     <script src="/bower_components/angular-route/angular-route.min.js"></script>
     <script src="/bower_components/ngstorage/ngStorage.min.js"></script>

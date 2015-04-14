@@ -21,7 +21,6 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 	$scope.selectedCategory = '';
 	$scope.selectedOrder = "name";
 	$scope.productFormModalObject = {};
-	
 
   $http.get(myConfig.apiUrl + '/products')
   .success(function(resp) {

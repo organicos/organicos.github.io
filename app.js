@@ -104,7 +104,7 @@ app.controller('headCtrl' , ['$scope', 'MetaService' , function($scope, MetaServ
 }]);
 
 app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'MetaService', 'facebook' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, MetaService, facebook) {
-
+    
     $scope.$on('$routeChangeSuccess', function(next, current) { 
         facebook.initialized = true;
         window.fbAsyncInit();
@@ -193,16 +193,6 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
     $scope.$on('alert', function(event, alertObj) {
         $scope.addAlert(alertObj);
     });
-    
-    $scope.gotoElement = function (eID, offset){
-      // set the location.hash to the id of
-      // the element you wish to scroll to.
-      $location.hash(eID);
- 
-      // call $anchorScroll()
-      anchorSmoothScroll.scrollTo(eID, offset);
-      
-    };
     
     $scope.appAlert = function(msg, duration) {
 
@@ -387,6 +377,8 @@ app.directive('contenteditable', function() {
 app.service('anchorSmoothScroll', function(){
     
     this.scrollTo = function(eID, offset) {
+        
+        console.log('iuhiuh')
 
         // This scrolling function 
         // is from http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript

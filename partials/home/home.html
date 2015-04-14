@@ -67,15 +67,15 @@
 	</div>
 </div>
 
-<div id="week_products" class="row" ng-controller="FairCtrl as FairCtrl">
+<div id="week_products" class="row">
 	<div class="col-xs-offset-1 col-xs-22">
 		<h2 class="text-center">Destaques da semana</h2>
 		<br><br>
 
 		<div class="row">
-			<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="product in products| filter:{ highlight: true }">
+			<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="product in highlightProducts">
 				<a href="/fair/product/{{product._id}}">
-					<img class="img-responsive" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200/{{product.img}}" ng-dblclick="addToBasket(product)">
+					<img class="img-responsive" alt="week_product" src="http://images.elasticbeanstalk.com/200" ng-src="http://images.elasticbeanstalk.com/200/{{product.img}}" ng-dblclick="addToBasket(product)">
 				</a>
 				<p style="height:60px;">{{product.name}}</p>
 			</div>
