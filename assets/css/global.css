@@ -1,5 +1,5 @@
 body {
-	padding-top:70px;
+	padding-top:60px;
 }
 
 /** Estilo do conteudo **/
@@ -23,6 +23,12 @@ body {
     width: 100%;
     background:black;
     color:white;
+}
+
+
+.navbar-brand > img{
+    margin-top: -13px;
+    height:46px;
 }
 
 #bg-topo-home{
