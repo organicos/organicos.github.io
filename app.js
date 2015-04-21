@@ -22,6 +22,9 @@ var app = angular.module('myApp', [
   'myApp.order',
   'myApp.products',
   'myApp.config',
+  'myApp.certification',
+  'myApp.susteinable',
+  'myApp.about',
   'myApp.articles',
   'myApp.blog',
   'bnx.module.facebook'

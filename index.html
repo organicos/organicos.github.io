@@ -115,10 +115,10 @@
             <li><a href="/blog">Blog</a></li>
             <li><a href="/home#how_it_works">Como funciona</a></li>
             <li><a href="/home#week_products">Destaques</a></li>
-            <li><a href="/home#about">Sobre</a></li>
-            <li><a href="/home#susteinable_actions">Sustentabilidade</a></li>
-            <li><a href="/home#certification">Certificação</a></li>
-            <li><a href="/home#contact">Contato</a></li>
+            <li><a href="/about">Sobre</a></li>
+            <li><a href="/susteinable">Sustentabilidade</a></li>
+            <li><a href="/certification">Certificação</a></li>
+            <li><a href="/contact">Contato</a></li>
             <li><a href="/signin" ng-cloak ng-if="!$storage.user.token">Entrar</a></li>
             <li dropdown ng-cloak ng-if="$storage.user.token">
               <a href="#" dropdown-toggle><i class="fa fa-user"></i> <span class="caret"></span></a>
@@ -208,6 +208,9 @@
     <script src="/config/env_config.js"></script>
     <script src="/partials/home/home.js"></script>
     <script src="/partials/fair/fair.js"></script>
+    <script src="/partials/certification/certification.js"></script>
+    <script src="/partials/susteinable/susteinable.js"></script>
+    <script src="/partials/about/about.js"></script>
     <script src="/partials/security/security.js"></script>
     <script src="/partials/contact/contact.js"></script>
     <script src="/partials/payments/payments.js"></script>
