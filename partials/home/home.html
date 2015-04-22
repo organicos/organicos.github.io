@@ -71,7 +71,7 @@
 		<div class="row">
 			<div class="col-lg-4 col-md-6 col-xs-12" ng-repeat="product in highlightProducts">
 				<a href="/fair/product/{{product._id}}">
-					<img class="img-responsive" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200/{{product.img}}" ng-dblclick="addToBasket(product)">
+					<img class="img-responsive" alt="{{product.name}}" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}" ng-dblclick="addToBasket(product)">
 				</a>
 				<p style="height:60px;">{{product.name}}</p>
 			</div>
