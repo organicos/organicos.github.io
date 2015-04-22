@@ -106,7 +106,7 @@ app.controller('headCtrl' , ['$scope', 'MetaService' , function($scope, MetaServ
     
 }]);
 
-app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'MetaService', 'facebook' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, MetaService, facebook) {
+app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'MetaService', 'facebook', '$http', 'myConfig' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, MetaService, facebook, $http, myConfig) {
     
     $scope.$on('$routeChangeSuccess', function(next, current) { 
         facebook.initialized = true;
@@ -115,6 +115,20 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
  
     $scope.$storage = $localStorage.$default({
         user: {kind: ''},
+    });
+    
+    $scope.followingShippingDate = '';
+    
+    $http.get(myConfig.apiUrl + '/shipping/following')
+    .success(function(res) {
+      
+      $scope.followingShippingDate = res;
+      
+    })
+    .error(function(err) {
+    
+        console.error('ERR', err);
+    
     });
     
     $scope.ensureUser = function() {

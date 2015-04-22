@@ -92,16 +92,22 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label for="phone" class="control-label">Telefone</label>
+                        <input type="text" class="form-control" id="phone" placeholder="Telefone" ng-model="$storage.basket.shipping.phone">                                          
+                    </div>
+                    <div class="form-group">
+                        <label for="deliveryOption" class="control-label">Data e horário de entrega ({{$storage.basket.shipping.deliveryOption}})</label>
+                        <select class="form-control" ng-model="$storage.basket.shipping.deliveryOption" ng-options="option as option for option in shipping.nextDates">
+                          <option value="">-- Selecione uma data de entrega --</option>
+                        </select>                        
+                    </div>
+                </div>
                 <div class="form-group col-sm-16">
                     <label for="address_ref" class="control-label">Dados complementares de entrega.</label>
-                    <textarea rows="3" class="form-control" id="address_ref" placeholder="Dados complementares de entrega" ng-model="$storage.basket.shipping.address_ref"></textarea>
+                    <textarea rows="4" class="form-control" id="address_ref" placeholder="Dados complementares de entrega" ng-model="$storage.basket.shipping.address_ref"></textarea>
                     <p class="help-block">Forneça dados que nos auxiliem na entrega, como pontos de referência próximos a sua casa, horário preferencial para o recebimento, pessoas autorizadas a receber a cesta... neste espaço</p>
-                </div>
-                <div class="form-group col-sm-8">
-                    <label for="deliveryOption" class="control-label">Data e horário de entrega ({{$storage.basket.shipping.deliveryOption}})</label>
-                    <select class="form-control" ng-model="$storage.basket.shipping.deliveryOption" ng-options="option.label as option.label for option in DeliveryOptions">
-                      <option value="">-- Selecione uma data de entrega --</option>
-                    </select>
                 </div>
             </div>
         </form>

@@ -114,7 +114,6 @@
             <li><a href="/admin_panel" ng-cloak ng-if="$storage.user.kind == 'admin'">Admin</a></li>
             <li><a href="/blog">Blog</a></li>
             <li><a href="/home#how_it_works">Como funciona</a></li>
-            <li><a href="/home#week_products">Destaques</a></li>
             <li><a href="/about">Sobre</a></li>
             <li><a href="/susteinable">Sustentabilidade</a></li>
             <li><a href="/certification">Certificação</a></li>
@@ -159,6 +158,8 @@
         
         <br>
         
+        <p class="text-center"><span class="text-violet">Próxima entrega:</span> <span ng-bind="followingShippingDate"></span></p>
+         
         <div class="row">
           <div class="col-xs-offset-1 col-xs-22">
             <div class="row">

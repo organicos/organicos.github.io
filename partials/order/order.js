@@ -135,11 +135,10 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     $scope.country = 'Brasil';
     $scope.orderReady = false;
     $scope.inactive_products = [];
-    $scope.DeliveryOptions = [
-    { label: 'Terça-feira', value: 'Terça-feira' },
-    { label: 'Sábado', value: 'Terça-feira' }
-  ]
-    
+    $scope.shipping = {
+      nextDates: []
+    };
+
     $http.post(myConfig.apiUrl + '/order_review', {
         basket: $scope.$storage.basket
     })
@@ -189,6 +188,22 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
       $scope.orderReady = true;
     });
     
+    $scope.shipping = {
+      nextDates: []
+    };
+    
+    $http.get(myConfig.apiUrl + '/shipping/next')
+    .success(function(res) {
+      
+      $scope.shipping.nextDates = res;
+      
+    })
+    .error(function(err) {
+    
+        console.error('ERR', err);
+    
+    });
+        
     $scope.$watch('$storage.basket.shipping.cep', function(newValue, oldValue) {
       
       var cep = newValue ? newValue.match(/\d+/) : '';
