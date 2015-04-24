@@ -38,7 +38,7 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvid
     });
     
     // define default route
-    $routeProvider.otherwise({redirectTo: '/home'});
+    $routeProvider.otherwise({redirectTo: '/'});
     
     // Append the Authenticated hash to the header
     $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {

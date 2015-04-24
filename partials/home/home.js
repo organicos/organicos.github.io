@@ -3,7 +3,7 @@
 var home = angular.module('myApp.home', ['ngRoute']);
 
 home.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/home', {
+  $routeProvider.when('/', {
     templateUrl: '/partials/home/home.html',
     controller: 'HomeCtrl'
   });
