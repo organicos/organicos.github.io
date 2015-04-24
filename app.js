@@ -75,7 +75,9 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvid
 app.service('MetaService', ['$location', function($location) {
     
     var MetaService = this;
-    var metaData = {};
+    var metaData = {
+        title: 'Feira Orgânica Delivery'
+    };
 
     return {
         resetData: function() {
