@@ -1,42 +1,46 @@
 <div class="row">
-	<div class="col-xs-offset-1 col-xs-14">
+	<div class="col-sm-offset-1 col-sm-22">
 		<h2>Entre em contato conosco.</h2>
 		<p>Para compras ou em caso de dúvidas, criticas e sugestões, deixe seu recado que responderemos em breve.</p>
-		
-		<form class="form" method="POST" role="form" name="contactForm" ng-submit="submitContact()">
-			<div class="form-group">
-				<label for="contact-name">Nome</label>
-				<input class="form-control" type="text" name="name" ng-model="name" id="name" placeholder="Nome"/>
-			</div>
-			<div class="form-group">
-				<label for="contact-email">E-mail *</label>
-				<input class="form-control" type="text" name="email" ng-model="email" id="email" placeholder="E-mail"/>
-			</div>
-			<div class="form-group">
-				<label for="contact-phone">Telefone</label>
-				<input class="form-control" type="text" name="phone" ng-model="phone" id="phone" placeholder="Telefone"/>
-			</div>
-			<div class="form-group">
-				<label for="contact-msg">Mensagem</label>
-				<textarea class="form-control" rows="5" name="msg" ng-model="msg" id="msg" placeholder="Mensagem"></textarea>
-			</div>
-			<div class="form-group">
-				<button type="submit" class="btn btn-success" ng-disabled="submitingContact">Enviar</button>
-			</div>
-		</form>
-	</div>
-	
-	<div class="col-xs-offset-1 col-xs-7">
 
-    <h4 class="text-center">Contatos</h4>
-    <address>
-      <strong>Feira Orgânica Delivery</strong><br>
-      Rodovia Admar Gonzaga, 5200<br>
-      Florianópolis, SC<br>
-      <p><abbr title="Telefone"><i class="fa fa-phone fa-2x"></i>:</abbr> +55 (48) 9145 6527</p>
-      <p><abbr title="Whatsapp"><i class="fa fa-whatsapp fa-2x"></i>:</abbr> +55 (48) 9676 9212</p>
-      <p><abbr title="E-mail"><i class="fa fa-envelope-o fa-2x"></i>:</abbr> <a href="mailto:#">info@feiraorganica.com</a></p>
-    </address>
+		<div class="row">
+			
+			<div class="col-xs-24 col-sm-offset-1 col-sm-7 pull-right">
+				<address>
+		      <strong>Feira Orgânica Delivery</strong><br>
+		      Rodovia Admar Gonzaga, 5200<br>
+		      Florianópolis, SC<br>
+		      <p><abbr title="Telefone"><i class="fa fa-phone fa-2x"></i>:</abbr> +55 (48) 9145 6527</p>
+		      <p><abbr title="Whatsapp"><i class="fa fa-whatsapp fa-2x"></i>:</abbr> +55 (48) 9676 9212</p>
+		      <p><abbr title="E-mail"><i class="fa fa-envelope-o fa-2x"></i>:</abbr> <a href="mailto:#">info@feiraorganica.com</a></p>
+		    </address>
+			</div>
+			
+			<div class="col-xs-24 col-sm-16 pull-left">
+				<form class="form" method="POST" role="form" name="contactForm" ng-submit="submitContact()">
+					<div class="form-group">
+						<label for="contact-name">Nome</label>
+						<input class="form-control" type="text" name="name" ng-model="name" id="name" placeholder="Nome"/>
+					</div>
+					<div class="form-group">
+						<label for="contact-email">E-mail *</label>
+						<input class="form-control" type="text" name="email" ng-model="email" id="email" placeholder="E-mail"/>
+					</div>
+					<div class="form-group">
+						<label for="contact-phone">Telefone</label>
+						<input class="form-control" type="text" name="phone" ng-model="phone" id="phone" placeholder="Telefone"/>
+					</div>
+					<div class="form-group">
+						<label for="contact-msg">Mensagem</label>
+						<textarea class="form-control" rows="5" name="msg" ng-model="msg" id="msg" placeholder="Mensagem"></textarea>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success" ng-disabled="submitingContact">Enviar</button>
+					</div>
+				</form>
+			</div>
+
+		</div>
 		
 	</div>
 	
