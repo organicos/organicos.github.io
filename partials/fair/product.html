@@ -64,7 +64,7 @@
                     </dl>
     
                     <dl class="dl-horizontal" ng-show="productFormModalObject.dscr">
-                        <dt>Descrição: </dt>
+                        <dt></dt>
                         <dd class="text-justify" ng-bind-html="productFormModalObject.dscr" style="white-space: pre-wrap;"></dd>
                     </dl>
                     
@@ -77,24 +77,37 @@
         <hr>
         
         <h3>Outros produtos da categoria {{productFormModalObject.category}}</h3>
-        <div class="row">
-        	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in products | filter: {category: productFormModalObject.category} | orderBy: 'name'">
-        		<a href="/fair/product/{{product._id}}">
-        			<img 
-        				class="img-responsive" 
-        				alt="week_product" 
-        				ng-src="{{product.img}}" 
-     					tooltip-placement="right"
-    					tooltip-html-unsafe="{{product.name}} <br> {{product.dscr}}" 
-    					tooltip-append-to-body="true" 
-        				ng-dblclick="addToBasket(product)"
-        				ng-click="addToBasket(product)"
-        			>
-        		</a>
-        		<p style="height:60px;">{{product.name}}</p>
-        	</div>
-        	
-        </div>
+		<div class="row">
+			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: {category: productFormModalObject.category} | orderBy: 'name')">
+		
+		
+				<div class="thumbnail">
+					<a href="/fair/product/{{product._id}}">
+						<img class="img-responsive img-responsive-wide img-centered" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}" ng-dblclick="addToBasket(product)">
+					</a>
+					<hr>
+					<div style="height:100px;">
+						<p>
+							<span ng-bind="product.price | currency:'R$':2"></span>
+							<span class="pull-right">
+								<a ng-if="product.category" ng-click="selectCategory(product.category)" ng-bind="product.category"></a>
+							</span>
+						</p>
+						<h4 class="text-violet"><a href="/fair/product/{{product._id}}" ng-bind="product.name"></a></h4>
+					</div>
+		
+					<button class="btn btn-success btn-block" ng-click="addToBasket(product)">Colocar na cesta 
+						<span class="label label-warning" ng-repeat="buttonProduct in $storage.basket.products | filter : {_id: product._id}" ng-bind="buttonProduct.quantity"></span>
+					</button>
+		
+				</div>
+		
+		
+			</div>
+			<div class="col-xs-24" ng-if="!filteredProducts.length">Nesta semana não temos nenhum outro produto na categoria {{selectedCategory}}!
+				<br></br>
+			</div>
+		</div>
 
     </div>
 

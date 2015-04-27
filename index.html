@@ -156,8 +156,8 @@
     
     <div class="row background-blue text-white" ng-if="!$storage.user.token" ng-cloak>
     	<div class="col-xs-24 text-center">
-    		<h2>Informe seu e-mail para receber semanalmente nossa lista de produtos e promoções.</h2>
-    		<br><br>
+    		<h2>Receba semanalmente nossa lista de produtos e preços.</h2>
+    		<br>
     
     		<div class="row">
     			
@@ -165,7 +165,6 @@
     				
     				<form class="form" role="form" ng-submit="signupToNewsletter()">
     					<div class="input-group input-group-lg">
-    						<div class="input-group-addon">E-mail</div>
     						<input type="email" class="form-control input-block" name="signupToNewsletterMail" placeholder="Informe seu e-mail" ng-model="signupToNewsletter.mail" />
 				        <span class="input-group-btn">
 				            <button type="submit" id="filter" class="btn btn-primary btn-block">Enviar</button>
