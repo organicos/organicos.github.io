@@ -26,41 +26,14 @@ var app = angular.module('myApp', [
   'myApp.susteinable',
   'myApp.about',
   'myApp.articles',
-  'myApp.blog',
-  'bnx.module.facebook'
+  'myApp.blog'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider', function($routeProvider, $httpProvider, $authProvider, $locationProvider) {
 
-    // define the google api token
-    $authProvider.google({
-      clientId: '741540784926-5973e11m7n43r2hd1333e72nrv1mvjma.apps.googleusercontent.com'
-    });
-    
     // define default route
     $routeProvider.otherwise({redirectTo: '/'});
     
-    // Append the Authenticated hash to the header
-    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
-        
-        return {
-            'request': function (config) {
-                
-                config.headers = config.headers || {};
-                if ($localStorage.user && $localStorage.user.token) {
-                  config.headers.Authorization = 'Organic ' + $localStorage.user.token;
-                }
-                return config;
-            },
-            'responseError': function(response) {
-                if(response.status === 401 || response.status === 403) {
-                  $location.path('/signin');
-                }
-                return $q.reject(response);
-            }
-        };
-    }]);
-
     // add cross-domain to the header
     $httpProvider.defaults.useXDomain = true;
 
@@ -72,9 +45,9 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvid
         
 }]);
 
-app.service('MetaService', ['$location', function($location) {
+app.service('HtmlMetaTagService', ['$location', function($location) {
     
-    var MetaService = this;
+    var HtmlMetaTagService = this;
     var metaData = {
         title: 'Feira Orgânica Delivery'
     };
@@ -82,9 +55,9 @@ app.service('MetaService', ['$location', function($location) {
     return {
         resetData: function() {
             metaData = {
-                title: 'Feira Orgânica Delivery'
+                title: 'Feira orgânica Delivery - Produtos orgânicos entregues em sua porta.'
             };
-            return MetaService;
+            return HtmlMetaTagService;
         },
         tag: function (tag, value) {
             if (!tag && !value) {
@@ -93,28 +66,23 @@ app.service('MetaService', ['$location', function($location) {
                 return metaData[tag];
             } else {
                 metaData[tag] = value;
-                return MetaService;
+                return HtmlMetaTagService;
             }
         }
    }
   
 }]);
 
-app.controller('headCtrl' , ['$scope', 'MetaService' , function($scope, MetaService) {
+app.controller('headCtrl' , ['$scope', 'HtmlMetaTagService' , function($scope, HtmlMetaTagService) {
 
-    // Social media tags reset    
-    MetaService.resetData();
-    $scope.MetaService = MetaService;
+    // Reset HTML Meta Tags
+    HtmlMetaTagService.resetData();
+    $scope.HtmlMetaTagService = HtmlMetaTagService;
     
 }]);
 
-app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'MetaService', 'facebook', '$http', 'myConfig' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, MetaService, facebook, $http, myConfig) {
+app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'HtmlMetaTagService', '$http', 'myConfig' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, HtmlMetaTagService, $http, myConfig) {
     
-    $scope.$on('$routeChangeSuccess', function(next, current) { 
-        facebook.initialized = true;
-        window.fbAsyncInit();
-    });
- 
     $scope.$storage = $localStorage.$default({
         user: {kind: ''},
     });
@@ -140,42 +108,6 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
     $scope.ping = function(callback) {
         callback();
     }
-
-    $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
-        
-        var privateRoutes = [
-            '/me'
-            , '/order_review'
-            , '/admin_panel'
-            , '/users'
-            , '/products'
-            , '/orders'
-            , '/articles'
-        ];
-
-        if(privateRoutes.indexOf(newValue) > -1){
-
-            if ($scope.$storage.user.token){
-                
-                $scope.ping(function (err, res) {
-
-                    if(err) { // is not logged anymore. invalid token
-                    
-                        $location.path('/signin'+newValue);
-                        
-                    }
-
-                });
-                
-            } else {
-                
-                $location.path('/signin'+newValue);
-                    
-            } 
-        
-        }
- 
-    });
 
     $scope.$back = function() {
         
