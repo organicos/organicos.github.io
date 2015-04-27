@@ -33,6 +33,27 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvid
 
     // define default route
     $routeProvider.otherwise({redirectTo: '/'});
+
+    // Append the Authenticated hash to the header
+    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
+        
+        return {
+            'request': function (config) {
+                
+                config.headers = config.headers || {};
+                if ($localStorage.user && $localStorage.user.token) {
+                  config.headers.Authorization = 'Organic ' + $localStorage.user.token;
+                }
+                return config;
+            },
+            'responseError': function(response) {
+                if(response.status === 401 || response.status === 403) {
+                  $location.path('/signin');
+                }
+                return $q.reject(response);
+            }
+        };
+    }]);
     
     // add cross-domain to the header
     $httpProvider.defaults.useXDomain = true;
@@ -83,6 +104,27 @@ app.controller('headCtrl' , ['$scope', 'HtmlMetaTagService' , function($scope, H
 
 app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'HtmlMetaTagService', '$http', 'myConfig' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, HtmlMetaTagService, $http, myConfig) {
 
+    // Append the Authenticated hash to the header
+    $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
+        
+        return {
+            'request': function (config) {
+                
+                config.headers = config.headers || {};
+                if ($localStorage.user && $localStorage.user.token) {
+                  config.headers.Authorization = 'Organic ' + $localStorage.user.token;
+                }
+                return config;
+            },
+            'responseError': function(response) {
+                if(response.status === 401 || response.status === 403) {
+                  $location.path('/signin');
+                }
+                return $q.reject(response);
+            }
+        };
+    }]);
+    
     $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
         
         var privateRoutes = [
