@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp').factory('accessLevelManagerFactory', ['$http', '$httpProvider', function Manager($http, $httpProvider) {
+angular.module('myApp').factory('accessLevelManagerFactory', ['$scope', '$http', '$httpProvider', function Manager($scope, $http, $httpProvider) {
 
     // Append the Authenticated hash to the header
     $httpProvider.interceptors.push(['$q', '$location', '$localStorage', function($q, $location, $localStorage) {
@@ -23,41 +23,5 @@ angular.module('myApp').factory('accessLevelManagerFactory', ['$http', '$httpPro
         };
     }]);
     
-    $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
-        
-        var privateRoutes = [
-            '/me'
-            , '/order_review'
-            , '/admin_panel'
-            , '/users'
-            , '/products'
-            , '/orders'
-            , '/articles'
-        ];
-
-        if(privateRoutes.indexOf(newValue) > -1){
-
-            if ($scope.$storage.user.token){
-                
-                $scope.ping(function (err, res) {
-
-                    if(err) { // is not logged anymore. invalid token
-                    
-                        $location.path('/signin'+newValue);
-                        
-                    }
-
-                });
-                
-            } else {
-                
-                $location.path('/signin'+newValue);
-                    
-            } 
-        
-        }
- 
-    });
-
 }]);
 

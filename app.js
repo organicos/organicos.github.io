@@ -82,6 +82,42 @@ app.controller('headCtrl' , ['$scope', 'HtmlMetaTagService' , function($scope, H
 }]);
 
 app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'HtmlMetaTagService', '$http', 'myConfig' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, HtmlMetaTagService, $http, myConfig) {
+
+    $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
+        
+        var privateRoutes = [
+            '/me'
+            , '/order_review'
+            , '/admin_panel'
+            , '/users'
+            , '/products'
+            , '/orders'
+            , '/articles'
+        ];
+
+        if(privateRoutes.indexOf(newValue) > -1){
+
+            if ($scope.$storage.user.token){
+                
+                $scope.ping(function (err, res) {
+
+                    if(err) { // is not logged anymore. invalid token
+                    
+                        $location.path('/signin'+newValue);
+                        
+                    }
+
+                });
+                
+            } else {
+                
+                $location.path('/signin'+newValue);
+                    
+            } 
+        
+        }
+ 
+    });
     
     $scope.$storage = $localStorage.$default({
         user: {kind: ''},
