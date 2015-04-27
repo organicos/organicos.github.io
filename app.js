@@ -26,7 +26,8 @@ var app = angular.module('myApp', [
   'myApp.susteinable',
   'myApp.about',
   'myApp.articles',
-  'myApp.blog'
+  'myApp.blog',
+  '720kb.socialshare'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider', function($routeProvider, $httpProvider, $authProvider, $locationProvider) {
@@ -70,7 +71,7 @@ app.service('HtmlMetaTagService', ['$location', function($location) {
     
     var HtmlMetaTagService = this;
     var metaData = {
-        title: 'Feira Orgânica Delivery'
+        title: 'Feira Orgânica Delivery - Produtos organicos entregues em sua porta.'
     };
 
     return {
