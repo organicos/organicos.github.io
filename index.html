@@ -91,7 +91,7 @@
   </head>
   <body ng-controller="myAppCtrl">
   
-    <nav class="navbar navbar-fixed-top" ng-class="$storage.user.kind == 'admin' ? 'navbar-fixed-top-admin' : ''" ng-controller="NavBarCtrl">
+    <nav class="navbar navbar-fixed-top" ng-class="$storage.user.kind == 'admin' ? 'navbar-fixed-top-admin' : ''" ng-controller="NavBarCtrl" ng-cloak>
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" ng-click="isCollapsed = !isCollapsed">
@@ -100,7 +100,7 @@
           
           <button class="btn btn-primary navbar-btn" ng-click="openBasket()" ng-if="$storage.basket.products.length">
             Minha cesta 
-            <span class="label label-success" ng-cloak ng-bind="$storage.basket.products.length"></span>
+            <span class="label label-success" ng-bind="$storage.basket.products.length"></span>
           </button>
             
           <a href="/fair" class="btn btn-primary navbar-btn visible-xs-inline-block pull-right">Feira</a>
@@ -154,70 +154,104 @@
 
     <div class="ng-view container-fluid main-container" autoscroll="true"></div>
     
-    <div class="footer small">
-      <div class="container-fluid clearfix">
-        
-        <br>
-        
-        <p class="text-center"><span class="text-violet">Próxima entrega:</span> <span ng-bind="followingShippingDate"></span></p>
-         
-        <div class="row">
-          <div class="col-xs-offset-1 col-xs-22">
-            <div class="row">
-              <div class="col-sm-5 text-muted">
-                <h4 class="text-center">Compra</h4>
-                <p>O valor mínimo para a compra de produtos é de R$35,00.</p>
-                <p>Taxa de entrega: R$6,00</p>
-                
-              </div>
-              <div class="col-sm-5 text-muted">
-                <h4 class="text-center">Pagamento</h4>
-                <p>Os pedidos só serão confirmados após a identificação do pagamento.</p>
-                <p>Pagamentos via boleto podem levar até 72 horas para serem identificados.</p>
-                <img class="img-responsive" src="http://images.elasticbeanstalk.com/200/https://s3-sa-east-1.amazonaws.com/fodev/img/global/pagseguro.png">
-              </div>
-              <div class="col-sm-5 text-muted text-">
-                <h4 class="text-center">Entrega</h4>
-                <p>Pedidos confirmados até as 23:59 de sábado têm entrega realizada na terça-feira.</p>
-                <p>Pedidos confirmados até as 23:59 de quarta-feira têm entrega realizada no sábado.</p>
-                <p>As entregas são feitas em período integral.</p>
-              </div>
-              <div class="col-sm-5 text-muted">
-                <h4 class="text-center">Termos e Condições</h4>
-                <p>Ao utilizar o site feiraorgânica.com você concorda com os <a href="/blog/terms">Termos e Condições de Uso.</a>
-                <p>A lista de produtos e preços é atualizada semanalmente sem aviso prévio.</p>
+    <div class="row background-blue text-white" ng-if="!$storage.user.token" ng-cloak>
+    	<div class="col-xs-24 text-center">
+    		<h2>Informe seu e-mail para receber semanalmente nossa lista de produtos e promoções.</h2>
+    		<br><br>
+    
+    		<div class="row">
+    			
+    			<div class="small text-left col-xs-24 col-sm-offset-2 col-sm-20 col-md-offset-4 col-md-16 col-lg-offset-5 col-lg-14">
+    				
+    				<form class="form" role="form" ng-submit="signupToNewsletter()">
+    					<div class="input-group input-group-lg">
+    						<div class="input-group-addon">E-mail</div>
+    						<input type="email" class="form-control input-block" name="signupToNewsletterMail" placeholder="Informe seu e-mail" ng-model="signupToNewsletter.mail" />
+				        <span class="input-group-btn">
+				            <button type="submit" id="filter" class="btn btn-primary btn-block">Enviar</button>
+				        </span>
+    					</div>
+    				</form>
+    				
+    				<br>
+    
+    				* A Feira Orgânica Delivery respeita sua privacidade e em nenhuma hipóteste seu endereço de e-mail será fornecido a terceiros.
+    				<br>
+    				** A Feira Orgânica Delivery enviará apenas 1 e-mail por semana.
+    				<br>
+    				*** A qualquer momento você poderá descadastrar-se. Basta acessar <a href="/me">seus dados</a> e desmarcar a opção "Desejo receber semanalmente a lista de produtos e promoções".
+    			</div>			
+    
+    		</div>
+    		
+    		<br></br>
+    		
+    	</div>
+    	
+    </div>
+
+    <div class="container-fluid clearfix footer small">
+      
+      <br>
+      
+      <p class="text-center"><span class="text-violet">Próxima entrega:</span> <span ng-bind="followingShippingDate"></span></p>
+       
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-22">
+          <div class="row">
+            <div class="col-sm-5 text-muted">
+              <h4 class="text-center">Compra</h4>
+              <p>O valor mínimo para a compra de produtos é de R$35,00.</p>
+              <p>Taxa de entrega: R$6,00</p>
+              
+            </div>
+            <div class="col-sm-5 text-muted">
+              <h4 class="text-center">Pagamento</h4>
+              <p>Os pedidos só serão confirmados após a identificação do pagamento.</p>
+              <p>Pagamentos via boleto podem levar até 72 horas para serem identificados.</p>
+              <img class="img-responsive" src="http://images.elasticbeanstalk.com/200/https://s3-sa-east-1.amazonaws.com/fodev/img/global/pagseguro.png">
+            </div>
+            <div class="col-sm-5 text-muted text-">
+              <h4 class="text-center">Entrega</h4>
+              <p>Pedidos confirmados até as 23:59 de sábado têm entrega realizada na terça-feira.</p>
+              <p>Pedidos confirmados até as 23:59 de quarta-feira têm entrega realizada no sábado.</p>
+              <p>As entregas são feitas em período integral.</p>
+            </div>
+            <div class="col-sm-5 text-muted">
+              <h4 class="text-center">Termos e Condições</h4>
+              <p>Ao utilizar o site feiraorgânica.com você concorda com os <a href="/blog/terms">Termos e Condições de Uso.</a>
+              <p>A lista de produtos e preços é atualizada semanalmente sem aviso prévio.</p>
+              </p>
+            </div>
+            <div class="col-sm-4 text-muted">
+              <h4 class="text-center">Contatos</h4>
+              <address>
+                <strong>Feira Orgânica Delivery</strong>
+                <br>
+                Rodovia Admar Gonzaga, 5200
+                <br>
+                Florianópolis, SC
+                <br>
+                <p>
+                  <i class="fa fa-phone fa-2x fa-fw" title="Telefone"></i> +55 (48) 9145 6527
+                  <br>
+                  <i class="fa fa-whatsapp fa-2x fa-fw" title="Whatsapp"></i> +55 (48) 9676 9212
+                  <br>
+                  <i class="fa fa-twitter fa-2x fa-fw" title="Twitter"></i> <a href="https://twitter.com/feira_organica" target="_blank">twitter.com/feira_organica</a>
+                  <br>
+                  <i class="fa fa-facebook fa-2x fa-fw" title="Facebook"></i> <a href="https://www.facebook.com/feiraorganicadelivery" target="_blank">fb.com/feiraorganicadelivery</a>
+                  <br>
+                  <i class="fa fa-instagram fa-2x fa-fw" title="Instagram"></i> <a href="https://instagram.com/feiraorganica" target="_blank">instagram.com/feiraorganica</a>
+                  <br>
+                  <i class="fa fa-envelope-o fa-2x fa-fw" title="E-mail"></i> <a href="mailto:info@feiraorganica.com">info@feiraorganica.com</a>
                 </p>
-              </div>
-              <div class="col-sm-4 text-muted">
-                <h4 class="text-center">Contatos</h4>
-                <address>
-                  <strong>Feira Orgânica Delivery</strong>
-                  <br>
-                  Rodovia Admar Gonzaga, 5200
-                  <br>
-                  Florianópolis, SC
-                  <br>
-                  <p>
-                    <i class="fa fa-phone fa-2x fa-fw" title="Telefone"></i> +55 (48) 9145 6527
-                    <br>
-                    <i class="fa fa-whatsapp fa-2x fa-fw" title="Whatsapp"></i> +55 (48) 9676 9212
-                    <br>
-                    <i class="fa fa-twitter fa-2x fa-fw" title="Twitter"></i> <a href="https://twitter.com/feira_organica" target="_blank">twitter.com/feira_organica</a>
-                    <br>
-                    <i class="fa fa-facebook fa-2x fa-fw" title="Facebook"></i> <a href="https://www.facebook.com/feiraorganicadelivery" target="_blank">fb.com/feiraorganicadelivery</a>
-                    <br>
-                    <i class="fa fa-instagram fa-2x fa-fw" title="Instagram"></i> <a href="https://instagram.com/feiraorganica" target="_blank">instagram.com/feiraorganica</a>
-                    <br>
-                    <i class="fa fa-envelope-o fa-2x fa-fw" title="E-mail"></i> <a href="mailto:info@feiraorganica.com">info@feiraorganica.com</a>
-                  </p>
-                </address>
-              </div>
+              </address>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
+
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/angular-i18n/angular-locale_pt-br.js"></script>
     <script src="/bower_components/angularjs-socialshare/dist/angular-socialshare.min.js"></script>

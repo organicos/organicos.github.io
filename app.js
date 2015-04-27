@@ -104,7 +104,18 @@ app.controller('headCtrl' , ['$scope', 'HtmlMetaTagService' , function($scope, H
 }]);
 
 app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$localStorage', 'basketService', 'HtmlMetaTagService', '$http', 'myConfig' , function($scope, $location, anchorSmoothScroll, $localStorage, basketService, HtmlMetaTagService, $http, myConfig) {
-
+    
+    // Basket 
+    $scope.openBasket = basketService.showModal;
+    $scope.addToBasket = basketService.addToBasket;
+    $scope.dropFromBasket = basketService.dropFromBasket;
+    $scope.$storage = $localStorage.$default({
+        user: {kind: ''},
+    });
+    $scope.followingShippingDate = '';
+    $scope.alerts = [];
+    $scope.signupToNewsletter = {mail: ""};
+    
     $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
         
         var privateRoutes = [
@@ -141,12 +152,6 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
  
     });
     
-    $scope.$storage = $localStorage.$default({
-        user: {kind: ''},
-    });
-    
-    $scope.followingShippingDate = '';
-    
     $http.get(myConfig.apiUrl + '/shipping/following')
     .success(function(res) {
       
@@ -173,8 +178,6 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
 
     };
   
-    $scope.alerts = [];
-
     $scope.addAlert = function(alertObj) {
         
         $scope.alerts.unshift(alertObj);
@@ -203,16 +206,49 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
         $scope.addAlert(alertObj);
     });
     
-    $scope.appAlert = function(msg, duration) {
-
-        alert(msg.join('<br>'));
+    $scope.signupToNewsletter = function(){
         
-    };
-
-    // Basket 
-    $scope.openBasket = basketService.showModal;
-    $scope.addToBasket = basketService.addToBasket;
-    $scope.dropFromBasket = basketService.dropFromBasket;
+        var email = $scope.signupToNewsletter.mail;
+        
+        if(email.length == 0) {
+            
+            $scope.addAlert({
+                kind: 'danger',
+                title: 'Ocorreu um problema ao assinar nossa newsletter. Veja abaixo o motivo:',
+                msg: ['Favor informar o um e-mail válido na assinatura da newsletter.']
+            });
+            
+        } else {
+            
+            $http.post(myConfig.apiUrl + '/newsletter/signup', {email: email})
+            .success(function(res) {
+              
+                $scope.addAlert({
+                    kind: 'success',
+                    title: 'Assinatura feita com sucesso.',
+                    msg: ['A partir de agora, você receberá nossa lista semanal de preços e promoções.']
+                });
+              
+                $scope.signupToNewsletter.mail = "";
+              
+            })
+            .error(function(err) {
+            
+                angular.forEach(err.errors, function(error, path) {
+                    this.push(error.message);
+                }, error_list);
+                
+                $scope.addAlert({
+                    kind: 'danger',
+                    title: 'Ocorreu um problema ao assinar nossa newsletter. Veja abaixo o motivo:',
+                    msg: error_list
+                });
+            
+            });
+            
+        }
+        
+    }
     
 }]);
 

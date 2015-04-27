@@ -1,12 +1,8 @@
+<br>
+
 <div class="row">
     <div class="col-sm-22 col-sm-offset-1">
-		<div class="btn-group" role="group" aria-label="productKind">
-			<button type="button" class="btn btn-sm btn-default" ng-class="selectedCategory == '' ? 'active' : ''" ng-click="selectCategory('')">Tudo</button>
-			<button ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'category' | groupBy: 'category')" type="button" class="btn btn-sm btn-default" ng-class="selectedCategory == product[0].category ? 'active' : ''" ng-click="selectCategory(product[0].category)">{{product[0].category}}</button>
-		</div>
-		
-		<br><br>
-		
+
 		<form class="form-inline text-right">
 			<div class="form-group">
 				<label for="productQuery">Buscar produto</label>
@@ -23,6 +19,17 @@
 			</div>
 		</form>
 		
+		<br><br>
+
+		<div class="btn-group btn-group-justified" role="group" aria-label="productKind">
+			<div class="btn-group" role="group">
+				<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == '' ? 'active' : ''" ng-click="selectCategory('')">Tudo</button>
+			</div>
+			<div class="btn-group" role="group" ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'category' | groupBy: 'category')">
+				<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == product[0].category ? 'active' : ''" ng-click="selectCategory(product[0].category)">{{product[0].category}}</button>
+			</div>
+		</div>
+		
 		<br>
 		
 		<div class="row">
@@ -31,7 +38,7 @@
 		
 				<div class="thumbnail">
 					<a href="/fair/product/{{product._id}}">
-						<img class="img-responsive" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}" ng-dblclick="addToBasket(product)">
+						<img class="img-responsive img-responsive-wide img-centered" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}" ng-dblclick="addToBasket(product)">
 					</a>
 					<hr>
 					<div style="height:100px;">

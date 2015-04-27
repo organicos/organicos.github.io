@@ -7,6 +7,7 @@
                 <tr>
                     <td>Nome</td>
                     <td>E-mail</td>
+                    <td>Tipo</td>
                     <td>Telefone</td>
                     <td>Compras</td>
                     <td>Ultima modificação</td>
@@ -17,6 +18,7 @@
                 <tr ng-repeat="user in users">
                     <td ng-bind="user.name"></td>
                     <td ng-bind="user.email"></td>
+                    <td ng-bind="user.kind"></td>
                     <td ng-bind="user.phone"></td>
                     <td ng-bind="user.orders"></td>
                     <td ng-bind="user.updated"></td>

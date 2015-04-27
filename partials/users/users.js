@@ -3,14 +3,19 @@
 var users = angular.module('myApp.users', ['ngRoute']);
 
 users.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/users', {
-    templateUrl: '/partials/users/users.html',
-    controller: 'AdminUsersCtrl'
-  });
-  $routeProvider.when('/change_password', {
-    templateUrl: '/partials/users/change_password.html',
-    controller: 'ChangePasswordCtrl'
-  });
+    $routeProvider
+    .when('/me', {
+        templateUrl: '/partials/users/me.html',
+        controller: 'MeCtrl'
+    })
+    .when('/change_password', {
+        templateUrl: '/partials/users/change_password.html',
+        controller: 'ChangePasswordCtrl'
+    })
+    .when('/users', {
+        templateUrl: '/partials/users/users.html',
+        controller: 'AdminUsersCtrl'
+    });
 }]);
 
 users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
@@ -75,4 +80,63 @@ users.controller('ChangePasswordCtrl', ['$scope','$http', 'myConfig', '$localSto
 
     };
 
+}]);
+
+users.controller('MeCtrl', ['$scope', '$localStorage', '$http', 'myConfig', function($scope, $localStorage, $http, myConfig) {
+    $scope.user = {};
+    $scope.processingUserUpdate = false;
+    
+    $http.get(myConfig.apiUrl+'/me')
+    .success(function(res) {
+        
+        $localStorage.user = res.data;
+        
+        $scope.user = $localStorage.user;
+        
+    }).error(function(err) {
+    
+        console.error('ERR', err);
+    
+    });
+    
+    $scope.updateUser = function(){
+        
+        $scope.processingUserUpdate = true;
+        
+        $http.put(myConfig.apiUrl+'/user/'+$scope.user._id, $scope.user)
+        .success(function(res) {
+            
+        
+            $localStorage.user = res;
+    
+            $scope.$emit('alert', {
+                kind: 'success',
+                msg: ['Dados salvos!'],
+                title: "Sucesso"
+            });  
+          
+        }).error(function(err) {
+            
+            $scope.processingChangePassword = false;
+        
+            var error_list = [];
+            
+            angular.forEach(err.errors, function(error, path) {
+                this.push(error.message);
+            }, error_list);
+            
+            $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Sua alteração precisa ser revisada. Verifique os motivos abaixo:"
+            });  
+        
+        }).finally(function(){
+
+            $scope.processingUserUpdate = false;
+
+        });
+        
+    }
+    
 }]);

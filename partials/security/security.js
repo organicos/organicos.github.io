@@ -15,10 +15,6 @@ security.config(['$routeProvider', function ($routeProvider) {
             templateUrl: '/partials/security/retrieve_password.html',
             controller: 'RetrievePasswordCtrl'
         }).
-        when('/me', {
-            templateUrl: '/partials/security/me.html',
-            controller: 'MeCtrl'
-        }).
         when('/logout', {
             templateUrl: '/partials/security/signin.html',
             controller: 'LogoutCtrl'
@@ -29,7 +25,7 @@ security.config(['$routeProvider', function ($routeProvider) {
 security.controller('LogoutCtrl', ['$scope', '$location', function ($scope, $location) {
 
     $scope.$storage.user = {kind: ''};
-    $location.path("/signin");
+    $location.path("/");
 
 }]);
 
@@ -52,9 +48,10 @@ security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http'
             $location.path($routeParams.return_url || "#/me");
         })
         .error(function (err) {
+
             $scope.$emit('alert', {
                 kind: 'danger',
-                msg: err,
+                msg: [err.data],
                 title: "Falha:"
             });
         })
@@ -70,6 +67,7 @@ security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http'
 security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams', 'myConfig', function ($scope, $http, $location, $routeParams, myConfig) {
     
     $scope.processingSignInUp = false;
+    $scope.newsletter = true;
 
     $scope.signup = function() {
         
@@ -79,7 +77,8 @@ security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams
             name: $scope.name,
             email: $scope.email,
             password: $scope.password,
-            password_hint: $scope.password_hint
+            password_hint: $scope.password_hint,
+            newsletter: $scope.newsletter
         };
         
         if($scope.name && $scope.email && $scope.password && $scope.password_hint){
@@ -92,9 +91,12 @@ security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams
                     $location.path($routeParams.return_url || "#/me");
                 })
                 .error(function (err) {
+                    
+                    if(err.code == 11000) err.message = "Este e-mail já foi cadastrado. Caso seja seu, tente recuperar a senha";
+                    
                     $scope.$emit('alert', {
                         kind: 'danger',
-                        msg: err,
+                        msg: [err.message],
                         title: "Falha:"
                     });
                 })
@@ -155,9 +157,10 @@ security.controller('RetrievePasswordCtrl', ['$scope', '$http', 'myConfig', func
             })
             .error(function (err) {
                 $scope.processingRetrievePassword = false;
+
                 $scope.$emit('alert', {
                     kind: 'danger',
-                    msg: err,
+                    msg: [err.message],
                     title: "Falha:"
                 });
             });
@@ -173,8 +176,4 @@ security.controller('RetrievePasswordCtrl', ['$scope', '$http', 'myConfig', func
         }
     };
     
-}]);
-
-security.controller('MeCtrl', ['$scope', '$localStorage', function($scope, $localStorage) {
-    $scope.user = $localStorage.user;
 }]);
