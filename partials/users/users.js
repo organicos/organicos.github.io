@@ -15,7 +15,47 @@ users.config(['$routeProvider', function($routeProvider) {
     .when('/usuarios', {
         templateUrl: '/partials/users/users.html',
         controller: 'AdminUsersCtrl'
+    })
+    .when('/usuario/:id', {
+        templateUrl: '/partials/users/user.html',
+        controller: 'AdminUserCtrl'
     });
+}]);
+
+users.controller('AdminUserCtrl', ['$scope','$http', '$routeParams', 'myConfig', function($scope, $http, $routeParams, myConfig) {
+  
+  $scope.user
+
+  $http.get(myConfig.apiUrl+'/user/'+$routeParams.id)
+  .success(function(res) {
+  
+      $scope.user = res;
+  
+  }).error(function(err) {
+  
+      console.error('ERR', err);
+  
+  });
+  
+}]);
+
+users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+
+    $scope.users = [];
+    $scope.userFormModalObject = {};
+    
+    $http.get(myConfig.apiUrl+'/users').then(function(res) {
+    
+        $scope.users = res.data;
+        
+        $scope.userFormModalObject = ($filter('filter')($scope.users, {_id: $routeParams.id}, false))[0];
+    
+    }, function(err) {
+    
+        console.error('ERR', err);
+    
+    });
+
 }]);
 
 users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
