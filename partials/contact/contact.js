@@ -3,7 +3,7 @@
 var contact = angular.module('myApp.contact', ['ngRoute']);
 
 contact.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/contact', {
+  $routeProvider.when('/contato', {
     templateUrl: '/partials/contact/contact.html',
     controller: 'ContactCtrl'
   });

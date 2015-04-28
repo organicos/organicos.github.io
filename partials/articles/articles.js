@@ -3,15 +3,15 @@
 var articles = angular.module('myApp.articles', ['ngRoute']);
 
 articles.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/articles', {
+  $routeProvider.when('/artigos', {
     templateUrl: '/partials/articles/articles.html',
     controller: 'ArticlesCtrl'
   });
-  $routeProvider.when('/article', {
+  $routeProvider.when('/artigo', {
     templateUrl: '/partials/articles/article.html',
     controller: 'ArticleCtrl'
   });
-  $routeProvider.when('/article/:id', {
+  $routeProvider.when('/artigo/:id', {
     templateUrl: '/partials/articles/article.html',
     controller: 'ArticleCtrl'
   });
@@ -156,7 +156,7 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     .success(function(resp) {
       
         $scope.articles = resp.data;
-        window.location = ("#/article/" + resp._id);
+        window.location = ("/artigo/" + resp._id);
         
     })
     .error(function (resp) {
@@ -223,7 +223,7 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
       $scope.saving_article = true;
         $http.delete(myConfig.apiUrl + '/articles/' + article._id)
         .success(function() {
-          $location.path("/fair");
+          $location.path("/feira");
         })
         .error(function (resp) {
           

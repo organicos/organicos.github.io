@@ -3,23 +3,23 @@
 var order = angular.module('myApp.order', ['ngRoute']);
 
 order.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/order_review', {
+  $routeProvider.when('/revisar-ordem', {
     templateUrl: '/partials/order/order_review.html',
     controller: 'OrderReviewCtrl'
   });
-  $routeProvider.when('/order/:id', {
+  $routeProvider.when('/ordem/:id', {
     templateUrl: '/partials/order/order.html',
     controller: 'OrderCtrl'
   });
-  $routeProvider.when('/orders', {
+  $routeProvider.when('/ordens', {
     templateUrl: '/partials/order/orders.html',
     controller: 'OrdersCtrl'
   });
-  $routeProvider.when('/me/users/:id', {
-    templateUrl: '/partials/order/order.html',
+  $routeProvider.when('/minha/ordem/:id', {
+    templateUrl: '/partials/users/order.html',
     controller: 'OrderCtrl'
   });
-  $routeProvider.when('/me/orders', {
+  $routeProvider.when('/minhas/ordens', {
     templateUrl: '/partials/users/orders.html',
     controller: 'OrdersCtrl'
   });
@@ -242,7 +242,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
       $scope.$storage.basket.products = [];
       $scope.$storage.basket.total = 0;
       
-      $location.path("/order/"+order._id);
+      $location.path("/ordem/"+order._id);
 
       $scope.$emit('alert', {
         kind: 'success',

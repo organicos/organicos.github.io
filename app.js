@@ -49,7 +49,7 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvid
             },
             'responseError': function(response) {
                 if(response.status === 401 || response.status === 403) {
-                  $location.path('/signin');
+                  $location.path('/entrar');
                 }
                 return $q.reject(response);
             }
@@ -119,13 +119,13 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
     $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
         
         var privateRoutes = [
-            '/me'
-            , '/order_review'
-            , '/admin_panel'
-            , '/users'
-            , '/products'
-            , '/orders'
-            , '/articles'
+            '/eu'
+            , '/revisar-ordem'
+            , '/administracao'
+            , '/usuarios'
+            , '/produtos'
+            , '/ordens'
+            , '/artigos'
         ];
 
         if(privateRoutes.indexOf(newValue) > -1){
@@ -136,7 +136,7 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
 
                     if(err) { // is not logged anymore. invalid token
                     
-                        $location.path('/signin'+newValue);
+                        $location.path('/entrar'+newValue);
                         
                     }
 
@@ -144,7 +144,7 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
                 
             } else {
                 
-                $location.path('/signin'+newValue);
+                $location.path('/entrar'+newValue);
                     
             } 
         
@@ -328,14 +328,14 @@ app.service('basketService', ['$modal', '$localStorage', '$filter', function ($m
                 $scope.dropFromBasket = self.dropFromBasket;
                 $scope.modalOptions = {
                     ok: function (result) {
-                        $location.path('/order_review');
+                        $location.path('/revisar-ordem');
                         $modalInstance.dismiss('order_review');
                     },
                     close: function (result) {
                         $modalInstance.dismiss('cancel');
                     },
                     goToFair: function(){
-                        $location.path('/fair');
+                        $location.path('/feira');
                         $modalInstance.dismiss('fair');
                     }
                 };
@@ -422,8 +422,6 @@ app.directive('contenteditable', function() {
 app.service('anchorSmoothScroll', function(){
     
     this.scrollTo = function(eID, offset) {
-        
-        console.log('iuhiuh')
 
         // This scrolling function 
         // is from http://www.itnewb.com/tutorial/Creating-the-Smooth-Scroll-Effect-with-JavaScript

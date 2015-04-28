@@ -3,15 +3,15 @@
 var products = angular.module('myApp.products', ['ngRoute']);
 
 products.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/products', {
+  $routeProvider.when('/produtos', {
     templateUrl: '/partials/products/products.html',
     controller: 'ProductsCtrl'
   });
-  $routeProvider.when('/product', {
+  $routeProvider.when('/produto', {
     templateUrl: '/partials/products/product.html',
     controller: 'ProductCtrl'
   });
-  $routeProvider.when('/product/:id', {
+  $routeProvider.when('/produto/:id', {
     templateUrl: '/partials/products/product.html',
     controller: 'ProductCtrl'
   });
@@ -95,7 +95,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
     .success(function(resp) {
       
         $scope.products = resp.data;
-        $location.path("/product/" + resp._id);
+        $location.path("/produto/" + resp._id);
         
     })
     .error(function (resp) {
@@ -168,7 +168,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
 
       $http.delete(myConfig.apiUrl + '/products/' + product._id)
       .success(function() {
-        $location.path("/products");
+        $location.path("/produtos");
       })
       .error(function (resp) {
         

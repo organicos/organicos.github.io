@@ -30,7 +30,7 @@
 
     <div class="hidden-xs col-sm-4 col-md-3" ng-if="articleProductsRaw.length > 0">
 		<div class="thumbnail" ng-repeat="product in articleProductsRaw">
-			<a href="/fair/product/{{product._id}}">
+			<a href="/feira/produto/{{product._id}}">
 				<img class="img-responsive" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}" ng-dblclick="addToBasket(product)">
 			</a>
 			<hr>
@@ -41,7 +41,7 @@
 						<a ng-if="product.category" ng-click="selectCategory(product.category)" ng-bind="product.category"></a>
 					</span>
 				</p>
-				<h4 class="text-violet"><a href="/fair/product/{{product._id}}" ng-bind="product.name"></a></h4>
+				<h4 class="text-violet"><a href="/feira/produto/{{product._id}}" ng-bind="product.name"></a></h4>
 			</div>
 
 			<button class="btn btn-success btn-block" ng-click="addToBasket(product)">Colocar na cesta 

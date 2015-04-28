@@ -103,7 +103,7 @@
             <span class="label label-success" ng-bind="$storage.basket.products.length"></span>
           </button>
             
-          <a href="/fair" class="btn btn-primary navbar-btn visible-xs-inline-block pull-right">Feira</a>
+          <a href="/feira" class="btn btn-primary navbar-btn visible-xs-inline-block pull-right">Feira</a>
           
           <a class="navbar-brand" href="/">
             <img ng-src="http://images.elasticbeanstalk.com/46/https://s3-sa-east-1.amazonaws.com/fodev/img/global/logo_transparent.png">
@@ -111,24 +111,24 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
           <ul class="nav navbar-nav navbar-right">
-            <li><p class="navbar-btn"><a href="/fair" class="btn btn-primary hidden-xs">Feira</a></p></li>
-            <li><a href="/admin_panel" ng-cloak ng-if="$storage.user.kind == 'admin'">Admin</a></li>
+            <li><p class="navbar-btn"><a href="/feira" class="btn btn-primary hidden-xs">Feira</a></p></li>
+            <li><a href="/administracao" ng-cloak ng-if="$storage.user.kind == 'admin'">Admin</a></li>
             <li><a href="/blog">Blog</a></li>
-            <li><a href="/#how_it_works">Como funciona</a></li>
-            <li><a href="/about">Sobre</a></li>
-            <li><a href="/susteinable">Sustentabilidade</a></li>
-            <li><a href="/certification">Certificação</a></li>
-            <li><a href="/contact">Contato</a></li>
-            <li><a href="/signin" ng-cloak ng-if="!$storage.user.token">Entrar</a></li>
+            <li><a href="/#como-funciona">Como funciona</a></li>
+            <li><a href="/sobre">Sobre</a></li>
+            <li><a href="/sustentabilidade">Sustentabilidade</a></li>
+            <li><a href="/certificacao">Certificação</a></li>
+            <li><a href="/contato">Contato</a></li>
+            <li><a href="/cadastro" ng-cloak ng-if="!$storage.user.token">Entrar</a></li>
             <li dropdown ng-cloak ng-if="$storage.user.token">
               <a href="#" dropdown-toggle><i class="fa fa-user"></i> <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li role="presentation" class="dropdown-header" ng-bind="user.name || user.email"></li>
-                <li><a href="/me">Meus dados</a></li>
-                <li><a href="/me/orders">Meus pedidos</a></li>
-                <li><a href="/change_password">Alterar senha</a></li>
+                <li><a href="/eu">Meus dados</a></li>
+                <li><a href="/minhas/ordens">Meus pedidos</a></li>
+                <li><a href="/alterar-senha">Alterar senha</a></li>
                 <li class="divider" role="presentation"></li>
-                <li><a href="/logout">Sair</a></li>
+                <li><a href="/sair">Sair</a></li>
               </ul>
             </li>
           </ul>

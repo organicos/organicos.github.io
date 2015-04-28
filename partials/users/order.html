@@ -1,27 +1,43 @@
 <div class="row">
     <div class="col-sm-22 col-sm-offset-1">
         
-        <h1>Pedido <span ng-bind="order._id"></span> <span class="label label-success" ng-if="order.pagseguro.transaction.status[0] == '3'">Pago</span></h1>
+        <h1>Pedido <span ng-bind="order._id"></span> </h1>
 
         <div class="row">
             <div class="col-sm-12">
                 
                 <h2>Dados</h2>
-                <p><strong>Status do pagamento: </strong> <span ng-bind="statuses[order.pagseguro.transaction.status[0]] || 'Aguardando pagamento'"></span></p>
+                <p><strong>Status do pagamento: </strong> 
+                    <span class="label" 
+                        ng-class="order.status == 1 ? 'label-success' : 'label-default'" 
+                        ng-cloak 
+                        ng-if="order.status == 1" 
+                        ng-bind="statuses[order.status].name"
+                    ></span>
+                    <small ng-class="order.status == 1 ? 'text-success' : 'text-danger'"  ng-bind="statuses[order.status].desc"></small>
+                </p>
                 <p><strong>Cliente: </strong> <a href="/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></p>
                 <p><strong>Valor da cesta: </strong> <span ng-bind="order.total | currency:'R$':2"></span></p>
                 <p><strong>Valor do frete: </strong> <span ng-bind="order.shipping.price | currency:'R$':2"></span></p>
                 <p><strong>Valor final: </strong> <span ng-bind="order.total + order.shipping.price | currency:'R$':2"></span></p>
                 <p><strong>Data: </strong> <span ng-bind="order.updated | date:'dd/MM/yyyy'"></span></p>
-                <div class="row" ng-if="order.pagseguro.transaction.status[0] != '3'">
-                    <div class="col-sm-12">
-                        <a class="btn btn-success btn-block" href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code={{order.pagseguro.checkout.code}}" target="_blank">
-                            Pagar
-                            <br>Compra 100% segura.
-                        </a>
+                <div ng-cloak ng-if="order.status == 0">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a class="btn btn-success btn-block" href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code={{order.pagseguro.checkout.code}}" target="_blank">
+                                Pagar
+                                <br>Compra 100% segura.
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-xs-12">
-                    </div>
+
+                    <br>
+                    
+                    <p class="small">
+                        Se você já efetuou o pagamento e o status do pedido não foi atualizado, clique no botão abaixo para fazer uma nova verificação junto ao Pagseguro.
+                        <br>
+                        <button class="btn btn-info btn-xs" ng-click="checkPagseguroPayment(order._id)">Confirmar pagamento.</button>
+                    </p>
                 </div>
                 
             </div>
@@ -29,7 +45,7 @@
                 
                 <h2>Entrega</h2>
 
-                <div class="row" ng-if="order.pagseguro.transaction.status[0] != '3'">
+                <div class="row">
                     <div class="col-sm-12">
                         <p><strong>CEP: </strong> <span ng-bind="order.shipping.cep"></span></p>
                         <p><strong>Rua: </strong> <span ng-bind="order.shipping.street"></span></p>
@@ -42,6 +58,7 @@
                         <p><strong>Estado: </strong> <span ng-bind="order.shipping.state"></span></p>
                         <p><strong>Entrega: </strong> <span ng-bind="order.shipping.deliveryOption"></span></p>
                         <p><strong>Referência: </strong> <span ng-bind="order.shipping.address_ref"></span></p>   
+                        <p><strong>Fone: </strong> <span ng-bind="order.shipping.phone"></span></p>  
                     </div>
                 </div>
                 

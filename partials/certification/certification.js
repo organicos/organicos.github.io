@@ -3,7 +3,7 @@
 var certification = angular.module('myApp.certification', ['ngRoute']);
 
 certification.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/certification', {
+  $routeProvider.when('/certificacao', {
     templateUrl: '/partials/certification/certification.html',
     controller: 'CertificationCtrl'
   });

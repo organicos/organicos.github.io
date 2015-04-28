@@ -3,7 +3,7 @@
 var susteinable = angular.module('myApp.susteinable', ['ngRoute']);
 
 susteinable.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/susteinable', {
+  $routeProvider.when('/sustentabilidade', {
     templateUrl: '/partials/susteinable/susteinable.html',
     controller: 'SusteinableCtrl'
   });

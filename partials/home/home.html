@@ -6,7 +6,7 @@
 		<img class="img-responsive img-centered" ng-src="http://images.elasticbeanstalk.com/1000/https://s3-sa-east-1.amazonaws.com/fodev/img/global/marca.png">
 		<br><br class="hidden-xs hidden-sm">
 		<p class="text-center">
-			<a href="/fair" class="btn btn-primary btn-lg">
+			<a href="/feira" class="btn btn-primary btn-lg">
 				<span class="visible-xs-inline">
 					Montar minha cesta orgânica
 				</span>
@@ -25,7 +25,7 @@
 	</div>
 </div>
 
-<div id="how_it_works" class="row background-green text-white">
+<div id="como-funciona" class="row background-green text-white">
 	<div class="col-xs-24">
 
 		<h2 class="text-center">Como funciona</h2>
@@ -73,7 +73,7 @@
 		
 		
 				<div class="thumbnail">
-					<a href="/fair/product/{{product._id}}">
+					<a href="/feira/produto/{{product._id}}">
 						<img class="img-responsive img-responsive-wide img-centered" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}" ng-dblclick="addToBasket(product)">
 					</a>
 					<hr>
@@ -84,7 +84,7 @@
 								<a ng-if="product.category" ng-click="selectCategory(product.category)" ng-bind="product.category"></a>
 							</span>
 						</p>
-						<h4 class="text-violet"><a href="/fair/product/{{product._id}}" ng-bind="product.name"></a></h4>
+						<h4 class="text-violet"><a href="/feira/produto/{{product._id}}" ng-bind="product.name"></a></h4>
 					</div>
 		
 					<button class="btn btn-success btn-block" ng-click="addToBasket(product)">Colocar na cesta 
