@@ -11,7 +11,15 @@ order.config(['$routeProvider', function($routeProvider) {
     templateUrl: '/partials/order/order.html',
     controller: 'OrderCtrl'
   });
+  $routeProvider.when('/order/:id', {
+    templateUrl: '/partials/order/order.html',
+    controller: 'OrderCtrl'
+  });
   $routeProvider.when('/ordens', {
+    templateUrl: '/partials/order/orders.html',
+    controller: 'OrdersCtrl'
+  });
+  $routeProvider.when('/orders', {
     templateUrl: '/partials/order/orders.html',
     controller: 'OrdersCtrl'
   });

@@ -7,11 +7,18 @@ fair.config(['$routeProvider', function($routeProvider) {
     templateUrl: '/partials/fair/fair.html',
     controller: 'FairCtrl'
   });
+  $routeProvider.when('/fair', {
+    templateUrl: '/partials/fair/fair.html',
+    controller: 'FairCtrl'
+  });
   $routeProvider.when('/feira/produto/:id', {
     templateUrl: '/partials/fair/product.html',
     controller: 'FairCtrl'
   });
-
+  $routeProvider.when('/fair/product/:id', {
+    templateUrl: '/partials/fair/product.html',
+    controller: 'FairCtrl'
+  });
 }]);
 
 fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$location', 'myConfig', function($scope, $http, $routeParams, $filter, $location, myConfig) {
