@@ -9,13 +9,14 @@
                 <h2>Dados</h2>
                 <p><strong>Status do pagamento: </strong> 
                     <span class="label" 
-                        ng-class="order.status == 1 ? 'label-success' : 'label-default'" 
+                        ng-class="order.status == 1 ? 'label-success' : order.status == 2 ? 'label-warning' : 'label-danger'" 
                         ng-cloak 
-                        ng-if="order.status == 1" 
                         ng-bind="statuses[order.status].name"
                     ></span>
                     <small ng-class="order.status == 1 ? 'text-success' : 'text-danger'"  ng-bind="statuses[order.status].desc"></small>
+                    <span><select ng-model="order.status" ng-options="index*1 as status.name for (index, status) in statuses"></select> </span>
                 </p>
+
                 <p><strong>Cliente: </strong> <a href="/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></p>
                 <p><strong>Valor da cesta: </strong> <span ng-bind="order.total | currency:'R$':2"></span></p>
                 <p><strong>Valor do frete: </strong> <span ng-bind="order.shipping.price | currency:'R$':2"></span></p>

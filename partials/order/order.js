@@ -33,10 +33,11 @@ order.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-var statuses = {
-  '0':	{name: 'Não pago', desc: 'Aguardando pagamento.'},
-  '1':	{name: 'Pago', desc: 'Aguardando entrega.'}
-};
+var statuses = [
+  {name: 'Não pago', desc: 'Aguardando pagamento.'},
+  {name: 'Pago', desc: 'Aguardando entrega.'},
+  {name: 'Entregue', desc: 'Cesta entregue ao cliente.'}
+];
 
 order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
 
@@ -108,16 +109,17 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
     
 }]);
 
-order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$modal', function($scope, $http, $filter, $routeParams, myConfig, $modal) {
   
   $scope.order
   $scope.statuses = statuses;
+  $scope.changingStatus = false;
   
   $http.get(myConfig.apiUrl+'/order/'+$routeParams.id)
   .success(function(res) {
   
       $scope.order = res;
-  
+
   }).error(function(err) {
   
       console.error('ERR', err);
@@ -136,6 +138,7 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
     
     });
   };
+  
 }]);
 
 order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
