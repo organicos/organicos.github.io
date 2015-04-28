@@ -5,17 +5,17 @@ var security = angular.module('myApp.security', ['ngRoute']);
 security.config(['$routeProvider', function ($routeProvider) {
  
     $routeProvider.
-        when('/signin', {
+        when('/entrar', {
             templateUrl: '/partials/security/signin.html'
         }).
-        when('/signin/:return_url', {
+        when('/entrar/:return_url', {
             templateUrl: '/partials/security/signin.html'
         }).
-        when('/retrieve_password', {
+        when('/recuperar-senha', {
             templateUrl: '/partials/security/retrieve_password.html',
             controller: 'RetrievePasswordCtrl'
         }).
-        when('/logout', {
+        when('/sair', {
             templateUrl: '/partials/security/signin.html',
             controller: 'LogoutCtrl'
         });
