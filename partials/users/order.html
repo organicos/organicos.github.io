@@ -16,7 +16,7 @@
                     ></span>
                     <small ng-class="order.status == 1 ? 'text-success' : 'text-danger'"  ng-bind="statuses[order.status].desc"></small>
                 </p>
-                <p><strong>Cliente: </strong> <a href="/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></p>
+                <p><strong>Cliente: </strong> <span ng-bind="order.customer.name || order.customer.email"></span></p>
                 <p><strong>Valor da cesta: </strong> <span ng-bind="order.total | currency:'R$':2"></span></p>
                 <p><strong>Valor do frete: </strong> <span ng-bind="order.shipping.price | currency:'R$':2"></span></p>
                 <p><strong>Valor final: </strong> <span ng-bind="order.total + order.shipping.price | currency:'R$':2"></span></p>

@@ -156,7 +156,7 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     .success(function(resp) {
       
         $scope.articles = resp.data;
-        window.location = ("/artigo/" + resp._id);
+        $location.path("/artigo/" + resp._id);
         
     })
     .error(function (resp) {
@@ -223,7 +223,7 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
       $scope.saving_article = true;
         $http.delete(myConfig.apiUrl + '/articles/' + article._id)
         .success(function() {
-          $location.path("/feira");
+          $location.path("/artigos");
         })
         .error(function (resp) {
           

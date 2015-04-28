@@ -16,7 +16,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="user in users">
-                    <td ng-bind="user.name"></td>
+                    <td><a href="/usuario/{{user._id}}" ng-bind="user.name"></a></td>
                     <td ng-bind="user.email"></td>
                     <td ng-bind="user.kind"></td>
                     <td ng-bind="user.phone"></td>
