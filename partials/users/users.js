@@ -24,18 +24,61 @@ users.config(['$routeProvider', function($routeProvider) {
 
 users.controller('AdminUserCtrl', ['$scope','$http', '$routeParams', 'myConfig', function($scope, $http, $routeParams, myConfig) {
   
-  $scope.user
+    $scope.user = {};
+    $scope.processingUserUpdate = false;
+    
+    $http.get(myConfig.apiUrl+'/user/'+$routeParams.id)
+    .success(function(res) {
+    
+        $scope.user = res;
+    
+    }).error(function(err) {
+    
+        console.error('ERR', err);
+    
+    });
+    
+    $scope.updateUser = function(){
+        
+        $scope.processingUserUpdate = true;
+        
+        $http.put(myConfig.apiUrl+'/user/'+$scope.user._id, $scope.user)
+        .success(function(res) {
+            
+        
+            $scope.$storage.user = res;
+    
+            $scope.$emit('alert', {
+                kind: 'success',
+                msg: ['Dados salvos!'],
+                title: "Sucesso"
+            });  
+          
+        }).error(function(err) {
+            
+            $scope.processingChangePassword = false;
+        
+            var error_list = [];
+            
+            angular.forEach(err.errors, function(error, path) {
+                this.push(error.message);
+            }, error_list);
+            
+            $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Sua alteração precisa ser revisada. Verifique os motivos abaixo:"
+            });  
+        
+        }).finally(function(){
 
-  $http.get(myConfig.apiUrl+'/user/'+$routeParams.id)
-  .success(function(res) {
-  
-      $scope.user = res;
-  
-  }).error(function(err) {
-  
-      console.error('ERR', err);
-  
-  });
+            $scope.processingUserUpdate = false;
+
+        });
+        
+    }
+
+
   
 }]);
 

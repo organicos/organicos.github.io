@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-offset-6 col-sm-12">
-        <h1>Meus dados</h1>
+        <h1>Dados do usuário <span class="text-violet" ng-bind="user.name"></span></h1>
         
         <form class="form" role="form" ng-submit="updateUser()">
             <div class="form-group">
@@ -13,7 +13,7 @@
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="newsletter" ng-model="user.newsletter"> Desejo receber semanalmente a lista de produtos e promoções.
+                    <input type="checkbox" name="newsletter" ng-model="user.newsletter"> Deseja receber semanalmente a lista de produtos e promoções.
                 </label>
             </div>
             <div class="form-group">
