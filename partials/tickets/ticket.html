@@ -3,12 +3,12 @@
         <h1>Dados do ticket</h1>
         
         <p><a href="/ticket/{{ticket._id}}" ng-bind="ticket._id"></a></p>
-        <p ng-bind="ticket.updated | date:'dd/MM/yyyy HH:mm'"></p>
-        <p ng-bind="ticket.name"></p>
-        <p ng-bind="ticket.email"></p>
-        <p ng-bind="ticket.kind"></p>
-        <p ng-bind="ticket.phone"></p>
-        <png-bind="ticket.msg"></p>
+        <p><strong>Data:</strong> <span ng-bind="ticket.updated | date:'dd/MM/yyyy HH:mm'"></span></p>
+        <p><strong>Nome:</strong> <span ng-bind="ticket.name"></span></p>
+        <p><strong>Eail:</strong> <span ng-bind="ticket.email"></span></p>
+        <p><strong>Tipo:</strong> <span ng-bind="ticket.kind"></span></p>
+        <p><strong>Telefone:</strong> <span ng-bind="ticket.phone"></span></p>
+        <p><strong>Mensagem:</strong> <span ng-bind="ticket.msg"></span></p>
 
     </div>
 </div>
