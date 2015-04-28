@@ -39,8 +39,8 @@
                     <hr>
                     
                     <dl class="dl-horizontal" ng-show="productFormModalObject.price">
-                        <dt>Preço R$: </dt>
-                        <dd ng-bind="productFormModalObject.price"></dd>
+                        <dt>Preço: </dt>
+                        <dd ng-bind="productFormModalObject.price | currency:'R$':2"></dd>
                     </dl>
                     
                     <dl class="dl-horizontal" ng-show="productFormModalObject.category">
