@@ -12,6 +12,7 @@ var app = angular.module('myApp', [
   'ngSanitize',
   'myApp.home',
   'myApp.fair',
+  'myApp.tickets',
   'myApp.security',
   'myApp.version',
   'myApp.contact',

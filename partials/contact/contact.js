@@ -15,7 +15,7 @@ contact.controller('ContactCtrl', ['$scope','$http', 'myConfig', function($scope
     $scope.submitContact = function() {
         $scope.submitingContact = true;
         if ($scope.email && $scope.msg) {
-            $http.post(myConfig.apiUrl+'/tickets',{
+            $http.post(myConfig.apiUrl+'/ticket',{
                 email: $scope.email
                 , name: $scope.name
                 , phone: $scope.phone

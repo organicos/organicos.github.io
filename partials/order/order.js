@@ -45,6 +45,7 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
     $scope.orders = [];
     $scope.userFormModalObject = {};
     $scope.statuses = statuses;
+    $scope.selectedOrder = "updated";
     
     $http.get(myConfig.apiUrl+'/orders')
     .success(function(res) {

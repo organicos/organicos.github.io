@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-md-offset-2 col-md-20">
+        <h1>Dados do ticket</h1>
+        
+        <p><a href="/ticket/{{ticket._id}}" ng-bind="ticket._id"></a></p>
+        <p ng-bind="ticket.updated | date:'dd/MM/yyyy HH:mm'"></p>
+        <p ng-bind="ticket.name"></p>
+        <p ng-bind="ticket.email"></p>
+        <p ng-bind="ticket.kind"></p>
+        <p ng-bind="ticket.phone"></p>
+        <png-bind="ticket.msg"></p>
+
+    </div>
+</div>

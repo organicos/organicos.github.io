@@ -101,25 +101,6 @@ users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams',
 
 }]);
 
-users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
-
-    $scope.users = [];
-    $scope.userFormModalObject = {};
-    
-    $http.get(myConfig.apiUrl+'/users').then(function(res) {
-    
-        $scope.users = res.data;
-        
-        $scope.userFormModalObject = ($filter('filter')($scope.users, {_id: $routeParams.id}, false))[0];
-    
-    }, function(err) {
-    
-        console.error('ERR', err);
-    
-    });
-
-}]);
-
 users.controller('ChangePasswordCtrl', ['$scope','$http', 'myConfig', '$localStorage', function($scope, $http, myConfig, $localStorage) {
 
     $scope.processingChangePassword = false;
