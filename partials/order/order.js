@@ -38,12 +38,13 @@ var statuses = [
   {name: 'Pago', desc: 'Aguardando entrega.'},
   {name: 'Entregue', desc: 'Cesta entregue ao cliente.'},
   {name: 'Cancelado', desc: 'Pedido cancelado por falta de pagamento.'},
-  {name: 'Problemas', desc: 'Problemas com o Pagseguro.'}
+  {name: 'Problemas', desc: 'Problemas com o Pagseguro.'},
+  {name: 'Inválido', desc: 'Pedidos que não respeitam a política do negócio.'}
 ];
 
 order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
 
-    $scope.selectedFilterInvalidValue = false;
+    $scope.filterStatus = '';
     $scope.selectedOrder = 'updated';
     $scope.orders = [];
     $scope.userFormModalObject = {};
@@ -63,9 +64,9 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
     
     });
 
-    $scope.selectFilterInvalidValue = function(value){
+    $scope.setFilterStatus = function(value){
       
-      $scope.selectedFilterInvalidValue = value;
+      $scope.filterStatus = value;
       
     }
     

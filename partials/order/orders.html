@@ -28,20 +28,15 @@
         		type="button" 
         		class="btn btn-sm btn-primary" 
         		ng-class="selectedFilterInvalidValue === '' ? 'active' : ''"
-        		ng-click="selectFilterInvalidValue('')"
+        		ng-click="setFilterStatus('')"
         	>Tudo</button>
-        	<button 
+        	<button ng-repeat="(index, status) in statuses"
         		type="button" 
         		class="btn btn-sm btn-primary" 
-        		ng-class="selectedFilterInvalidValue === false ? 'active' : ''"
-        		ng-click="selectFilterInvalidValue(false)"
-        	>Válidos</button>
-        	<button 
-        		type="button" 
-        		class="btn btn-sm btn-primary" 
-        		ng-class="selectedFilterInvalidValue === true ? 'active' : ''"
-        		ng-click="selectFilterInvalidValue(true)"
-        	>Inválidos</button>
+        		ng-class="filterStatus === index ? 'active' : ''"
+        		ng-click="setFilterStatus(index)"
+        		ng-bind="status.name"
+        	></button>
         </div>
         
         <br><br>
@@ -57,13 +52,12 @@
                     <td>Entrega</td>
                     <td>Produtos</td>
                     <td>Data</td>
-                    <td>Pago</td>
-                    <td ng-if="selectedFilterInvalidValue === ''">Inválido</td>
+                    <td>Status</td>
                     <td>Ações</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="order in filteredProducts = (orders | filter: orderQuery | orderBy: selectedOrder:true | filter: {invalid : selectedFilterInvalidValue})">
+                <tr ng-repeat="order in filteredProducts = (orders | filter: orderQuery | orderBy: selectedOrder:true | filter: {status : filterStatus})">
                     <td><a href="/pedido/{{order._id}}" ng-bind="order._id"></a></td>
                     <td><a href="/usuario/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></td>
                     <td ng-bind="order.shipping.phone"></td>
@@ -72,8 +66,14 @@
                     <td ng-bind="order.shipping.deliveryOption"></td>
                     <td ng-bind="order.products.length"></td>
                     <td ng-bind="order.updated | date:'dd/MM/yyyy'"></td>
-                    <td><i ng-if="order.status == 1" class="fa fa-check"></i></td>
-                    <td ng-if="selectedFilterInvalidValue === ''"><i ng-if="order.invalid" class="fa fa-check"></i></td>
+                    <td ng-switch="order.status" title="{{statuses[order.status].name}} - {{statuses[order.status].desc}}">
+                        <i ng-switch-when="0" class="fa fa-fw fa-money text-info"></i>
+                        <i ng-switch-when="1" class="fa fa-fw fa-truck fa-flip-horizontal text-warning"></i>
+                        <i ng-switch-when="2" class="fa fa-fw fa-check text-success"></i>
+                        <i ng-switch-when="3" class="fa fa-fw fa-close text-danger"></i>
+                        <i ng-switch-when="4" class="fa fa-fw fa-exclamation text-danger"></i>
+                        <i ng-switch-when="5" class="fa fa-fw fa-ban text-danger"></i>
+                    </td>
                     <td><a ng-click="dropOrder(order)" href="javascrip:void(0)">x</a></td>
                 </tr>
             </tbody>
