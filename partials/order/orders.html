@@ -64,7 +64,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="order in filteredProducts = (orders | filter: orderQuery | orderBy: selectedOrder:true | filter: {invalid : selectedFilterInvalidValue})">
-                    <td><a href="/ordem/{{order._id}}" ng-bind="order._id"></a></td>
+                    <td><a href="/pedido/{{order._id}}" ng-bind="order._id"></a></td>
                     <td><a href="/usuario/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></td>
                     <td ng-bind="order.shipping.phone"></td>
                     <td ng-bind="order.shipping.district"></td>

@@ -382,10 +382,10 @@ app.service('confirmModalService', ['$modal', function ($modal) {
             tempModalDefaults.controller = function ($scope, $modalInstance) {
                 $scope.modalOptions = tempModalOptions;
                 $scope.modalOptions.ok = function (result) {
-                    $modalInstance.close(result);
+                    $modalInstance.close(true);
                 };
                 $scope.modalOptions.close = function (result) {
-                    $modalInstance.dismiss('cancel');
+                    $modalInstance.close(false);
                 };
             }
         }

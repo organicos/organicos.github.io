@@ -3,11 +3,11 @@
 var order = angular.module('myApp.order', ['ngRoute']);
 
 order.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/revisar-ordem', {
+  $routeProvider.when('/revisar-pedido', {
     templateUrl: '/partials/order/order_review.html',
     controller: 'OrderReviewCtrl'
   });
-  $routeProvider.when('/ordem/:id', {
+  $routeProvider.when('/pedido/:id', {
     templateUrl: '/partials/order/order.html',
     controller: 'OrderCtrl'
   });
@@ -15,7 +15,7 @@ order.config(['$routeProvider', function($routeProvider) {
     templateUrl: '/partials/order/order.html',
     controller: 'OrderCtrl'
   });
-  $routeProvider.when('/ordens', {
+  $routeProvider.when('/pedidos', {
     templateUrl: '/partials/order/orders.html',
     controller: 'OrdersCtrl'
   });
@@ -23,11 +23,11 @@ order.config(['$routeProvider', function($routeProvider) {
     templateUrl: '/partials/order/orders.html',
     controller: 'OrdersCtrl'
   });
-  $routeProvider.when('/minha/ordem/:id', {
+  $routeProvider.when('/meu/pedido/:id', {
     templateUrl: '/partials/users/order.html',
     controller: 'OrderCtrl'
   });
-  $routeProvider.when('/minhas/ordens', {
+  $routeProvider.when('/meus/pedidos', {
     templateUrl: '/partials/users/orders.html',
     controller: 'OrdersCtrl'
   });
@@ -109,16 +109,77 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
     
 }]);
 
-order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$modal', function($scope, $http, $filter, $routeParams, myConfig, $modal) {
+order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$modal', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, $modal, confirmModalService) {
   
   $scope.order
   $scope.statuses = statuses;
   $scope.changingStatus = false;
+  $scope.newStatus = 0;
+  
+  $scope.changeStatus = function(newStatus){
+    
+    $scope.changingStatus = true;
+
+    var modalOptions = {
+        closeButtonText: 'Cancelar',
+        actionButtonText: 'Alterar status do pedido',
+        actionButtonKind: 'btn-danger',
+        headerText: 'Alterar status do pedido para ' + statuses[newStatus].name + "?",
+        bodyText: 'Deseja realmente alterar status do pedido para ' + statuses[newStatus].name + "?"
+    };
+
+    confirmModalService.showModal({}, modalOptions)
+    .then(function (confirmed) {
+      
+      if(confirmed){
+        
+        $http.put(myConfig.apiUrl + '/order/'+$scope.order._id, {status: newStatus})
+        .success(function(res) {
+          
+          $scope.order.status = newStatus;
+          $scope.newStatus = newStatus;
+    
+          $scope.$emit('alert', {
+              kind: 'success',
+              msg: '',
+              title: "Ordem editada com sucesso"
+          });
+    
+        })
+        .error( function(resp) {
+          
+          var error_list = [];
+    
+          angular.forEach(resp.errors, function(error, path) {
+            this.push(error.message);
+          }, error_list);
+          
+          $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Não foi possível editar a ordem. Verifique o motivo abaixo:"
+          });
+      
+        })
+        .finally(function () {
+          $scope.changingStatus = false;
+        });
+        
+      } else {
+        
+        $scope.changingStatus = false;
+        
+      }
+
+    });
+    
+  };
   
   $http.get(myConfig.apiUrl+'/order/'+$routeParams.id)
   .success(function(res) {
   
       $scope.order = res;
+      $scope.newStatus = res.status;
 
   }).error(function(err) {
   
