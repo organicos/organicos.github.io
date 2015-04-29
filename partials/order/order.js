@@ -36,7 +36,9 @@ order.config(['$routeProvider', function($routeProvider) {
 var statuses = [
   {name: 'Não pago', desc: 'Aguardando pagamento.'},
   {name: 'Pago', desc: 'Aguardando entrega.'},
-  {name: 'Entregue', desc: 'Cesta entregue ao cliente.'}
+  {name: 'Entregue', desc: 'Cesta entregue ao cliente.'},
+  {name: 'Cancelado', desc: 'Pedido cancelado por falta de pagamento.'},
+  {name: 'Problemas', desc: 'Problemas com o Pagseguro.'}
 ];
 
 order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {

@@ -37,7 +37,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="order in filteredProducts = (orders | filter: orderQuery | orderBy: selectedOrder | filter: {invalid : selectedFilterInvalidValue})">
-                    <td><a href="/minha/ordem/{{order._id}}" ng-bind="order._id"></a></td>
+                    <td><a href="/meu/pedido/{{order._id}}" ng-bind="order._id"></a></td>
                     <td ng-bind="order.shipping.district"></td>
                     <td ng-bind="order.shipping.city"></td>
                     <td ng-bind="order.shipping.deliveryOption"></td>
