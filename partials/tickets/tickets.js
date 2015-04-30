@@ -20,13 +20,13 @@ tickets.controller('AdminTicketCtrl', ['$scope','$http', '$routeParams', 'myConf
     $scope.processingTicketUpdate = false;
     $scope.newUpdateMessage = "";
     
-    $scope.addUpdate = function(customer){
+    $scope.addUpdate = function(isCustomerMessage){
         
         $scope.processingTicketUpdate = true;
         
         $http.post(myConfig.apiUrl+'/ticket/'+$scope.ticket._id+'/update', {
             msg: $scope.newUpdateMessage
-            , customer: customer
+            , isCustomerMessage: isCustomerMessage
         })
         .success(function(res) {
 
