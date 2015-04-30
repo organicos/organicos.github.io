@@ -11,11 +11,11 @@ fair.config(['$routeProvider', function($routeProvider) {
     templateUrl: '/partials/fair/fair.html',
     controller: 'FairCtrl'
   });
-  $routeProvider.when('/feira/produto/:id', {
+  $routeProvider.when('/feira/:id', {
     templateUrl: '/partials/fair/product.html',
     controller: 'FairCtrl'
   });
-  $routeProvider.when('/fair/product/:id', {
+  $routeProvider.when('/fair/:id', {
     templateUrl: '/partials/fair/product.html',
     controller: 'FairCtrl'
   });
