@@ -31,6 +31,7 @@ tickets.controller('AdminTicketCtrl', ['$scope','$http', '$routeParams', 'myConf
         .success(function(res) {
 
             $scope.ticket = res;
+            $scope.newUpdateMessage = "";
     
         }).error(function(err) {
             
