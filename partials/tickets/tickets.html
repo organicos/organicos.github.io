@@ -36,7 +36,7 @@
                     <td><a ng-bind="ticket.customer.name" ng-href="/usuario/{{ticket.customer._id}}"></a></td>
                     <td ng-bind="ticket.customer.email"></td>
                     <td ng-bind="ticket.kind"></td>
-                    <td ng-bind="ticket.phone"></td>
+                    <td ng-bind="ticket.customer.phone"></td>
                     <td><span ng-bind="ticket.msg | limitTo: 150"></span><span ng-if="article.content.length > 150">...</span></td>
                     <td ng-bind="ticket.updated | date:'dd/MM/yyyy HH:mm'"></td>
                     <td>x</td>

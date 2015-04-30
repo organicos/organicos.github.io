@@ -18,6 +18,41 @@ tickets.controller('AdminTicketCtrl', ['$scope','$http', '$routeParams', 'myConf
   
     $scope.ticket = {};
     $scope.processingTicketUpdate = false;
+    $scope.newUpdateMessage = "";
+    
+    $scope.addUpdate = function(customer){
+        
+        $scope.processingTicketUpdate = true;
+        
+        $http.post(myConfig.apiUrl+'/ticket/'+$scope.ticket._id+'/update', {
+            msg: $scope.newUpdateMessage
+            , customer: customer
+        })
+        .success(function(res) {
+
+            $scope.ticket = res;
+    
+        }).error(function(err) {
+            
+            var error_list = [];
+            
+            angular.forEach(err.errors, function(error, path) {
+                this.push(error.message);
+            }, error_list);
+            
+            $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Sua alteração precisa ser revisada. Verifique os motivos abaixo:"
+            });  
+        
+        }).finally(function(){
+
+            $scope.processingTicketUpdate = false;
+
+        });
+        
+    }
     
     $http.get(myConfig.apiUrl+'/ticket/'+$routeParams.id)
     .success(function(res) {
