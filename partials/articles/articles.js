@@ -51,9 +51,28 @@ articles.controller('ArticlesCtrl', ['$scope','$http', '$filter', '$routeParams'
 articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
 
   $scope.saving_article = false;
-  $scope.article = {products: []};
-  $scope.loadingLocations = false;
-  $scope.articleProductsRaw = [];
+  $scope.article = {};
+  $scope.loadingProducts = false;
+  $scope.loadingImages = false;
+
+  if($routeParams.id){
+    
+    $http.get(myConfig.apiUrl+'/article/'+$routeParams.id)
+    .success(function(res) {
+
+      $scope.article = res;
+      
+    }).error(function(err) {
+    
+        $scope.$emit('alert', {
+            kind: 'danger',
+            msg: err,
+            title: "Não foi possível acessar os dados do artigo. Verifique o motivo abaixo:"
+        });
+    
+    });
+    
+  }
   
   $scope.getProducts = function(name){
     return $http.get(myConfig.apiUrl+'/products', {
@@ -69,24 +88,20 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
 
   $scope.selectProduct = function (item, model, label) {
     
-    var product = ($filter('filter')($scope.articleProductsRaw, {_id: item._id}, false))[0];
+    var product = ($filter('filter')($scope.article.products, {_id: item._id}, false))[0];
     
-    var productIndex = $scope.articleProductsRaw.indexOf(product);
-    if (productIndex == -1) {
-      $scope.articleProductsRaw.push(item);        
-    }
-    
-    var productIndex = $scope.article.products.indexOf(item._id);
-    if (productIndex == -1) {
-      $scope.article.products.push(item._id);
+    if (!product) {
+
+      $scope.article.products.push(item);
+      
     }
     
   };
   
-  $scope.dropFromArticle = function(product){
-    var productIndex = $scope.articleProductsRaw.indexOf(product);
+  $scope.dropProductFromArticle = function(product){
+    var productIndex = $scope.article.products.indexOf(product);
     if (productIndex >= 0) {
-        $scope.articleProductsRaw.splice(productIndex, 1);
+        $scope.article.products.splice(productIndex, 1);
     }
     var productIndex = $scope.article.products.indexOf(product._id);
     if (productIndex >= 0) {
@@ -94,46 +109,41 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     }
   };
 
-  if($routeParams.id){
-    
-    $http.get(myConfig.apiUrl+'/article/'+$routeParams.id)
-    .success(function(res) {
-
-      $scope.article = res;
+  $scope.getImages = function(title){
+    return $http.get(myConfig.apiUrl+'/images', {
+      params: {
+        title: title
+      }
+    }).then(function(res) {
       
-      $scope.loadProducts();
+      return res.data;
 
-    }).error(function(err) {
-    
-        $scope.$emit('alert', {
-            kind: 'danger',
-            msg: err,
-            title: "Não foi possível acessar os dados do artigo. Verifique o motivo abaixo:"
-        });
-    
     });
-    
   }
+
+  $scope.selectImage = function (item, model, label) {
+    
+    var image = ($filter('filter')($scope.article.images, {_id: item._id}, false))[0];
+    
+    if (!image) {
+
+      $scope.article.images.push(item);
+      
+    }
+    
+  };
   
-  $scope.loadProducts = function () {
-    
-    $http.get(myConfig.apiUrl+'/article/'+$scope.article._id+'/products')
-    .success(function(res) {
-
-      $scope.articleProductsRaw = res;
-      
-    }).error(function(err) {
-    
-        $scope.$emit('alert', {
-            kind: 'danger',
-            msg: err,
-            title: "Não foi possível carregar os produtos do artigo. Verifique o motivo abaixo:"
-        });
-    
-    });
-    
-  }
-
+  $scope.dropImageFromArticle = function(image){
+    var imageIndex = $scope.article.images.indexOf(image);
+    if (imageIndex >= 0) {
+        $scope.article.images.splice(imageIndex, 1);
+    }
+    var imageIndex = $scope.article.images.indexOf(image._id);
+    if (imageIndex >= 0) {
+        $scope.article.images.splice(imageIndex, 1);
+    }
+  };
+  
   $scope.articleFormSubmit = function () {
     
     $scope.saving_article = true;

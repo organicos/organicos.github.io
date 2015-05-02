@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-sm-22 col-sm-offset-1">
+        <h1>Imagens</h1>
+        
+        <table class="table table-condensed table-stripped table-hover">
+            <thead>
+                <tr>
+                    <td>Título</td>
+                    <td>Url</td>
+                    <td>Ultima modificação</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="image in images">
+                    <td><a href="/usuario/{{image._id}}" ng-bind="image.title"></a></td>
+                    <td ng-bind="image.url"></td>
+                    <td ng-bind="image.updated"></td>
+                    <td>x</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

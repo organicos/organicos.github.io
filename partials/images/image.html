@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-sm-offset-6 col-sm-12">
+        <h1>Dados do usuário <span class="text-violet" ng-bind="user.name"></span></h1>
+        
+        <form class="form" role="form" ng-submit="updateUser()">
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input class="form-control" type="text" name="name" id="name" ng-model="user.name"/>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input class="form-control" type="text" name="email" id="email" ng-model="user.email"/>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="newsletter" ng-model="user.newsletter"> Deseja receber semanalmente a lista de produtos e promoções.
+                </label>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" ng-disabled="processingUserUpdate">Salvar</button>
+            </div>
+        </form>
+
+    </div>
+</div>

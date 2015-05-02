@@ -1,23 +1,51 @@
 <br>
 
 <div class="row">
-    <div class="col-sm-offset-1 col-sm-19">
+    
+    <div class="col-sm-offset-1 col-sm-3">
+        <div class="form-group">
+            <input 
+                type="text" 
+                ng-model="selectedImage" 
+                placeholder="Imagens" 
+                typeahead="image.title for image in getImages($viewValue)" 
+                typeahead-loading="loadingImages" 
+                typeahead-on-select="selectImage($item, $model, $label)" 
+                class="form-control"
+                >
+            <i ng-show="loadingImages" class="fa fa-spin fa-spinner"></i>
+        </div>
+        
+		<div class="thumbnail" ng-repeat="image in article.images">
+		    <p class="text-right">
+		        <a ng-click="dropImageFromArticle(image)"><i class="fa fa-remove"></i></a>
+		    </p>
+			<a href="/image/{{image._id}}">
+				<img class="img-responsive" alt="{{image.title}}" ng-src="http://images.elasticbeanstalk.com/200x200/{{image.url}}">
+			</a>
+		</div>
+    </div>
+
+    <div class="col-sm-16">
         <form class="form" role="form" ng-submit="articleFormSubmit()">
             
+            <div class="form-group">
+                <input class="form-control" type="text" ng-model="article.title" placeholder="Título">
+            </div>
+            
             <div class="row">
-                <div class="col-xs-3">
-                    <img class="img-responsive" alt="article_image" ng-src="http://images.elasticbeanstalk.com/200x200/{{article.img}}">
-                </div>
-                <div class="col-xs-21">
-                    <div class="form-group">
-                        <input class="form-control" type="text" ng-model="article.title" placeholder="Título">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" ng-model="article.img" placeholder="Imagem">
-                    </div>
+                <div class="col-sm-18">
                     <div class="form-group">
                         <input class="form-control" type="text" ng-model="article.encoded_url" placeholder="nome-codificado-sem-caracter-especial">
                     </div>
+                </div>
+                <div class="checkbox col-sm-6">
+                    <label>
+                        <input type="checkbox" name="active" ng-model="article.highlight"> Destaque
+                    </label>
+                    <label>
+                        <input type="checkbox" name="active" ng-model="article.active"> Ativo
+                    </label>
                 </div>
             </div>
             
@@ -25,14 +53,6 @@
                 <textarea class="form-control" rows="8" ng-model="article.content" placeholder="Conteúdo do artigo"></textarea>
             </div>
 
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="active" ng-model="article.highlight"> Destaque
-                </label>
-                <label>
-                    <input type="checkbox" name="active" ng-model="article.active"> Ativo
-                </label>
-            </div>
             <div class="form-group">
                 <button class="btn btn-success" type="submit" ng-model="title" placeholder="Título">Salvar</button>
             </div>
@@ -44,21 +64,21 @@
             <input 
                 type="text" 
                 ng-model="selectedProduct" 
-                placeholder="Produto" 
+                placeholder="Produtos" 
                 typeahead="product.name for product in getProducts($viewValue)" 
-                typeahead-loading="loadingLocations" 
+                typeahead-loading="loadingProducts" 
                 typeahead-on-select="selectProduct($item, $model, $label)" 
                 class="form-control"
                 >
-            <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+            <i ng-show="loadingProducts" class="fa fa-spin fa-spinner"></i>
         </div>
         
-		<div class="thumbnail" ng-repeat="product in articleProductsRaw">
+		<div class="thumbnail" ng-repeat="product in article.products">
 			<a href="/feira/produto/{{product._id}}">
 				<img class="img-responsive" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}">
 			</a>
 			<hr>
-			<div style="height:100px;">
+			<div style="height:80px;">
 				<p>
 					<span ng-bind="product.price | currency:'R$':2"></span>
 					<span class="pull-right">
@@ -68,7 +88,7 @@
 				<h4 class="text-violet"><a href="/feira/produto/{{product._id}}" ng-bind="product.name"></a></h4>
 			</div>
 
-			<button class="btn btn-danger btn-block" ng-click="dropFromArticle(product)">Remover</button>
+			<button class="btn btn-danger btn-block" ng-click="dropProductFromArticle(product)">Remover</button>
 
 		</div>
     </div>

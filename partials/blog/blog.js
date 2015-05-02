@@ -52,7 +52,6 @@ blog.controller('BlogArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
 
   $scope.saving_article = false;
   $scope.article = {};
-  $scope.articleProductsRaw = [];
 
   if($routeParams.id){
     
@@ -60,8 +59,6 @@ blog.controller('BlogArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     .success(function(res) {
 
       $scope.article = res;
-      
-      $scope.loadProducts();
       
     }).error(function(err) {
     
@@ -74,24 +71,5 @@ blog.controller('BlogArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     });
     
   }
-  
-  $scope.loadProducts = function () {
-    
-    $http.get(myConfig.apiUrl+'/article/'+$scope.article._id+'/products')
-    .success(function(res) {
 
-      $scope.articleProductsRaw = res;
-      
-    }).error(function(err) {
-    
-        $scope.$emit('alert', {
-            kind: 'danger',
-            msg: err,
-            title: "Não foi possível carregar os produtos do artigo. Verifique o motivo abaixo:"
-        });
-    
-    });
-    
-  }
-  
 }]);

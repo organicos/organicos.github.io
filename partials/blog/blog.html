@@ -3,8 +3,8 @@
 <div class="row visible-md-block visible-lg-block">
     <div class="col-xs-12 col-sm-8 blog-post-thumb-wrap" ng-repeat="article in articles">
         <a class="blog-post-thumb" href="/blog/{{article.encoded_url}}">
-            <img class="blog-post-thumb-img" ng-if="article.img" ng-src="http://images.elasticbeanstalk.com/300x300/{{article.img}}"></img>
-            <img class="blog-post-thumb-img" id="navi" ng-if="!article.img" ng-src="http://images.elasticbeanstalk.com/300x300"></img>
+            <img class="blog-post-thumb-img" ng-if="article.images.length" ng-src="http://images.elasticbeanstalk.com/300x300/{{article.images[0].url}}" alt="{{article.images[0].title}}"></img>
+            <img class="blog-post-thumb-img" id="navi" ng-if="!article.images.length" ng-src="http://images.elasticbeanstalk.com/300x300" alt="{{article.title}}"></img>
             <p class="blog-post-thumb-title">
                 <small ng-bind="article.updated | date: 'dd/MM/yyyy'"></small>
                 <br>
@@ -17,8 +17,8 @@
 <div class="row visible-xs-block visible-sm-block">
     <div class="col-xs-12 col-sm-8 blog-post-thumb-wrap-sm" ng-repeat="article in articles">
         <a class="blog-post-thumb" href="/blog/{{article.encoded_url}}">
-            <img class="blog-post-thumb-img" ng-if="article.img" ng-src="http://images.elasticbeanstalk.com/300x300/{{article.img}}"></img>
-            <img class="blog-post-thumb-img" id="navi" ng-if="!article.img" ng-src="http://images.elasticbeanstalk.com/300x300"></img>
+            <img class="blog-post-thumb-img" ng-if="article.images.length" ng-src="http://images.elasticbeanstalk.com/300x300/{{article.images[0].url}}" alt="{{article.images[0].title}}"></img>
+            <img class="blog-post-thumb-img" id="navi" ng-if="!article.images.length" ng-src="http://images.elasticbeanstalk.com/300x300" alt="{{article.title}}"></img>
             <p class="blog-post-thumb-title">
                 <small ng-bind="article.updated | date: 'dd/MM/yyyy'"></small>
                 <br>
