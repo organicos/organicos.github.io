@@ -296,7 +296,7 @@ app.service('basketService', ['$modal', '$localStorage', '$filter', function ($m
         basket.total = 0;
         
         angular.forEach(basket.products, function(product, key) {
-            basket.total += (product.prices[0].price || 1) * product.quantity;
+            basket.total += product.prices ? product.prices[0].price * product.quantity : 1;
         });
         
     })();
