@@ -75,6 +75,8 @@
     <link rel="stylesheet" href="/bower_components/bootstrap-24grid-violet/css/bootstrap.min.css">
     <!-- Font Awesome - Icon -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- Chart,js -->
+    <link rel="stylesheet" href="/bower_components/angular-chart.js/dist/angular-chart.css">
     <!-- Custom CSS -->
     <link href="/assets/css/global.css" rel="stylesheet">
 
@@ -100,17 +102,20 @@
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" ng-click="isCollapsed = !isCollapsed">
             <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
           </button>
-          
-          <button class="btn btn-primary navbar-btn" ng-click="openBasket()" ng-if="$storage.basket.products.length">
-            Minha cesta 
-            <span class="label label-success" ng-bind="$storage.basket.products.length"></span>
-          </button>
+
+          <span>
+            <button class="btn btn-primary navbar-btn" ng-click="openBasket()" ng-if="$storage.basket.products.length">
+              Minha cesta 
+              <span class="label label-success" ng-bind="$storage.basket.products.length"></span>
+            </button>
             
+            <a class="navbar-brand" href="/">
+              <img ng-src="http://images.elasticbeanstalk.com/46/https://s3-sa-east-1.amazonaws.com/fodev/img/global/logo_transparent.png">
+            </a>
+          </span>
+          
           <a href="/feira" class="btn btn-primary navbar-btn visible-xs-inline-block pull-right">Feira</a>
           
-          <a class="navbar-brand" href="/">
-            <img ng-src="http://images.elasticbeanstalk.com/46/https://s3-sa-east-1.amazonaws.com/fodev/img/global/logo_transparent.png">
-          </a>
         </div>
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
           <ul class="nav navbar-nav navbar-right">
@@ -264,6 +269,8 @@
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="/bower_components/angular-filter/dist/angular-filter.min.js"></script>
     <script src="/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="/bower_components/Chart.js/Chart.min.js"></script>
+    <script src="/bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
     <script src="/app.js"></script>
     <script src="/config/env_config.js"></script>
     <script src="/partials/home/home.js"></script>

@@ -27,7 +27,8 @@ var app = angular.module('myApp', [
   'myApp.images',
   'myApp.articles',
   'myApp.blog',
-  '720kb.socialshare'
+  '720kb.socialshare',
+  'chart.js'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider', function($routeProvider, $httpProvider, $authProvider, $locationProvider) {
@@ -275,20 +276,32 @@ app.controller('NavBarCtrl', function($scope, $localStorage) {
 app.service('basketService', ['$modal', '$localStorage', '$filter', function ($modal, $localStorage, $filter) {
     
     var self = this;
-    
-   this.ensureBasket = function() {
-    	if(!$localStorage.basket){
-    	    $localStorage.basket = {total: 0,name: '',products: [], shipping: {price: 6, country: 'Brasil'}};
-    	} else {
-        	if(!$localStorage.basket.products) $localStorage.basket.products = {};
-        	if(!$localStorage.basket.total) $localStorage.basket.total = 0;
-        	if(!$localStorage.basket.name) $localStorage.basket.name = '';
-        	if(!$localStorage.basket.shipping) $localStorage.basket.shipping = {price: 6, country: 'Brasil'};
-    	}
-    }();
+    var basket = $localStorage.basket;
 
+    (this.ensureBasket = function() {
+    	if(!basket){
+    	    basket = {total: 0,name: '',products: [], shipping: {price: 6, country: 'Brasil'}};
+    	} else {
+        	if(!basket.products) basket.products = {};
+        	if(!basket.total || basket.total < 0) basket.total = 0;
+        	if(!basket.name) basket.name = '';
+        	if(!basket.shipping) basket.shipping = {price: 6, country: 'Brasil'};
+    	}
+    	
+    	$localStorage.basket = basket;
+    })();
+
+    (this.refreshTotal = function () {
+        
+        basket.total = 0;
+        
+        angular.forEach(basket.products, function(product, key) {
+            basket.total += product.prices[0].price * product.quantity;
+        });
+        
+    })();
+    
     this.addToBasket = function (product) {
-        var basket = $localStorage.basket;
         var basketProduct = ($filter('filter')(basket.products, {_id: product._id}, false))[0];
         if(basketProduct){
             basketProduct.quantity = basketProduct.quantity >= 0 ? basketProduct.quantity : 1;
@@ -297,22 +310,20 @@ app.service('basketService', ['$modal', '$localStorage', '$filter', function ($m
             product.quantity = 1;
             basket.products.push(product);
         }
-        basket.total += parseFloat(product.price);
+        self.refreshTotal();
     };
     
     this.dropFromBasket = function (product, decreasingAmount) {
-        var basket = $localStorage.basket;
         var productIndex = basket.products.indexOf(product);
         var product = basket.products[productIndex];
         if (productIndex >= 0) {
             if (decreasingAmount > 0 & product.quantity > decreasingAmount) {
                 product.quantity -= decreasingAmount;
-                basket.total -= product.price * decreasingAmount;
             } else {
-                basket.total -= parseFloat(product.price) * product.quantity;
                 basket.products.splice(productIndex, 1);   
             }
         }
+        self.refreshTotal();
     };
     
     this.showModal = function(){
@@ -323,12 +334,12 @@ app.service('basketService', ['$modal', '$localStorage', '$filter', function ($m
             size: 'lg',
             templateUrl: '/partials/basket/basket_modal.html',
             controller: function ($scope, $location, $modalInstance) {
-                $scope.basket = $localStorage.basket;
+                $scope.basket = basket;
                 $scope.addToBasket = self.addToBasket;
                 $scope.dropFromBasket = self.dropFromBasket;
                 $scope.modalOptions = {
                     ok: function (result) {
-                        $location.path('/revisar-ordem');
+                        $location.path('/revisar-pedido');
                         $modalInstance.dismiss('order_review');
                     },
                     close: function (result) {

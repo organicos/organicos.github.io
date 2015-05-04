@@ -9,9 +9,9 @@
             
             <span>
                 
-                <button class="btn btn-default" socialshare socialshare-provider="facebook" socialshare-text="Encontrem este delicioso produto na Feira Orgãnica Delivery" socialshare-hashtags="organicos, feiraorganicadelivery, florianopolis, floripa, comidasaudavel" socialshare-url="https://feiraorganica.com/feira/{{productFormModalObject._id}}" socialshare-via="feiraorganicadelivery"><i class="fa fa-facebook fa-fw"></i></button>
-                <button class="btn btn-default" socialshare socialshare-provider="twitter" socialshare-text="Encontrem este delicioso produto na Feira Orgãnica Delivery" socialshare-hashtags="organicos, feiraorganicadelivery, florianopolis, floripa, comidasaudavel" socialshare-url="https://feiraorganica.com/feira/{{productFormModalObject._id}}" socialshare-via="feiraorganicadelivery"><i class="fa fa-twitter fa-fw"></i></button>
-                <button class="btn btn-default" socialshare socialshare-provider="google+" socialshare-text="Encontrem este delicioso produto na Feira Orgãnica Delivery" socialshare-hashtags="organicos, feiraorganicadelivery, florianopolis, floripa, comidasaudavel" socialshare-url="https://feiraorganica.com/feira/{{productFormModalObject._id}}" socialshare-via="feiraorganicadelivery"><i class="fa fa-google-plus fa-fw"></i></button>
+                <button class="btn btn-default" socialshare socialshare-provider="facebook" socialshare-text="Encontrem este delicioso produto na Feira Orgãnica Delivery" socialshare-hashtags="organicos, feiraorganicadelivery, florianopolis, floripa, comidasaudavel" socialshare-url="https://feiraorganica.com/feira/{{product._id}}" socialshare-via="feiraorganicadelivery"><i class="fa fa-facebook fa-fw"></i></button>
+                <button class="btn btn-default" socialshare socialshare-provider="twitter" socialshare-text="Encontrem este delicioso produto na Feira Orgãnica Delivery" socialshare-hashtags="organicos, feiraorganicadelivery, florianopolis, floripa, comidasaudavel" socialshare-url="https://feiraorganica.com/feira/{{product._id}}" socialshare-via="feiraorganicadelivery"><i class="fa fa-twitter fa-fw"></i></button>
+                <button class="btn btn-default" socialshare socialshare-provider="google+" socialshare-text="Encontrem este delicioso produto na Feira Orgãnica Delivery" socialshare-hashtags="organicos, feiraorganicadelivery, florianopolis, floripa, comidasaudavel" socialshare-url="https://feiraorganica.com/feira/{{product._id}}" socialshare-via="feiraorganicadelivery"><i class="fa fa-google-plus fa-fw"></i></button>
 
             </span>
             
@@ -25,49 +25,51 @@
                     
                     <br>
                     
-                    <img class="img-responsive" ng-src="{{productFormModalObject.img}}" ></img>
+                    <img class="img-responsive" ng-src="{{product.images[0].url}}" ></img>
                     
-                    <button class="btn btn-success btn-block" ng-click="addToBasket(productFormModalObject)">
+                    <button class="btn btn-success btn-block" ng-click="addToBasket(product)">
                         Colocar na cesta
-                        <span class="label label-warning" ng-repeat="buttonProduct in $storage.basket.products | filter : {_id: productFormModalObject._id}" ng-bind="buttonProduct.quantity"></span>
+                        <span class="label label-warning" ng-repeat="buttonProduct in $storage.basket.products | filter : {_id: product._id}" ng-bind="buttonProduct.quantity"></span>
                     </button>
-        
+                    
+                    <div ng-if="product.prices[1]">
+                        <h3>Variação de preço</h3>
+                        <canvas id="line" class="chart chart-line" data="pricesChartData.data" labels="pricesChartData.labels" series="pricesChartData.series"></canvas>                         
+                    </div>
+
                 </div>
                 
                 <div class="col-sm-18">
                     
-                    <h2 ng-bind="productFormModalObject.name"></h2>
+                    <h2 ng-bind="product.name"></h2>
                     
                     <hr>
+
+                    <h3><span class="text-success" ng-bind="product.prices[0].price | currency:'R$':2"></span> <span ng-if="product.prices[1].price > product.prices[0].price"><i class="fa fa-arrow-down text-success"></i> <del><small class="text-muted text-danger" ng-bind="product.prices[1].price | currency:'R$':2"></small></del></span></h3>
                     
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.price">
-                        <dt>Preço: </dt>
-                        <dd ng-bind="productFormModalObject.price | currency:'R$':2"></dd>
-                    </dl>
-                    
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.category">
+                    <dl class="dl-horizontal" ng-if="product.category">
                         <dt>Categoria: </dt>
-                        <dd ng-bind="productFormModalObject.category"></dd>
+                        <dd ng-bind="product.category"></dd>
                     </dl>
                     
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.supplier">
+                    <dl class="dl-horizontal" ng-if="product.supplier">
                         <dt>Fornecedor: </dt>
-                        <dd ng-bind="productFormModalObject.supplier"></dd>
+                        <dd ng-bind="product.supplier"></dd>
                     </dl>
                     
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.season">
+                    <dl class="dl-horizontal" ng-if="product.season">
                         <dt>Época: </dt>
-                        <dd ng-bind="productFormModalObject.season"></dd>
+                        <dd ng-bind="product.season"></dd>
                     </dl>
-                    
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.recipes">
+
+                    <dl class="dl-horizontal" ng-if="product.recipes">
                         <dt>Receitas: </dt>
-                        <dd ng-bind="productFormModalObject.recipes"></dd>
+                        <dd ng-bind="product.recipes"></dd>
                     </dl>
     
-                    <dl class="dl-horizontal" ng-show="productFormModalObject.dscr">
+                    <dl class="dl-horizontal" ng-if="product.dscr">
                         <dt></dt>
-                        <dd class="text-justify" ng-bind-html="productFormModalObject.dscr" style="white-space: pre-wrap;"></dd>
+                        <dd class="text-justify" ng-bind-html="product.dscr" style="white-space: pre-wrap;"></dd>
                     </dl>
                     
                 </div>
@@ -78,9 +80,9 @@
         
         <hr>
         
-        <h3>Outros produtos da categoria {{productFormModalObject.category}}</h3>
+        <h3>Outros produtos da categoria {{product.category}}</h3>
 		<div class="row">
-			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: {category: productFormModalObject.category} | orderBy: 'name')">
+			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: {category: product.category} | orderBy: 'name')">
 		
 		
 				<div class="thumbnail">
@@ -90,7 +92,7 @@
 					<hr>
 					<div style="height:100px;">
 						<p>
-							<span ng-bind="product.price | currency:'R$':2"></span>
+							<span ng-bind="product.prices[0].price | currency:'R$':2"></span>
 							<span class="pull-right">
 								<a ng-if="product.category" ng-click="selectCategory(product.category)" ng-bind="product.category"></a>
 							</span>

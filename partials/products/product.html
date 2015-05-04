@@ -1,3 +1,5 @@
+
+
 <div class="row">
     <div class="col-sm-22 col-sm-offset-1">
         
@@ -5,16 +7,34 @@
 
         <div class="row">
             
-            <div class="col-xs-6">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input 
+                        type="text" 
+                        ng-model="selectedImage" 
+                        placeholder="Imagens" 
+                        typeahead="image.title for image in getImages($viewValue)" 
+                        typeahead-loading="loadingImages" 
+                        typeahead-on-select="selectImage($item, $model, $label)" 
+                        class="form-control"
+                        >
+                    <i ng-show="loadingImages" class="fa fa-spin fa-spinner"></i>
+                </div>
                 
-                <img class="img-responsive" ng-src="{{product.img}}" ></img>
-    
+        		<div class="thumbnail" ng-repeat="image in product.images">
+        		    <p class="text-right">
+        		        <a ng-click="dropImage(image)"><i class="fa fa-remove"></i></a>
+        		    </p>
+        			<a href="/image/{{image._id}}">
+        				<img class="img-responsive" alt="{{image.title}}" ng-src="http://images.elasticbeanstalk.com/200x200/{{image.url}}">
+        			</a>
+        		</div>
             </div>
-            
-            <div class="col-xs-18">
+        
+            <div class="col-sm-20">
                 
                 <p class="text-right">
-                    <button class="btn btn-danger" ng-click="dropProduct(product)" ng-if="product.lenght"><i class="fa fa-trash"></i></button>
+                    <button class="btn btn-danger" ng-click="dropProduct(product)" ng-if="product"><i class="fa fa-trash"></i></button>
                 </p>
                 
                 <form class="form-horizontal" role="form">
@@ -28,22 +48,36 @@
                     
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="cost">Custo</label>
-                        <div class="col-sm-20">
-                            <input class="form-control" type="text" id="cost" ng-model="product.cost">
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" id="cost" ng-model="product.costs[0].price">
+                        </div>
+                        <div class="col-sm-2">
+                            <span ng-if="product.costs[1].price > product.costs[0].price"><i class="fa fa-arrow-down text-success"></i> <del><small class="text-danger" ng-bind="product.costs[1].price | currency:'R$':2"></small></del></span>
+                            <span ng-if="product.costs[1].price < product.costs[0].price"><i class="fa fa-arrow-up text-danger"></i> <del><small class="text-danger" ng-bind="product.costs[1].price | currency:'R$':2"></small></del></span>
+                        </div>
+                        <label class="col-sm-4 control-label" for="price">Preço</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" id="price" ng-model="product.prices[0].price">
+                        </div>
+                        <div class="col-sm-2">
+                            <span ng-if="product.prices[1].price > product.prices[0].price"><i class="fa fa-arrow-down text-success"></i> <del><small class="text-danger" ng-bind="product.prices[1].price | currency:'R$':2"></small></del></span>
+                            <span ng-if="product.prices[1].price < product.prices[0].price"><i class="fa fa-arrow-up text-danger"></i> <del><small class="text-danger" ng-bind="product.prices[1].price | currency:'R$':2"></small></del></span>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="price">Preço</label>
-                        <div class="col-sm-20">
-                            <input class="form-control" type="text" id="price" ng-model="product.price">
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <canvas id="line" class="chart chart-line" data="costsChartData.data" labels="costsChartData.labels" series="costsChartData.series"></canvas> 
+                        </div>
+                        <div class="col-sm-offset-4 col-sm-8">
+                            <canvas id="line" class="chart chart-line" data="pricesChartData.data" labels="pricesChartData.labels" series="pricesChartData.series"></canvas> 
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="category">Categoria</label>
                         <div class="col-sm-20">
-                            <input class="form-control" type="text" id="category" ng-model="product.category" required>
+                            <input class="form-control" type="text" id="category" ng-model="product.categories[0].name" required>
                         </div>
                     </div>
                     
@@ -61,20 +95,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="recipes">Receitas</label>
-                        <div class="col-sm-20">
-                            <input class="form-control" type="text" id="recipes" ng-model="product.recipes">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="img">Imagem (url)</label>
-                        <div class="col-sm-20">
-                            <input class="form-control" type="text" id="img" ng-model="product.img" required>
-                        </div>
-                    </div>
-                    
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="dscr">Descrição</label>
                         <div class="col-sm-20">

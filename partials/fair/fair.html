@@ -12,8 +12,8 @@
 				<label for="selectedOrder">Ordem</label>
 				<select class="form-control" id="selectedOrder" name="selectedOrder" ng-model="selectedOrder">
 					<option value="name">Nome</option>
-					<option value="price">Preço</option>
-					<option value="category">Categoria</option>
+					<option value="prices[0].price">Preço</option>
+					<option value="categories[0].name">Categoria</option>
 					<option value="highlight">Destaque</option>
 				</select>
 			</div>
@@ -21,12 +21,12 @@
 		
 		<br><br>
 
-		<div class="btn-group btn-group-justified" role="group" aria-label="productKind">
+		<div class="btn-group" role="group" aria-label="productKind">
 			<div class="btn-group" role="group">
 				<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == '' ? 'active' : ''" ng-click="selectCategory('')">Tudo</button>
 			</div>
-			<div class="btn-group" role="group" ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'category' | groupBy: 'category')">
-				<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == product[0].category ? 'active' : ''" ng-click="selectCategory(product[0].category)">{{product[0].category}}</button>
+			<div class="btn-group" role="group" ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'categories[0].name' | groupBy: 'categories[0].name')">
+				<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == product[0].categories[0].name ? 'active' : ''" ng-click="selectCategory(product[0].categories[0].name)">{{product[0].categories[0].name}}</button>
 			</div>
 		</div>
 		
@@ -38,15 +38,12 @@
 		
 				<div class="thumbnail">
 					<a href="/feira/{{product._id}}">
-						<img class="img-responsive img-responsive-wide img-centered" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}" ng-dblclick="addToBasket(product)">
+						<img class="img-responsive img-responsive-wide img-centered" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.images[0].url}}" ng-dblclick="addToBasket(product)">
 					</a>
 					<hr>
 					<div style="height:100px;">
 						<p>
-							<span ng-bind="product.price | currency:'R$':2"></span>
-							<span class="pull-right">
-								<a ng-if="product.category" ng-click="selectCategory(product.category)" ng-bind="product.category"></a>
-							</span>
+							<span class="text-success" ng-bind="product.prices[0].price | currency:'R$':2"></span> <span ng-if="product.prices[1].price > product.prices[0].price"><i class="fa fa-arrow-down text-success"></i> <del><small class="text-muted text-danger" ng-bind="product.prices[1].price | currency:'R$':2"></small></del></span>
 						</p>
 						<h4 class="text-violet"><a href="/feira/{{product._id}}" ng-bind="product.name"></a></h4>
 					</div>

@@ -67,6 +67,7 @@ ul.nav a:hover { background-color:#8C3E8C; color:white; }
 .text-red{ color:#D64541;}
 .text-white{ color:white;}
 .text-violet{ color:#A348A3;}
+.text-yellow{color: #f1c40f;}
 a.text-black{ color:black;}
 a.text-blue{ color:#5BC0DE;}
 a.text-blue-dark{ color:#22A7F0;}
@@ -83,6 +84,7 @@ a.text-violet{ color:#A348A3;}
 .font-40{ font-size: 40px;}
 .font-50{ font-size: 50px;}
 .font-60{ font-size: 60px;}
+.font-100{ font-size: 100px;}
 .font-200{ font-size: 200px;}
 
 .blog-post-thumb-wrap{

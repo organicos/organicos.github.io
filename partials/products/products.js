@@ -1,6 +1,6 @@
 'use strict';
 
-var products = angular.module('myApp.products', ['ngRoute']);
+var products = angular.module('myApp.products', ['ngRoute', 'chart.js']);
 
 products.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/produtos', {
@@ -51,15 +51,26 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
 products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', '$location', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, $location) {
 
   $scope.saving_product = false;
-  
-  $scope.product = {};
-
+  $scope.product = {prices: [], costs: []};
+  $scope.pricesChartData = {
+    series : ['Preço'],
+    labels : [],
+    data : []
+  };
+  $scope.costsChartData = {
+    series : ['Custo'],
+    labels : [],
+    data : []
+  };
+    
   if($routeParams.id){
     
     $http.get(myConfig.apiUrl+'/product/'+$routeParams.id)
     .success(function(res) {
 
       $scope.product = res;
+      
+      $scope.updateProductCharts();
 
     }).error(function(err) {
     
@@ -69,6 +80,24 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
             title: "Não foi possível acessar os dados do produto. Verifique o motivo abaixo:"
         });
     
+    });
+    
+  }
+  
+  $scope.updateProductCharts = function(){
+
+    $scope.costsChartData.data[0] = [];
+    $scope.costsChartData.labels = [];
+    angular.forEach($scope.product.costs, function(cost, key) {
+      $scope.costsChartData.data[0].unshift(cost.price);
+      $scope.costsChartData.labels.unshift("R$");
+    });
+
+    $scope.pricesChartData.data[0] = [];
+    $scope.pricesChartData.labels = [];
+    angular.forEach($scope.product.prices, function(price, key) {
+      $scope.pricesChartData.data[0].unshift(price.price);
+      $scope.pricesChartData.labels.unshift("R$");
     });
     
   }
@@ -94,7 +123,6 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
     $http.post(myConfig.apiUrl + '/products', product)
     .success(function(resp) {
       
-        $scope.products = resp.data;
         $location.path("/produto/" + resp._id);
         
     })
@@ -124,7 +152,9 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
     $http.put(myConfig.apiUrl + '/products/'+product._id, product)
     .success(function(resp) {
       
-      $scope.products = resp.data;
+      $scope.product = resp;
+      
+      $scope.updateProductCharts();
 
       $scope.$emit('alert', {
           kind: 'success',
@@ -165,29 +195,81 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
 
     confirmModalService.showModal({}, modalOptions)
     .then(function (result) {
-
-      $http.delete(myConfig.apiUrl + '/products/' + product._id)
-      .success(function() {
-        $location.path("/produtos");
-      })
-      .error(function (resp) {
+      
+      if(result){
         
-        var error_list = [];
-  
-        angular.forEach(resp.errors, function(error, path) {
-          this.push(error.message);
-        }, error_list);
-        
-        $scope.$emit('alert', {
-            kind: 'danger',
-            msg: error_list,
-            title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
+        $http.delete(myConfig.apiUrl + '/products/' + product._id)
+        .success(function() {
+          $location.path("/produtos");
+        })
+        .error(function (resp) {
+          
+          var error_list = [];
+    
+          angular.forEach(resp.errors, function(error, path) {
+            this.push(error.message);
+          }, error_list);
+          
+          $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
+          });
+    
         });
-  
-      });
+        
+      }
 
     });
 
   };
 
+  $scope.getImages = function(title){
+    return $http.get(myConfig.apiUrl+'/images', {
+      params: {
+        title: title
+      }
+    }).then(function(res) {
+      
+      return res.data;
+
+    });
+  }
+
+  $scope.selectImage = function (item, model, label) {
+    
+    var image = ($filter('filter')($scope.product.images, {_id: item._id}, false))[0];
+    
+    if (!image) {
+
+      $scope.product.images.push(item);
+      
+    }
+    
+  };
+  
+  $scope.dropImage = function(image){
+    var imageIndex = $scope.product.images.indexOf(image);
+    if (imageIndex >= 0) {
+        $scope.product.images.splice(imageIndex, 1);
+    }
+    var imageIndex = $scope.product.images.indexOf(image._id);
+    if (imageIndex >= 0) {
+        $scope.product.images.splice(imageIndex, 1);
+    }
+  };
+  
+}]);
+
+// Optional configuration
+products.config(['ChartJsProvider', function (ChartJsProvider) {
+    // Configure all charts
+    ChartJsProvider.setOptions({
+      colours: ['#FF5252'],
+      responsive: true
+    });
+    // Configure all line charts
+    ChartJsProvider.setOptions('Line', {
+      datasetFill: true
+    });
 }]);
