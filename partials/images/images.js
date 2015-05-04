@@ -11,6 +11,10 @@ images.config(['$routeProvider', function($routeProvider) {
     .when('/image/:id', {
         templateUrl: '/partials/images/image.html',
         controller: 'AdminImageCtrl'
+    })
+    .when('/image', {
+        templateUrl: '/partials/images/image.html',
+        controller: 'AdminImageCtrl'
     });
 }]);
 
@@ -31,26 +35,74 @@ images.controller('AdminImagesCtrl', ['$scope','$http', '$filter', '$routeParams
 
 }]);
 
-images.controller('AdminImageCtrl', ['$scope','$http', '$routeParams', 'myConfig', function($scope, $http, $routeParams, myConfig) {
+images.controller('AdminImageCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', function($scope, $http, $routeParams, myConfig, $location) {
   
     $scope.image = {};
+    $scope.imagesQuery = "";
     $scope.processingImageUpdate = false;
     
-    $http.get(myConfig.apiUrl+'/image/'+$routeParams.id)
-    .success(function(res) {
+    if($routeParams.id){
     
-        $scope.image = res;
-    
-    }).error(function(err) {
-    
-        console.error('ERR', err);
-    
-    });
-    
-    $scope.updateImage = function(){
+        $http.get(myConfig.apiUrl+'/image/'+$routeParams.id)
+        .success(function(res) {
         
+            $scope.image = res;
+        
+        }).error(function(err) {
+        
+            console.error('ERR', err);
+        
+        });
+        
+    }
+    
+    $scope.imageFormSubmit = function () {
+    
         $scope.processingImageUpdate = true;
         
+        if($scope.image._id){
+          
+            $scope.imagePut($scope.product);
+          
+        } else {
+        
+            $scope.imagePost($scope.product); 
+        
+        }
+    
+    }
+  
+    $scope.imagePost = function() {
+    
+        $http.post(myConfig.apiUrl + '/image', $scope.image)
+        .success(function(resp) {
+          
+            $location.path("/image/" + resp._id);
+            
+        })
+        .error(function (resp) {
+          
+            var error_list = [];
+            
+            angular.forEach(resp.errors, function(error, path) {
+                this.push(error.message);
+            }, error_list);
+            
+            $scope.$emit('alert', {
+                kind: 'danger',
+                msg: error_list,
+                title: "Não foi possível inserir a imagem. Verifique o motivo abaixo:"
+            });
+        
+        })
+        .finally(function () {
+            $scope.processingImageUpdate = false;
+        });
+    
+    };
+  
+    $scope.imagePut = function(){
+
         $http.put(myConfig.apiUrl+'/image/'+$scope.image._id, $scope.image)
         .success(function(res) {
             

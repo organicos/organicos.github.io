@@ -2,6 +2,24 @@
     <div class="col-sm-22 col-sm-offset-1">
         <h1>Imagens</h1>
         
+        <form class="form-inline text-right">
+            <div class="form-group">
+            	<label for="productQuery">Buscar imagem</label>
+        		<input class="form-control input-xs" id="imagesQuery" name="imagesQuery" ng-model="imagesQuery" type="text" placeholder="Buscar imagem">
+            </div>
+        	<div class="form-group">
+        	    <label for="order">Ordem</label>
+                <select class="form-control" id="order" ng-model="selectedOrder">
+                    <option value="title" selected>Título</option>
+                    <option value="url" selected>Url</option>
+                    <option value="updated">Data</option>
+                </select>
+        	</div>
+            <a class="btn btn-default" href="/image">+</a>
+        </form>
+        
+        <br>
+
         <table class="table table-condensed table-stripped table-hover">
             <thead>
                 <tr>
@@ -12,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="image in images">
+                <tr ng-repeat="image in filteredImages = (images | filter: imagesQuery | orderBy: selectedOrder)">
                     <td><a href="/image/{{image._id}}" ng-bind="image.title"></a></td>
                     <td ng-bind="image.url"></td>
                     <td ng-bind="image.updated"></td>
