@@ -47,7 +47,7 @@ images.controller('AdminImageCtrl', ['$scope','$http', '$routeParams', 'myConfig
     
     });
     
-    $scope.updateUser = function(){
+    $scope.updateImage = function(){
         
         $scope.processingImageUpdate = true;
         
