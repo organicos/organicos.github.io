@@ -19,18 +19,14 @@
 			</div>
 		</form>
 		
-		<br><br>
+		<br>
 
 		<div class="btn-group" role="group" aria-label="productKind">
-			<div class="btn-group" role="group">
-				<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == '' ? 'active' : ''" ng-click="selectCategory('')">Tudo</button>
-			</div>
-			<div class="btn-group" role="group" ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'categories[0].name' | groupBy: 'categories[0].name')">
-				<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == product[0].categories[0].name ? 'active' : ''" ng-click="selectCategory(product[0].categories[0].name)">{{product[0].categories[0].name}}</button>
-			</div>
+			<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == '' ? 'active' : ''" ng-click="selectCategory('')">Tudo</button>
+			<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == product[0].categories[0].name ? 'active' : ''" ng-click="selectCategory(product[0].categories[0].name)" ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'categories[0].name' | groupBy: 'categories[0].name')">{{product[0].categories[0].name}}</button>
 		</div>
 		
-		<br>
+		<hr>
 		
 		<div class="row">
 			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {category : selectedCategory} | orderBy: selectedOrder)">
