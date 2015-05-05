@@ -29,7 +29,7 @@
 		<hr>
 		
 		<div class="row">
-			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {category : selectedCategory} | orderBy: selectedOrder)">
+			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {categories : selectedCategory} | orderBy: selectedOrder)">
 		
 		
 				<div class="thumbnail">

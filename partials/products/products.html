@@ -20,27 +20,17 @@
         	</div>
             <a class="btn btn-default" href="/produto">+</a>
         </form>
-        
-        <br>
-        
-        <div class="btn-group" role="group">
-        	<button 
-        		type="button" 
-        		class="btn btn-sm btn-primary" 
-        		ng-class="selectedFilterField == 'category' && selectedFilterValue == '' ? 'active' : ''"
-        		ng-click="selectFilter('category', '')"
-        	>Tudo</button>
-        	<button 
-        		ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'categories[0].name' | groupBy: 'category')" 
-        		type="button" 
-        		class="btn btn-sm btn-primary" 
-        		ng-class="selectedFilterField == 'categories[0].name' && selectedFilterValue == product[0].categories[0].name ? 'active' : ''"
-        		ng-click="selectFilter('category', product[0].categories[0].name)"
-        	>{{product[0].categories[0].name}}</button>
-        </div>
-        
-        <br><br>
-        				
+		
+		<br>
+
+		<div class="btn-group" role="group" aria-label="productKind">
+			<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == '' ? 'active' : ''" ng-click="selectCategory('')">Tudo</button>
+			<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == product[0].categories[0].name ? 'active' : ''" ng-click="selectCategory(product[0].categories[0].name)" ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'categories[0].name' | groupBy: 'categories[0].name')">{{product[0].categories[0].name}}</button>
+		</div>
+		
+		<hr>
+		
+
         <table class="table table-condensed table-stripped table-hover">
             <thead>
                 <tr>
@@ -56,7 +46,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {categories : selectedFilterValue} | orderBy: selectedOrder)">
+                <tr ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {categories : selectedCategory} | orderBy: selectedOrder)">
                     <td><a class="text-violet" href="/produto/{{product._id}}" ng-bind="product.name"></a></td>
                     <td>
                         <span ng-bind="product.costs[0].price | currency"></span>

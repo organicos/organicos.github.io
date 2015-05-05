@@ -39,11 +39,10 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
   
   });
 
-  $scope.selectFilter = function (field, value) {
+  $scope.selectCategory = function (category) {
     
-    $scope.selectedFilterField = field;
-    $scope.selectedFilterValue = value;
-    
+    $scope.selectedCategory = category;
+
   }
   
   $scope.dropProduct = function(product) {
