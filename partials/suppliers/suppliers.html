@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-sm-22 col-sm-offset-1">
+        <h1>Fornecedores <span ng-bind="filteredSuppliers.length"></span></h1>
+        
+        <form class="form-inline text-right">
+            <div class="form-group">
+            	<label for="supplierQuery">Buscar fornecedores</label>
+        		<input class="form-control input-xs" id="supplierQuery" name="supplierQuery" ng-model="supplierQuery" type="text" placeholder="Buscar fornecedores">
+            </div>
+        	<div class="form-group">
+        	    <label for="order">Ordem</label>
+                <select class="form-control" id="order" ng-model="selectedOrder">
+                    <option value="name" selected>Nome</option>
+                    <option value="updated">Data</option>
+                </select>
+        	</div>
+            <a class="btn btn-default" href="/supplier">+</a>
+        </form>
+        
+        <br>
+
+        <table class="table table-condensed table-stripped table-hover">
+            <thead>
+                <tr>
+                    <td>nome</td>
+                    <td>Ultima modificação</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="supplier in filteredSuppliers = (suppliers | filter: supplierQuery | orderBy: selectedOrder)">
+                    <td><a href="/supplier/{{supplier._id}}" ng-bind="supplier.name || '???'"></a></td>
+                    <td ng-bind="supplier.updated"></td>
+                    <td><a href="javascript:void(0)" ng-click="dropSupplier(supplier)">x</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

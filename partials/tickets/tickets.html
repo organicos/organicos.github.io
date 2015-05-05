@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-22 col-sm-offset-1">
-        <h1>Tickets</h1>
+        <h1>Tickets <span ng-bind="filteredTickets.length"></span></h1>
 
         <form class="form-inline text-right">
             <div class="form-group">
@@ -31,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="ticket in tickets | orderBy: selectedOrder:true">
+                <tr ng-repeat="ticket in filteredTickets = ( tickets | orderBy: selectedOrder:true )">
                     <td><a href="/ticket/{{ticket._id}}" ng-bind="ticket._id"></a></td>
                     <td><a ng-bind="ticket.customer.name" ng-href="/usuario/{{ticket.customer._id}}"></a></td>
                     <td ng-bind="ticket.customer.email"></td>

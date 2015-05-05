@@ -26,7 +26,10 @@ var app = angular.module('myApp', [
   'myApp.about',
   'myApp.images',
   'myApp.articles',
+  'myApp.suppliers',
   'myApp.blog',
+  'myApp.newsletters',
+  'myApp.categories',
   '720kb.socialshare',
   'chart.js'
 ]);

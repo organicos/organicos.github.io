@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-22 col-sm-offset-1">
-        <h1>{{products.length}} Produtos</h1>
+        <h1>Produtos <span ng-bind="filteredProducts.length"></span></h1>
         
         <form class="form-inline text-right">
             <div class="form-group">
@@ -31,12 +31,12 @@
         		ng-click="selectFilter('category', '')"
         	>Tudo</button>
         	<button 
-        		ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'category' | groupBy: 'category')" 
+        		ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'categories[0].name' | groupBy: 'category')" 
         		type="button" 
         		class="btn btn-sm btn-primary" 
-        		ng-class="selectedFilterField == 'category' && selectedFilterValue == product[0].category ? 'active' : ''"
-        		ng-click="selectFilter('category', product[0].category)"
-        	>{{product[0].category}}</button>
+        		ng-class="selectedFilterField == 'categories[0].name' && selectedFilterValue == product[0].categories[0].name ? 'active' : ''"
+        		ng-click="selectFilter('category', product[0].categories[0].name)"
+        	>{{product[0].categories[0].name}}</button>
         </div>
         
         <br><br>
@@ -56,7 +56,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {category : selectedFilterValue} | orderBy: selectedOrder)">
+                <tr ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {categories : selectedFilterValue} | orderBy: selectedOrder)">
                     <td><a class="text-violet" href="/produto/{{product._id}}" ng-bind="product.name"></a></td>
                     <td>
                         <span ng-bind="product.costs[0].price | currency"></span>
@@ -73,7 +73,7 @@
                     <td><i ng-if="product.active" class="fa fa-check"></i></td>
                     <td><i ng-if="product.highlight" class="fa fa-check"></i></td>
                     <td ng-bind="product.updated | date:'dd/MM/yyyy'"></td>
-                    <td>x</td>
+                    <td><a href="javascript:void(0)" ng-click="dropProduct(category)">x</a></td>
                 </tr>
             </tbody>
         </table>

@@ -17,7 +17,7 @@ products.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService) {
 
   $scope.products = [];
   $scope.selectedFilterValue = '';
@@ -45,6 +45,51 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
     $scope.selectedFilterValue = value;
     
   }
+  
+  $scope.dropProduct = function(product) {
+
+    var modalOptions = {
+        closeButtonText: 'Cancelar',
+        actionButtonText: 'Excluir produto',
+        actionButtonKind: 'btn-danger',
+        headerText: 'Excluir o produto ' + product.name + "?",
+        bodyText: 'Deseja realmente excluir o produto ' + product.name + "?"
+    };
+
+    confirmModalService.showModal({}, modalOptions)
+    .then(function (result) {
+      
+      if(result){
+        
+        $http.delete(myConfig.apiUrl + '/products/' + product._id)
+        .success(function(res) {
+          
+          var productIndex = $scope.products.indexOf(product);
+          
+          $scope.products.splice(productIndex, 1);
+          
+        })
+        .error(function (resp) {
+          
+          var error_list = [];
+    
+          angular.forEach(resp.errors, function(error, path) {
+            this.push(error.message);
+          }, error_list);
+          
+          $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Não foi possível inserir o produto. Verifique o motivo abaixo:"
+          });
+    
+        });
+        
+      }
+
+    });
+
+  };
   
 }]);
 
@@ -189,7 +234,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
         closeButtonText: 'Cancelar',
         actionButtonText: 'Excluir produto',
         actionButtonKind: 'btn-danger',
-        headerText: 'excluir o produto ' + product.name + "?",
+        headerText: 'Excluir o produto ' + product.name + "?",
         bodyText: 'Deseja realmente excluir o produto ' + product.name + "?"
     };
 
@@ -224,6 +269,80 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
 
   };
 
+  $scope.getSuppliers = function(name){
+    return $http.get(myConfig.apiUrl+'/suppliers', {
+      params: {
+        name: name
+      }
+    }).then(function(res) {
+      
+      return res.data;
+
+    });
+  }
+
+  $scope.selectSupplier = function (item, model, label) {
+    
+    var supplier = ($filter('filter')($scope.product.suppliers, {_id: item._id}, false))[0];
+    
+    if (!supplier) {
+      
+      $scope.selectedSupplier = "";
+
+      $scope.product.suppliers.push(item);
+      
+    }
+    
+  };
+  
+  $scope.dropSupplier = function(supplier){
+    var supplierIndex = $scope.product.suppliers.indexOf(supplier);
+    if (supplierIndex >= 0) {
+        $scope.product.suppliers.splice(supplierIndex, 1);
+    }
+    var supplierIndex = $scope.product.suppliers.indexOf(supplier._id);
+    if (supplierIndex >= 0) {
+        $scope.product.suppliers.splice(supplierIndex, 1);
+    }
+  };
+
+  $scope.getCategories = function(name){
+    return $http.get(myConfig.apiUrl+'/categories', {
+      params: {
+        name: name
+      }
+    }).then(function(res) {
+      
+      return res.data;
+
+    });
+  }
+
+  $scope.selectCategory = function (item, model, label) {
+    
+    var category = ($filter('filter')($scope.product.categories, {_id: item._id}, false))[0];
+    
+    if (!category) {
+      
+      $scope.selectedCategory = "";
+
+      $scope.product.categories.push(item);
+      
+    }
+    
+  };
+  
+  $scope.dropCategory = function(category){
+    var categoryIndex = $scope.product.categories.indexOf(category);
+    if (categoryIndex >= 0) {
+        $scope.product.categories.splice(categoryIndex, 1);
+    }
+    var categoryIndex = $scope.product.categories.indexOf(category._id);
+    if (categoryIndex >= 0) {
+        $scope.product.categories.splice(categoryIndex, 1);
+    }
+  };
+  
   $scope.getImages = function(title){
     return $http.get(myConfig.apiUrl+'/images', {
       params: {
@@ -241,6 +360,8 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
     var image = ($filter('filter')($scope.product.images, {_id: item._id}, false))[0];
     
     if (!image) {
+      
+      $scope.selectedImage = "";
 
       $scope.product.images.push(item);
       

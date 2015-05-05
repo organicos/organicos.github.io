@@ -1,7 +1,7 @@
 <div class="row">
 
     <div class="col-sm-22 col-sm-offset-1">
-        <h1>Pedidos</h1>
+        <h1>Pedidos <span ng-bind="filteredOrders.length"></span></h1>
         
         <form class="form-inline text-right">
             <div class="form-group">
@@ -57,7 +57,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="order in filteredProducts = (orders | filter: orderQuery | orderBy: selectedOrder:true | filter: {status : filterStatus})">
+                <tr ng-repeat="order in filteredOrders = (orders | filter: orderQuery | orderBy: selectedOrder:true | filter: {status : filterStatus})">
                     <td><a href="/pedido/{{order._id}}" ng-bind="order._id"></a></td>
                     <td><a href="/usuario/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></td>
                     <td ng-bind="order.shipping.phone"></td>
