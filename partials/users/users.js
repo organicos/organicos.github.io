@@ -45,9 +45,12 @@ users.controller('AdminUserCtrl', ['$scope','$http', '$routeParams', 'myConfig',
         $http.put(myConfig.apiUrl+'/user/'+$scope.user._id, $scope.user)
         .success(function(res) {
             
-        
-            $scope.$storage.user = res;
-    
+            if(res._id == $scope.$storage.user._id){
+                
+                $scope.$storage.user = res;
+                
+            }
+
             $scope.$emit('alert', {
                 kind: 'success',
                 msg: ['Dados salvos!'],

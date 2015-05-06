@@ -130,6 +130,9 @@ app.controller('myAppCtrl' , ['$scope', '$location', 'anchorSmoothScroll', '$loc
             , '/produtos'
             , '/ordens'
             , '/artigos'
+            , '/categories'
+            , '/suppliers'
+            , '/images'
         ];
 
         if(privateRoutes.indexOf(newValue) > -1){

@@ -21,7 +21,7 @@
 		        <a ng-click="dropImageFromArticle(image)"><i class="fa fa-remove"></i></a>
 		    </p>
 			<a href="/image/{{image._id}}">
-				<img class="img-responsive" alt="{{image.title}}" ng-src="http://images.elasticbeanstalk.com/200x200/{{image.url}}">
+				<img class="img-responsive" alt="{{image.title}}" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{image.url}}">
 			</a>
 		</div>
     </div>
@@ -50,7 +50,7 @@
             </div>
             
             <div class="form-group">
-                <textarea class="form-control" rows="8" ng-model="article.content" placeholder="Conteúdo do artigo"></textarea>
+                <textarea class="form-control" rows="20" ng-model="article.content" placeholder="Conteúdo do artigo"></textarea>
             </div>
 
             <div class="form-group">
@@ -75,7 +75,7 @@
         
 		<div class="thumbnail" ng-repeat="product in article.products">
 			<a href="/feira/produto/{{product._id}}">
-				<img class="img-responsive" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}">
+				<img class="img-responsive" alt="week_product" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.img}}">
 			</a>
 			<hr>
 			<div style="height:80px;">

@@ -98,7 +98,7 @@
                         <input type="text" class="form-control" id="phone" placeholder="Telefone" ng-model="$storage.basket.shipping.phone">                                          
                     </div>
                     <div class="form-group">
-                        <label for="deliveryOption" class="control-label">Data e horário de entrega ({{$storage.basket.shipping.deliveryOption}})</label>
+                        <label for="deliveryOption" class="control-label">Data e horário de entrega</label>
                         <select class="form-control" ng-model="$storage.basket.shipping.deliveryOption" ng-options="option as option for option in shipping.nextDates">
                           <option value="">-- Selecione uma data de entrega --</option>
                         </select>

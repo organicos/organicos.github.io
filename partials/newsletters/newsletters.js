@@ -37,7 +37,27 @@ newsletters.controller('AdminNewslettersCtrl', ['$scope','$http', 'myConfig', fu
 
 newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
 
-    $scope.newsletter = [];
+    $scope.newsletter = {
+        title: ""
+        , top: ""
+        , bottom: ""
+        , sections: []
+    };
+    
+    $scope.addNewSection = function(){
+        
+        var newSection = {
+            title: ""
+            , top: ""
+            , bottom: ""
+            , products: []
+            , articles: []
+        }
+        
+        $scope.newsletter.sections.push(newSection);
+        
+        
+    }
     
     if($routeParams.id){
 

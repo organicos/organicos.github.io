@@ -33,7 +33,7 @@
     <div class="hidden-xs col-sm-4 col-md-3" ng-if="article.products.length > 0">
 		<div class="thumbnail" ng-repeat="product in article.products">
 			<a href="/feira/{{product._id}}">
-				<img class="img-responsive" alt="week_product" ng-src="http://images.elasticbeanstalk.com/200x200/{{product.img}}" ng-dblclick="addToBasket(product)">
+				<img class="img-responsive" alt="week_product" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.img}}" ng-dblclick="addToBasket(product)">
 			</a>
 			<hr>
 			<div style="height:100px;">

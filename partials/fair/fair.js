@@ -49,6 +49,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter', '$location', 'myConfig', function($scope, $http, $routeParams, $filter, $location, myConfig) {
 
 	$scope.product = [];
+	$scope.sameCategoryProducts = [];
 	$scope.saving_product = false;
 
   $scope.pricesChartData = {
@@ -70,6 +71,17 @@ fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter',
 
   });
 
+  $http.get(myConfig.apiUrl + '/products')
+  .success(function(resp) {
+    
+      $scope.sameCategoryProducts = resp;
+
+  }).error(function(err) {
+    
+      console.error('ERR', err);
+
+  });
+  
   $scope.updateProductCharts = function(){
 
     $scope.pricesChartData.data[0] = [];
