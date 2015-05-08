@@ -1,6 +1,16 @@
 body {
 	padding-top:60px;
-	word-break:break-all;
+
+    -ms-word-break: break-all;
+    word-break: break-all;
+
+     /* Non standard for webkit */
+     word-break: break-word;
+
+    -webkit-hyphens: auto;
+       -moz-hyphens: auto;
+        -ms-hyphens: auto;
+            hyphens: auto;
 }
 
 /** Estilo do conteudo **/
