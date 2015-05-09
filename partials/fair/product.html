@@ -29,7 +29,7 @@
                     
                     <button class="btn btn-success btn-block" ng-click="addToBasket(product)">
                         Colocar na cesta
-                        <span class="label label-warning" ng-repeat="buttonProduct in $storage.basket.products | filter : {_id: product._id}" ng-bind="buttonProduct.quantity"></span>
+                        <span class="label label-warning" ng-bind="($storage.basket.products | filter:{_id:product._id}).quantity"></span>
                     </button>
                     
                     <div ng-if="product.prices[1]">

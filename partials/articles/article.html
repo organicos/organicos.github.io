@@ -27,6 +27,13 @@
     </div>
 
     <div class="col-sm-16">
+        
+        <p class="text-right">
+            <button class="btn btn-danger" ng-click="dropArticle(article)" ng-if="article"><i class="fa fa-trash"></i></button>
+        </p>
+        
+        <p><b>Visualizações:</b> <span ng-bind="article.visits.length"></span></p>
+        
         <form class="form" role="form" ng-submit="articleFormSubmit()">
             
             <div class="form-group">

@@ -16,6 +16,7 @@
                     <option value="deliveryOption">Entrega</option>
                     <option value="products">Produto</option>
                     <option value="payment_status">Pagamento</option>
+                    <option value="visits.length">Visualizações</option>
                     <option value="invalid">Inválido</option>
                 </select>
         	</div>
@@ -28,7 +29,7 @@
             <thead>
                 <tr>
                     <td>Título</td>
-                    <td>Conteúdo</td>
+                    <td>Visualizações</td>
                     <td>Url</td>
                     <td>Modificado</td>
                     <td>Ações</td>
@@ -36,8 +37,8 @@
             </thead>
             <tbody>
                 <tr ng-repeat="article in filteredArticles = (articles | filter: orderQuery | orderBy: selectedOrder | filter: {invalid : selectedFilterInvalidValue})">
-                    <td><a href="/artigo/{{article._id}}" ng-bind="article.title"></a></td>
-                    <td><span ng-bind="article.content | limitTo: 150"></span><span ng-if="article.content.length > 150">...</span></td>
+                    <td><a href="/artigo/{{article._id}}" ng-bind="article.title" title="{{article.content}}"></a></td>
+                    <td ng-bind="article.visits.length"></td>
                     <td ng-bind="article.encoded_url"></td>
                     <td ng-bind="article.updated | date:'dd/MM/yyyy'"></td>
                     <td><a ng-click="dropArticle(article)" href="javascrip:void(0)">x</a></td>

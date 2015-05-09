@@ -226,7 +226,7 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
   
   $scope.dropArticle = function(article) {
     
-    var confirmed = confirm('Deseja realmente excluir o artigo ' + article.name + "?");
+    var confirmed = confirm('Deseja realmente excluir o artigo ' + article.title + "?");
       
     if (confirmed) {
 
