@@ -7,19 +7,6 @@
             <div class="form-group">
         		<input class="form-control input-xs" id="orderQuery" name="orderQuery" ng-model="orderQuery" type="text" placeholder="Buscar artigo">
             </div>
-        	<div class="form-group">
-                <select class="form-control" id="order" ng-model="selectedOrder">
-                    <option value="updated" selected>Data</option>
-                    <option value="customer.email">Cliente</option>
-                    <option value="district">Bairro</option>
-                    <option value="city">Cidade</option>
-                    <option value="deliveryOption">Entrega</option>
-                    <option value="products">Produto</option>
-                    <option value="payment_status">Pagamento</option>
-                    <option value="visits.length">Visualizações</option>
-                    <option value="invalid">Inválido</option>
-                </select>
-        	</div>
             <a class="btn btn-default" href="/artigo">+</a>
         </form>
         
@@ -28,15 +15,15 @@
         <table class="table table-condensed table-stripped table-hover small">
             <thead>
                 <tr>
-                    <td>Título</td>
-                    <td>Visualizações</td>
-                    <td>Url</td>
-                    <td>Modificado</td>
+                    <td class="click" ng-click="orderByField='title'; reverseSort = !reverseSort">Título</td>
+                    <td class="click" ng-click="orderByField='visits.length'; reverseSort = !reverseSort">Visualizações</td>
+                    <td class="click" ng-click="orderByField='encoded_url'; reverseSort = !reverseSort">Url</td>
+                    <td class="click" ng-click="orderByField='updated'; reverseSort = !reverseSort">Modificado</td>
                     <td>Ações</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="article in filteredArticles = (articles | filter: orderQuery | orderBy: selectedOrder | filter: {invalid : selectedFilterInvalidValue})">
+                <tr ng-repeat="article in filteredArticles = (articles | filter: orderQuery | filter: {invalid : selectedFilterInvalidValue} | orderBy:orderByField:reverseSort)">
                     <td><a href="/artigo/{{article._id}}" ng-bind="article.title" title="{{article.content}}"></a></td>
                     <td ng-bind="article.visits.length"></td>
                     <td ng-bind="article.encoded_url"></td>

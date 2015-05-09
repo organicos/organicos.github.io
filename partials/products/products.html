@@ -35,20 +35,20 @@
         <table class="table table-condensed table-stripped table-hover">
             <thead>
                 <tr>
-                    <td>Nome</td>
-                    <td>Custo</td>
-                    <td>Preço</td>
+                    <td class="click" ng-click="orderByField='name'; reverseSort = !reverseSort">Nome</td>
+                    <td class="click" ng-click="orderByField='costs[0].price'; reverseSort = !reverseSort">Custo</td>
+                    <td class="click" ng-click="orderByField='prices[0].price'; reverseSort = !reverseSort">Preço</td>
                     <td>Margem</td>
-                    <td>Categoria</td>
-                    <td>Visualizações</td>
-                    <td>Ativo</td>
-                    <td>Destaque</td>
-                    <td>Ultima modificação</td>
+                    <td class="click" ng-click="orderByField='categories[0].name'; reverseSort = !reverseSort">Categoria</td>
+                    <td class="click" ng-click="orderByField='visits.length'; reverseSort = !reverseSort">Visualizações</td>
+                    <td class="click" ng-click="orderByField='active'; reverseSort = !reverseSort">Ativo</td>
+                    <td class="click" ng-click="orderByField='highlight'; reverseSort = !reverseSort">Destaque</td>
+                    <td class="click" ng-click="orderByField='updated'; reverseSort = !reverseSort">Ultima modificação</td>
                     <td>Ações</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {categories : selectedCategory} | orderBy: selectedOrder)">
+                <tr ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {categories : selectedCategory} | orderBy:orderByField:reverseSort)">
                     <td><a class="text-violet" href="/produto/{{product._id}}" ng-bind="product.name"></a></td>
                     <td>
                         <span ng-bind="product.costs[0].price | currency"></span>

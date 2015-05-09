@@ -170,3 +170,8 @@ object[type^='application/gas-events'] { display: none; }
     padding-right:0;
     padding-left:0;
 }
+
+/** Simula pointer click **/
+.click:hover {
+    cursor:pointer;
+}
