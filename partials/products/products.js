@@ -282,7 +282,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
 
   $scope.selectSupplier = function (item, model, label) {
     
-    var supplier = ($filter('filter')($scope.product.suppliers, {_id: item._id}, false));
+    var supplier = ($filter('filter')($scope.product.suppliers, {_id: item._id}, false))[0];
     
     if (!supplier) {
       
@@ -319,7 +319,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
 
   $scope.selectCategory = function (item, model, label) {
     
-    var category = ($filter('filter')($scope.product.categories, {_id: item._id}, false));
+    var category = ($filter('filter')($scope.product.categories, {_id: item._id}, false))[0];
     
     if (!category) {
       
@@ -356,7 +356,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
 
   $scope.selectImage = function (item, model, label) {
     
-    var image = ($filter('filter')($scope.product.images, {_id: item._id}, false));
+    var image = ($filter('filter')($scope.product.images, {_id: item._id}, false))[0];
     
     if (!image) {
       
