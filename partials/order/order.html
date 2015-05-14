@@ -17,13 +17,13 @@
                     <span ng-if="!changingStatus"><select ng-model="newStatus" ng-change="changeStatus(newStatus)" ng-options="index*1 as status.name for (index, status) in statuses"></select> </span>
                     <span ng-if="changingStatus"><i class="fa fa-spinner fa-spin"></i></span>
                 </p>
-
+                <p ng-if="order.payment_date"><strong>Data do pagamento:</strong> <span ng-bind="order.payment_date"></span></p>
                 <p><strong>Cliente: </strong> <a href="/user/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></p>
                 <p><strong>Valor da cesta: </strong> <span ng-bind="order.total | currency:'R$':2"></span></p>
                 <p><strong>Valor do frete: </strong> <span ng-bind="order.shipping.price | currency:'R$':2"></span></p>
                 <p><strong>Valor final: </strong> <span ng-bind="order.total + order.shipping.price | currency:'R$':2"></span></p>
                 <p><strong>Data: </strong> <span ng-bind="order.updated | date:'dd/MM/yyyy'"></span></p>
-                <div ng-cloak ng-if="order.status == 0">
+                <div>
                     <div class="row">
                         <div class="col-sm-12">
                             <a class="btn btn-success btn-block" href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code={{order.pagseguro.checkout.code}}" target="_blank">

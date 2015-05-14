@@ -53,6 +53,7 @@
                     <td>Produtos</td>
                     <td>Data</td>
                     <td>Status</td>
+                    <td>Pagamento</td>
                     <td>Ações</td>
                 </tr>
             </thead>
@@ -74,6 +75,7 @@
                         <i ng-switch-when="4" class="fa fa-fw fa-exclamation text-danger"></i>
                         <i ng-switch-when="5" class="fa fa-fw fa-ban text-danger"></i>
                     </td>
+                    <td ng-bind="order.payment_date"></td>
                     <td><a ng-click="dropOrder(order)" href="javascrip:void(0)">x</a></td>
                 </tr>
             </tbody>

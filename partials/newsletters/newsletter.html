@@ -1,21 +1,7 @@
-<style type="text/css">
-    .newsBody {background-color:#F0F0F0; text-align: justify; word-break:break-all;}
-    .newsBody h1{color:#1D9E74; font-weight: bold;}
-    .newsBody h2{color:#A348A3;}
-    .newsBody h3{color:#A348A3;}
-    .newsBody p { white-space:pre-wrap; }
-    .newsBody a{ color:white; text-decoration: none; }
-    .newsBody .newsHead {font-size:30px; text-align:center; background-color:#0079BF; color:white; margin:0; padding: 10px 15px;}
-    .newsBody .newsSectionHead {font-size:30px; text-align:center; background-color:#0079BF; color:white; margin:0; padding: 10px 15px;}
-    .newsBody .newsContent{ padding: 10px 15px; }
-    .newsBody .newsFoot{font-size:20px; text-align:center; background-color:#0079BF; color:white; margin:0; padding: 10px 15px;}
-</style>
-
-
 <div class="row">
-    <div class="col-sm-offset-1 col-sm-22">
+    <div class="col-sm-24">
         <div class="row">
-            <div class="col-sm-11">
+            <div class="col-sm-10">
                 <h1>Newsletter</h1>
                 <form class="form" role="form" ng-submit="submitNewsletterForm()">
                     
@@ -43,6 +29,46 @@
                             <textarea class="form-control input-sm" rows="3" name="section.top" ng-model="section.top" placeholder="Texto superior da sessão"></textarea>
                         </div>
 
+                        <div clas="form-group" ng-if="section.articles.length == 0">
+                            <label for="section.products"></label>
+                            <input name="products_search"
+                                type="text" 
+                                ng-model="selectedProduct" 
+                                placeholder="Produtos" 
+                                typeahead="product.name for product in getProducts($viewValue)" 
+                                typeahead-loading="loadingProducts" 
+                                typeahead-on-select="selectProduct($item, $model, $label, section); selectedProduct = ''" 
+                                class="form-control input-sm"
+                                >
+                            <i ng-show="loadingProducts" class="fa fa-spin fa-spinner"></i>
+                            <span ng-repeat="product in section.products">
+                                <span class="label label-info">
+                                    <span ng-bind="product.name"></span>
+                                    <a href="javascript:void(0)" ng-click="dropProduct(product, section)">x</a>
+                                </span> 
+                            </span>
+                        </div>
+                        
+                        <div clas="form-group" ng-if="section.products.length == 0">
+                            <label for="section.articles"></label>
+                            <input name="articles_search"
+                                type="text" 
+                                ng-model="selectedArticle" 
+                                placeholder="Artigos" 
+                                typeahead="article.title for article in getArticles($viewValue)" 
+                                typeahead-loading="loadingArticles" 
+                                typeahead-on-select="selectArticle($item, $model, $label, section); selectedArticle = ''" 
+                                class="form-control input-sm"
+                                >
+                            <i ng-show="loadingArticles" class="fa fa-spin fa-spinner"></i>
+                            <span ng-repeat="article in section.articles">
+                                <span class="label label-info">
+                                    <span ng-bind="article.title"></span>
+                                    <a href="javascript:void(0)" ng-click="dropArticle(article, section)">x</a>
+                                </span> 
+                            </span>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="section.bottom"></label>
                             <textarea class="form-control input-sm" rows="3" name="section.bottom" ng-model="section.bottom" placeholder="Texto inferior da seção"></textarea>
@@ -61,57 +87,123 @@
                     </div>
                     
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Adicinar newsletter</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Salvar</button>
                     </div>
 
                 </form>
             </div>
-            <div class="col-sm-offset-2 col-sm-11">
+            
+            
+            <div class="col-sm-14">
                 
                 <h1>Preview do e-mail</h1>
                 
-                <iframe style="width:100%;" seamless srcdoc='
-                
-                <div class="newsBody">
-
-                    <div class="newsHead">
-    
-                        <a href="https://feiraorganica.com">Feira Orgânica Delivery</a>
-                        
-                    </div>
+                <div>
+                    <table width="100%" style="background-color:#FFFFFF; text-align: justify; -ms-word-break: break-all; word-break: break-all; word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto;">
+                        <tr>
+                            <td>
+                                <table width="600" align="center">
+                                    <tr>
+                                        <td width="600">
+                                            <table width="600" style="background-color:#0079BF;">
+                                                <tr>
+                                                    <td align="center">
+                                                        <a href="https://feiraorganica.com" style="color:white; text-decoration:none; font-size: 1.5em; margin-top: 0.83em; margin-bottom: 0.83em; margin-left: 0; margin-right: 0; font-weight: bold">Feira Orgânica Delivery</a>
+                                                    </td>
+                                                </tr>    
+                                            </table>
+                                            <table width="600" style="background-color:#F0F0F0;">
+                                                <tr>
+                                                    <td width="15"><img src="https://s3-sa-east-1.amazonaws.com/fodev/img/email/pixeltransparent.png" width="15" height="1" /></td>
+                                                    <td width="570">
+                                                        <table>
+                                                            <tr style="color:#1D9E74; font-size: 2em; margin-top: 0.67em; margin-bottom: 0.67em; margin-left: 0; margin-right: 0; font-weight: bold;"><td ng-bind="newsletter.title"></td></tr>
+                                                            <tr><td>
+                                                                <div style="padding-top:10px; margin-bottom:15px;" ng-bind="newsletter.top"></div>
+                                                            </td></tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <table width="570" ng-repeat="section in newsletter.sections">
+                                                                        <tr><td align="center" ng-bind="section.title" style="background-color:#a349a4; color:white;"></td></tr>
+                                                                        <tr><td>
+                                                                            <div style="padding-top:10px; margin-bottom:15px;" ng-bind="section.top"></div>
+                                                                        </td></tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <table nf-if="section.articles.length" ng-repeat="article in section.articles">
+                                                                                    <tr>
+                                            											<td valign="top" style="padding-bottom: 30px; padding-right: 35px; padding-top: 3px;">
+                                            												<div>
+                                            												    <div>
+                                            												        <a href="https://feiraorganica.com/feira/{{article.encoded_url}}">
+                                            												            <img alt="{{article.title}}" src="https://feiraorganica.com/cdn/image/140x150/?url={{article.images[0].src}}" border="0" style="max-width: 510px; border: 1px solid #dddddd; display: inline; height: 140px; width: 150px;">
+                                            												        </a>
+                                        												        </div>
+                                        												    </div>
+                                            											</td>
+                                            											<td valign="top" style="padding-bottom: 25px;">
+                                            												<div style="font-size: 20px; font-weight: bold; margin: 0; font-family: 'Helvetica Neue',Helvetica,arial,sans-serif; line-height: 115%; padding-top: 0; display: block; text-align: left; font-style: normal; padding-bottom: 0; letter-spacing: normal; width: 323px; color: #50bbb6 !important; text-decoration: none;">
+                                            												    <a href="https://feiraorganica.com/blog/{{article.encoded_url}}" style="color: #50bbb6; text-decoration: none;" ng-bind="article.title"></a>
+                                            												</div>
+                                        												    <div style="font-size: 16px; font-weight: normal; font-style: italic; margin-bottom: 0; margin-top: 3px; padding-top: 0; color: #444444;">
+                                        												        <div>
+                                        												            <span xml="lang" ng-bind="article.author"></span>
+                                        												        </div>
+                                        												    </div>
+                                        												    <div style="font-family: 'Helvetica Neue',Helvetica,arial,sans-serif; font-size: 14px; line-height: 150%; color: #444444;">
+                                        												        <p ng-bind="article.content"></p>
+                                        												        <p>
+                                        												            <a href="https://feiraorganica.com/blog/{{article.encoded_url}}" style="color: #50bbb6 !important;">Ler artigo</a>
+                                        												        </p>
+                                        												    </div>
+                                            											</td>
+                                            										</tr>
+                                                                                </table>
+                                                                                
+                                                                                <table nf-if="section.products.length" cellspacing="0" id="pocketAvailableDetails" border="0" cellpadding="0" style="table-layout: fixed; width: 510px;">
+                                                        							<tbody>
+                                                        							    <tr>
+                                                            								<td ng-repeat="product in section.products" valign="top" style="padding-bottom: 23px; padding-top: 10px; width: 108px;">
+                                                            								    <a href="https://feiraorganica.com/feira/{{product._id}}">
+                                                            								        <img border="0" alt="{{product.name}}" src="https://feiraorganica.com/cdn/image/108x116/?url={{product.images[0].url}}" style="width: 108px; height: 116px;"></a>
+                                                            								    </td>
+                                                            								<td valign="top" style="width: 29px;">&nbsp;</td>
+                                                        							    </tr>
+                                                        						    </tbody>
+                                                        						</table>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr><td>
+                                                                            <div style="padding-top:10px; margin-bottom:15px;" ng-bind="section.bottom"></div>
+                                                                        </td></tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr><td>
+                                                                <div style="padding-top:10px; margin-bottom:15px;" ng-bind="newsletter.bottom"></div>
+                                                            </td></tr>
+                                                            <tr><td style="font-size: .67em; margin-top: 2.33em; margin-bottom: 2.33em; margin-left: 0; margin-right: 0; font-weight: bold;">Para garantir que nossos comunicados cheguem em sua caixa de entrada, adicione o e-mail <a href="mailto:info@feiraorganica.com.br" style="color:#0079BF;">info@feiraorganica.com.br</a> ao seu catálogo de endereços.</td></tr>   
+                                                            <tr><td align="center" style="font-size: .67em; margin-top: 2.33em; margin-bottom: 2.33em; margin-left: 0; margin-right: 0; font-weight: bold;">Não consegue ver este e-mail? <a href="https://feiraorganica.com/newsletter/{{newsletter.encoded-url}}" style="text-decoration:none; font-size: 1.17em; margin-top: 1em; margin-bottom: 1em; margin-left: 0; margin-right: 0; font-weight: bold">Clique aqui.</a></td></tr>
+                                                        </table>
+                                                    </td>
+                                                    <td width="15"><img src="https://s3-sa-east-1.amazonaws.com/fodev/img/email/pixeltransparent.png" width="15" height="1" /></td>
+                                                </tr>
+                                            </table>
+                                            <table width="600" style="background-color:#0079BF;">
+                                                <tr>
+                                                    <td align="center">
+                                                        <a href="https://feiraorganica.com" style="color:white; text-decoration:none; font-size: 1.17em; margin-top: 1em; margin-bottom: 1em; margin-left: 0; margin-right: 0; font-weight: bold">A Feira Orgânica Delivery agradece sua confiança!</a>
+                                                    </td>
+                                                </tr>    
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
                     
-                    <div class="newsContent">
-                        
-                        <h1 ng-bind="newsletter.title"></h1>
-                        
-                        <p ng-bind="newsletter.top"></p>
-                        
-                        <div ng-repeat="section in newsletter.sections">
-                            
-                            <h2 class="newsSectionHead" ng-bind="section.title"></h2>
-                            
-                            <p ng-bind="section.top"></p>
-                            
-                            <p ng-bind="section.bottom"></p>
-                            
-                        </div>
-                        
-                        <p ng-bind="newsletter.bottom"></p>
-                            
-                        <small>Para garantir que nossos comunicados cheguem em sua caixa de entrada, adicione o e-mail <a href="mailto:info@feiraorganica.com.br" style="color:#0079BF;">info@feiraorganica.com.br</a> ao seu catálogo de endereços.</small>
-                    </div>
-                    
-                    <div class="newsFoot">
-                        
-                        <a href="https://feiraorganica.com">A Feira Orgânica Delivery agradece sua confiança!</a>
-
-                    </div>
-
-                </div>             
-                
-                '>
-                    
-                </iframe>
+                </div>
                 
             </div>
         </div>
