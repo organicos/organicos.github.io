@@ -20,9 +20,8 @@ products.config(['$routeProvider', function($routeProvider) {
 products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService) {
 
   $scope.products = [];
-  $scope.selectedFilterValue = '';
-  $scope.selectedFilterField = 'category';
-  $scope.selectedOrder = 'name';
+  $scope.orderByField = 'name';
+  $scope.selectedCategory = '';
 
   $http.get(myConfig.apiUrl+'/products')
   .success(function(res){

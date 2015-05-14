@@ -20,9 +20,8 @@ articles.config(['$routeProvider', function($routeProvider) {
 articles.controller('ArticlesCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
 
   $scope.articles = [];
-  $scope.selectedFilterValue = '';
-  $scope.selectedFilterField = 'category';
-  $scope.selectedOrder = 'name';
+  $scope.orderByField = 'updated';
+  $scope.reverseSort = 1;
 
   $http.get(myConfig.apiUrl+'/articles')
   .success(function(res){
@@ -39,13 +38,6 @@ articles.controller('ArticlesCtrl', ['$scope','$http', '$filter', '$routeParams'
   
   });
 
-  $scope.selectFilter = function (field, value) {
-    
-    $scope.selectedFilterField = field;
-    $scope.selectedFilterValue = value;
-    
-  }
-  
 }]);
 
 articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
