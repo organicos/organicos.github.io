@@ -49,11 +49,20 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="encoded_url">encoded_url</label>
-                        <div class="col-sm-20">
-                            <input class="form-control" type="text" id="encoded_url" ng-model="product.encoded_url" required>
+                        <label class="col-sm-4 control-label" for="encoded_url">Slug</label>
+                        <div class="col-sm-14">
+                            <input class="form-control" type="text" ng-model="product.encoded_url" placeholder="nome-codificado-sem-caracter-especial">
+                        </div>
+                        <div class="checkbox col-sm-6">
+                            <label>
+                                <input type="checkbox" name="active" ng-model="product.highlight"> Destaque
+                            </label>
+                            <label>
+                                <input type="checkbox" name="active" ng-model="product.active"> Ativo
+                            </label>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="cost">Custo</label>
                         <div class="col-sm-6">
@@ -142,19 +151,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-sm-offset-4 col-sm-20">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="active" ng-model="product.highlight"> Destaque
-                                </label>
-                                <label>
-                                    <input type="checkbox" name="active" ng-model="product.active"> Ativo
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-20">
                             <button type="button" class="btn btn-primary" ng-click="producFormSubmit()" ng-class="saving_selectedProduct ? 'disabled' : ''">Salvar</button>

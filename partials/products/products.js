@@ -60,7 +60,7 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
       
       if(result){
         
-        $http.delete(myConfig.apiUrl + '/products/' + product._id)
+        $http.delete(myConfig.apiUrl + '/product/' + product._id)
         .success(function(res) {
           
           var productIndex = $scope.products.indexOf(product);
