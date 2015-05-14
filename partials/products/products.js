@@ -95,7 +95,7 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
 products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', '$location', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, $location) {
 
   $scope.saving_product = false;
-  $scope.product = {prices: [], costs: []};
+  $scope.product = {prices: [], costs: [], suppliers: [], categories: [], images: []};
   $scope.pricesChartData = {
     series : ['Preço'],
     labels : [],
