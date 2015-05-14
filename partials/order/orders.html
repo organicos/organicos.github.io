@@ -23,42 +23,24 @@
         
         <br>
         
-        <div class="btn-group" role="group">
-        	<button 
-        		type="button" 
-        		class="btn btn-sm btn-primary" 
-        		ng-class="selectedFilterInvalidValue === '' ? 'active' : ''"
-        		ng-click="setFilterStatus('')"
-        	>Tudo</button>
-        	<button ng-repeat="(index, status) in statuses"
-        		type="button" 
-        		class="btn btn-sm btn-primary" 
-        		ng-class="filterStatus === index ? 'active' : ''"
-        		ng-click="setFilterStatus(index)"
-        		ng-bind="status.name"
-        	></button>
-        </div>
-        
-        <br><br>
-        
         <table class="table table-condensed table-stripped table-hover small">
             <thead>
                 <tr>
-                    <td>Ref</td>
-                    <td>Cliente</td>
-                    <td>Fone</td>
-                    <td>Bairro</td>
-                    <td>Cidade</td>
-                    <td>Entrega</td>
-                    <td>Produtos</td>
-                    <td>Data</td>
-                    <td>Status</td>
-                    <td>Pagamento</td>
+                    <td class="click" ng-click="orderByField='_id'; reverseSort = !reverseSort">Ref</td>
+                    <td class="click" ng-click="orderByField='customer.name'; reverseSort = !reverseSort">Cliente</td>
+                    <td class="click" ng-click="orderByField='shipping.phone'; reverseSort = !reverseSort">Fone</td>
+                    <td class="click" ng-click="orderByField='shipping.district'; reverseSort = !reverseSort">Bairro</td>
+                    <td class="click" ng-click="orderByField='shipping.city'; reverseSort = !reverseSort">Cidade</td>
+                    <td class="click" ng-click="orderByField='shipping.deliveryOption'; reverseSort = !reverseSort">Entrega</td>
+                    <td class="click" ng-click="orderByField='products.length'; reverseSort = !reverseSort">Produtos</td>
+                    <td class="click" ng-click="orderByField='updated'; reverseSort = !reverseSort">Data</td>
+                    <td class="click" ng-click="orderByField='status'; reverseSort = !reverseSort">Status</td>
+                    <td class="click" ng-click="orderByField='payment_date'; reverseSort = !reverseSort">Pagamento</td>
                     <td>Ações</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="order in filteredOrders = (orders | filter: orderQuery | orderBy: selectedOrder:true | filter: {status : filterStatus})">
+                <tr ng-repeat="order in filteredOrders = (orders | filter: orderQuery | orderBy: orderByField:reverseSort)">
                     <td><a href="/pedido/{{order._id}}" ng-bind="order._id"></a></td>
                     <td><a href="/usuario/{{order.customer._id}}" ng-bind="order.customer.name || order.customer.email"></a></td>
                     <td ng-bind="order.shipping.phone"></td>

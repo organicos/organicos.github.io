@@ -52,8 +52,12 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvid
                 return config;
             },
             'responseError': function(response) {
+                var login_path = '/entrar'+$location.path();
+                
+                console.log('app:::::  ' + login_path);
+                
                 if(response.status === 401 || response.status === 403) {
-                  $location.path('/entrar');
+                  $location.path(login_path);
                 }
                 return $q.reject(response);
             }

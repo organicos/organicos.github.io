@@ -164,7 +164,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
   
   $scope.productPost = function(product) {
     
-    $http.post(myConfig.apiUrl + '/products', product)
+    $http.post(myConfig.apiUrl + '/product', product)
     .success(function(resp) {
       
         $location.path("/produto/" + resp._id);
@@ -193,7 +193,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
 
   $scope.productPut = function(product) {
     
-    $http.put(myConfig.apiUrl + '/products/'+product._id, product)
+    $http.put(myConfig.apiUrl + '/product/'+product._id, product)
     .success(function(resp) {
       
       $scope.product = resp;
@@ -242,7 +242,7 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
       
       if(result){
         
-        $http.delete(myConfig.apiUrl + '/products/' + product._id)
+        $http.delete(myConfig.apiUrl + '/product/' + product._id)
         .success(function() {
           $location.path("/produtos");
         })

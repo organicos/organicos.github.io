@@ -8,7 +8,7 @@ security.config(['$routeProvider', function ($routeProvider) {
         when('/entrar', {
             templateUrl: '/partials/security/signin.html'
         }).
-        when('/entrar/:return_url', {
+        when('/entrar/:return_url*', {
             templateUrl: '/partials/security/signin.html'
         }).
         when('/recuperar-senha', {
@@ -30,6 +30,8 @@ security.controller('LogoutCtrl', ['$scope', '$location', function ($scope, $loc
 }]);
 
 security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http', 'myConfig', function ($scope, $location, $routeParams, $http, myConfig) {
+    
+    console.log('signin:::::  ' + $routeParams.return_url);
     
     $scope.processingSignInUp = false;
     

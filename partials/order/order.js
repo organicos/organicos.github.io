@@ -45,11 +45,10 @@ var statuses = [
 order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
 
     $scope.filterStatus = '';
-    $scope.selectedOrder = 'updated';
+    $scope.selectedOrder = '';
     $scope.orders = [];
     $scope.userFormModalObject = {};
     $scope.statuses = statuses;
-    $scope.selectedOrder = "updated";
     
     $http.get(myConfig.apiUrl+'/orders')
     .success(function(res) {
@@ -160,7 +159,7 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
           $scope.$emit('alert', {
               kind: 'danger',
               msg: error_list,
-              title: "Não foi possível editar a ordem. Verifique o motivo abaixo:"
+              title: "Não foi possível editar seu pedido. Verifique o motivo abaixo:"
           });
       
         })
@@ -184,10 +183,18 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
       $scope.order = res;
       $scope.newStatus = res.status;
 
-  }).error(function(err) {
-  
-      console.error('ERR', err);
-  
+  }).error(function(err, response) {
+
+      if(response === 403) {
+        
+          $scope.$emit('alert', {
+              kind: 'danger',
+              msg: ['Você precisa se identificar para rever seu pedido!'],
+              title: "Não foi possível carregar seu pedido. Verifique o motivo abaixo:"
+          });  
+        
+      }
+
   });
   
   $scope.checkPagseguroPayment = function(order_id){
@@ -223,7 +230,17 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
         $scope.$storage.basket.products = basket.products;
         $scope.$storage.basket.total = basket.total;
     
-    }).error(function(err) {
+    }).error(function(err, response) {
+      
+      if(response === 403) {
+        
+          $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Você precisa se identificar para rever seu pedido!"
+          });  
+        
+      } else {
         
         if(err.inactive_products){
             
@@ -257,19 +274,23 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
               title: "Seu pedido precisa ser revisado. Verifique os motivos abaixo:"
           });            
             
-        }
-    
+        }        
+        
+      }
+        
     })
     .finally(function(){
       $scope.orderReady = true;
     });
     
-    $scope.shipping = {
-      nextDates: []
-    };
-    
     $http.get(myConfig.apiUrl + '/shipping/next')
     .success(function(res) {
+
+      if(res.indexOf($scope.$storage.basket.shipping.deliveryOption) == -1){
+        
+        $scope.$storage.basket.shipping.deliveryOption = "";
+        
+      }
       
       $scope.shipping.nextDates = res;
       
@@ -318,7 +339,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
       $scope.$storage.basket.products = [];
       $scope.$storage.basket.total = 0;
       
-      $location.path("/ordem/"+order._id);
+      $location.path("/pedido/"+order._id);
 
       $scope.$emit('alert', {
         kind: 'success',

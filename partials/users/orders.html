@@ -26,17 +26,17 @@
         <table class="table table-condensed table-stripped table-hover small">
             <thead>
                 <tr>
-                    <td>Ref</td>
-                    <td>Bairro</td>
-                    <td>Cidade</td>
-                    <td>Entrega</td>
-                    <td>Preço</td>
-                    <td>Data</td>
-                    <td>Pago</td>
+                    <td class="click" ng-click="orderByField='_id'; reverseSort = !reverseSort">Ref</td>
+                    <td class="click" ng-click="orderByField='shipping.district'; reverseSort = !reverseSort">Bairro</td>
+                    <td class="click" ng-click="orderByField='shipping.city'; reverseSort = !reverseSort">Cidade</td>
+                    <td class="click" ng-click="orderByField='shipping.deliveryOption'; reverseSort = !reverseSort">Entrega</td>
+                    <td class="click" ng-click="orderByField='total'; reverseSort = !reverseSort">Preço</td>
+                    <td class="click" ng-click="orderByField='updated'; reverseSort = !reverseSort">Data</td>
+                    <td class="click" ng-click="orderByField='pagseguro.transaction.status[0]'; reverseSort = !reverseSort">Pago</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="order in filteredProducts = (orders | filter: orderQuery | orderBy: selectedOrder | filter: {invalid : selectedFilterInvalidValue})">
+                <tr ng-repeat="order in filteredOrders = (orders | filter: orderQuery | orderBy: orderByField:reverseSort)">
                     <td><a href="/meu/pedido/{{order._id}}" ng-bind="order._id"></a></td>
                     <td ng-bind="order.shipping.district"></td>
                     <td ng-bind="order.shipping.city"></td>
