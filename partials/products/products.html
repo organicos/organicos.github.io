@@ -30,6 +30,7 @@
                     <td class="click" ng-click="orderByField='categories[0].name'; reverseSort = !reverseSort">Categoria</td>
                     <td class="click" ng-click="orderByField='visits.length'; reverseSort = !reverseSort">Visualizações</td>
                     <td class="click" ng-click="orderByField='active'; reverseSort = !reverseSort">Ativo</td>
+                    <td class="click" ng-click="orderByField='encoded_url'; reverseSort = !reverseSort">url</td>
                     <td class="click" ng-click="orderByField='highlight'; reverseSort = !reverseSort">Destaque</td>
                     <td class="click" ng-click="orderByField='updated'; reverseSort = !reverseSort">Ultima modificação</td>
                     <td>Ações</td>
@@ -52,9 +53,10 @@
                     <td ng-bind="product.categories[0].name"></td>
                     <td ng-bind="product.visits.length"></td>
                     <td><i ng-if="product.active" class="fa fa-check"></i></td>
+                    <td ng-bind="product.encoded_url"></td>
                     <td><i ng-if="product.highlight" class="fa fa-check"></i></td>
                     <td ng-bind="product.updated | date:'dd/MM/yyyy'"></td>
-                    <td><a href="javascript:void(0)" ng-click="dropProduct(category)">x</a></td>
+                    <td><a href="javascript:void(0)" ng-click="dropProduct(product)">x</a></td>
                 </tr>
             </tbody>
         </table>

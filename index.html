@@ -131,7 +131,7 @@
             <li dropdown ng-cloak ng-if="$storage.user.token">
               <a href="#" dropdown-toggle><i class="fa fa-user"></i> <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li role="presentation" class="dropdown-header" ng-bind="user.name || user.email"></li>
+                <li role="presentation" class="dropdown-header" ng-bind="$storage.user.name || $storage.user.email"></li>
                 <li><a href="/eu">Meus dados</a></li>
                 <li><a href="/meus/pedidos">Meus pedidos</a></li>
                 <li><a href="/alterar-senha">Alterar senha</a></li>
