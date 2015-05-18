@@ -30,7 +30,7 @@ var app = angular.module('myApp', [
   'myApp.blog',
   'myApp.newsletters',
   'myApp.categories',
-  '720kb.socialshare',
+  'myApp.custom-filters',
   'chart.js'
 ]);
 

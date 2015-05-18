@@ -33,7 +33,7 @@
 		
 		
 				<div class="thumbnail">
-					<a href="/feira/{{product._id}}">
+					<a href="/feira/{{product.encoded_url}}">
 						<img class="img-responsive img-responsive-wide img-centered" alt="week_product" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.images[0].url}}" ng-dblclick="addToBasket(product)">
 					</a>
 					<hr>
@@ -41,7 +41,7 @@
 						<p>
 							<span class="text-success" ng-bind="product.prices[0].price | currency:'R$':2"></span> <span ng-if="product.prices[1].price > product.prices[0].price"><i class="fa fa-arrow-down text-success"></i> <del><small class="text-muted text-danger" ng-bind="product.prices[1].price | currency:'R$':2"></small></del></span>
 						</p>
-						<h4 class="text-violet"><a href="/feira/{{product._id}}" ng-bind="product.name"></a></h4>
+						<h4 class="text-violet"><a href="/feira/{{product.encoded_url}}" ng-bind="product.name"></a></h4>
 					</div>
 		
 					<button class="btn btn-success btn-block" ng-click="addToBasket(product)">Colocar na cesta 

@@ -81,7 +81,7 @@
         </div>
         
 		<div class="thumbnail" ng-repeat="product in article.products">
-			<a href="/feira/produto/{{product._id}}">
+			<a href="/feira/produto/{{product.encoded_url}}">
 				<img class="img-responsive" alt="week_product" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.images[0].url}}">
 			</a>
 			<hr>
@@ -92,7 +92,7 @@
 						<a ng-if="product.category" ng-click="selectCategory(product.category)" ng-bind="product.category"></a>
 					</span>
 				</p>
-				<h4 class="text-violet"><a href="/feira/produto/{{product._id}}" ng-bind="product.name"></a></h4>
+				<h4 class="text-violet"><a href="/feira/produto/{{product.encoded_url}}" ng-bind="product.name"></a></h4>
 			</div>
 
 			<button class="btn btn-danger btn-block" ng-click="dropProductFromArticle(product)">Remover</button>

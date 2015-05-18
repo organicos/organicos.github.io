@@ -90,7 +90,7 @@
             
             <div class="col-sm-14">
                 
-                <h1>Preview do e-mail</h1>
+                <h1>Preview do e-mail <a class="btn" href="https://fodev-api-vinagreti-1.c9.io/newsletter/{{newsletter._id}}/preview" target="_blank"><i class="fa fa-external-link"></i></a></h1>
                 
                 <div>
                     <table width="100%" style="background-color:#FFFFFF; text-align: justify; -ms-word-break: break-all; word-break: break-all; word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto;">
@@ -130,7 +130,7 @@
                                             												<div>
                                             												    <div>
                                             												        <a href="https://feiraorganica.com/feira/{{article.encoded_url}}">
-                                            												            <img alt="{{article.title}}" src="https://feiraorganica.com/cdn/image/140x150/?url={{article.images[0].url}}" border="0" style="max-width: 510px; border: 1px solid #dddddd; display: inline; height: 140px; width: 150px;">
+                                            												            <img alt="{{article.title}}" ng-src="https://feiraorganica.com/cdn/image/140x150/?url={{article.images[0].url}}" border="0" style="max-width: 510px; border: 1px solid #dddddd; display: inline; height: 140px; width: 150px;">
                                             												        </a>
                                         												        </div>
                                         												    </div>
@@ -153,11 +153,12 @@
                                                                                 
                                                                                 <table nf-if="section.products.length">
                                                         							<tbody>
-                                                        							    <tr>
-                                                            								<td ng-repeat="(index, product) in section.products" valign="top" align="center" style="padding-left:5px; padding-bottom: 23px; padding-top: 10px; width: 137px;">
-                                                            								    <a href="https://feiraorganica.com/feira/{{product._id}}">
-                                                            								        <img border="0" alt="{{product.name}}" src="https://feiraorganica.com/cdn/image/137x120/?url={{product.images[0].url}}" style="width: 137px; height: 120px;">
+                                                        							    <tr ng-repeat="rowProducts in section.products|groupIntoRowsBy:4">
+                                                            								<td ng-repeat="product in rowProducts" valign="top" align="center" style="padding-left:5px; padding-bottom: 23px; padding-top: 10px; width: 137px;">
+                                                            								    <a href="https://feiraorganica.com/feira/{{product.encoded_url}}">
+                                                            								        <img border="0" alt="{{product.name}}" ng-src="https://feiraorganica.com/cdn/image/137x120/?url={{product.images[0].url}}" style="width: 137px; height: 120px;">
                                                             								        <b ng-bind="product.name"></b>
+                                                            								        <p><span ng-bind="product.price | currency:'R$':2"></span></p>
                                                             								    </a>
                                                         								    </td>
                                                         							    </tr>
