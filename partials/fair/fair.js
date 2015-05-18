@@ -70,7 +70,7 @@ fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter',
 
   }).error(function(err) {
     
-    $scope.loadingProduct = true;
+    $scope.loadingProduct = false;
     
     console.error('ERR', err);
 
