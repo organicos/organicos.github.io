@@ -35,10 +35,11 @@ newsletters.controller('AdminNewslettersCtrl', ['$scope','$http', 'myConfig', fu
 
 }]);
 
-newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService) {
 
     $scope.loadingProducts = false;
     $scope.savingNewsletter = false;
+    $scope.newsletterSent = false;
     $scope.newsletter = {
         title: ""
         , top: ""
@@ -74,12 +75,70 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
             , top: ""
             , bottom: ""
             , products: []
-            , newsletters: []
+            , articles: []
         }
         
         $scope.newsletter.sections.push(newSection);
         
     }
+    
+  $scope.sendNewsletter = function(){
+    
+    $scope.savingNewsletter = true;
+    
+    var modalOptions = {
+        closeButtonText: 'Cancelar',
+        actionButtonText: 'Enviar newsletter',
+        actionButtonKind: 'btn-danger',
+        headerText: 'Enviar a newsletter ' + $scope.newsletter._id + "?",
+        bodyText: 'Deseja realmente enviar a newsletter ' + $scope.newsletter._id + "? Esta ação pode ser realizada apenas uma única vez e não poderá ser desfeita. Revise a newsletter antes de proceder e garanta que está tudo correto."
+    };
+
+    confirmModalService.showModal({}, modalOptions)
+    .then(function (result) {
+      
+      if(result){
+        
+        $http.post(myConfig.apiUrl + '/newsletter/'+$scope.newsletter._id+'/send', {_id: $scope.newsletter._id})
+        .success(function(resp) {
+          
+          $scope.newsletterSent = true;
+    
+          $scope.$emit('alert', {
+              kind: 'success',
+              msg: [],
+              title: "Newsletter enviada com sucesso!"
+          });
+          
+        })
+        .error(function (resp) {
+          
+          var error_list = [];
+    
+          angular.forEach(resp.errors, function(error, path) {
+            this.push(error.message);
+          }, error_list);
+          
+          $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Não foi possível enviar a newsletter. Verifique o motivo abaixo:"
+          });
+      
+        })
+        .finally(function () {
+          $scope.savingNewsletter = false;
+        });
+      
+      } else {
+      
+        $scope.savingNewsletter = false;
+        
+      }
+
+    });
+    
+  };
     
   $scope.submitNewsletterForm = function () {
     
@@ -103,7 +162,7 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
     .success(function(resp) {
       
         $scope.newsletter = resp.data;
-        $location.path("/newsletter/" + resp._id);
+        $location.path("/newsletter/" + resp.data._id);
         
     })
     .error(function (resp) {

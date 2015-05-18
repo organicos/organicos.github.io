@@ -80,8 +80,13 @@
                         <textarea class="form-control input-sm" rows="3" name="newsletter.bottom" ng-model="newsletter.bottom" placeholder="Texto inferior da newsletter"></textarea>
                     </div>
                     
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Salvar</button>
+                    <div class="form-group" ng-if="!newsletter._id || newsletter.status == 0">
+                        <button type="submit" class="btn btn-primary" ng-disable="savingNewsletter" ng-if="!newsletterSent"><i class="fa fa-plus"></i> Salvar</button>
+                        <button type="button" class="btn btn-danger" ng-click="sendNewsletter()" ng-disable="savingNewsletter" ng-if="!newsletterSent && newsletter._id"><i class="fa fa-send"></i> Enviar</button>
+                    </div>
+                    
+                    <div class="form-group" ng-if="newsletter.status == 1">
+                        <p>Esta newletter já foi enviada!</p>
                     </div>
 
                 </form>
@@ -90,7 +95,7 @@
             
             <div class="col-sm-14">
                 
-                <h1>Preview do e-mail <a class="btn" href="https://fodev-api-vinagreti-1.c9.io/newsletter/{{newsletter._id}}/preview" target="_blank"><i class="fa fa-external-link"></i></a></h1>
+                <h1>Preview do e-mail <a class="btn" href="https://fodev-api-vinagreti-1.c9.io/news/{{newsletter._id}}" target="_blank"><i class="fa fa-external-link"></i></a></h1>
                 
                 <div>
                     <table width="100%" style="background-color:#FFFFFF; text-align: justify; -ms-word-break: break-all; word-break: break-all; word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto;">
