@@ -17,6 +17,10 @@
                     
                     <div ng-repeat="section in newsletter.sections" class="well well-mini background-violet">
                         
+                        <div class="clearfix">
+                            <button type="button" class="btn btn-xs pull-right" ng-click="dropSection(section)"><i class="fa fa-remove"></i></button>
+                        </div>
+                        
                         <div clas="form-group">
                             <label for="section.title"></label>
                             <input class="form-control input-sm" type="text" name="section.title" ng-model="section.title" placeholder="Título da seção"/>
@@ -67,8 +71,8 @@
                         </div>
                     </div>
                     
-                    <div class="well well-mini">
-                        <button type="button" class="btn btn-success btn-xs" ng-click="addNewSection()"><i class="fa fa-plus"></i> Nova seção</button>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-lg btn-default" ng-click="addNewSection()"><i class="fa fa-plus"></i> Nova seção</button>
                     </div>
                     
                     <div class="form-group">
@@ -91,7 +95,7 @@
             
             <div class="col-sm-14">
                 
-                <h1>Preview do e-mail <a class="btn" href="/news/{{newsletter._id}}" target="_blank"><i class="fa fa-external-link"></i></a></h1>
+                <h1 class="text-center">Preview do e-mail <a class="btn" href="/news/{{newsletter._id}}" target="_blank"><i class="fa fa-external-link"></i></a></h1>
                 
                 <div>
                     <table width="100%" style="background-color:#FFFFFF; text-align: justify; -ms-word-break: break-all; word-break: break-all; word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; -ms-hyphens: auto; hyphens: auto;">

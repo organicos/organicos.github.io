@@ -220,6 +220,16 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
     });
   };
   
+  $scope.dropSection = function(section){
+    
+    var sectionPos = $scope.newsletter.sections.indexOf(section);
+    
+    if(sectionPos >= 0){
+      $scope.newsletter.sections.splice(sectionPos, 1);
+    }
+    
+  }
+  
   $scope.getArticles = function(title){
     return $http.get(myConfig.apiUrl+'/articles', {
       params: {
