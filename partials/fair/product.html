@@ -16,10 +16,12 @@
             </span>
             
         </div>
-                    
-        <form class="form" role="form" name="productFormModal">
         
-            <div class="row">
+        <div ng-if="loadingProduct">Carregando os dados do produto <i class="fa fa-spin fa-spinner"></i></div>
+        
+        <div ng-if="!loadingProduct">
+            
+            <div class="row" ng-if="product.name">
                 
                 <div class="col-sm-6">
                     
@@ -36,7 +38,7 @@
                         <h3>Variação de preço</h3>
                         <canvas id="line" class="chart chart-line" data="pricesChartData.data" labels="pricesChartData.labels" series="pricesChartData.series"></canvas>                         
                     </div>
-
+    
                 </div>
                 
                 <div class="col-sm-18">
@@ -44,7 +46,7 @@
                     <h2 ng-bind="product.name"></h2>
                     
                     <hr>
-
+    
                     <h3><span class="text-success" ng-bind="product.prices[0].price | currency:'R$':2"></span> <span ng-if="product.prices[1].price > product.prices[0].price"><i class="fa fa-arrow-down text-success"></i> <del><small class="text-muted text-danger" ng-bind="product.prices[1].price | currency:'R$':2"></small></del></span></h3>
                     
                     <dl class="dl-horizontal" ng-if="product.categories && product.categories[0]">
@@ -61,7 +63,7 @@
                         <dt>Época: </dt>
                         <dd ng-bind="product.season"></dd>
                     </dl>
-
+    
                     <dl class="dl-horizontal" ng-if="product.dscr">
                         <dt></dt>
                         <dd class="text-justify" ng-bind-html="product.dscr" style="white-space: pre-wrap;"></dd>
@@ -70,8 +72,10 @@
                 </div>
         
             </div>
+            <div ng-if="!product.name">Este produto não existe ou está em falta no momento.</div>            
             
-        </form>
+            
+        </div>
         
         <hr>
         

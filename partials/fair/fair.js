@@ -51,6 +51,7 @@ fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter',
 	$scope.product = [];
 	$scope.sameCategoryProducts = [];
 	$scope.saving_product = false;
+	$scope.loadingProduct = true;
 
   $scope.pricesChartData = {
     series : ['Custo'],
@@ -64,10 +65,14 @@ fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter',
       $scope.product = resp;
       
       $scope.updateProductCharts();
+      
+      $scope.loadingProduct = false;
 
   }).error(function(err) {
     
-      console.error('ERR', err);
+    $scope.loadingProduct = true;
+    
+    console.error('ERR', err);
 
   });
 
