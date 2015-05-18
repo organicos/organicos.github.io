@@ -82,7 +82,7 @@
         
 		<div class="thumbnail" ng-repeat="product in article.products">
 			<a href="/feira/produto/{{product._id}}">
-				<img class="img-responsive" alt="week_product" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.img}}">
+				<img class="img-responsive" alt="week_product" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.images[0].url}}">
 			</a>
 			<hr>
 			<div style="height:80px;">

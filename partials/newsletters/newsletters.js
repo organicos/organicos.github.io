@@ -59,12 +59,20 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
         
             $scope.newsletter = res;
             
+            $scope.divideSectionProductsListTouseInTable();
+            
         }).error(function(err) {
         
             console.error('ERR', err);
         
         });
         
+    }
+    
+    $scope.divideSectionProductsListTouseInTable = function(){
+      
+      return true;
+      
     }
     
     $scope.addNewSection = function(){

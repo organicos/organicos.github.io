@@ -42,10 +42,7 @@
                                 >
                             <i ng-show="loadingProducts" class="fa fa-spin fa-spinner"></i>
                             <span ng-repeat="product in section.products">
-                                <span class="label label-info">
-                                    <span ng-bind="product.name"></span>
-                                    <a href="javascript:void(0)" ng-click="dropProduct(product, section)">x</a>
-                                </span> 
+                                &nbsp;<span class="label label-info"><span ng-bind="product.name"></span><a href="javascript:void(0)" ng-click="dropProduct(product, section)">x</a></span> 
                             </span>
                         </div>
                         
@@ -62,10 +59,7 @@
                                 >
                             <i ng-show="loadingArticles" class="fa fa-spin fa-spinner"></i>
                             <span ng-repeat="article in section.articles">
-                                <span class="label label-info">
-                                    <span ng-bind="article.title"></span>
-                                    <a href="javascript:void(0)" ng-click="dropArticle(article, section)">x</a>
-                                </span> 
+                                &nbsp;<span class="label label-info"><span ng-bind="article.title"></span> <a href="javascript:void(0)" ng-click="dropArticle(article, section)">X</a></span>
                             </span>
                         </div>
                         
@@ -136,7 +130,7 @@
                                             												<div>
                                             												    <div>
                                             												        <a href="https://feiraorganica.com/feira/{{article.encoded_url}}">
-                                            												            <img alt="{{article.title}}" src="https://feiraorganica.com/cdn/image/140x150/?url={{article.images[0].src}}" border="0" style="max-width: 510px; border: 1px solid #dddddd; display: inline; height: 140px; width: 150px;">
+                                            												            <img alt="{{article.title}}" src="https://feiraorganica.com/cdn/image/140x150/?url={{article.images[0].url}}" border="0" style="max-width: 510px; border: 1px solid #dddddd; display: inline; height: 140px; width: 150px;">
                                             												        </a>
                                         												        </div>
                                         												    </div>
@@ -145,13 +139,10 @@
                                             												<div style="font-size: 20px; font-weight: bold; margin: 0; font-family: 'Helvetica Neue',Helvetica,arial,sans-serif; line-height: 115%; padding-top: 0; display: block; text-align: left; font-style: normal; padding-bottom: 0; letter-spacing: normal; width: 323px; color: #50bbb6 !important; text-decoration: none;">
                                             												    <a href="https://feiraorganica.com/blog/{{article.encoded_url}}" style="color: #50bbb6; text-decoration: none;" ng-bind="article.title"></a>
                                             												</div>
-                                        												    <div style="font-size: 16px; font-weight: normal; font-style: italic; margin-bottom: 0; margin-top: 3px; padding-top: 0; color: #444444;">
-                                        												        <div>
-                                        												            <span xml="lang" ng-bind="article.author"></span>
-                                        												        </div>
-                                        												    </div>
                                         												    <div style="font-family: 'Helvetica Neue',Helvetica,arial,sans-serif; font-size: 14px; line-height: 150%; color: #444444;">
-                                        												        <p ng-bind="article.content"></p>
+                                        												        <p>
+                                        												            "<span ng-bind="article.content | limitTo: 200 "></span>..."
+                                        												        </p>
                                         												        <p>
                                         												            <a href="https://feiraorganica.com/blog/{{article.encoded_url}}" style="color: #50bbb6 !important;">Ler artigo</a>
                                         												        </p>
@@ -160,14 +151,15 @@
                                             										</tr>
                                                                                 </table>
                                                                                 
-                                                                                <table nf-if="section.products.length" cellspacing="0" id="pocketAvailableDetails" border="0" cellpadding="0" style="table-layout: fixed; width: 510px;">
+                                                                                <table nf-if="section.products.length">
                                                         							<tbody>
                                                         							    <tr>
-                                                            								<td ng-repeat="product in section.products" valign="top" style="padding-bottom: 23px; padding-top: 10px; width: 108px;">
+                                                            								<td ng-repeat="(index, product) in section.products" valign="top" align="center" style="padding-left:5px; padding-bottom: 23px; padding-top: 10px; width: 137px;">
                                                             								    <a href="https://feiraorganica.com/feira/{{product._id}}">
-                                                            								        <img border="0" alt="{{product.name}}" src="https://feiraorganica.com/cdn/image/108x116/?url={{product.images[0].url}}" style="width: 108px; height: 116px;"></a>
-                                                            								    </td>
-                                                            								<td valign="top" style="width: 29px;">&nbsp;</td>
+                                                            								        <img border="0" alt="{{product.name}}" src="https://feiraorganica.com/cdn/image/137x120/?url={{product.images[0].url}}" style="width: 137px; height: 120px;">
+                                                            								        <b ng-bind="product.name"></b>
+                                                            								    </a>
+                                                        								    </td>
                                                         							    </tr>
                                                         						    </tbody>
                                                         						</table>
