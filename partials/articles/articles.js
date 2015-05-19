@@ -154,7 +154,7 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
   
   $scope.articlePost = function(article) {
     
-    $http.post(myConfig.apiUrl + '/articles', article)
+    $http.post(myConfig.apiUrl + '/article', article)
     .success(function(resp) {
       
         $scope.articles = resp.data;
@@ -184,7 +184,7 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
 
   $scope.articlePut = function(article) {
     
-    $http.put(myConfig.apiUrl + '/articles/'+article._id, article)
+    $http.put(myConfig.apiUrl + '/article/'+article._id, article)
     .success(function(resp) {
       
       $scope.articles = resp.data;
@@ -223,7 +223,7 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     if (confirmed) {
 
       $scope.saving_article = true;
-        $http.delete(myConfig.apiUrl + '/articles/' + article._id)
+        $http.delete(myConfig.apiUrl + '/article/' + article._id)
         .success(function() {
           $location.path("/artigos");
         })
