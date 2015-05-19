@@ -2,7 +2,7 @@
 
 <div class="row visible-md-block visible-lg-block">
     <div class="col-xs-12 col-sm-8 blog-post-thumb-wrap" ng-repeat="article in articles">
-        <a class="blog-post-thumb" href="/blog/{{article.encoded_url}}">
+        <a class="blog-post-thumb" href="/blog/{{article.encoded_url}}" hreflang="pt-br">
             <img class="blog-post-thumb-img" ng-if="article.images.length" ng-src="https://feiraorganica.com/cdn/image/300x300/?url={{article.images[0].url}}" alt="{{article.images[0].title}}"></img>
             <img class="blog-post-thumb-img" id="navi" ng-if="!article.images.length" ng-src="https://feiraorganica.com/cdn/image/300x300" alt="{{article.title}}"></img>
             <p class="blog-post-thumb-title">
@@ -16,7 +16,7 @@
 
 <div class="row visible-xs-block visible-sm-block">
     <div class="col-xs-12 col-sm-8 blog-post-thumb-wrap-sm" ng-repeat="article in articles">
-        <a class="blog-post-thumb" href="/blog/{{article.encoded_url}}">
+        <a class="blog-post-thumb" href="/blog/{{article.encoded_url}}" hreflang="pt-br">
             <img class="blog-post-thumb-img" ng-if="article.images.length" ng-src="https://feiraorganica.com/cdn/image/300x300/?url={{article.images[0].url}}" alt="{{article.images[0].title}}"></img>
             <img class="blog-post-thumb-img" id="navi" ng-if="!article.images.length" ng-src="https://feiraorganica.com/cdn/image/300x300" alt="{{article.title}}"></img>
             <p class="blog-post-thumb-title">

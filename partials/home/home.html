@@ -6,7 +6,7 @@
 		<img class="img-responsive img-centered" ng-src="https://feiraorganica.com/cdn/image/1000/?url=https://s3-sa-east-1.amazonaws.com/fodev/img/global/marca.png">
 		<br><br class="hidden-xs hidden-sm">
 		<p class="text-center">
-			<a href="/feira" class="btn btn-primary btn-lg">
+			<a href="/feira"  hreflang="pt-br" class="btn btn-primary btn-lg">
 				<span class="visible-xs-inline">
 					Montar minha cesta orgânica
 				</span>
@@ -33,7 +33,7 @@
 
 		<div class="row">
 			<div class="col-sm-8 text-center">
-				<h3 class="text-yellow"><a class="text-yellow" href="/montar_cesta">1 - Monte sua cesta.</a></h3>
+				<h3 class="text-yellow"><a class="text-yellow" hreflang="pt-br" href="/montar_cesta">1 - Monte sua cesta.</a></h3>
 				<p>Em nossa feira você encontra somente produtos que foram produzidos com muito amor e respeito a você e ao meio ambiente.</p>
 				<i class="fa fa-shopping-cart font-200"></i>
 			</div>
@@ -51,7 +51,7 @@
 
 		<br></br>
 		
-		<p class="text-right"><a class="text-white" href="/blog/termos">Saiba mais aqui...</a></p>
+		<p class="text-right"><a class="text-white" href="/blog/termos" hreflang="pt-br">Saiba mais aqui...</a></p>
 		
 		<br>
 	</div>
@@ -67,7 +67,7 @@
 		
 		
 				<div class="thumbnail">
-					<a href="/feira/{{product.encoded_url}}">
+					<a href="/feira/{{product.encoded_url}}" hreflang="pt-br">
 						<img class="img-responsive img-responsive-wide img-centered" alt="week_product" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.images[0].url}}" ng-dblclick="addToBasket(product)">
 					</a>
 					<hr>
@@ -78,7 +78,7 @@
 								<a ng-if="product.category" ng-click="selectCategory(product.category)" ng-bind="product.category"></a>
 							</span>
 						</p>
-						<h4 class="text-violet"><a href="/feira/{{product.encoded_url}}" ng-bind="product.name"></a></h4>
+						<h4 class="text-violet"><a href="/feira/{{product.encoded_url}}" ng-bind="product.name" hreflang="pt-br"></a></h4>
 					</div>
 		
 					<button class="btn btn-success btn-block" ng-click="addToBasket(product)">Colocar na cesta 
