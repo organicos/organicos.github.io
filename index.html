@@ -154,7 +154,108 @@
       ing an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="ng-view container-fluid main-container" autoscroll="true"></div>
+    <div ng-view-children-as-template ng-view class="container-fluid main-container" autoscroll="true">
+      
+      <h1 class="hide">Feira Orgânica Delivery</h1>
+      
+      <div class="row no-gutter" id="bg-topo-home" style="min-height: 700px; background:">
+      	<div class="col-xs-offset-3 col-xs-18 col-md-offset-4 col-md-16">
+      
+      		<img class="img-responsive img-centered img-responsive-wide" ng-src="https://s3-sa-east-1.amazonaws.com/fodev/img/global/marca.png">
+      		<br><br class="hidden-xs hidden-sm">
+      		<p class="text-center">
+      			<a href="/feira"  hreflang="pt-br" class="btn btn-primary btn-lg">
+      				<span class="visible-xs-inline">
+      					Montar minha cesta orgânica
+      				</span>
+      				<span class="visible-sm-inline font-30">
+      					Montar minha cesta orgânica
+      				</span>
+      				<span class="visible-md-inline font-40">
+      					Montar minha cesta orgânica
+      				</span>
+      				<span class="visible-lg-inline font-40">
+      					Montar minha cesta orgânica
+      				</span>
+      			</a>			
+      		</p>
+      		<br><br class="hidden-xs hidden-sm">
+      	</div>
+      </div>
+      
+      <div id="como-funciona" class="row background-green text-white">
+      	<div class="col-xs-24">
+      
+      		<h2 class="text-center">Como funciona</h2>
+      		<br>
+      
+      		<div class="row">
+      			<div class="col-sm-8 text-center">
+      				<h3 class="text-yellow"><a class="text-yellow" hreflang="pt-br" href="/montar_cesta">1 - Monte sua cesta.</a></h3>
+      				<p>Em nossa feira você encontra somente produtos que foram produzidos com muito amor e respeito a você e ao meio ambiente.</p>
+      				<i class="fa fa-shopping-cart font-200"></i>
+      			</div>
+      			<div class="col-sm-8 text-center">
+      				<h3 class="text-yellow">2 - Efetue o pagamento.</h3>
+      				<p>Compra 100% segura! Você escolhe a melhor forma de pagar. Aceitamos cartões de crédito e débito, transferência e boleto bancário.</p>
+      				<i class="fa fa-credit-card font-200"></i>
+      			</div>
+      			<div class="col-sm-8 text-center">
+      				<h3 class="text-yellow">3 - Receba o produto.</h3>
+      				<p>Fazemos o que chamamos de Entrega Inteligente. Muita logística, menor custo, baixa emissão de carbono e horários alternativos.</p>
+      				<i class="fa fa-truck fa-flip-horizontal font-200"></i>
+      			</div>
+      		</div>
+      
+      		<br></br>
+      		
+      		<p class="text-right"><a class="text-white" href="/blog/termos" hreflang="pt-br">Saiba mais aqui...</a></p>
+      		
+      		<br>
+      	</div>
+      </div>
+      
+      <div class="row">
+      	<div class="col-xs-24">
+      		<h2 class="text-center">Destaques da semana</h2>
+      		<br><br>
+      
+      		<div class="row">
+      			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in highlightProducts">
+      		
+      		
+      				<div class="thumbnail">
+      					<a href="/feira/{{product.encoded_url}}" hreflang="pt-br">
+      						<img class="img-responsive img-responsive-wide img-centered" alt="week_product" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.images[0].url}}" ng-dblclick="addToBasket(product)">
+      					</a>
+      					<hr>
+      					<div style="height:100px;">
+      						<p>
+      							<span ng-bind="product.price | currency:'R$':2"></span>
+      							<span class="pull-right">
+      								<a ng-if="product.category" ng-click="selectCategory(product.category)" ng-bind="product.category"></a>
+      							</span>
+      						</p>
+      						<h4 class="text-violet"><a href="/feira/{{product.encoded_url}}" ng-bind="product.name" hreflang="pt-br"></a></h4>
+      					</div>
+      		
+      					<button class="btn btn-success btn-block" ng-click="addToBasket(product)">Colocar na cesta 
+      						<span class="label label-warning" ng-repeat="buttonProduct in $storage.basket.products | filter : {_id: product._id}" ng-bind="buttonProduct.quantity"></span>
+      					</button>
+      		
+      				</div>
+      		
+      		
+      			</div>
+      			<div class="col-xs-24" ng-if="!highlightProducts.length">Nesta semana não temos nenhum produto em destaque!
+      				<br></br>
+      			</div>
+      		</div>
+      		
+      	</div>
+      </div>
+      
+    </div>
     
     <div class="container-fluid background-blue text-white text-center" ng-if="!$storage.user.token" ng-cloak>
 

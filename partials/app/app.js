@@ -33,6 +33,17 @@ var app = angular.module('myApp', [
   'chart.js'
 ]);
 
+app.directive('ngViewChildrenAsTemplate', ['$templateCache', function($templateCache)
+{
+    return {
+        restrict: 'A',
+        compile:  function (element)
+        {
+            $templateCache.put('ngViewChildrenAsTemplateDirective.html', element.html());
+        }
+    };
+}])
+
 app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider', function($routeProvider, $httpProvider, $authProvider, $locationProvider) {
 
     // define default route
