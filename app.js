@@ -14,7 +14,6 @@ var app = angular.module('myApp', [
   'myApp.fair',
   'myApp.tickets',
   'myApp.security',
-  'myApp.version',
   'myApp.contact',
   'myApp.admin',
   'myApp.users',
