@@ -80,6 +80,7 @@ app.service('HtmlMetaTagService', ['$location', function($location) {
     var metaData = {
         title: 'Feira Orgânica Delivery - Produtos organicos entregues em sua porta.'
     };
+    var posposition = ' - Feira orgânica Delivery';
 
     return {
         resetData: function() {
@@ -94,7 +95,7 @@ app.service('HtmlMetaTagService', ['$location', function($location) {
             } else if (!value) {
                 return metaData[tag];
             } else {
-                metaData[tag] = value;
+                metaData[tag] = value + posposition;
                 return HtmlMetaTagService;
             }
         }
@@ -104,8 +105,6 @@ app.service('HtmlMetaTagService', ['$location', function($location) {
 
 app.controller('headCtrl' , ['$scope', 'HtmlMetaTagService' , function($scope, HtmlMetaTagService) {
 
-    // Reset HTML Meta Tags
-    HtmlMetaTagService.resetData();
     $scope.HtmlMetaTagService = HtmlMetaTagService;
     
 }]);

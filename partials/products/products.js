@@ -17,7 +17,9 @@ products.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService) {
+products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, HtmlMetaTagService) {
+  
+  HtmlMetaTagService.tag('title', 'Produtos');
 
   $scope.products = [];
   $scope.orderByField = 'name';
@@ -91,7 +93,7 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
   
 }]);
 
-products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', '$location', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, $location) {
+products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', '$location', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, $location, HtmlMetaTagService) {
 
   $scope.saving_product = false;
   $scope.product = {prices: [], costs: [], suppliers: [], categories: [], images: []};
@@ -111,6 +113,8 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
     $http.get(myConfig.apiUrl+'/product/'+$routeParams.id)
     .success(function(res) {
 
+      HtmlMetaTagService.tag('title', res.name);
+      
       $scope.product = res;
       
       $scope.updateProductCharts();

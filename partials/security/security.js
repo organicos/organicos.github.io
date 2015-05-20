@@ -29,9 +29,9 @@ security.controller('LogoutCtrl', ['$scope', '$location', function ($scope, $loc
 
 }]);
 
-security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http', 'myConfig', function ($scope, $location, $routeParams, $http, myConfig) {
+security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http', 'myConfig', 'HtmlMetaTagService', function ($scope, $location, $routeParams, $http, myConfig, HtmlMetaTagService) {
     
-    console.log('signin:::::  ' + $routeParams.return_url);
+    HtmlMetaTagService.tag('title', 'Entrar');
     
     $scope.processingSignInUp = false;
     
@@ -66,7 +66,9 @@ security.controller('SigninCtrl', ['$scope', '$location', '$routeParams','$http'
     
 }]);
 
-security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams', 'myConfig', function ($scope, $http, $location, $routeParams, myConfig) {
+security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams', 'myConfig', 'HtmlMetaTagService', function ($scope, $http, $location, $routeParams, myConfig, HtmlMetaTagService) {
+    
+    HtmlMetaTagService.tag('title', 'Cadastro');
     
     $scope.processingSignInUp = false;
     $scope.newsletter = true;
@@ -136,7 +138,9 @@ security.controller('SignupCtrl', ['$scope', '$http', '$location', '$routeParams
     
 }]);
 
-security.controller('RetrievePasswordCtrl', ['$scope', '$http', 'myConfig', function($scope, $http, myConfig) {
+security.controller('RetrievePasswordCtrl', ['$scope', '$http', 'myConfig', 'HtmlMetaTagService', function($scope, $http, myConfig, HtmlMetaTagService) {
+    
+    HtmlMetaTagService.tag('title', 'Recuperar senha');
     
     $scope.email = "";
     

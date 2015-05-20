@@ -9,6 +9,6 @@ susteinable.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-susteinable.controller('SusteinableCtrl', ['$scope', function($scope) {
-
+susteinable.controller('SusteinableCtrl', ['$scope', 'HtmlMetaTagService', function($scope, HtmlMetaTagService) {
+  HtmlMetaTagService.tag('title', 'Sustentabilidade');
 }]);

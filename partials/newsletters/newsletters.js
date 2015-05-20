@@ -18,7 +18,9 @@ newsletters.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-newsletters.controller('AdminNewslettersCtrl', ['$scope','$http', 'myConfig', function($scope, $http, myConfig) {
+newsletters.controller('AdminNewslettersCtrl', ['$scope','$http', 'myConfig', 'HtmlMetaTagService', function($scope, $http, myConfig, HtmlMetaTagService) {
+  
+  HtmlMetaTagService.tag('title', 'Newsletter');
 
     $scope.newsletters = [];
     $scope.newsletterFormModalObject = {};
@@ -35,7 +37,7 @@ newsletters.controller('AdminNewslettersCtrl', ['$scope','$http', 'myConfig', fu
 
 }]);
 
-newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService) {
+newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, HtmlMetaTagService) {
 
     $scope.loadingProducts = false;
     $scope.savingNewsletter = false;
@@ -57,8 +59,10 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
 
         $http.get(myConfig.apiUrl+'/newsletter/'+$routeParams.id)
         .success(function(res) {
+          
+          HtmlMetaTagService.tag('title', res.title);
         
-            $scope.newsletter = res;
+          $scope.newsletter = res;
             
         }).error(function(err) {
         

@@ -9,6 +9,6 @@ about.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-about.controller('AboutCtrl', ['$scope', function($scope) {
-
+about.controller('AboutCtrl', ['$scope', 'HtmlMetaTagService', function($scope, HtmlMetaTagService) {
+  HtmlMetaTagService.tag('title', 'Sobre');
 }]);

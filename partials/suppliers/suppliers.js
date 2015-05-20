@@ -18,7 +18,9 @@ suppliers.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-suppliers.controller('AdminSuppliersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService) {
+suppliers.controller('AdminSuppliersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, HtmlMetaTagService) {
+    
+    HtmlMetaTagService.tag('title', 'Fornecedores');
 
     $scope.suppliers = [];
     $scope.supplierFormModalObject = {};
@@ -80,7 +82,7 @@ suppliers.controller('AdminSuppliersCtrl', ['$scope','$http', '$filter', '$route
     
 }]);
 
-suppliers.controller('AdminSupplierCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', function($scope, $http, $routeParams, myConfig, $location) {
+suppliers.controller('AdminSupplierCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', function($scope, $http, $routeParams, myConfig, $location, HtmlMetaTagService) {
   
     $scope.supplier = {};
     $scope.suppliersQuery = "";
@@ -90,6 +92,8 @@ suppliers.controller('AdminSupplierCtrl', ['$scope','$http', '$routeParams', 'my
     
         $http.get(myConfig.apiUrl+'/supplier/'+$routeParams.id)
         .success(function(res) {
+            
+            HtmlMetaTagService.tag('title', res.name);
         
             $scope.supplier = res;
         

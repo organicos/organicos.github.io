@@ -9,7 +9,9 @@ contact.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-contact.controller('ContactCtrl', ['$scope','$http', 'myConfig', function($scope, $http, myConfig) {
+contact.controller('ContactCtrl', ['$scope','$http', 'myConfig', 'HtmlMetaTagService', function($scope, $http, myConfig, HtmlMetaTagService) {
+    
+    HtmlMetaTagService.tag('title', 'Contato');
 
     $scope.submitingContact = false;
     $scope.submitContact = function() {

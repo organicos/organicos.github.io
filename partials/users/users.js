@@ -22,21 +22,48 @@ users.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-users.controller('AdminUserCtrl', ['$scope','$http', '$routeParams', 'myConfig', function($scope, $http, $routeParams, myConfig) {
-  
-    $scope.user = {};
-    $scope.processingUserUpdate = false;
+users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService) {
     
-    $http.get(myConfig.apiUrl+'/user/'+$routeParams.id)
-    .success(function(res) {
+    HtmlMetaTagService.tag('title', 'Usuários');
+
+    $scope.users = [];
+    $scope.userFormModalObject = {};
     
-        $scope.user = res;
+    $http.get(myConfig.apiUrl+'/users').then(function(res) {
     
-    }).error(function(err) {
+        $scope.users = res.data;
+        
+        $scope.userFormModalObject = ($filter('filter')($scope.users, {_id: $routeParams.id}, false))[0];
+    
+    }, function(err) {
     
         console.error('ERR', err);
     
     });
+
+}]);
+
+users.controller('AdminUserCtrl', ['$scope','$http', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $routeParams, myConfig, HtmlMetaTagService) {
+    
+    $scope.user = {};
+    $scope.processingUserUpdate = false;
+    
+    if($routeParams.id){
+        
+        $http.get(myConfig.apiUrl+'/user/'+$routeParams.id)
+        .success(function(res) {
+            
+            HtmlMetaTagService.tag('title', res.name);
+        
+            $scope.user = res;
+        
+        }).error(function(err) {
+        
+            console.error('ERR', err);
+        
+        });        
+        
+    }
     
     $scope.updateUser = function(){
         
@@ -85,26 +112,9 @@ users.controller('AdminUserCtrl', ['$scope','$http', '$routeParams', 'myConfig',
   
 }]);
 
-users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
-
-    $scope.users = [];
-    $scope.userFormModalObject = {};
+users.controller('ChangePasswordCtrl', ['$scope','$http', 'myConfig', '$localStorage', 'HtmlMetaTagService', function($scope, $http, myConfig, $localStorage, HtmlMetaTagService) {
     
-    $http.get(myConfig.apiUrl+'/users').then(function(res) {
-    
-        $scope.users = res.data;
-        
-        $scope.userFormModalObject = ($filter('filter')($scope.users, {_id: $routeParams.id}, false))[0];
-    
-    }, function(err) {
-    
-        console.error('ERR', err);
-    
-    });
-
-}]);
-
-users.controller('ChangePasswordCtrl', ['$scope','$http', 'myConfig', '$localStorage', function($scope, $http, myConfig, $localStorage) {
+    HtmlMetaTagService.tag('title', 'Alteração de senha');
 
     $scope.processingChangePassword = false;
     
@@ -149,7 +159,10 @@ users.controller('ChangePasswordCtrl', ['$scope','$http', 'myConfig', '$localSto
 
 }]);
 
-users.controller('MeCtrl', ['$scope', '$localStorage', '$http', 'myConfig', function($scope, $localStorage, $http, myConfig) {
+users.controller('MeCtrl', ['$scope', '$localStorage', '$http', 'myConfig', 'HtmlMetaTagService', function($scope, $localStorage, $http, myConfig, HtmlMetaTagService) {
+    
+    HtmlMetaTagService.tag('title', 'Meus dados');
+    
     $scope.user = {};
     $scope.processingUserUpdate = false;
     

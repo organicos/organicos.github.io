@@ -18,7 +18,9 @@ images.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-images.controller('AdminImagesCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+images.controller('AdminImagesCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService) {
+    
+    HtmlMetaTagService.tag('title', 'Imagens');
 
     $scope.images = [];
     $scope.imageFormModalObject = {};
@@ -35,7 +37,7 @@ images.controller('AdminImagesCtrl', ['$scope','$http', '$filter', '$routeParams
 
 }]);
 
-images.controller('AdminImageCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', function($scope, $http, $routeParams, myConfig, $location) {
+images.controller('AdminImageCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', function($scope, $http, $routeParams, myConfig, $location, HtmlMetaTagService) {
   
     $scope.image = {};
     $scope.imagesQuery = "";
@@ -45,6 +47,8 @@ images.controller('AdminImageCtrl', ['$scope','$http', '$routeParams', 'myConfig
     
         $http.get(myConfig.apiUrl+'/image/'+$routeParams.id)
         .success(function(res) {
+            
+            HtmlMetaTagService.tag('title', res.title);
         
             $scope.image = res;
         

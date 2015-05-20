@@ -21,7 +21,9 @@ fair.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$location', 'myConfig', function($scope, $http, $routeParams, $filter, $location, myConfig) {
+fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$location', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $routeParams, $filter, $location, myConfig, HtmlMetaTagService) {
+  
+  HtmlMetaTagService.tag('title', 'Feira');
   
 	$scope.products = [];
 	$scope.selectedCategory = '';
@@ -46,7 +48,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 
 }]);
 
-fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter', '$location', 'myConfig', function($scope, $http, $routeParams, $filter, $location, myConfig) {
+fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter', '$location', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $routeParams, $filter, $location, myConfig, HtmlMetaTagService) {
 
 	$scope.product = [];
 	$scope.sameCategoryProducts = [];
@@ -61,6 +63,8 @@ fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter',
 
   $http.get(myConfig.apiUrl + '/product/' + $routeParams.id)
   .success(function(resp) {
+    
+      HtmlMetaTagService.tag('title', resp.name);
     
       $scope.product = resp;
       

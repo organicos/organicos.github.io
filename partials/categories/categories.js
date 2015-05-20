@@ -18,7 +18,9 @@ categories.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-categories.controller('AdminCategoriesCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService) {
+categories.controller('AdminCategoriesCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, HtmlMetaTagService) {
+    
+    HtmlMetaTagService.tag('title', 'Categorias');
 
     $scope.categories = [];
     $scope.categoryFormModalObject = {};
@@ -80,7 +82,7 @@ categories.controller('AdminCategoriesCtrl', ['$scope','$http', '$filter', '$rou
 
 }]);
 
-categories.controller('AdminCategoryCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', function($scope, $http, $routeParams, myConfig, $location) {
+categories.controller('AdminCategoryCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', function($scope, $http, $routeParams, myConfig, $location, HtmlMetaTagService) {
   
     $scope.category = {};
     $scope.categoriesQuery = "";
@@ -90,6 +92,8 @@ categories.controller('AdminCategoryCtrl', ['$scope','$http', '$routeParams', 'm
     
         $http.get(myConfig.apiUrl+'/category/'+$routeParams.id)
         .success(function(res) {
+            
+            HtmlMetaTagService.tag('title', res.name);
         
             $scope.category = res;
         

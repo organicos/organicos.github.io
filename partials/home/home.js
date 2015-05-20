@@ -9,7 +9,9 @@ home.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-home.controller('HomeCtrl', ['$scope', '$http', 'myConfig', '$location', 'anchorSmoothScroll', function($scope, $http, myConfig, $location, anchorSmoothScroll) {
+home.controller('HomeCtrl', ['$scope', '$http', 'myConfig', '$location', 'anchorSmoothScroll', 'HtmlMetaTagService', function($scope, $http, myConfig, $location, anchorSmoothScroll, HtmlMetaTagService) {
+  
+  HtmlMetaTagService.resetData();
   
   $scope.highlightProducts = [];
   

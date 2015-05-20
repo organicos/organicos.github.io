@@ -13,7 +13,9 @@ blog.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-blog.controller('BlogArticlesCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+blog.controller('BlogArticlesCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService) {
+  
+  HtmlMetaTagService.tag('title', 'Blog');
 
   $scope.articles = [];
   $scope.selectedFilter = '';
@@ -48,7 +50,7 @@ blog.controller('BlogArticlesCtrl', ['$scope','$http', '$filter', '$routeParams'
   
 }]);
 
-blog.controller('BlogArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+blog.controller('BlogArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService) {
 
   $scope.saving_article = false;
   $scope.article = {};
@@ -57,6 +59,8 @@ blog.controller('BlogArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     
     $http.get(myConfig.apiUrl+'/article/'+$routeParams.id)
     .success(function(res) {
+      
+      HtmlMetaTagService.tag('title', res.title);
 
       $scope.article = res;
       

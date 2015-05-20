@@ -9,6 +9,8 @@ certification.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-certification.controller('CertificationCtrl', ['$scope', function($scope) {
+certification.controller('CertificationCtrl', ['$scope', 'HtmlMetaTagService', function($scope, HtmlMetaTagService) {
+  
+  HtmlMetaTagService.tag('title', 'Certificação');
 
 }]);

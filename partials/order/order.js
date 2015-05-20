@@ -42,7 +42,9 @@ var statuses = [
   {name: 'Inválido', desc: 'Pedidos que não respeitam a política do negócio.'}
 ];
 
-order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService) {
+  
+    HtmlMetaTagService.tag('title', 'Pedidos');
 
     $scope.filterStatus = '';
     $scope.selectedOrder = '';
@@ -111,12 +113,38 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
     
 }]);
 
-order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$modal', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, $modal, confirmModalService) {
+order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$modal', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, $modal, confirmModalService, HtmlMetaTagService) {
   
   $scope.order
   $scope.statuses = statuses;
   $scope.changingStatus = false;
   $scope.newStatus = 0;
+  
+  if($routeParams.id){
+
+    $http.get(myConfig.apiUrl+'/order/'+$routeParams.id)
+    .success(function(res) {
+    
+        HtmlMetaTagService.tag('title', 'Pedido ' + res._id);
+    
+        $scope.order = res;
+        $scope.newStatus = res.status;
+  
+    }).error(function(err, response) {
+  
+        if(response === 403) {
+          
+            $scope.$emit('alert', {
+                kind: 'danger',
+                msg: ['Você precisa se identificar para rever seu pedido!'],
+                title: "Não foi possível carregar seu pedido. Verifique o motivo abaixo:"
+            });  
+          
+        }
+  
+    });
+    
+  }
   
   $scope.changeStatus = function(newStatus){
     
@@ -177,26 +205,6 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
     
   };
   
-  $http.get(myConfig.apiUrl+'/order/'+$routeParams.id)
-  .success(function(res) {
-  
-      $scope.order = res;
-      $scope.newStatus = res.status;
-
-  }).error(function(err, response) {
-
-      if(response === 403) {
-        
-          $scope.$emit('alert', {
-              kind: 'danger',
-              msg: ['Você precisa se identificar para rever seu pedido!'],
-              title: "Não foi possível carregar seu pedido. Verifique o motivo abaixo:"
-          });  
-        
-      }
-
-  });
-  
   $scope.checkPagseguroPayment = function(order_id){
     $http.get(myConfig.apiUrl+'/check_pagseguro_payment/'+order_id)
     .success(function(res) {
@@ -212,7 +220,9 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
   
 }]);
 
-order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
+order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, $location, HtmlMetaTagService) {
+  
+    HtmlMetaTagService.tag('title', 'Revisão de pedido');
   
     $scope.processingOrder = false;
     $scope.country = 'Brasil';

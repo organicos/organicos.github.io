@@ -9,7 +9,9 @@ admin.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-admin.controller('AdminPanelCtrl', ['$scope', function ($scope) {
+admin.controller('AdminPanelCtrl', ['$scope', 'HtmlMetaTagService', function ($scope, HtmlMetaTagService) {
+  
+    HtmlMetaTagService.tag('title', 'Cantinho da Amora');
     
     $scope.usuarios = {};
 

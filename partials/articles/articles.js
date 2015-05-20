@@ -17,7 +17,9 @@ articles.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-articles.controller('ArticlesCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
+articles.controller('ArticlesCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService) {
+  
+  HtmlMetaTagService.tag('title', 'Artigos');
 
   $scope.articles = [];
   $scope.orderByField = 'updated';
@@ -40,7 +42,7 @@ articles.controller('ArticlesCtrl', ['$scope','$http', '$filter', '$routeParams'
 
 }]);
 
-articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', function($scope, $http, $filter, $routeParams, myConfig, $location) {
+articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, $location, HtmlMetaTagService) {
 
   $scope.saving_article = false;
   $scope.article = {};
@@ -51,6 +53,8 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     
     $http.get(myConfig.apiUrl+'/article/'+$routeParams.id)
     .success(function(res) {
+      
+      HtmlMetaTagService.tag('title', res.title);
 
       $scope.article = res;
       

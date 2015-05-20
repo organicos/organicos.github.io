@@ -14,8 +14,30 @@ tickets.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-tickets.controller('AdminTicketCtrl', ['$scope','$http', '$routeParams', 'myConfig', function($scope, $http, $routeParams, myConfig) {
-  
+tickets.controller('AdminTicketsCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService) {
+
+    HtmlMetaTagService.tag('title', 'Tickets');
+
+    $scope.tickets = [];
+    $scope.ticketFormModalObject = {};
+    $scope.selectedOrder = "updated";
+    
+    $http.get(myConfig.apiUrl+'/tickets').then(function(res) {
+        
+        $scope.tickets = res.data;
+        
+        $scope.ticketFormModalObject = ($filter('filter')($scope.tickets, {_id: $routeParams.id}, false))[0];
+    
+    }, function(err) {
+    
+        console.error('ERR', err);
+    
+    });
+
+}]);
+
+tickets.controller('AdminTicketCtrl', ['$scope','$http', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $routeParams, myConfig, HtmlMetaTagService) {
+    
     $scope.ticket = {};
     $scope.processingTicketUpdate = false;
     $scope.newUpdateMessage = "";
@@ -30,6 +52,7 @@ tickets.controller('AdminTicketCtrl', ['$scope','$http', '$routeParams', 'myConf
         })
         .success(function(res) {
 
+            HtmlMetaTagService.tag('title', 'Ticket ' + res._id);
             $scope.ticket = res;
             $scope.newUpdateMessage = "";
     
@@ -108,24 +131,4 @@ tickets.controller('AdminTicketCtrl', ['$scope','$http', '$routeParams', 'myConf
 
 
   
-}]);
-
-tickets.controller('AdminTicketsCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', function($scope, $http, $filter, $routeParams, myConfig) {
-
-    $scope.tickets = [];
-    $scope.ticketFormModalObject = {};
-    $scope.selectedOrder = "updated";
-    
-    $http.get(myConfig.apiUrl+'/tickets').then(function(res) {
-    
-        $scope.tickets = res.data;
-        
-        $scope.ticketFormModalObject = ($filter('filter')($scope.tickets, {_id: $routeParams.id}, false))[0];
-    
-    }, function(err) {
-    
-        console.error('ERR', err);
-    
-    });
-
 }]);
