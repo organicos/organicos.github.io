@@ -43,9 +43,10 @@ body {
 }
 
 #bg-topo-home{
-    background:url('https://feiraorganica.com/cdn/image/1400x700/?url=https://s3-sa-east-1.amazonaws.com/fodev/img/global/bg_vegetais.jpg') no-repeat center center;
+    background:url('https://s3-sa-east-1.amazonaws.com/fodev/img/global/bg_vegetais.jpg') no-repeat center center;
     background-size:100% auto;
 }
+
 
 /** bootstrap-ui **/
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
