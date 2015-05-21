@@ -81,8 +81,8 @@
                     </div>
                     
                     <div class="form-group" ng-if="!newsletter._id || newsletter.status == 0">
-                        <button type="submit" class="btn btn-primary" ng-disable="savingNewsletter" ng-if="!newsletterSent"><i class="fa fa-plus"></i> Salvar</button>
-                        <button type="button" class="btn btn-danger" ng-click="sendNewsletter()" ng-disable="savingNewsletter" ng-if="!newsletterSent && newsletter._id"><i class="fa fa-send"></i> Enviar</button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="savingNewsletter" ng-if="!newsletterSent"><i class="fa fa-plus"></i> Salvar</button>
+                        <button type="button" class="btn btn-danger" ng-click="sendNewsletter()" ng-disabled="savingNewsletter" ng-if="!newsletterSent && newsletter._id"><i class="fa fa-send"></i> Enviar</button>
                     </div>
                     
                     <div class="form-group" ng-if="newsletter.status == 1">
