@@ -37,7 +37,7 @@ newsletters.controller('AdminNewslettersCtrl', ['$scope','$http', 'myConfig', 'H
 
 }]);
 
-newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, HtmlMetaTagService) {
+newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$routeParams', '$location', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, $location, myConfig, confirmModalService, HtmlMetaTagService) {
 
     $scope.loadingProducts = false;
     $scope.savingNewsletter = false;
@@ -46,13 +46,7 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
         title: ""
         , top: ""
         , bottom: ""
-        , sections: [{
-            title: ""
-            , top: ""
-            , bottom: ""
-            , products: []
-            , articles: []
-        }]
+        , sections: []
     };
 
     if($routeParams.id){
@@ -160,13 +154,15 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
 
   }
   
-  $scope.newsletterPost = function(article) {
+  $scope.newsletterPost = function(newsletter) {
     
-    $http.post(myConfig.apiUrl + '/newsletter', article)
-    .success(function(resp) {
+    $http.post(myConfig.apiUrl + '/newsletter', newsletter)
+    .success(function(res) {
       
-        $scope.newsletter = resp.data;
-        $location.path("/newsletter/" + resp.data._id);
+      console.log(res);
+      
+        $scope.newsletter = res;
+        $location.path("/newsletter/" + res._id);
         
     })
     .error(function (resp) {
