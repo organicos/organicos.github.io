@@ -11,8 +11,9 @@
         	    <label for="order">Ordem</label>
                 <select class="form-control" id="order" ng-model="selectedOrder">
                     <option value="title" selected>Título</option>
-                    <option value="status" selected>Status</option>
-                    <option value="kind" selected>Tipo</option>
+                    <option value="status">Status</option>
+                    <option value="kind">Tipo</option>
+                    <option value="newsletter">Newsletter</option>
                     <option value="updated">Data</option>
                 </select>
         	</div>
@@ -26,6 +27,7 @@
                     <td>Nome</td>
                     <td>E-mail</td>
                     <td>Tipo</td>
+                    <td>Newsletter</td>
                     <td>Telefone</td>
                     <td>Compras</td>
                     <td>Ultima modificação</td>
@@ -37,6 +39,7 @@
                     <td><a href="/usuario/{{user._id}}" ng-bind="user.name"></a></td>
                     <td ng-bind="user.email"></td>
                     <td ng-bind="user.kind"></td>
+                    <td><i ng-if="user.newsletter" class="fa fa-check text-success"></i></td>
                     <td ng-bind="user.phone"></td>
                     <td ng-bind="user.orders"></td>
                     <td ng-bind="user.updated"></td>
