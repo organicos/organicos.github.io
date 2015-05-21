@@ -118,14 +118,14 @@
                                                         <table>
                                                             <tr style="color:#1D9E74; font-size: 2em; margin-top: 0.67em; margin-bottom: 0.67em; margin-left: 0; margin-right: 0; font-weight: bold;"><td ng-bind="newsletter.title"></td></tr>
                                                             <tr><td>
-                                                                <div style="padding-top:10px; margin-bottom:15px;" ng-bind="newsletter.top"></div>
+                                                                <div style="padding-top:10px; margin-bottom:15px; white-space: pre;" ng-bind-html="newsletter.top"></div>
                                                             </td></tr>
                                                             <tr>
                                                                 <td>
                                                                     <table width="570" ng-repeat="section in newsletter.sections">
                                                                         <tr><td align="center" ng-bind="section.title" style="background-color:#a349a4; color:white;"></td></tr>
                                                                         <tr><td>
-                                                                            <div style="padding-top:10px; margin-bottom:15px;" ng-bind="section.top"></div>
+                                                                            <div style="padding-top:10px; margin-bottom:15px; white-space: pre;" ng-bind-html="section.top"></div>
                                                                         </td></tr>
                                                                         <tr>
                                                                             <td>
@@ -172,13 +172,13 @@
                                                                             </td>
                                                                         </tr>
                                                                         <tr><td>
-                                                                            <div style="padding-top:10px; margin-bottom:15px;" ng-bind="section.bottom"></div>
+                                                                            <div style="padding-top:10px; margin-bottom:15px; white-space: pre;" ng-bind-html="section.bottom"></div>
                                                                         </td></tr>
                                                                     </table>
                                                                 </td>
                                                             </tr>
                                                             <tr><td>
-                                                                <div style="padding-top:10px; margin-bottom:15px;" ng-bind="newsletter.bottom"></div>
+                                                                <div style="padding-top:10px; margin-bottom:15px; white-space: pre;" ng-bind-html="newsletter.bottom"></div>
                                                             </td></tr>
                                                             <tr><td style="font-size: .67em; margin-top: 2.33em; margin-bottom: 2.33em; margin-left: 0; margin-right: 0; font-weight: bold;">Para garantir que nossos comunicados cheguem em sua caixa de entrada, adicione o e-mail <a href="mailto:info@feiraorganica.com.br" style="color:#0079BF;">info@feiraorganica.com.br</a> ao seu catálogo de endereços.</td></tr>   
                                                             <tr><td align="center" style="font-size: .67em; margin-top: 2.33em; margin-bottom: 2.33em; margin-left: 0; margin-right: 0; font-weight: bold;">Não consegue ver este e-mail? <a href="https://feiraorganica.com/newsletter/{{newsletter.encoded-url}}" style="text-decoration:none; font-size: 1.17em; margin-top: 1em; margin-bottom: 1em; margin-left: 0; margin-right: 0; font-weight: bold">Clique aqui.</a></td></tr>
