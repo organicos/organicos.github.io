@@ -87,6 +87,7 @@
                     
                     <div class="form-group" ng-if="newsletter.status == 1">
                         <p>Esta newletter já foi enviada!</p>
+                        <div class="well" ng-bind="newsletter.receivers"></div>
                     </div>
 
                 </form>

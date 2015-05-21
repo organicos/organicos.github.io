@@ -46,13 +46,7 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
         title: ""
         , top: ""
         , bottom: ""
-        , sections: [{
-            title: ""
-            , top: ""
-            , bottom: ""
-            , products: []
-            , articles: []
-        }]
+        , sections: []
     };
 
     if($routeParams.id){
@@ -107,6 +101,8 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
         .success(function(resp) {
           
           $scope.newsletterSent = true;
+          
+          $scope.newsletter = resp;
     
           $scope.$emit('alert', {
               kind: 'success',
