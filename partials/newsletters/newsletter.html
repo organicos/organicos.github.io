@@ -163,7 +163,13 @@
                                                             								    <a href="https://feiraorganica.com/feira/{{product.encoded_url}}">
                                                             								        <img border="0" alt="{{product.name}}" ng-src="https://feiraorganica.com/cdn/image/137x120/?url={{product.images[0].url}}" style="width: 137px; height: 120px;">
                                                             								        <b ng-bind="product.name"></b>
-                                                            								        <p><span ng-bind="product.price | currency:'R$':2"></span></p>
+                                                            								        <p>
+                                                            								            <span ng-bind="product.prices[0].price | currency:'R$':2" style="color: green;"></span>
+                                                            								            <span ng-if="product.prices[1] && product.prices[0].price < product.prices[1].price">
+                                                            								                <b style="color: red;">&dArr;</b>
+                                                            								                <del ng-bind="product.prices[1].price | currency:'R$':2" style="color:#b2b2b2;"></del>
+                                                            								            </span>
+                                                            								        </p>
                                                             								    </a>
                                                         								    </td>
                                                         							    </tr>
