@@ -396,7 +396,7 @@ app.service('confirmModalService', ['$modal', function ($modal) {
     };
 
     this.showModal = function (customModalDefaults, customModalOptions) {
-        if (!customModalDefaults) customModalDefaults = {};
+        var customModalDefaults = customModalDefaults ? customModalDefaults : {};
         customModalDefaults.backdrop = 'static';
         return this.show(customModalDefaults, customModalOptions);
     };
@@ -413,7 +413,7 @@ app.service('confirmModalService', ['$modal', function ($modal) {
         angular.extend(tempModalOptions, modalOptions, customModalOptions);
 
         if (!tempModalDefaults.controller) {
-            tempModalDefaults.controller = function ($scope, $modalInstance) {
+            tempModalDefaults.controller = ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.modalOptions = tempModalOptions;
                 $scope.modalOptions.ok = function (result) {
                     $modalInstance.close(true);
@@ -421,7 +421,7 @@ app.service('confirmModalService', ['$modal', function ($modal) {
                 $scope.modalOptions.close = function (result) {
                     $modalInstance.close(false);
                 };
-            }
+            }]
         }
 
         return $modal.open(tempModalDefaults).result;

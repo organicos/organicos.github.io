@@ -37,7 +37,7 @@ newsletters.controller('AdminNewslettersCtrl', ['$scope','$http', 'myConfig', 'H
 
 }]);
 
-newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$routeParams', '$location', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, $location, myConfig, confirmModalService, HtmlMetaTagService) {
+newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', '$location', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, HtmlMetaTagService, $location) {
 
     $scope.loadingProducts = false;
     $scope.savingNewsletter = false;
@@ -46,7 +46,13 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
         title: ""
         , top: ""
         , bottom: ""
-        , sections: []
+        , sections: [{
+            title: ""
+            , top: ""
+            , bottom: ""
+            , products: []
+            , articles: []
+        }]
     };
 
     if($routeParams.id){
