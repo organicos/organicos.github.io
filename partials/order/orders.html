@@ -31,11 +31,12 @@
                     <td class="click" ng-click="orderByField='shipping.phone'; reverseSort = !reverseSort">Fone</td>
                     <td class="click" ng-click="orderByField='shipping.district'; reverseSort = !reverseSort">Bairro</td>
                     <td class="click" ng-click="orderByField='shipping.city'; reverseSort = !reverseSort">Cidade</td>
+                    <td class="click" ng-click="orderByField='updated'; reverseSort = !reverseSort">Compra</td>
+                    <td class="click" ng-click="orderByField='payment_date'; reverseSort = !reverseSort">Pagamento</td>
+                    <td class="click" ng-click="orderByField='total'; reverseSort = !reverseSort">valor</td>
                     <td class="click" ng-click="orderByField='shipping.deliveryOption'; reverseSort = !reverseSort">Entrega</td>
                     <td class="click" ng-click="orderByField='products.length'; reverseSort = !reverseSort">Produtos</td>
-                    <td class="click" ng-click="orderByField='updated'; reverseSort = !reverseSort">Data</td>
                     <td class="click" ng-click="orderByField='status'; reverseSort = !reverseSort">Status</td>
-                    <td class="click" ng-click="orderByField='payment_date'; reverseSort = !reverseSort">Pagamento</td>
                     <td>Ações</td>
                 </tr>
             </thead>
@@ -46,9 +47,11 @@
                     <td ng-bind="order.shipping.phone"></td>
                     <td ng-bind="order.shipping.district"></td>
                     <td ng-bind="order.shipping.city"></td>
-                    <td ng-bind="order.shipping.deliveryOption"></td>
                     <td ng-bind="order.products.length"></td>
                     <td ng-bind="order.updated | date:'dd/MM/yyyy'"></td>
+                    <td ng-bind="order.shipping.deliveryOption"></td>
+                    <td ng-bind="order.payment_date"></td>
+                    <td ng-bind="order.total"></td>
                     <td ng-switch="order.status" title="{{statuses[order.status].name}} - {{statuses[order.status].desc}}">
                         <i ng-switch-when="0" class="fa fa-fw fa-money text-info"></i>
                         <i ng-switch-when="1" class="fa fa-fw fa-truck fa-flip-horizontal text-warning"></i>
@@ -57,7 +60,6 @@
                         <i ng-switch-when="4" class="fa fa-fw fa-exclamation text-danger"></i>
                         <i ng-switch-when="5" class="fa fa-fw fa-ban text-danger"></i>
                     </td>
-                    <td ng-bind="order.payment_date"></td>
                     <td><a ng-click="dropOrder(order)" href="javascrip:void(0)">x</a></td>
                 </tr>
             </tbody>
