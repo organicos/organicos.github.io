@@ -34,8 +34,8 @@
                     <button class="btn btn-default btn-xs" ng-click="addToBasket(product)"><i class="fa fa-plus"></i></button>
           				</span>
                 </td>
-                <td ng-bind="product.price | currency:'R$':2" align="right"></td>
-                <td ng-bind="product.quantity*product.price | currency:'R$':2" align="right"></td>
+                <td ng-bind="product.prices[0].price | currency:'R$':2" align="right"></td>
+                <td ng-bind="product.quantity*product.prices[0].price | currency:'R$':2" align="right"></td>
             </tr>
             <tr>
                 <td colspan="2" ng-class="basket.total < 35 ? 'danger' : ''">
@@ -48,13 +48,13 @@
                 <td></td>
                 <td></td>
                 <td align="right">Frete:</td>
-                <td align="right" ng-bind="basket.shipping.prices[0].price | currency:'R$':2">></td>
+                <td align="right" ng-bind="basket.shipping.price | currency:'R$':2">></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td align="right"><h4>Preço final:</h4></td>
-                <td align="right"><h4 ng-bind="basket.total + basket.shipping.prices[0].price | currency:'R$':2"></h4></td>
+                <td align="right"><h4 ng-bind="basket.total + basket.shipping.price | currency:'R$':2"></h4></td>
             </tr>
         </tbody>
     </table>
