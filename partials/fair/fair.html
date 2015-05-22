@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-sm-22 col-sm-offset-1">
 
-		<form class="form-inline text-right">
+		<form class="ng-cloak form-inline text-right">
 			<div class="form-group">
 				<label for="productQuery">Buscar produto</label>
 				<input class="form-control input-xs" id="productQuery" name="productQuery" ng-model="productQuery" type="text" placeholder="Buscar produto">
@@ -21,15 +21,16 @@
 		
 		<br>
 
-		<div class="btn-group" role="group" aria-label="productKind">
+		<div class="ng-cloak btn-group" role="group" aria-label="productKind">
 			<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == '' ? 'active' : ''" ng-click="selectCategory('')">Tudo</button>
 			<button type="button" class="btn btn-sm btn-primary" ng-class="selectedCategory == product[0].categories[0].name ? 'active' : ''" ng-click="selectCategory(product[0].categories[0].name)" ng-repeat="product in filteredProducts = (products | filter: productQuery | orderBy: 'categories[0].name' | groupBy: 'categories[0].name')">{{product[0].categories[0].name}}</button>
 		</div>
 		
 		<hr>
+		{{::products.length}}
 		
 		<div class="row">
-			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {categories : selectedCategory} | orderBy: selectedOrder)">
+			<div class="ng-cloak ol-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (products | filter: productQuery | filter: {categories : selectedCategory} | orderBy: selectedOrder)">
 		
 		
 				<div class="thumbnail">
