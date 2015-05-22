@@ -349,7 +349,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
       $scope.$storage.basket.products = [];
       $scope.$storage.basket.total = 0;
       
-      $location.path("/pedido/"+order._id);
+      $location.path("/meu/pedido/"+order._id);
 
       $scope.$emit('alert', {
         kind: 'success',
