@@ -1,6 +1,6 @@
 {
   "name": "satellizer",
-  "version": "0.9.4",
+  "version": "0.10.1",
   "main": "satellizer.js",
   "homepage": "https://github.com/sahat/satellizer",
   "ignore": [
@@ -19,14 +19,14 @@
   "dependencies": {
     "angular": "latest"
   },
-  "_release": "0.9.4",
+  "_release": "0.10.1",
   "_resolution": {
     "type": "version",
-    "tag": "0.9.4",
-    "commit": "56ef2e35c540497162363a3479339f590f8b332a"
+    "tag": "0.10.1",
+    "commit": "b0c45982b984e7e4625acb6f8ed377eee81dcfa4"
   },
   "_source": "git://github.com/sahat/satellizer.git",
-  "_target": "~0.9.4",
+  "_target": "~0.10.1",
   "_originalSource": "satellizer",
   "_direct": true
 }
