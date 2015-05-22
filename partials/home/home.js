@@ -6,7 +6,7 @@ home.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', { templateUrl: 'ngViewChildrenAsTemplateDirective.html', controller: 'HomeCtrl' });
 }]);
 
-home.controller('HomeCtrl', ['$scope', '$http', 'myConfig', '$location', 'anchorSmoothScroll', 'HtmlMetaTagService', function($scope, $http, myConfig, $location, anchorSmoothScroll, HtmlMetaTagService) {
+home.controller('HomeCtrl', ['$scope', '$http', 'myConfig', '$location', 'anchorSmoothScrollService', 'HtmlMetaTagService', function($scope, $http, myConfig, $location, anchorSmoothScrollService, HtmlMetaTagService) {
   
   HtmlMetaTagService.resetData();
   
@@ -21,7 +21,7 @@ home.controller('HomeCtrl', ['$scope', '$http', 'myConfig', '$location', 'anchor
       
       setTimeout(function(){
 
-        anchorSmoothScroll.scrollTo($location.hash(), -63);
+        anchorSmoothScrollService.scrollTo($location.hash(), -63);
       
       }, 1000);
       
