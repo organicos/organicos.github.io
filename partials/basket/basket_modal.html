@@ -48,13 +48,13 @@
                 <td></td>
                 <td></td>
                 <td align="right">Frete:</td>
-                <td align="right" ng-bind="basket.shipping.price | currency:'R$':2">></td>
+                <td align="right" ng-bind="basket.shipping.prices[0].price | currency:'R$':2">></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td align="right"><h4>Preço final:</h4></td>
-                <td align="right"><h4 ng-bind="basket.total + basket.shipping.price | currency:'R$':2"></h4></td>
+                <td align="right"><h4 ng-bind="basket.total + basket.shipping.prices[0].price | currency:'R$':2"></h4></td>
             </tr>
         </tbody>
     </table>
