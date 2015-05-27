@@ -385,6 +385,7 @@
     "forms.less",
     "buttons.less",
     "responsive-utilities.less",
+    "glyphicons.less",
     "button-groups.less",
     "input-groups.less",
     "navs.less",
@@ -403,7 +404,13 @@
     "panels.less",
     "responsive-embed.less",
     "wells.less",
-    "close.less"
+    "close.less",
+    "component-animations.less",
+    "dropdowns.less",
+    "tooltip.less",
+    "popovers.less",
+    "modals.less",
+    "carousel.less"
   ],
   "js": [
     "alert.js",
@@ -419,5 +426,5 @@
     "scrollspy.js",
     "transition.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=38b5278c05af79a3386e"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=43b3592ea488826164af"
 }

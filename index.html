@@ -90,7 +90,7 @@
     <a href="https://plus.google.com/+BrunoJoão1" rel="me" style="display:none;"></a>
     <!-- Body SEO -->
     
-    <nav class="navbar navbar-fixed-top" ng-class="$storage.user.kind == 'admin' ? 'navbar-fixed-top-admin' : ''" ng-controller="NavBarCtrl" ng-cloak>
+    <nav class="navbar navbar-fixed-top ng-cloak" ng-class="$storage.user.kind == 'admin' ? 'navbar-fixed-top-admin' : ''" ng-controller="NavBarCtrl" ng-cloak>
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" ng-click="isCollapsed = !isCollapsed">
@@ -254,7 +254,7 @@
       
     </div>
     
-    <div class="container-fluid background-blue text-white text-center" ng-if="!$storage.user.token" ng-cloak>
+    <div class="container-fluid background-blue text-white text-center" ng-if="!$storage.user.token">
 
     		<h2>Receba semanalmente nossa lista de produtos e preços.</h2>
 
