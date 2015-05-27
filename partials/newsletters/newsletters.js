@@ -8,6 +8,10 @@ newsletters.config(['$routeProvider', function($routeProvider) {
         templateUrl: '/partials/newsletters/newsletters.html',
         controller: 'AdminNewslettersCtrl'
     })
+    .when('/newsletter/signout', {
+        templateUrl: '/partials/newsletters/signout.html',
+        controller: 'NewsletterSignoutCtrl'
+    })
     .when('/newsletter/:id', {
         templateUrl: '/partials/newsletters/newsletter.html',
         controller: 'AdminNewsletterCtrl'
@@ -301,4 +305,56 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
         section.products.splice(productIndex, 1);
     }
   };
+}]);
+
+newsletters.controller('NewsletterSignoutCtrl', ['$scope','$http', 'myConfig', 'HtmlMetaTagService', function($scope, $http, myConfig, HtmlMetaTagService) {
+  
+  HtmlMetaTagService.tag('title', 'Cancelamento de assinatura de newsletter');
+
+    $scope.email = "";
+    $scope.newsletterCanceled = false;
+
+    $scope.submitNewsletterSignout = function(){
+      
+      if($scope.email){
+
+        $http.post(myConfig.apiUrl+'/newsletter/signout', {email: $scope.email})
+        .success(function(res) {
+
+          $scope.$emit('alert', {
+              kind: 'success',
+              msg: [],
+              title: res.data
+          });
+          
+          $scope.newsletterCanceled = true;
+
+        }).error(function(err) {
+
+          var error_list = [];
+    
+          angular.forEach(err, function(error, path) {
+            this.push(error.message);
+          }, error_list);
+      
+          $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Informe o e-mail a ser descadastrado."
+          });
+        
+        });
+        
+      } else {
+        
+        $scope.$emit('alert', {
+            kind: 'danger',
+            msg: ["Informe o e-mail a ser descadastrado."],
+            title: 'Erro ao cancelar assinatura! Verifique o motivo abaixo:'
+        });
+        
+      }
+
+    };
+    
 }]);
