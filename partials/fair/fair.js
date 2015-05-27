@@ -71,6 +71,8 @@ fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter',
       $scope.updateProductCharts();
       
       $scope.loadingProduct = false;
+      
+      $scope.loadSameCategoryProducts(resp.categories);
 
   }).error(function(err) {
     
@@ -79,18 +81,24 @@ fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter',
     console.error('ERR', err);
 
   });
-
-  $http.get(myConfig.apiUrl + '/products')
-  .success(function(resp) {
-    
-      $scope.sameCategoryProducts = resp;
-
-  }).error(function(err) {
-    
-      console.error('ERR', err);
-
-  });
   
+  $scope.loadSameCategoryProducts = function() {
+    
+    $http.get(myConfig.apiUrl + '/products', {params: {category: $scope.product.categories[0].name}})
+    .success(function(res) {
+      
+        console.log(res);
+      
+        $scope.sameCategoryProducts = res;
+  
+    }).error(function(err) {
+      
+        console.error('ERR', err);
+  
+    });    
+    
+  }
+
   $scope.updateProductCharts = function(){
 
     $scope.pricesChartData.data[0] = [];

@@ -81,7 +81,7 @@
         
         <h3>Outros produtos da categoria {{product.categories[0].name}}</h3>
 		<div class="row">
-			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in filteredProducts = (sameCategoryProducts | filter: {categories: product.categories[0].name} | orderBy: 'name')">
+			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in sameCategoryProducts">
 		
 		
 				<div class="thumbnail">
