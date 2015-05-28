@@ -159,7 +159,7 @@
                                                                                 
                                                                                 <table nf-if="section.products.length">
                                                         							<tbody>
-                                                        							    <tr ng-repeat="rowProducts in section.products|groupIntoRowsBy:4">
+                                                        							    <tr ng-repeat="rowProducts in section.products | groupIntoRowsBy:4">
                                                             								<td ng-repeat="product in rowProducts" valign="top" align="center" style="padding-left:5px; padding-bottom: 23px; padding-top: 10px; width: 137px;">
                                                             								    <a href="https://feiraorganica.com/feira/{{product.encoded_url}}">
                                                             								        <img border="0" alt="{{product.name}}" ng-src="https://feiraorganica.com/cdn/image/137x120/?url={{product.images[0].url}}" style="width: 137px; height: 120px;">

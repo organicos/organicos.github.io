@@ -35,6 +35,10 @@ var app = angular.module('myApp', [
   'chart.js'
 ]);
 
+app.factory('_', function() {
+	return window._; // assumes underscore has already been loaded on the page
+});
+
 app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider', function($routeProvider, $httpProvider, $authProvider, $locationProvider) {
 
     // define default route
