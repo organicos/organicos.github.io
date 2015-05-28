@@ -22,7 +22,7 @@ users.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService) {
+users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', 'confirmModalService', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService, confirmModalService) {
     
     HtmlMetaTagService.tag('title', 'Usuários');
 
@@ -40,6 +40,58 @@ users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams',
         console.error('ERR', err);
     
     });
+    
+  $scope.dropUser = function(user) {
+      
+      console.log('iuhiuhiuh')
+
+    var modalOptions = {
+        closeButtonText: 'Cancelar',
+        actionButtonText: 'Excluir usuário',
+        actionButtonKind: 'btn-danger',
+        headerText: 'Excluir o usuário ' + user.name + "?",
+        bodyText: 'Deseja realmente excluir o usuário ' + user.name + "?"
+    };
+
+    confirmModalService.showModal({}, modalOptions)
+    .then(function (result) {
+      
+      if(result){
+        
+        $http.delete(myConfig.apiUrl + '/user/' + user._id)
+        .success(function() {
+
+            var userIndex = $scope.users.indexOf(user);
+            $scope.users.splice(userIndex, 1);
+
+            $scope.$emit('alert', {
+              kind: 'success',
+              msg: [],
+              title: "Usuário removido com sucesso!"
+            });
+
+        })
+        .error(function (resp) {
+          
+          var error_list = [];
+    
+          angular.forEach(resp.errors, function(error, path) {
+            this.push(error.message);
+          }, error_list);
+          
+          $scope.$emit('alert', {
+              kind: 'danger',
+              msg: error_list,
+              title: "Não foi possível excluir o usuário. Verifique o motivo abaixo:"
+          });
+    
+        });
+        
+      }
+
+    });
+
+  };
 
 }]);
 
