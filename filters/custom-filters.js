@@ -45,3 +45,5 @@ customFilters.filter('groupIntoRowsBy', function($cacheFactory) {
   };
 
 });
+
+// https://gist.github.com/gugiserman/94bb936210c7b2abfe58

@@ -58,7 +58,13 @@ fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter',
   $scope.pricesChartData = {
     series : ['Custo'],
     labels : [],
-    data : []
+    data : [],
+    options : {
+      scaleLabel : "<%='R$' + Number(value).toFixed(2)%>"
+      , showScale: true
+      , tooltipTemplate: "<%='R$' + Number(value).toFixed(2)%>"
+      , multiTooltipTemplate: "<%='R$' + Number(value).toFixed(2)%>"
+    }
   };
 
   $http.get(myConfig.apiUrl + '/product/' + $routeParams.id)
@@ -102,9 +108,10 @@ fair.controller('FairProductCtrl', ['$scope','$http', '$routeParams', '$filter',
   $scope.updateProductCharts = function(){
 
     $scope.pricesChartData.data[0] = [];
+
     angular.forEach($scope.product.prices, function(price, key) {
       $scope.pricesChartData.data[0].unshift(price.price);
-      $scope.pricesChartData.labels.unshift("R$");
+      $scope.pricesChartData.labels.unshift($filter('date')(price.date,'dd/MM/yyyy'));
     });
     
   }
