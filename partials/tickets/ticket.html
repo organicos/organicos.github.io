@@ -7,11 +7,11 @@
         <p><strong>E-mail:</strong> <span ng-bind="ticket.customer.email"></span></p>
         <p><strong>Tipo:</strong> <span ng-bind="ticket.kind"></span></p>
         <p><strong>Telefone:</strong> <span ng-bind="ticket.customer.phone"></span></p>
-        <p class="text-justify" ng-bind-html="ticket.msg" style="white-space: pre-wrap;"></p>
-        
+        <p class="well well-mini text-justify background-blue text-white"><strong>Mensagem:</strong> <span ng-bind-html="ticket.msg" style="white-space: pre-wrap;"></span></p>
+
         <hr>
         
-        <div class="well well-mini" ng-class="update.user._id == ticket.customer._id ? '' : 'background-violet text-white'" ng-repeat="update in ticket.updates">
+        <div class="well well-mini text-white" ng-class="update.user._id == ticket.customer._id ? 'background-blue' : 'background-violet'" ng-repeat="update in ticket.updates">
             
             <p>
                 <span class="pull-right" ng-bind="update.date | date:'dd/MM/yyyy HH:mm'"></span>
@@ -32,7 +32,7 @@
             <div class="form-group">
                 
                 <button type="button" class="btn btn-primary" ng-click="addUpdate(0)" ng-disabled="processingTicketUpdate">Responder</button>
-                <button type="submit" class="btn btn-primary" ng-click="addUpdate(1)" ng-disabled="processingTicketUpdate">Adicionar resposta de cliente</button>
+                <button type="submit" class="btn btn-default" ng-click="addUpdate(1)" ng-disabled="processingTicketUpdate">Adicionar resposta de cliente</button>
                 
             </div>
             

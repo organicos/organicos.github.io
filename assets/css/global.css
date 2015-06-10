@@ -57,14 +57,14 @@ body {
 }
 
 /** Default styles **/
-.background-black{ background-color:black;}
-.background-blue{ background-color:#5BC0DE;}
-.background-blue-dark{ background-color:#22A7F0;}
-.background-green{ background-color:#1D9E74;}
-.background-orange{ background-color:#F27935;}
-.background-red{ background-color:#D64541;}
-.background-white{ background-color:white;}
-.background-violet{ background-color:#A348A3;}
+.background-black{ background-color:black !important;}
+.background-blue{ background-color:#5BC0DE !important;}
+.background-blue-dark{ background-color:#22A7F0 !important;}
+.background-green{ background-color:#1D9E74 !important;}
+.background-orange{ background-color:#F27935 !important;}
+.background-red{ background-color:#D64541 !important;}
+.background-white{ background-color:white !important;}
+.background-violet{ background-color:#A348A3 !important;}
 
 /** changing hover color **/
 ul.nav a:hover { background-color:#8C3E8C; color:white; }
