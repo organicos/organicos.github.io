@@ -46,12 +46,11 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
   
     HtmlMetaTagService.tag('title', 'Pedidos');
 
-    $scope.filterStatus = '';
-    $scope.selectedOrder = '';
+    $scope.orderByField = 'updated';
     $scope.orders = [];
     $scope.userFormModalObject = {};
     $scope.statuses = statuses;
-    
+    $scope.reverseSort = true;
     $http.get(myConfig.apiUrl+'/orders')
     .success(function(res) {
     
@@ -65,12 +64,6 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
     
     });
 
-    $scope.setFilterStatus = function(value){
-      
-      $scope.filterStatus = value;
-      
-    }
-    
   $scope.dropOrder = function(order){
       
     var confirmed = confirm('Deseja realmente excluir o produto ' + order._id + "?");
