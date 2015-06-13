@@ -11,6 +11,7 @@ var app = angular.module('myApp', [
   'angular.filter',
   'satellizer',
   'ngSanitize',
+  'ngFileUpload',
   'myApp.home',
   'myApp.fair',
   'myApp.tickets',
@@ -58,8 +59,6 @@ app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvid
             },
             'responseError': function(response) {
                 var login_path = '/entrar'+$location.path();
-                
-                console.log('app:::::  ' + login_path);
                 
                 if(response.status === 401 || response.status === 403) {
                   $location.path(login_path);

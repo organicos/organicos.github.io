@@ -211,12 +211,13 @@ users.controller('ChangePasswordCtrl', ['$scope','$http', 'myConfig', '$localSto
 
 }]);
 
-users.controller('MeCtrl', ['$scope', '$localStorage', '$http', 'myConfig', 'HtmlMetaTagService', 'Upload', function($scope, $localStorage, $http, myConfig, HtmlMetaTagService, Upload) {
+users.controller('MeCtrl', ['$scope', '$localStorage', '$http', 'myConfig', 'HtmlMetaTagService', 'filesService', function($scope, $localStorage, $http, myConfig, HtmlMetaTagService, filesService) {
     
     HtmlMetaTagService.tag('title', 'Meus dados');
     
     $scope.user = {};
     $scope.processingUserUpdate = false;
+    $scope.filesService = filesService;
     
     $http.get(myConfig.apiUrl+'/me')
     .success(function(res) {
@@ -270,37 +271,5 @@ users.controller('MeCtrl', ['$scope', '$localStorage', '$http', 'myConfig', 'Htm
         });
         
     }
-    
-    $scope.$watch('files', function () {
-        $scope.upload($scope.files);
-    });
-
-    $scope.upload = function (files) {
-        if (files && files.length) {
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                
-                Upload.upload({
-                    url: 'https://s3-sa-east-1.amazonaws.com/fodev-test/uploads', //S3 upload url including bucket name
-                    method: 'POST',
-                    fields : {
-                        key: file.name, // the key to store the file on S3, could be file name or customized
-                        AWSAccessKeyId: myConfig.s3.accessKeyID, 
-                        acl: 'public', // sets the access to the uploaded file in the bucket: private or public 
-                        policy: $scope.policy, // base64-encoded json policy (see article below)
-                        signature: $scope.signature, // base64-encoded signature based on policy string (see article below)
-                        "Content-Type": file.type != '' ? file.type : 'application/octet-stream', // content type of the file (NotEmpty)
-                        filename: file.name // this is needed for Flash polyfill IE8-9
-                    },
-                    file: file
-                }).progress(function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-                }).success(function (data, status, headers, config) {
-                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-                });
-            }
-        }
-    };
     
 }]);

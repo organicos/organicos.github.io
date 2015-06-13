@@ -1,39 +1,37 @@
 <div class="row">
     <div class="col-sm-offset-6 col-sm-12">
-        <h1>Meus dados</h1>
         
-        <form class="form" role="form" ng-submit="updateUser()">
-            <div class="form-group">
-                <label for="name">Nome</label>
-                <input class="form-control" type="text" name="name" id="name" ng-model="user.name"/>
+        <h1>Meus dados</h1>
+
+        <div class="row">
+            <div class="col-sm-12 col-lg-8">
+
+                <img class="img-responsive img-responsive-wide" ng-src="{{'https://s3-sa-east-1.amazonaws.com/fodev/img/global/no-profile-image.jpg' || user.img}}" ng-click="filesService.showModal(user.img)"></img>
+
             </div>
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input class="form-control" type="text" name="email" id="email" ng-model="user.email"/>
+            <div class="col-sm-12 col-lg-16">
+
+                <form class="form" role="form" ng-submit="updateUser()">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input class="form-control" type="text" name="name" id="name" ng-model="user.name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input class="form-control" type="text" name="email" id="email" ng-model="user.email"/>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="newsletter" ng-model="user.newsletter"> Desejo receber semanalmente a lista de produtos e promoções.
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" ng-disabled="processingUserUpdate">Salvar</button>
+                    </div>
+                </form>
+        
             </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="newsletter" ng-model="user.newsletter"> Desejo receber semanalmente a lista de produtos e promoções.
-                </label>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" ng-disabled="processingUserUpdate">Salvar</button>
-            </div>
-        </form>
+        </div>
 
     </div>
 </div>
-
-watching model:
-<button class="btn" ngf-select ng-model="files">Upload using model $watch</button>
-<button class="btn" ngf-select ngf-change="upload($files)">Upload on file change</button>
-
-Drop File:
-<div ngf-drop ng-model="files" class="drop-box" 
-    ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true"
-    ngf-accept="'image/*,application/pdf'">Drop Images or PDFs files here</div>
-<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-
-Image thumbnail: <img ngf-src="files[0]" ngf-default-src="'/thumb.jpg'" ngf-accept="'image/*'">
-Audio preview: <audio controls ngf-src="files[0]" ngf-accept="'audio/*'"></audio>
-Video preview: <video controls ngf-src="files[0]" ngf-accept="'video/*'"></video>
