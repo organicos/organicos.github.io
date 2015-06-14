@@ -4,16 +4,17 @@
     <h3>Arquivos</h3>
   </div>
   <div class="modal-body">
-    <ul class="nav nav-tabs nav-justified" ng-init="fileTab = 'upload'">
-      <li role="presentation" ng-class="fileTab == 'upload' ? 'active' : ''"><a href="javascript:void(0)" ng-click="fileTab = 'upload'">Enviar</a></li>
-      <li role="presentation" ng-class="fileTab == 'images' ? 'active' : ''"><a href="javascript:void(0)" ng-click="fileTab = 'images'">Imagens</a></li>
-      <li role="presentation" ng-class="fileTab == 'videos' ? 'active' : ''"><a href="javascript:void(0)" ng-click="fileTab = 'videos'">Vídeos</a></li>
-      <li role="presentation" ng-class="fileTab == 'audios' ? 'active' : ''"><a href="javascript:void(0)" ng-click="fileTab = 'audios'">Audios</a></li>
+    <ul class="nav nav-tabs nav-justified" ng-init="fileType = 'upload'">
+      <li role="presentation" ng-class="fileType == 'upload' ? 'active' : ''"><a href="javascript:void(0)" ng-click="fileType = 'upload'">Enviar</a></li>
+      <li role="presentation" ng-class="fileType == 'images' ? 'active' : ''"><a href="javascript:void(0)" ng-click="fileType = 'images'">Imagens</a></li>
+      <li role="presentation" ng-class="fileType == 'videos' ? 'active' : ''"><a href="javascript:void(0)" ng-click="fileType = 'videos'">Vídeos</a></li>
+      <li role="presentation" ng-class="fileType == 'audios' ? 'active' : ''"><a href="javascript:void(0)" ng-click="fileType = 'audios'">Audios</a></li>
     </ul>
-    <div ng-include="'/partials/files/files_modal_'+fileTab+'.html'"></div>
+    <br>
+    <div ng-include="'/partials/files/files_modal_'+fileType+'.html'" onload="prepareModalContent(fileType)" autoscroll></div>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-default" ng-click="modalOptions.ok();">Fechar</button>
-    <button class="btn btn-success" ng-click="upload(files)">Salvar</button>
+    <button class="btn btn-default" ng-click="modalOptions.close();">Fechar</button>
+    <button class="btn btn-success" ng-click="modalOptions.ok()" ng-disabled="selectedItems.length == 0">Selecionar</button>
   </div>
 </form>

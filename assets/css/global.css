@@ -74,6 +74,17 @@ body {
 /** changing hover color **/
 ul.nav a:hover { background-color:#8C3E8C; color:white; }
 
+/** Bordas arredondadas **/
+.round-5 {-webkit-border-radius: 5px !important; -moz-border-radius: 5px !important; border-radius: 5px !important;}
+.round-10 {-webkit-border-radius: 10px !important; -moz-border-radius: 10px !important; border-radius: 10px !important;}
+.round-12 {-webkit-border-radius: 12px !important; -moz-border-radius: 12px !important; border-radius: 12px !important;}
+.round-15 {-webkit-border-radius: 15px !important; -moz-border-radius: 15px !important; border-radius: 15px !important;}
+.round-20 {-webkit-border-radius: 20px !important; -moz-border-radius: 20px !important; border-radius: 20px !important;}
+
+/** Classe para colunas infinitas sem mudar de row **/
+.col-infinite {
+    margin-top: 5px !important;
+}
 
 /** Default styles **/
 .text-black{ color:black;}
