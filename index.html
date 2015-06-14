@@ -123,7 +123,7 @@
             <li><a href="/contato" hreflang="pt-br">Contato</a></li>
             <li><a href="/entrar" hreflang="pt-br" ng-cloak ng-if="!$storage.user.token">Entrar</a></li>
             <li dropdown ng-cloak ng-if="$storage.user.token">
-              <a href="#" dropdown-toggle><i class="fa fa-user"></i> <span class="caret"></span></a>
+              <img class="img-responsive img-circle" id="profile-img" ng-src="https://feiraorganica.com/cdn/image/100x100/?url={{$storage.user.profile_img.url}}" dropdown-toggle></img>
               <ul class="dropdown-menu" role="menu">
                 <li role="presentation" class="dropdown-header" ng-bind="$storage.user.name || $storage.user.email"></li>
                 <li><a href="/eu" hreflang="pt-br">Meus dados</a></li>

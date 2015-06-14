@@ -219,10 +219,15 @@ users.controller('MeCtrl', ['$scope', '$localStorage', '$http', 'myConfig', 'Htm
     $scope.processingUserUpdate = false;
     $scope.filesService = filesService;
     
+    $scope.changeUserImage = function(profile_img){
+        $scope.user.profile_img = profile_img;
+        $scope.updateUser();
+    }
+    
     $http.get(myConfig.apiUrl+'/me')
     .success(function(res) {
         
-        $localStorage.user = res.data;
+        $localStorage.user = res;
         
         $scope.user = $localStorage.user;
         

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-sm-12 col-lg-8">
 
-                <img class="img-responsive img-responsive-wide" ng-src="{{'https://s3-sa-east-1.amazonaws.com/fodev/img/global/no-profile-image.jpg' || user.img}}" ng-click="filesService.showModal(user.img)"></img>
+                <img class="img-responsive img-responsive-wide" alt="user.profile_img.name" ng-src="{{user.profile_img.url || 'https://s3-sa-east-1.amazonaws.com/fodev/img/global/no-profile-image.jpg'}}" ng-click="filesService.showModal(changeUserImage)"></img>
 
             </div>
             <div class="col-sm-12 col-lg-16">

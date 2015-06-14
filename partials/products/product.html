@@ -13,7 +13,7 @@
                         type="text" 
                         ng-model="selectedImage" 
                         placeholder="Imagens" 
-                        typeahead="image.title for image in getImages($viewValue)" 
+                        typeahead="image.name for image in getImages($viewValue)" 
                         typeahead-loading="loadingImages" 
                         typeahead-on-select="selectImage($item, $model, $label)" 
                         class="form-control"
@@ -26,7 +26,7 @@
         		        <a ng-click="dropImage(image)"><i class="fa fa-remove"></i></a>
         		    </p>
         			<a href="/image/{{image._id}}">
-        				<img class="img-responsive" alt="{{image.title}}" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{image.url}}">
+        				<img class="img-responsive" alt="{{image.name}}" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{image.url}}">
         			</a>
         		</div>
             </div>

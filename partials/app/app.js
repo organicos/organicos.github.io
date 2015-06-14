@@ -26,7 +26,7 @@ var app = angular.module('myApp', [
   'myApp.susteinable',
   '720kb.socialshare',
   'myApp.about',
-  'myApp.images',
+  'myApp.files',
   'myApp.articles',
   'myApp.suppliers',
   'myApp.blog',

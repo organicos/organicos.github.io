@@ -2,16 +2,22 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
     
     var self = this;
     
-    var uploadCallback = '';
+    var callback = function(res){
+        return res || '';
+    };
+    
+    var uploadCallback = function(cbk){
+        if(angular.isFunction(cbk)) callback = cbk;
+    }
 
-    self.showModal = function(callback){
-        uploadCallback = callback;
+    self.showModal = function(cbk){
+        uploadCallback(cbk);
         return $modal.open({
             backdrop: true,
             keyboard: true,
             modalFade: true,
-            size: 'md',
-            templateUrl: '/partials/files/upload_file_modal.html',
+            size: 'lg',
+            templateUrl: '/partials/files/files_modal.html',
             controller: filesUploadFileModalCtrl
         }).result;
     };
@@ -46,30 +52,9 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
                         file_name: file.name
                         , file_type: file.type
                     }})
-                    .success(function(res) {
+                    .success(function(s3SignRes) {
                         
-                        $scope.uploading = true;
-                        
-                        var xhr = new XMLHttpRequest();
-                        xhr.open("PUT", res.signed_request);
-                        xhr.setRequestHeader('x-amz-acl', 'public-read');
-                        xhr.onload = function() {
-                            if (xhr.status === 200) {
-                                $scope.uploading = false;
-                                varToUpdate = res.url;
-                                $scope.$apply();
-                            }
-                        };
-                        xhr.upload.onprogress = function(evt){
-                            $scope.progress = ((100 / evt.total) * evt.loaded).toFixed(0);
-                            $scope.$apply();
-                        };
-    
-                        xhr.onerror = function() {
-                            $scope.uploading = false;
-                            alert("Could not upload file.");
-                        };
-                        xhr.send(file);
+                        uploadToS3(s3SignRes, file);
                         
                     }).error(function(err) {
                     
@@ -81,6 +66,57 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
                 }
             }
         };
+        
+        var uploadToS3 = function(s3SignRes, file){
+            
+            $scope.uploading = true;
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open("PUT", s3SignRes.signed_request);
+            xhr.setRequestHeader('x-amz-acl', 'public-read');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    $scope.uploading = false;
+                    $scope.$apply();
+                    persistImage(s3SignRes, file);
+                }
+            };
+            xhr.upload.onprogress = function(evt){
+                $scope.progress = ((100 / evt.total) * evt.loaded).toFixed(0);
+                $scope.$apply();
+            };
+    
+            xhr.onerror = function() {
+                $scope.uploading = false;
+                alert("Could not upload file.");
+            };
+            xhr.send(file);
+            
+        }
+        
+        var persistImage = function(s3SignRes, file){
+            
+            console.log(file);
+    
+            $http.post(myConfig.apiUrl+'/file', {
+                name: $scope.name
+                , file_name: file.name
+                , type: file.type
+                , size: file.size
+                , url: s3SignRes.url
+            })
+            .success(function(res) {
+                
+                callback(res);
+                
+            }).error(function(err) {
+            
+                console.error('ERR', err);
+            
+            });
+            
+        }
+    
     }
 
 }]);

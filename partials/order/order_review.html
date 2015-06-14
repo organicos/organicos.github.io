@@ -50,64 +50,84 @@
             </tbody>
         </table>
         
-        
+        <form class="form" role="form">
 
-        <h2>Dados de entrega</h2>
-        
-        <form class="form well well-mini" role="form">
-            <div class="row">
-                <div class="form-group col-sm-5">
-                    <label for="cep" class="control-label">CEP</label>
-                    <input type="text" class="form-control" id="cep" placeholder="CEP" ng-model="$storage.basket.shipping.cep">
-                </div>
-                <div class="form-group col-sm-11">
-                    <label for="street" class="control-label">Rua</label>
-                    <input type="text" class="form-control" id="street" placeholder="Rua" ng-model="$storage.basket.shipping.street">
-                </div>
-                <div class="form-group col-sm-2">
-                    <label for="number" class="control-label">Número</label>
-                    <input type="text" class="form-control" id="number" placeholder="Número" ng-model="$storage.basket.shipping.number">
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="complement" class="control-label">Complemento</label>
-                    <input type="text" class="form-control" id="complement" placeholder="Complemento" ng-model="$storage.basket.shipping.complement">
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-sm-6">
-                    <label for="district" class="control-label">Bairro</label>
-                    <input type="text" class="form-control" id="district" placeholder="Bairro" ng-model="$storage.basket.shipping.district">
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="city" class="control-label">Cidade</label>
-                    <input type="text" class="form-control" id="city" placeholder="Cidade" ng-model="$storage.basket.shipping.city">
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="state" class="control-label">Estado</label>
-                    <input type="text" class="form-control" id="state" placeholder="Estado" ng-model="$storage.basket.shipping.state">
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="country" class="control-label">País</label>
-                    <input type="text" class="form-control" id="country" placeholder="País" ng-model="$storage.basket.shipping.country" disabled>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="form-group">
-                        <label for="phone" class="control-label">Telefone</label>
-                        <input type="text" class="form-control" id="phone" placeholder="Telefone" ng-model="$storage.basket.shipping.phone">                                          
+            <div class="well well-mini background-blue text-white">
+                <h2 class="click" ng-click="showPreferencesForm = !showPreferencesForm">Preferências <i class="fa text-white" ng-class="showPreferencesForm ? 'fa-arrow-up' : 'fa-arrow-down'"></i></h2>
+                <div class="row" ng-if="showPreferencesForm">
+                    <div class="form-group col-sm-5">
+                        
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="$storage.basket.shipping.garbage_free"> Livre de lixo
+                            </label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="deliveryOption" class="control-label">Data e horário de entrega</label>
-                        <select class="form-control" ng-model="$storage.basket.shipping.deliveryOption" ng-options="option as option for option in shipping.nextDates">
-                          <option value="">-- Selecione uma data de entrega --</option>
-                        </select>
+                </div>  
+            </div>
+
+            <div class="well well-mini">
+                <h2 class="click clearfix" ng-click="showShippingForm = !showShippingForm">
+                    Dados de entrega <i class="fa small" ng-class="showShippingForm ? 'fa-arrow-up' : 'fa-arrow-down'"></i>
+                    <small class="pull-right"><a href="javascript:void(0)" ng-click="adressesModal">Meus endereços</a></small>
+                </h2>
+                
+                <hr>
+                
+                <div class="row" ng-if="showShippingForm">
+                    <div class="form-group col-sm-5">
+                        <label for="cep" class="control-label">CEP</label>
+                        <input type="text" class="form-control" id="cep" placeholder="CEP" ng-model="$storage.basket.shipping.cep">
+                    </div>
+                    <div class="form-group col-sm-11">
+                        <label for="street" class="control-label">Rua</label>
+                        <input type="text" class="form-control" id="street" placeholder="Rua" ng-model="$storage.basket.shipping.street">
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <label for="number" class="control-label">Número</label>
+                        <input type="text" class="form-control" id="number" placeholder="Número" ng-model="$storage.basket.shipping.number">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="complement" class="control-label">Complemento</label>
+                        <input type="text" class="form-control" id="complement" placeholder="Complemento" ng-model="$storage.basket.shipping.complement">
                     </div>
                 </div>
-                <div class="form-group col-sm-16">
-                    <label for="address_ref" class="control-label">Dados complementares de entrega.</label>
-                    <textarea rows="4" class="form-control" id="address_ref" placeholder="Dados complementares de entrega" ng-model="$storage.basket.shipping.address_ref"></textarea>
-                    <p class="help-block">Forneça dados que nos auxiliem na entrega, como pontos de referência próximos a sua casa, horário preferencial para o recebimento, pessoas autorizadas a receber a cesta...</p>
+                <div class="row" ng-if="showShippingForm">
+                    <div class="form-group col-sm-6">
+                        <label for="district" class="control-label">Bairro</label>
+                        <input type="text" class="form-control" id="district" placeholder="Bairro" ng-model="$storage.basket.shipping.district">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="city" class="control-label">Cidade</label>
+                        <input type="text" class="form-control" id="city" placeholder="Cidade" ng-model="$storage.basket.shipping.city">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="state" class="control-label">Estado</label>
+                        <input type="text" class="form-control" id="state" placeholder="Estado" ng-model="$storage.basket.shipping.state">
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="country" class="control-label">País</label>
+                        <input type="text" class="form-control" id="country" placeholder="País" ng-model="$storage.basket.shipping.country" disabled>
+                    </div>
+                </div>
+                <div class="row" ng-if="showShippingForm">
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label for="phone" class="control-label">Telefone</label>
+                            <input type="text" class="form-control" id="phone" placeholder="Telefone" ng-model="$storage.basket.shipping.phone">                                          
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryOption" class="control-label">Data e horário de entrega</label>
+                            <select class="form-control" ng-model="$storage.basket.shipping.deliveryOption" ng-options="option as option for option in shipping.nextDates">
+                              <option value="">-- Selecione uma data de entrega --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-16">
+                        <label for="address_ref" class="control-label">Dados complementares de entrega.</label>
+                        <textarea rows="4" class="form-control" id="address_ref" placeholder="Dados complementares de entrega" ng-model="$storage.basket.shipping.address_ref"></textarea>
+                        <p class="help-block">Forneça dados que nos auxiliem na entrega, como pontos de referência próximos a sua casa, horário preferencial para o recebimento, pessoas autorizadas a receber a cesta...</p>
+                    </div>
                 </div>
             </div>
         </form>

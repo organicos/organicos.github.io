@@ -9,6 +9,8 @@ angular.module('myApp').service('basketService', ['$modal', '$localStorage', '$f
     	    basket = {total: 0,name: '',products: [], shipping: {price: 6, country: 'Brasil'}};
     	} else {
         	if(!basket.products) basket.products = {};
+        	if(!basket.garbage_free) basket.garbage_free = true;
+        	if(!basket.receipt) basket.receipt = false;
         	if(!basket.total || basket.total < 0) basket.total = 0;
         	if(!basket.name) basket.name = '';
         	if(!basket.shipping) basket.shipping = {price: 6, country: 'Brasil'};

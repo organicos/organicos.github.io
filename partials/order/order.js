@@ -217,6 +217,8 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
   
     HtmlMetaTagService.tag('title', 'Revisão de pedido');
   
+    $scope.showPreferencesForm = true;
+    $scope.showShippingForm = true;
     $scope.processingOrder = false;
     $scope.country = 'Brasil';
     $scope.orderReady = false;
