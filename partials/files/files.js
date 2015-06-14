@@ -4,15 +4,15 @@ var files = angular.module('myApp.files', ['ngRoute']);
 
 files.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-    .when('/files', {
+    .when('/arquivos', {
         templateUrl: '/partials/files/files.html',
         controller: 'AdminFilesCtrl'
     })
-    .when('/file/:id', {
+    .when('/arquivo/:id', {
         templateUrl: '/partials/files/file.html',
         controller: 'AdminFileCtrl'
     })
-    .when('/file', {
+    .when('/arquivo', {
         templateUrl: '/partials/files/file.html',
         controller: 'AdminFileCtrl'
     });
@@ -37,11 +37,12 @@ files.controller('AdminFilesCtrl', ['$scope','$http', '$filter', '$routeParams',
 
 }]);
 
-files.controller('AdminFileCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', function($scope, $http, $routeParams, myConfig, $location, HtmlMetaTagService) {
+files.controller('AdminFileCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', 'filesService', function($scope, $http, $routeParams, myConfig, $location, HtmlMetaTagService, filesService) {
   
     $scope.file = {};
     $scope.filesQuery = "";
     $scope.processingFileUpdate = false;
+    $scope.filesService = filesService;
     
     if($routeParams.id){
     

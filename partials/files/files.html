@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="file in filteredFiles = (files | filter: filesQuery | orderBy: selectedOrder)">
-                    <td><a href="/file/{{file._id}}" ng-bind="file.name || '???'"></a></td>
+                    <td><a href="/arquivo/{{file._id}}" ng-bind="file.name || '???'"></a></td>
                     <td ng-bind="file.file_name"></td>
                     <td ng-bind="file.updated"></td>
                     <td>x</td>

@@ -1,13 +1,12 @@
 <div class="text-center" ng-if="!uploading">
   <p>Envie um arquivo do seu computador.</p>
-  <button 
-    class="btn btn-default btn-lg" 
-    ngf-accept="'image/*'" 
-    ngf-select 
-    ngf-change="upload($files)" 
-    ng-click="filesService.showModal()"
-    ng-disabled="uploading"
-  >Escolher o arquivo</button>
+  
+  <p>Primeiro defina a privacidade</p>
+  <div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <div class="btn-group btn-group-lg" role="group" aria-label="...">Público</div>
+    <div class="btn-group" role="group" aria-label="...">Privado</div>
+    <div class="btn-group btn-group-sm" role="group" aria-label="...">Global</div>
+  </div>
 </div>
 
 <div ng-if="uploading">
