@@ -4,6 +4,7 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
     var multiple = false;
     var typeTab = 'images';
     var appMode = true;
+    var selectedItems = [];
     
     var setMultiple = function(mtpl){
         multiple = mtpl || false;
@@ -36,10 +37,18 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         appMode = status;
     }
     
-    var getAppMode = function(status){
+    var getAppMode = function(){
         return appMode;
     }
-        
+     
+    var setSelectedItems = function(file){
+        selectedItems = file;
+    }
+    
+    var getSelectedItems = function(){
+        return selectedItems;
+    }
+    
     var createModal = function(template){
         return $modal.open({
             backdrop: true,
@@ -51,9 +60,11 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         }).result;
     }
 
-    self.selectUserFile = function(cbk, multiple){
+    self.selectUserFile = function(cbk, multiple, files){
         
         setAppMode(false);
+        
+        setSelectedItems(files);
 
         setMultiple(multiple);
 
@@ -83,7 +94,7 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         $scope.videos = [];
         $scope.images = [];
         $scope.file = {};
-        $scope.selectedItems = [];
+        $scope.selectedItems = getSelectedItems();
         $scope.privacy;
         
         $scope.setPrivacy = function(privacy){
@@ -156,25 +167,30 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         
         $scope.selectFile = function(file, finishSelection){
             
-            var elementPos = $scope.selectedItems.map(function(x) {return x._id; }).indexOf(file._id);
+            var selectedItems = getSelectedItems();
+            
+            var elementPos = selectedItems.map(function(x) {return x._id; }).indexOf(file._id);
             
             if(elementPos > -1){
-                $scope.selectedItems.splice(elementPos, 1);
+                selectedItems.splice(elementPos, 1);
             } else {
                 if(getMultiple()){
-                    $scope.selectedItems.push(file);
+                    selectedItems.push(file);
                 } else {
-                    $scope.selectedItems = [file];
+                    selectedItems = [file];
                     if(finishSelection){
                         $scope.modalOptions.ok();
                     }
                 }
             }
+            
+            setSelectedItems(selectedItems);
+            $scope.selectedItems = selectedItems;
 
         }
         
         $scope.isSelectedFile = function(file){
-            var elementPos = $scope.selectedItems.map(function(x) {return x._id; }).indexOf(file._id);
+            var elementPos = getSelectedItems().map(function(x) {return x._id; }).indexOf(file._id);
             return elementPos > -1 ? true : false;
         }
         

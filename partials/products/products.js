@@ -93,9 +93,10 @@ products.controller('ProductsCtrl', ['$scope','$http', '$filter', '$routeParams'
   
 }]);
 
-products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', '$location', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, $location, HtmlMetaTagService) {
+products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', '$location', 'HtmlMetaTagService', 'filesService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, $location, HtmlMetaTagService, filesService) {
 
   $scope.saving_product = false;
+  $scope.filesService = filesService;
   $scope.product = {prices: [], costs: [], suppliers: [], categories: [], images: []};
   $scope.pricesChartData = {
     series : ['Preço'],
@@ -129,6 +130,10 @@ products.controller('ProductCtrl', ['$scope','$http', '$filter', '$routeParams',
     
     });
     
+  }
+  
+  $scope.setProductImages = function(images){
+    $scope.product.images = images;
   }
   
   $scope.updateProductCharts = function(){

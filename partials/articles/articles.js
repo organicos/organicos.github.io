@@ -42,12 +42,13 @@ articles.controller('ArticlesCtrl', ['$scope','$http', '$filter', '$routeParams'
 
 }]);
 
-articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, $location, HtmlMetaTagService) {
+articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', 'filesService', function($scope, $http, $filter, $routeParams, myConfig, $location, HtmlMetaTagService, filesService) {
 
   $scope.saving_article = false;
   $scope.article = {};
   $scope.loadingProducts = false;
   $scope.loadingImages = false;
+  $scope.filesService = filesService;
 
   if($routeParams.id){
     
