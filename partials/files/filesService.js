@@ -156,29 +156,19 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         
         $scope.selectFile = function(file, finishSelection){
             
-            var appMode = getAppMode();
+            var elementPos = $scope.selectedItems.map(function(x) {return x._id; }).indexOf(file._id);
             
-            if(appMode){
-                
-                
-                
+            if(elementPos > -1){
+                $scope.selectedItems.splice(elementPos, 1);
             } else {
-
-                var elementPos = $scope.selectedItems.map(function(x) {return x._id; }).indexOf(file._id);
-                
-                if(elementPos > -1){
-                    $scope.selectedItems.splice(elementPos, 1);
+                if(getMultiple()){
+                    $scope.selectedItems.push(file);
                 } else {
-                    if(getMultiple()){
-                        $scope.selectedItems.push(file);
-                    } else {
-                        $scope.selectedItems = [file];
-                        if(finishSelection){
-                            $scope.modalOptions.ok();
-                        }
+                    $scope.selectedItems = [file];
+                    if(finishSelection){
+                        $scope.modalOptions.ok();
                     }
                 }
-   
             }
 
         }
