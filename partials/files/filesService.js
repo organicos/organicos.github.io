@@ -42,10 +42,11 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
     }
      
     var setSelectedItems = function(file){
-        selectedItems = file;
+        selectedItems = file || [];
     }
     
     var getSelectedItems = function(){
+        selectedItems = selectedItems || [];
         return selectedItems;
     }
     
@@ -74,9 +75,7 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         
     };
 
-    self.selectAppFile = function(cbk, multiple, files){
-        
-        setAppMode(true);
+    var selectFile = function(cbk, multiple, files){
         
         setSelectedItems(files);
 
@@ -86,17 +85,39 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         
         return createModal('files_modal_select.html');
         
+    }
+    
+    self.selectAppFile = function(cbk, multiple, files){
+        
+        setAppMode(true);
+        
+        return selectFile(cbk, multiple, files);
+        
     };
 
-    self.manageUserFiles = function(typeTab){
+    self.selectUserFile = function(cbk, multiple, files){
         
         setAppMode(false);
+        
+        return selectFile(cbk, multiple, files);
+        
+    };
+
+    var manageFiles = function(typeTab){
         
         setMultiple(true);
         
         setTypeTab(typeTab);
 
         return createModal('files_modal_manage.html');
+
+    }
+    
+    self.manageUserFiles = function(typeTab){
+        
+        setAppMode(false);
+        
+        return manageFiles(typeTab);
 
     };
     
@@ -104,12 +125,7 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         
         setAppMode(true);
         
-        setMultiple(true);
-        
-        setTypeTab(typeTab);
-
-        return createModal('files_modal_manage.html');
-
+        return manageFiles(typeTab);
     };
     
     var selectFilesModalCtrl = function (Upload, $scope, $http, $modalInstance, myConfig, $filter) {
@@ -216,7 +232,10 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         }
         
         $scope.isSelectedFile = function(file){
-            var elementPos = getSelectedItems().map(function(x) {return x._id; }).indexOf(file._id);
+            var selectedItems = getSelectedItems();
+            
+            var elementPos = selectedItems.map(function(x) {return x._id; }).indexOf(file._id);
+            
             return elementPos > -1 ? true : false;
         }
         
