@@ -74,6 +74,32 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         
     };
 
+    self.selectAppFile = function(cbk, multiple, files){
+        
+        setAppMode(true);
+        
+        setSelectedItems(files);
+
+        setMultiple(multiple);
+
+        uploadCallback(cbk);
+        
+        return createModal('files_modal_select.html');
+        
+    };
+
+    self.manageUserFiles = function(typeTab){
+        
+        setAppMode(false);
+        
+        setMultiple(true);
+        
+        setTypeTab(typeTab);
+
+        return createModal('files_modal_manage.html');
+
+    };
+    
     self.manageAppFiles = function(typeTab){
         
         setAppMode(true);
@@ -82,7 +108,7 @@ angular.module('myApp').service('filesService', ['$modal', function ($modal) {
         
         setTypeTab(typeTab);
 
-        return createModal('files_modal_app.html');
+        return createModal('files_modal_manage.html');
 
     };
     
