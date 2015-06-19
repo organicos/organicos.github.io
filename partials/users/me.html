@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-sm-12 col-lg-8">
 
-                <img class="img-responsive img-responsive-wide click" alt="user.profile_img.name" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{user.profile_img.url || 'https://s3-sa-east-1.amazonaws.com/fodev/img/global/no-profile-image.jpg'}}" ng-click="filesService.selectUserFile(changeUserImage)"></img>
+                <img class="img-responsive img-responsive-wide img-rounded click" alt="user.profile_img.name" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{user.profile_img.url || 'https://s3-sa-east-1.amazonaws.com/fodev/img/global/no-profile-image.jpg'}}" ng-click="filesService.selectUserFile(changeUserImage)"></img>
 
             </div>
             <div class="col-sm-12 col-lg-16">
@@ -19,6 +19,10 @@
                     <div class="form-group">
                         <label for="email">E-mail</label>
                         <input class="form-control" type="text" name="email" id="email" ng-model="user.email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefone</label>
+                        <input class="form-control" type="text" name="phone" id="phone" ng-model="user.phone"/>
                     </div>
                     <div class="checkbox">
                         <label>

@@ -9,7 +9,7 @@
     <meta http-equiv="content-language" content="pt-br">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="feira organica, feiras organicas, organico, organicos, organica, organicas, cesta, cestas, sustentavel, sustentaveis, sustentabilidade, alimento, alimentos, delivery, entrega, flroanopolis, agricultura, agricultura familiar, ecologicamente correto, ecologicamente correta, ecologico, ecologica, selo sustentavel, selo organico, selo, certificacao organica, certificado organico, frutas, verduras, saladas, saudaveis, saldavel, entrega em casa, entrega no trabalho, produto orgânico, feira, feirante, agricultor, produtor, ortaliças, compra de produtos. compra de produto, agronegocio, agronegocios, sem agrotoxico, compostagem, meio ambiente, responsavel, responsabilidade ambiental, responsabilidade social, socioambiental, socioambientais">
+    <meta name="keywords" content="organicos florianopolis, florianopolis, feira florianopolisfeira organica, feiras organicas, organico, organicos, organica, organicas, cesta, cestas, sustentavel, sustentaveis, sustentabilidade, alimento, alimentos, delivery, entrega, flroanopolis, agricultura, agricultura familiar, ecologicamente correto, ecologicamente correta, ecologico, ecologica, selo sustentavel, selo organico, selo, certificacao organica, certificado organico, frutas, verduras, saladas, saudaveis, saldavel, entrega em casa, entrega no trabalho, produto orgânico, feira, feirante, agricultor, produtor, ortaliças, compra de produtos. compra de produto, agronegocio, agronegocios, sem agrotoxico, compostagem, meio ambiente, responsavel, responsabilidade ambiental, responsabilidade social, socioambiental, socioambientais">
     
     <meta name="author" content="Bruno da Silva João">
     <meta name="reply-to" content="info@feiraorganica.com">
@@ -128,6 +128,7 @@
                 <li role="presentation" class="dropdown-header" ng-bind="$storage.user.name || $storage.user.email"></li>
                 <li><a href="/eu" hreflang="pt-br">Meus dados</a></li>
                 <li><a href="/meus/pedidos" hreflang="pt-br">Meus pedidos</a></li>
+                <li><a href="/meus/enderecos" hreflang="pt-br">Meus endereços</a></li>
                 <li><a href="/alterar-senha" hreflang="pt-br">Alterar senha</a></li>
                 <li class="divider" role="presentation"></li>
                 <li><a href="/sair" hreflang="pt-br">Sair</a></li>
@@ -226,7 +227,7 @@
       		
       				<div class="thumbnail">
       					<a href="/feira/{{product.encoded_url}}" hreflang="pt-br">
-      						<img class="img-responsive img-responsive-wide img-centered" alt="week_product" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.images[0].url}}" ng-dblclick="addToBasket(product)">
+      						<img class="img-responsive img-responsive-wide img-centered" alt="{{::product.name}}" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.images[0].url}}" ng-dblclick="addToBasket(product)">
       					</a>
       					<hr>
       					<div style="height:100px;">
