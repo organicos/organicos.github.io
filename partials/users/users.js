@@ -95,10 +95,11 @@ users.controller('AdminUsersCtrl', ['$scope','$http', '$filter', '$routeParams',
 
 }]);
 
-users.controller('AdminUserCtrl', ['$scope','$http', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $routeParams, myConfig, HtmlMetaTagService) {
+users.controller('AdminUserCtrl', ['$scope','$http', '$routeParams', 'myConfig', 'HtmlMetaTagService', 'filesService', function($scope, $http, $routeParams, myConfig, HtmlMetaTagService, filesService) {
     
     $scope.user = {};
     $scope.processingUserUpdate = false;
+    $scope.filesService = filesService;
     
     if($routeParams.id){
         
@@ -115,6 +116,11 @@ users.controller('AdminUserCtrl', ['$scope','$http', '$routeParams', 'myConfig',
         
         });        
         
+    }
+    
+    $scope.changeUserImage = function(profile_img){
+        $scope.user.profile_img = profile_img;
+        $scope.updateUser();
     }
     
     $scope.updateUser = function(){
