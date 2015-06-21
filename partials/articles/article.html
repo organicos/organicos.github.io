@@ -24,28 +24,46 @@
             <button class="btn btn-danger" ng-click="dropArticle(article)" ng-if="article"><i class="fa fa-trash"></i></button>
         </p>
         
-        <p><b>Visualizações:</b> <span ng-bind="article.visits.length"></span></p>
-        
-        <div class="form-group">
-            <input class="form-control" type="text" ng-model="article.title" placeholder="Título">
-        </div>
-        
         <div class="row">
-            <div class="col-sm-18">
+            <div class="col-sm-20">
+                <p><b>Visualizações:</b> <span ng-bind="article.visits.length"></span></p>
+            
+                <div class="row">
+                    <div class="col-sm-18">
+                        <div class="form-group">
+                            <input class="form-control" type="text" ng-model="article.encoded_url" placeholder="nome-codificado-sem-caracter-especial">
+                        </div>
+                    </div>
+                    <div class="checkbox col-sm-6">
+                        <label>
+                            <input type="checkbox" name="active" ng-model="article.highlight"> Destaque
+                        </label>
+                        <label>
+                            <input type="checkbox" name="active" ng-model="article.active"> Ativo
+                        </label>
+                    </div>
+                </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" ng-model="article.encoded_url" placeholder="nome-codificado-sem-caracter-especial">
+                    <input class="form-control" type="text" ng-model="article.title" placeholder="Título">
+                </div>        
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input 
+                        type="text" 
+                        ng-model="selectedAuthor" 
+                        placeholder="Autor" 
+                        typeahead="user.name for user in getAuthors($viewValue)" 
+                        typeahead-loading="loadingAuthors" 
+                        typeahead-on-select="selectAuthor($item, $model, $label)" 
+                        class="form-control"
+                        >
+                    <i ng-show="loadingAuthors" class="fa fa-spin fa-spinner"></i>
+                    <img class="img-responsive img-rounded" alt="article.author.profile_img.name" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{article.author.profile_img.url || 'https://s3-sa-east-1.amazonaws.com/fodev/img/global/no-profile-image.jpg'}}"></img>
                 </div>
             </div>
-            <div class="checkbox col-sm-6">
-                <label>
-                    <input type="checkbox" name="active" ng-model="article.highlight"> Destaque
-                </label>
-                <label>
-                    <input type="checkbox" name="active" ng-model="article.active"> Ativo
-                </label>
-            </div>
         </div>
-        
+    
         <div class="form-group">
             <textarea class="form-control" rows="20" ng-model="article.content" placeholder="Conteúdo do artigo"></textarea>
         </div>

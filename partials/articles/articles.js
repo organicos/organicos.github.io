@@ -47,6 +47,7 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
   $scope.saving_article = false;
   $scope.article = {};
   $scope.loadingProducts = false;
+  $scope.loadingAuthors = false;
   $scope.loadingImages = false;
   $scope.filesService = filesService;
 
@@ -70,6 +71,24 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     });
     
   }
+
+  $scope.getAuthors = function(name){
+    return $http.get(myConfig.apiUrl+'/users', {
+      params: {
+        name: name
+      }
+    }).then(function(res) {
+      
+      return res.data;
+
+    });
+  }
+
+  $scope.selectAuthor = function (item, model, label) {
+    
+    $scope.article.author = item;
+    
+  };
   
   $scope.getProducts = function(name){
     return $http.get(myConfig.apiUrl+'/products', {
