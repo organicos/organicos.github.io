@@ -7,13 +7,6 @@
             	<label for="supplierQuery">Buscar fornecedores</label>
         		<input class="form-control input-xs" id="supplierQuery" name="supplierQuery" ng-model="supplierQuery" type="text" placeholder="Buscar fornecedores">
             </div>
-        	<div class="form-group">
-        	    <label for="order">Ordem</label>
-                <select class="form-control" id="order" ng-model="selectedOrder">
-                    <option value="name" selected>Nome</option>
-                    <option value="updated">Data</option>
-                </select>
-        	</div>
             <a class="btn btn-default" href="/fornecedor">+</a>
         </form>
         
@@ -22,16 +15,18 @@
         <table class="table table-condensed table-stripped table-hover">
             <thead>
                 <tr>
-                    <td>nome</td>
-                    <td>Ultima modificação</td>
-                    <td>Ações</td>
+                    <td ng-click="selectedOrder = 'name'; reverseSort = !reverseSort" class="click">Nome</td>
+                    <td ng-click="selectedOrder = 'email'; reverseSort = !reverseSort" class="click">E-mail</td>
+                    <td ng-click="selectedOrder = 'phone'; reverseSort = !reverseSort" class="click">Telefone</td>
+                    <td align="center">Ações</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="supplier in filteredSuppliers = (suppliers | filter: supplierQuery | orderBy: selectedOrder)">
+                <tr ng-repeat="supplier in filteredSuppliers = (suppliers | filter: supplierQuery | orderBy: selectedOrder:reverseSort)">
                     <td><a href="/fornecedor/{{supplier._id}}" ng-bind="supplier.name || '???'"></a></td>
-                    <td ng-bind="supplier.updated"></td>
-                    <td><a href="javascript:void(0)" ng-click="dropSupplier(supplier)">x</a></td>
+                    <td ng-bind="supplier.email"></td>
+                    <td ng-bind="supplier.phone"></td>
+                    <td align="center"><button class="btn btn-xs btn-default" ng-click="dropSupplier(supplier)"><i class="fa fa-remove"></i></button></td>
                 </tr>
             </tbody>
         </table>

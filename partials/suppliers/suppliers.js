@@ -24,6 +24,7 @@ suppliers.controller('AdminSuppliersCtrl', ['$scope','$http', '$filter', '$route
 
     $scope.suppliers = [];
     $scope.supplierFormModalObject = {};
+    $scope.selectedOrder = 'name';
     
     $http.get(myConfig.apiUrl+'/suppliers').then(function(res) {
     
@@ -82,7 +83,7 @@ suppliers.controller('AdminSuppliersCtrl', ['$scope','$http', '$filter', '$route
     
 }]);
 
-suppliers.controller('AdminSupplierCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', function($scope, $http, $routeParams, myConfig, $location, HtmlMetaTagService) {
+suppliers.controller('AdminSupplierCtrl', ['$scope','$http', '$routeParams', 'myConfig', '$location', 'HtmlMetaTagService', '$filter', function($scope, $http, $routeParams, myConfig, $location, HtmlMetaTagService, $filter) {
   
     $scope.supplier = {};
     $scope.suppliersQuery = "";
@@ -188,6 +189,39 @@ suppliers.controller('AdminSupplierCtrl', ['$scope','$http', '$routeParams', 'my
         
     }
 
+    $scope.getProducts = function(name){
+        return $http.get(myConfig.apiUrl+'/products', {
+            params: {
+                name: name
+            }
+        }).then(function(res) {
+        
+            return res.data;
+        
+        });
+    }
+    
+    $scope.selectProduct = function (item, model, label) {
+    
+        var product = ($filter('filter')($scope.supplier.products, {_id: item._id}, false))[0];
+    
+        if (!product) {
+        
+            $scope.supplier.products.push(item);
+        
+        }
+        
+        $scope.selectedProduct = '';
+    
+    };
+    
+    $scope.dropProductFromSupplier = function(product){
 
+        var productIndex = $scope.supplier.products.indexOf(product);
+        if (productIndex >= 0) {
+            $scope.supplier.products.splice(productIndex, 1);
+        }
+        
+    };
   
 }]);

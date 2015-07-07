@@ -119,10 +119,6 @@ articles.controller('ArticleCtrl', ['$scope','$http', '$filter', '$routeParams',
     if (productIndex >= 0) {
         $scope.article.products.splice(productIndex, 1);
     }
-    var productIndex = $scope.article.products.indexOf(product._id);
-    if (productIndex >= 0) {
-        $scope.article.products.splice(productIndex, 1);
-    }
   };
 
   $scope.getImages = function(title){
