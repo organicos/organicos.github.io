@@ -4,15 +4,15 @@ var suppliers = angular.module('myApp.suppliers', ['ngRoute']);
 
 suppliers.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-    .when('/suppliers', {
+    .when('/fornecedores', {
         templateUrl: '/partials/suppliers/suppliers.html',
         controller: 'AdminSuppliersCtrl'
     })
-    .when('/supplier/:id', {
+    .when('/fornecedor/:id', {
         templateUrl: '/partials/suppliers/supplier.html',
         controller: 'AdminSupplierCtrl'
     })
-    .when('/supplier', {
+    .when('/fornecedor', {
         templateUrl: '/partials/suppliers/supplier.html',
         controller: 'AdminSupplierCtrl'
     });
@@ -126,7 +126,7 @@ suppliers.controller('AdminSupplierCtrl', ['$scope','$http', '$routeParams', 'my
         $http.post(myConfig.apiUrl + '/supplier', $scope.supplier)
         .success(function(resp) {
           
-            $location.path("/supplier/" + resp._id);
+            $location.path("/fornecedor/" + resp._id);
             
         })
         .error(function (resp) {

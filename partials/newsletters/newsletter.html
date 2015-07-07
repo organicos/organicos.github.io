@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-sm-24">
-        <div class="row">
+        <div class="row ng-cloak" ng-if="newsletter.status">
             <div class="col-sm-10">
                 <h1>Newsletter</h1>
-                <form class="form" role="form" ng-submit="submitNewsletterForm()">
+                <form class="form" role="form" ng-submit="submitNewsletterForm()" ng-if="newsletter.status != 1">
                     
                     <div class="form-group">
                         <label for="title"></label>
@@ -85,15 +85,15 @@
                         <button type="button" class="btn btn-danger" ng-click="sendNewsletter()" ng-disabled="savingNewsletter" ng-if="!newsletterSent && newsletter._id"><i class="fa fa-send"></i> Enviar</button>
                     </div>
                     
-                    <div class="form-group" ng-if="newsletter.status == 1">
-                        <p>Esta newletter já foi enviada!</p>
-                        <div class="well" ng-bind="newsletter.receivers"></div>
-                    </div>
-
                 </form>
+                
+                <div ng-if="newsletter.status == 1">
+                    <p>Esta newsletter foi enviada para <a href="javascript:void(0)" ng-click="showReceivers = !showReceivers"><span ng-bind="newsletter.receivers.length"></span> pessoa<span ng-if="newsletter.receivers.length != 1">s</span>.</a></p>
+                    <div class="well" ng-bind="newsletter.receivers" ng-if="showReceivers"></div>
+                </div>  
+
             </div>
-            
-            
+
             <div class="col-sm-14">
                 
                 <h1 class="text-center">Preview do e-mail <a class="btn" href="/news/{{newsletter._id}}" target="_blank"><i class="fa fa-external-link"></i></a></h1>

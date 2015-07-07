@@ -192,8 +192,3 @@ object[type^='application/gas-events'] { display: none; }
 .click:hover {
     cursor:pointer;
 }
-
-/** ANGULAR ngCloak **/
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
-}

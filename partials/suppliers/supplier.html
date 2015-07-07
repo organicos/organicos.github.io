@@ -6,9 +6,38 @@
         
         <form class="form" role="form" ng-submit="supplierFormSubmit()">
             <div class="form-group">
-                <label for="name">Título</label>
+                <label for="name">Nome</label>
                 <input class="form-control" type="text" name="name" id="name" ng-model="supplier.name"/>
             </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="name">Email</label>
+                        <input class="form-control" type="text" name="email" id="email" ng-model="supplier.email"/>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="name">Telefone</label>
+                        <input class="form-control" type="text" name="phone" id="phone" ng-model="supplier.phone"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="name">Descrição</label>
+                        <textarea class="form-control" rows="5" name="desc" id="desc" ng-model="supplier.desc"></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="name">Como efetuar pedido</label>
+                        <textarea class="form-control" rows="5" name="orderRules" id="orderRules" ng-model="supplier.orderRules"></textarea>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-primary" ng-disabled="processingSupplierUpdate">Salvar</button>
             </div>

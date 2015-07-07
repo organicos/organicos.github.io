@@ -14,7 +14,7 @@
                     <option value="updated">Data</option>
                 </select>
         	</div>
-            <a class="btn btn-default" href="/supplier">+</a>
+            <a class="btn btn-default" href="/fornecedor">+</a>
         </form>
         
         <br>
@@ -29,7 +29,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="supplier in filteredSuppliers = (suppliers | filter: supplierQuery | orderBy: selectedOrder)">
-                    <td><a href="/supplier/{{supplier._id}}" ng-bind="supplier.name || '???'"></a></td>
+                    <td><a href="/fornecedor/{{supplier._id}}" ng-bind="supplier.name || '???'"></a></td>
                     <td ng-bind="supplier.updated"></td>
                     <td><a href="javascript:void(0)" ng-click="dropSupplier(supplier)">x</a></td>
                 </tr>
