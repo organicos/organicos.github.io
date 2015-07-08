@@ -225,6 +225,11 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     $scope.inactive_products = [];
     $scope.shipping = {
       nextDates: []
+      , prices: [
+        {city: 'Florianópolis', price : '6'}
+        , {city: 'Palhoça', price : '15'}
+        , {city: 'São José', price : '12'}
+      ]
     };
 
     $http.post(myConfig.apiUrl + '/order_review', {
@@ -306,6 +311,24 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     
     });
         
+    $http.get(myConfig.apiUrl + '/shipping/locations')
+    .success(function(res) {
+
+      if(res.indexOf($scope.$storage.basket.shipping.deliveryOption) == -1){
+        
+        $scope.$storage.basket.shipping.deliveryOption = "";
+        
+      }
+      
+      $scope.shipping.nextDates = res;
+      
+    })
+    .error(function(err) {
+    
+        console.error('ERR', err);
+    
+    });
+
     $scope.$watch('$storage.basket.shipping.cep', function(newValue, oldValue) {
       
       var cep = newValue ? newValue.match(/\d+/) : '';
