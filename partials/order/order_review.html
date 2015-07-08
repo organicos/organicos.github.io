@@ -2,54 +2,57 @@
     <div class="col-sm-22 col-sm-offset-1">
         <h1>Revise seu pedido</h1>
         
+        <h2>Produtos</h2>
         <table class="table table-condensed">
             <thead>
                 <tr>
-                    <td>Produto</td>
-                    <td align="center">Quantidade</td>
-                    <td align="right">Preço unitário</td>
-                    <td align="right">Total</td>
+                    <td class="col-sm-13 col-md-15 col-lg-17">Produto</td>
+                    <td align="rigth" class="col-xs-1"></td>
+                    <td align="center" class="col-xs-1"></td>
+                    <td align="left" class="col-xs-1"></td>
+                    <td align="right" class="col-sm-4 col-md-3 col-lg-2">Preço unitário</td>
+                    <td align="right" class="col-sm-4 col-md-3 col-lg-2">Total</td>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="product in $storage.basket.products">
                     <td ng-bind="product.name"
     					tooltip-placement="right"
-    					tooltip-html-unsafe="{{product.name}} <hr> {{product.dscr}}" 
+    					tooltip-template="{{product.name}} <hr> {{product.dscr}}" 
     					tooltip-append-to-body="true" 
                     ></td>
                     <td align="center">
-        				<span class="btn-group" role="group" aria-label="productKind">
-                            <button class="btn btn-default btn-xs" ng-click="dropFromBasket(product, 1)"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-default btn-xs" ng-bind="product.quantity" disabled></button>
-                            <button class="btn btn-default btn-xs" ng-click="addToBasket(product)"><i class="fa fa-plus"></i></button>
-        				</span>
+                        <button class="btn btn-default btn-xs" ng-click="dropFromBasket(product, 1)"><i class="fa fa-minus"></i></button>
+                    </td>
+                    <td align="center">
+                        <button class="btn btn-default btn-xs" ng-bind="product.quantity" disabled></button>
+                    </td>
+                    <td align="center">
+                        <button class="btn btn-default btn-xs" ng-click="addToBasket(product)"><i class="fa fa-plus"></i></button>
                     </td>
                     <td ng-bind="product.prices[0].price | currency:'R$':2" align="right"></td>
                     <td ng-bind="product.quantity*product.prices[0].price | currency:'R$':2" align="right"></td>
                 </tr>
                 <tr>
-                    <td colspan="2" ng-class="$storage.basket.total < 35 ? 'danger' : ''">
+                    <td ng-class="$storage.basket.total < 35 ? 'danger' : ''">
                         <span ng-if="$storage.basket.total < 35" >O valor mínimo para a compra de produtos é de R$35,00.</span>
                     </td>
-                    <td align="right">Total:</h5></td>
+                    <td colspan="4" align="right">Total:</h5></td>
                     <td align="right" ng-bind="$storage.basket.total | currency:'R$':2"</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td align="right">Frete:</td>
-                    <td align="right" ng-bind="$storage.basket.shipping.price | currency:'R$':2">></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td align="right"><h4>Preço final:</h4></td>
-                    <td align="right"><h4 ng-bind="$storage.basket.total + $storage.basket.shipping.price | currency:'R$':2"></h4></td>
                 </tr>
             </tbody>
         </table>
         
+        <h2>Frete</h2>
+        <select class="form-control" 
+            ng-model="$storage.basket.shipping.city" 
+            ng-options="city as option.city for option in shipping.prices track by option.city"
+            ng-change="update()">
+          <option value="">-- Selecione sua cidade --</option>
+        </select>
+        <p ng-bind="$storage.basket.shipping.price | currency:'R$':2"></p>
+        <p ng-bind="$storage.basket.total + ($storage.basket.shipping.price * 1) | currency:'R$':2"></p>
+
         <form class="form" role="form">
 
             <div class="well well-mini background-blue text-white hidden">
@@ -99,11 +102,11 @@
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="city" class="control-label">Cidade</label>
-                        <input type="text" class="form-control" id="city" placeholder="Cidade" ng-model="$storage.basket.shipping.city">
+                        <input type="text" class="form-control" id="city" placeholder="Cidade" ng-model="$storage.basket.shipping.city" disabled>
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="state" class="control-label">Estado</label>
-                        <input type="text" class="form-control" id="state" placeholder="Estado" ng-model="$storage.basket.shipping.state">
+                        <input type="text" class="form-control" id="state" placeholder="Estado" ng-model="$storage.basket.shipping.state" disabled>
                     </div>
                     <div class="form-group col-sm-6">
                         <label for="country" class="control-label">País</label>

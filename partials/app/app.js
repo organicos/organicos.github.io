@@ -33,6 +33,7 @@ var app = angular.module('myApp', [
   'myApp.blog',
   'myApp.newsletters',
   'myApp.categories',
+  'myApp.shipping',
   'myApp.custom-filters',
   'chart.js'
 ]);
