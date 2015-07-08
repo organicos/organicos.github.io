@@ -92,26 +92,24 @@
             </tbody>
         </table>
         
-        <div>
-            <div class="row">
-                <div class="col-sm-12 pull-right">
-                    <a class="btn btn-success btn-block" href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code={{order.pagseguro.checkout.code}}" target="_blank">
-                        <p class="font-30">Pagar com Pagseguro</p>
-                        <small>Compra 100% segura.</small>
-                    </a>
-                    <br>
-                    <p class="small"><strong>Atenção!</strong> Se você já efetuou o pagamento e o status do pedido não foi atualizado, clique no botão abaixo para fazer uma nova verificação junto ao Pagseguro.</p>
-                    <button class="btn btn-info btn-xs" ng-click="checkPagseguroPayment(order._id)">Confirmar pagamento no Pagseguro.</button>
-                </div>
-                <div class="col-sm-12">
-                    <button type="button" class="btn btn-primary btn-block" ng-click="showDepositInstructionsModal()">
-                        <p class="font-30">Pagar com depósito</p>
-                        <small>Compra 100% segura.</small>
-                    </a>
-                </div>
+        <div class="row">
+            <div class="col-sm-12 pull-right">
+                <a class="btn btn-success btn-block" href="https://pagseguro.uol.com.br/v2/checkout/payment.html?code={{order.pagseguro.checkout.code}}" target="_blank">
+                    <p class="font-30">Pagar com Pagseguro</p>
+                    <small>Compra 100% segura.</small>
+                </a>
+                <br>
+                <p class="small"><strong>Atenção!</strong> Se você já efetuou o pagamento e o status do pedido não foi atualizado, clique no botão abaixo para fazer uma nova verificação junto ao Pagseguro.</p>
+                <button class="btn btn-info btn-xs" ng-click="checkPagseguroPayment(order._id)">Confirmar pagamento no Pagseguro.</button>
             </div>
-
+            <div class="col-sm-12">
+                <button type="button" class="btn btn-primary btn-block" ng-click="showDepositInstructionsModal()">
+                    <p class="font-30">Pagar com depósito</p>
+                    <small>Compra 100% segura.</small>
+                </a>
+            </div>
         </div>
-        
+
+
     </div>
 </div>
