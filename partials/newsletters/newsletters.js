@@ -52,6 +52,7 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
         , bottom: ""
         , sections: []
     };
+    $scope.newsletterLoaded = false;
 
     if($routeParams.id){
 
@@ -60,14 +61,18 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
           
           HtmlMetaTagService.tag('title', res.title);
         
-          $scope.newsletter = res;
-            
+          $scope.newsletterLoaded = true;
+        
         }).error(function(err) {
         
             console.error('ERR', err);
         
         });
         
+    } else {
+      
+      $scope.newsletterLoaded = true;
+      
     }
     
     $scope.addNewSection = function(){
