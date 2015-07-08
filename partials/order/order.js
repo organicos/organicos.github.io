@@ -197,7 +197,26 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
     });
     
   };
-  
+
+  $scope.showDepositInstructionsModal = function(){
+    
+      console.log('iuhiuhiu');
+      return $modal.open({
+          backdrop: true,
+          keyboard: true,
+          modalFade: true,
+          size: 'md',
+          templateUrl: '/partials/order/deposit_instructions.html',
+          controller: function ($scope, $location, $modalInstance) {
+              $scope.modalOptions = {
+                  close: function (result) {
+                      $modalInstance.dismiss('cancel');
+                  }
+              };
+          }
+      }).result;
+  };
+    
   $scope.checkPagseguroPayment = function(order_id){
     $http.get(myConfig.apiUrl+'/check_pagseguro_payment/'+order_id)
     .success(function(res) {
