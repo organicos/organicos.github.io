@@ -60,6 +60,8 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
         .success(function(res) {
           
           HtmlMetaTagService.tag('title', res.title);
+          
+          $scope.newsletter = res;
         
           $scope.newsletterLoaded = true;
         
@@ -70,6 +72,8 @@ newsletters.controller('AdminNewsletterCtrl', ['$scope','$http', '$filter', '$ro
         });
         
     } else {
+      
+      HtmlMetaTagService.tag('title', 'Nava newsletter');
       
       $scope.newsletterLoaded = true;
       
