@@ -1,18 +1,20 @@
 'use strict';
 
+var currentTimestamp = new Date().getTime();
+
 var order = angular.module('myApp.order', ['ngRoute']);
 
 order.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/revisar-pedido', {
-    templateUrl: '/partials/order/order_review.html',
+    templateUrl: '/partials/order/order_review.html' + '?' + currentTimestamp,
     controller: 'OrderReviewCtrl'
   });
   $routeProvider.when('/pedido/:id', {
-    templateUrl: '/partials/order/order.html',
+    templateUrl: '/partials/order/order.html' + '?' + currentTimestamp,
     controller: 'OrderCtrl'
   });
   $routeProvider.when('/order/:id', {
-    templateUrl: '/partials/order/order.html',
+    templateUrl: '/partials/order/order.html' + '?' + currentTimestamp,
     controller: 'OrderCtrl'
   });
   $routeProvider.when('/pedidos', {
@@ -24,7 +26,7 @@ order.config(['$routeProvider', function($routeProvider) {
     controller: 'OrdersCtrl'
   });
   $routeProvider.when('/meu/pedido/:id', {
-    templateUrl: '/partials/users/order.html',
+    templateUrl: '/partials/users/order.html' + '?' + currentTimestamp,
     controller: 'OrderCtrl'
   });
   $routeProvider.when('/meus/pedidos', {

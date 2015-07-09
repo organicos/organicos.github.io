@@ -100,41 +100,37 @@
                     </div>
                 </div>
                 <div class="row" ng-if="showShippingForm">
-                    <div class="form-group col-sm-6">
+                    <div class="form-group col-sm-8">
                         <label for="district" class="control-label">Bairro</label>
                         <input type="text" class="form-control" id="district" placeholder="Bairro" ng-model="$storage.basket.shipping.district">
                     </div>
-                    <div class="form-group col-sm-6">
-                        <label for="city" class="control-label">Cidade</label>
-                        <input type="text" class="form-control" id="city" placeholder="Cidade" ng-model="$storage.basket.shipping.city" disabled>
+                    <div class="form-group col-sm-8">
+                        <label for="phone" class="control-label">Telefone</label>
+                        <input type="text" class="form-control" id="phone" placeholder="Telefone" ng-model="$storage.basket.shipping.phone">                                          
                     </div>
-                    <div class="form-group col-sm-6">
-                        <label for="state" class="control-label">Estado</label>
-                        <input type="text" class="form-control" id="state" placeholder="Estado" ng-model="$storage.basket.shipping.state" disabled>
+                    <div class="form-group col-sm-8">
+                        <label for="date" class="control-label">Data e horário de entrega</label>
+                        <select class="form-control" ng-model="$storage.basket.shipping.date" ng-options="option as option | date:'dd/MM/yyyy' for option in shipping.nextDates track by option">
+                          <option value="">-- Selecione uma data de entrega --</option>
+                        </select>
                     </div>
-                    <div class="form-group col-sm-6">
-                        <label for="country" class="control-label">País</label>
-                        <input type="text" class="form-control" id="country" placeholder="País" ng-model="$storage.basket.shipping.country" disabled>
-                    </div>
+                    <!--<div class="form-group col-sm-6">-->
+                    <!--    <label for="city" class="control-label">Cidade</label>-->
+                    <!--    <input type="text" class="form-control" id="city" placeholder="Cidade" ng-model="$storage.basket.shipping.city" disabled>-->
+                    <!--</div>-->
+                    <!--<div class="form-group col-sm-6">-->
+                    <!--    <label for="state" class="control-label">Estado</label>-->
+                    <!--    <input type="text" class="form-control" id="state" placeholder="Estado" ng-model="$storage.basket.shipping.state" disabled>-->
+                    <!--</div>-->
+                    <!--<div class="form-group col-sm-6">-->
+                    <!--    <label for="country" class="control-label">País</label>-->
+                    <!--    <input type="text" class="form-control" id="country" placeholder="País" ng-model="$storage.basket.shipping.country" disabled>-->
+                    <!--</div>-->
                 </div>
-                <div class="row" ng-if="showShippingForm">
-                    <div class="col-sm-8">
-                        <div class="form-group">
-                            <label for="phone" class="control-label">Telefone</label>
-                            <input type="text" class="form-control" id="phone" placeholder="Telefone" ng-model="$storage.basket.shipping.phone">                                          
-                        </div>
-                        <div class="form-group">
-                            <label for="date" class="control-label">Data e horário de entrega</label>
-                            <select class="form-control" ng-model="$storage.basket.shipping.date" ng-options="option as option | date:'dd/MM/yyyy' for option in shipping.nextDates track by option">
-                              <option value="">-- Selecione uma data de entrega --</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-16">
-                        <label for="address_ref" class="control-label">Dados complementares de entrega.</label>
-                        <textarea rows="4" class="form-control" id="address_ref" placeholder="Dados complementares de entrega" ng-model="$storage.basket.shipping.address_ref"></textarea>
-                        <p class="help-block">Forneça dados que nos auxiliem na entrega, como pontos de referência próximos a sua casa, horário preferencial para o recebimento, pessoas autorizadas a receber a cesta...</p>
-                    </div>
+                <div class="form-group">
+                    <label for="address_ref" class="control-label">Dados complementares de entrega.</label>
+                    <textarea rows="4" class="form-control" id="address_ref" placeholder="Dados complementares de entrega" ng-model="$storage.basket.shipping.address_ref"></textarea>
+                    <p class="help-block">Forneça dados que nos auxiliem na entrega, como pontos de referência próximos a sua casa, horário preferencial para o recebimento, pessoas autorizadas a receber a cesta...</p>
                 </div>
             </div>
         </form>
