@@ -357,6 +357,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     
     $scope.UpdateCityAndShippingPrice = function(){
       $scope.$storage.basket.shipping.city = $scope.$storage.basket.shipping.location ? $scope.$storage.basket.shipping.location.city : "";
+      $scope.$storage.basket.shipping.state = $scope.$storage.basket.shipping.location ? $scope.$storage.basket.shipping.location.state : "";
       $scope.$storage.basket.shipping.price = $scope.$storage.basket.shipping.location ? $scope.$storage.basket.shipping.location.price : "";
     }
     
