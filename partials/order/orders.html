@@ -50,7 +50,7 @@
                     <td ng-bind="order.products.length"></td>
                     <td ng-bind="order.updated | date:'dd/MM/yyyy'"></td>
                     <td ng-bind="order.payment_date | date:'dd/MM/yyyy'"></td>
-                    <td ng-bind="order.shipping.deliveryOption"></td>
+                    <td ng-bind="order.shipping.date | date:'EEEE, dd/MM/yyyy' || order.shipping.deliveryOption"></td>
                     <td ng-switch="order.status" title="{{statuses[order.status].name}} - {{statuses[order.status].desc}}">
                         <i ng-switch-when="0" class="fa fa-fw fa-money text-info"></i>
                         <i ng-switch-when="1" class="fa fa-fw fa-truck fa-flip-horizontal text-warning"></i>

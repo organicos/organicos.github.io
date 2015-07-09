@@ -40,7 +40,7 @@
                     <td><a href="/meu/pedido/{{order._id}}" ng-bind="order._id"></a></td>
                     <td ng-bind="order.shipping.district"></td>
                     <td ng-bind="order.shipping.city"></td>
-                    <td ng-bind="order.shipping.deliveryOption"></td>
+                    <td ng-bind="order.shipping.date | date:'EEEE, dd/MM/yyyy' || order.shipping.deliveryOption"></td>
                     <td ng-bind="order.total + order.shipping.price | currency:'R$':2"></td>
                     <td ng-bind="order.updated | date:'dd/MM/yyyy'"></td>
                     <td><i ng-if="order.pagseguro.transaction.status[0] == '3'" class="fa fa-check"></i></td>
