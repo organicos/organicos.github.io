@@ -331,11 +331,11 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     $http.get(myConfig.apiUrl + '/shipping/locations')
     .success(function(res) {
 
-      var myLocation = $filter('filter')(res, { city: $scope.$storage.basket.shipping.city });
+      var city = $scope.$storage.basket.shipping.city;
       
-      console.log(myLocation);
+      var myLocation = $filter('filter')(res, { city:  city}, true);
 
-      if(myLocation){
+      if(myLocation.length){
         
         $scope.$storage.basket.shipping.price = myLocation[0].price;
         
