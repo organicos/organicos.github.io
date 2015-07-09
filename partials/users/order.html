@@ -36,7 +36,7 @@
                     <div class="col-sm-12">
                         <p><strong>Cidade: </strong> <span ng-bind="order.shipping.city"></span></p>
                         <p><strong>Estado: </strong> <span ng-bind="order.shipping.state"></span></p>
-                        <p><strong>Entrega: </strong> <span ng-bind="order.shipping.deliveryOption"></span></p>
+                        <p><strong>Entrega: </strong> <span ng-bind="order.shipping.date | date:'EEEE, dd/MM/yyyy' || order.shipping.deliveryOption"></span></p>
                         <p><strong>Referência: </strong> <span ng-bind="order.shipping.address_ref"></span></p>   
                         <p><strong>Fone: </strong> <span ng-bind="order.shipping.phone"></span></p>  
                     </div>

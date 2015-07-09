@@ -55,12 +55,13 @@ angular.module('myApp').service('basketService', ['$modal', '$localStorage', '$f
     };
     
     this.showModal = function(){
+        var currentTimestamp = new Date().getTime();
         return $modal.open({
             backdrop: true,
             keyboard: true,
             modalFade: true,
             size: 'lg',
-            templateUrl: '/partials/basket/basket_modal.html',
+            templateUrl: '/partials/basket/basket_modal.html?' + currentTimestamp,
             controller: function ($scope, $location, $modalInstance) {
                 $scope.basket = basket;
                 $scope.addToBasket = self.addToBasket;

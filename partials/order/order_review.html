@@ -3,11 +3,11 @@
         <h1>Revise seu pedido</h1>
         
         <h2>Produtos</h2>
-        <table class="table table-condensed">
+        <table class="table table-condensed table-striped table-hover small">
             <thead>
                 <tr>
                     <td class="col-sm-13 col-md-15 col-lg-17">Produto</td>
-                    <td align="rigth" class="col-xs-1"></td>
+                    <td align="right" class="col-xs-1"></td>
                     <td align="center" class="col-xs-1"></td>
                     <td align="left" class="col-xs-1"></td>
                     <td align="right" class="col-sm-4 col-md-3 col-lg-2">Preço unitário</td>
@@ -16,11 +16,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="product in $storage.basket.products">
-                    <td ng-bind="product.name"
-    					tooltip-placement="right"
-    					tooltip-template="{{product.name}} <hr> {{product.dscr}}" 
-    					tooltip-append-to-body="true" 
-                    ></td>
+                    <td ng-bind="product.name"></td>
                     <td align="center">
                         <button class="btn btn-default btn-xs" ng-click="dropFromBasket(product, 1)"><i class="fa fa-minus"></i></button>
                     </td>
@@ -44,14 +40,22 @@
         </table>
         
         <h2>Frete</h2>
-        <select class="form-control" 
-            ng-model="$storage.basket.shipping.city" 
-            ng-options="city as option.city for option in shipping.prices track by option.city"
-            ng-change="update()">
-          <option value="">-- Selecione sua cidade --</option>
-        </select>
-        <p ng-bind="$storage.basket.shipping.price | currency:'R$':2"></p>
-        <p ng-bind="$storage.basket.total + ($storage.basket.shipping.price * 1) | currency:'R$':2"></p>
+        <div class="row">
+            <div class="col-sm-18">
+                <select class="form-control" 
+                    ng-model="$storage.basket.shipping.location" 
+                    ng-options="location as location.city for location in shipping.locations track by location.city"
+                    ng-change="UpdateCityAndShippingPrice()"
+                    >
+                  <option value="">-- Selecione sua cidade --</option>
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <p class="pull-right" ng-bind="$storage.basket.shipping.price | currency:'R$':2"></p>
+            </div>
+        </div>
+        
+        <h2 class="text-right">Valor final <span class="text-success" ng-bind="$storage.basket.total + ($storage.basket.shipping.price * 1) | currency:'R$':2"></span></h2>
 
         <form class="form" role="form">
 
@@ -72,7 +76,7 @@
             <div class="well well-mini">
                 <h2 class="click clearfix" ng-click="showShippingForm = !showShippingForm">
                     Dados de entrega <i class="fa small" ng-class="showShippingForm ? 'fa-arrow-up' : 'fa-arrow-down'"></i>
-                    <small class="pull-right"><a href="javascript:void(0)" ng-click="adressesModal">Meus endereços</a></small>
+                    <small class="pull-right hidden"><a href="javascript:void(0)" ng-click="adressesModal">Meus endereços</a></small>
                 </h2>
                 
                 <hr>
@@ -120,8 +124,8 @@
                             <input type="text" class="form-control" id="phone" placeholder="Telefone" ng-model="$storage.basket.shipping.phone">                                          
                         </div>
                         <div class="form-group">
-                            <label for="deliveryOption" class="control-label">Data e horário de entrega</label>
-                            <select class="form-control" ng-model="$storage.basket.shipping.deliveryOption" ng-options="option as option for option in shipping.nextDates">
+                            <label for="date" class="control-label">Data e horário de entrega</label>
+                            <select class="form-control" ng-model="$storage.basket.shipping.date" ng-options="option as option | date:'dd/MM/yyyy' for option in shipping.nextDates track by option">
                               <option value="">-- Selecione uma data de entrega --</option>
                             </select>
                         </div>

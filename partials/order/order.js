@@ -244,11 +244,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     $scope.inactive_products = [];
     $scope.shipping = {
       nextDates: []
-      , prices: [
-        {city: 'Florianópolis', price : '6'}
-        , {city: 'Palhoça', price : '15'}
-        , {city: 'São José', price : '12'}
-      ]
+      , locations: []
     };
 
     $http.post(myConfig.apiUrl + '/order_review', {
@@ -315,9 +311,11 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     $http.get(myConfig.apiUrl + '/shipping/next')
     .success(function(res) {
 
-      if(res.indexOf($scope.$storage.basket.shipping.deliveryOption) == -1){
+      var myDateExists = res.indexOf($scope.$storage.basket.shipping.date) > -1;
+
+      if(!myDateExists){
         
-        $scope.$storage.basket.shipping.deliveryOption = "";
+        $scope.$storage.basket.shipping.date = "";
         
       }
       
@@ -333,13 +331,22 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
     $http.get(myConfig.apiUrl + '/shipping/locations')
     .success(function(res) {
 
-      if(res.indexOf($scope.$storage.basket.shipping.deliveryOption) == -1){
+      var myLocation = $filter('filter')(res, { city: $scope.$storage.basket.shipping.city });
+      
+      console.log(myLocation);
+
+      if(myLocation){
         
-        $scope.$storage.basket.shipping.deliveryOption = "";
+        $scope.$storage.basket.shipping.price = myLocation[0].price;
+        
+      } else {
+        
+        $scope.$storage.basket.shipping.city = "";
+        $scope.$storage.basket.shipping.price = "";
         
       }
       
-      $scope.shipping.nextDates = res;
+      $scope.shipping.locations = res;
       
     })
     .error(function(err) {
@@ -347,7 +354,12 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
         console.error('ERR', err);
     
     });
-
+    
+    $scope.UpdateCityAndShippingPrice = function(){
+      $scope.$storage.basket.shipping.city = $scope.$storage.basket.shipping.location ? $scope.$storage.basket.shipping.location.city : "";
+      $scope.$storage.basket.shipping.price = $scope.$storage.basket.shipping.location ? $scope.$storage.basket.shipping.location.price : "";
+    }
+    
     $scope.$watch('$storage.basket.shipping.cep', function(newValue, oldValue) {
       
       var cep = newValue ? newValue.match(/\d+/) : '';
@@ -359,10 +371,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
           
           $scope.$storage.basket.shipping.street = res.logradouro || '';
           $scope.$storage.basket.shipping.district = res.bairro || '';
-          $scope.$storage.basket.shipping.city = res.cidade || '';
-          $scope.$storage.basket.shipping.state = res.estado || '';
-          $scope.$storage.basket.shipping.country = res.pais || 'Brasil';
-          
+
         })
         .error(function(err) {
         
