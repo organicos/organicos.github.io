@@ -1,4 +1,4 @@
-angular.module('myApp').service('basketService', ['$modal', '$localStorage', '$filter', function ($modal, $localStorage, $filter) {
+angular.module('myApp').service('basketService', ['$modal', '$localStorage', '$filter', 'confirmModalService', function ($modal, $localStorage, $filter, confirmModalService) {
     
     var self = this;
 
@@ -8,7 +8,7 @@ angular.module('myApp').service('basketService', ['$modal', '$localStorage', '$f
     	if(!basket){
     	    basket = {total: 0,name: '',products: [], shipping: {price: 6, country: 'Brasil'}};
     	} else {
-        	if(!basket.products) basket.products = {};
+        	if(!basket.products) basket.products = [];
         	if(!basket.garbage_free) basket.garbage_free = true;
         	if(!basket.receipt) basket.receipt = false;
         	if(!basket.total || basket.total < 0) basket.total = 0;
@@ -77,6 +77,27 @@ angular.module('myApp').service('basketService', ['$modal', '$localStorage', '$f
                     goToFair: function(){
                         $location.path('/feira');
                         $modalInstance.dismiss('fair');
+                    },
+                    clearBasket: function(){
+                        var modalOptions = {
+                            closeButtonText: 'Cancelar',
+                            actionButtonText: 'Esvaziar cesta',
+                            actionButtonKind: 'btn-danger',
+                            headerText: 'Cornfirme',
+                            bodyText: 'Deseja realmente esvaziar sua cesta?'
+                        };
+                    
+                        confirmModalService.showModal({}, modalOptions)
+                        .then(function (result) {
+                          
+                          if(result){
+                            
+                            basket.products = [];
+                            
+                          }
+                    
+                        });
+                        
                     }
                 };
             }
