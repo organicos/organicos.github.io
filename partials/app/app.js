@@ -87,6 +87,8 @@ app.controller('myAppCtrl' , ['$scope', '$location', '$localStorage', 'basketSer
     $scope.openBasket = basketService.showModal;
     $scope.addToBasket = basketService.addToBasket;
     $scope.dropFromBasket = basketService.dropFromBasket;
+    $scope.getBasketProductsAmount = basketService.productsAmount;
+
     $scope.$storage = $localStorage.$default({
         user: {kind: ''},
     });

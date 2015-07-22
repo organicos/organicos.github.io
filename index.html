@@ -107,7 +107,7 @@
           <span>
             <button class="btn btn-primary navbar-btn" ng-click="openBasket()" ng-if="$storage.basket.products.length">
               Minha cesta 
-              <span class="label label-success" ng-bind="$storage.basket.products.length"></span>
+              <span class="label label-success" ng-bind="getBasketProductsAmount()"></span>
             </button>
             
             <a class="navbar-brand" href="/" hreflang="pt-br">

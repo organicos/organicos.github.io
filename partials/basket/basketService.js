@@ -3,6 +3,14 @@ angular.module('myApp').service('basketService', ['$modal', '$localStorage', '$f
     var self = this;
 
     var basket = $localStorage.basket;
+    
+    this.productsAmount = function(){
+        var amount = 0;
+        angular.forEach(basket.products, function(product, index){
+            amount += product.quantity;
+        });
+        return amount;
+    };
 
     (this.ensureBasket = function() {
     	if(!basket){
