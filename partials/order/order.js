@@ -113,21 +113,26 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
   };
   
   $scope.showCheckedOrderProductsCondensed = function(){
+
     var condensedList = [];
+    var checkedOrders = ($filter('filter')($scope.orders, {checked: true}, false));
     
-    angular.forEach($scope.orders, function(order, orderIndex) {
+    console.log(condensedList.length);
+    console.log(checkedOrders.length);
+
+    angular.forEach(checkedOrders, function(order, orderIndex) {
       angular.forEach(order.products, function(product, productIndex) {
         var productInCondensedList = ($filter('filter')(condensedList, {_id: product._id}, false))[0];
-        var productInCondensedListIndex = condensedList.indexOf(productInCondensedList);
-        
         if(productInCondensedList){
-            condensedList[productInCondensedListIndex].quantity += product.quantity;
+          var productInCondensedListIndex = condensedList.indexOf(productInCondensedList);
+          condensedList[productInCondensedListIndex].quantity += product.quantity;
         }  else {
-            condensedList.push(product);
+            condensedList.push(angular.copy(product));
         }
-
       });
     });
+
+    console.log(condensedList.length);
 
     return $modal.open({
       backdrop: true,
