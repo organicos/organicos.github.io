@@ -212,7 +212,7 @@ app.controller('myAppCtrl' , ['$scope', '$location', '$localStorage', 'basketSer
                     title: 'Assinatura feita com sucesso.',
                     msg: ['A partir de agora, você receberá nossa lista semanal de preços e promoções.']
                 });
-              
+                
                 $scope.signupToNewsletter.mail = "";
               
             })

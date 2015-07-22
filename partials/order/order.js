@@ -44,10 +44,10 @@ var statuses = [
   {name: 'Inválido', desc: 'Pedidos que não respeitam a política do negócio.'}
 ];
 
-order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService) {
+order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', '$modal', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService, $modal) {
   
     HtmlMetaTagService.tag('title', 'Pedidos');
-
+    $scope.checkAllStatus = false;
     $scope.orderByField = 'updated';
     $scope.orders = [];
     $scope.userFormModalObject = {};
@@ -105,10 +105,53 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
     };
     
   };
+  
+  $scope.checkAllOrders = function(){
+    angular.forEach($scope.orders, function(order, orderIndex) {
+      $scope.orders[orderIndex].checked = $scope.checkAllStatus;
+    });
+  };
+  
+  $scope.showCheckedOrderProductsCondensed = function(){
+    var condensedList = [];
     
+    angular.forEach($scope.orders, function(order, orderIndex) {
+      angular.forEach(order.products, function(product, productIndex) {
+        var productInCondensedList = ($filter('filter')(condensedList, {_id: product._id}, false))[0];
+        var productInCondensedListIndex = condensedList.indexOf(productInCondensedList);
+        
+        if(productInCondensedList){
+            condensedList[productInCondensedListIndex].quantity += product.quantity;
+        }  else {
+            condensedList.push(product);
+        }
+
+      });
+    });
+
+    return $modal.open({
+      backdrop: true,
+      keyboard: true,
+      modalFade: true,
+      size: 'lg',
+      templateUrl: '/partials/order/order_condensed_modal.html',
+      controller: function ($scope, $location, $modalInstance) {
+        $scope.products = condensedList;
+        $scope.modalOptions = {
+          print: function (result) {
+            $location.path('/printCondensedProductsList');
+            $modalInstance.dismiss('print');
+          },
+          close: function (result) {
+            $modalInstance.dismiss('cancel');
+          }
+        }
+      }
+    }).result;
+  }
 }]);
 
-order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', '$modal', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, $modal, confirmModalService, HtmlMetaTagService) {
+order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, HtmlMetaTagService) {
   
   $scope.order
   $scope.statuses = statuses;
