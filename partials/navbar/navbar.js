@@ -1,10 +1,14 @@
-angular.module('myApp').controller('NavBarCtrl', function($scope, $localStorage) {
+angular.module('myApp').controller('NavBarCtrl', function($scope, $localStorage, $location) {
     
     $scope.isCollapsed = true;
     
     $scope.user = $localStorage.user;
     
     $scope.$on('$routeChangeSuccess', function(){
+        
+        console.log($location.path())
+        
+        $scope.location = $location;
         $scope.isCollapsed = true;
     });
     
@@ -15,5 +19,5 @@ angular.module('myApp').controller('NavBarCtrl', function($scope, $localStorage)
         }
         return total;
     };
-
+    
 });

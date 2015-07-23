@@ -28,6 +28,25 @@ body {
   width: 100% !important;
 }
 
+/** Navbar divider **/
+.navbar .divider-vertical {
+height: 50px;
+margin: 0 9px;
+border-right: 1px solid #ffffff;
+border-left: 1px solid #f2f2f2;
+}
+
+.navbar-inverse .divider-vertical {
+border-right-color: #222222;
+border-left-color: #111111;
+}
+
+@media (max-width: 767px) {
+.navbar-collapse .nav > .divider-vertical {
+    display: none;
+  }
+}
+
 /** Estilo do rodape **/
 .footer {
     bottom: 0;
@@ -36,6 +55,16 @@ body {
     color:white;
 }
 
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.nav>li>a:hover{
+    background-color:#b274b2 !important;
+}
+
+.nav>li.active>a, .nav>li>a:focus{
+    background-color:#A348A3 !important;
+    color: white !important;
+}
 
 .navbar-brand > img{
     margin-top: -13px;
@@ -159,19 +188,12 @@ a.text-violet{ color:#A348A3;}
 }
 
 /** Estilo do navegador **/
-.navbar-fixed-top{
+.navbar-fixed-top, .navbar-fixed-bottom{
     background: rgba(255, 255, 255, 0.9);
-    /** border-bottom: .1em solid rgba(163, 73, 164, 0.9); **/
-    font-family:'Impact, Charcoal, sans-serif';
 }
-.navbar-fixed-bottom{
-    background: rgba(255, 255, 255, 0.9);
-    /** border-bottom: .1em solid rgba(163, 73, 164, 0.9); **/
-    font-family:'Impact, Charcoal, sans-serif';
-}
+
 .navbar-fixed-top-admin{
     background: rgba(200, 200, 200, 0.9);
-    /** border-bottom: .1em solid rgba(163, 73, 164, 0.9); **/
 }
 
 /** Centraliza imagens responsivas **/
