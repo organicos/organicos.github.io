@@ -11,11 +11,11 @@ fair.config(['$routeProvider', function($routeProvider) {
     templateUrl: '/partials/fair/fair.html',
     controller: 'FairCtrl'
   });
-  $routeProvider.when('/fair/:category', {
+  $routeProvider.when('/fair/category/:category', {
     templateUrl: '/partials/fair/fair.html',
     controller: 'FairCtrl'
   });
-  $routeProvider.when('/fair/:category', {
+  $routeProvider.when('/feira/categoria/:category', {
     templateUrl: '/partials/fair/fair.html',
     controller: 'FairCtrl'
   });
@@ -49,8 +49,8 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
   });
 
   $scope.selectCategory = function (category) {
-    
-    $scope.selectedCategory = category;
+    var destination = category ? '/feira/categoria/' + category : '/feira';
+    $location.path(destination);
     
   };
 
