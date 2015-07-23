@@ -11,6 +11,14 @@ fair.config(['$routeProvider', function($routeProvider) {
     templateUrl: '/partials/fair/fair.html',
     controller: 'FairCtrl'
   });
+  $routeProvider.when('/fair/:category', {
+    templateUrl: '/partials/fair/fair.html',
+    controller: 'FairCtrl'
+  });
+  $routeProvider.when('/fair/:category', {
+    templateUrl: '/partials/fair/fair.html',
+    controller: 'FairCtrl'
+  });
   $routeProvider.when('/feira/:id', {
     templateUrl: '/partials/fair/product.html',
     controller: 'FairProductCtrl'
@@ -26,7 +34,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
   HtmlMetaTagService.tag('title', 'Feira');
   
 	$scope.products = [];
-	$scope.selectedCategory = '';
+	$scope.selectedCategory = $routeParams.category ? $routeParams.category : '';
 	$scope.selectedOrder = "name";
 
   $http.get(myConfig.apiUrl + '/products')

@@ -72,7 +72,7 @@
     <meta name="msapplication-config" content="https://s3-sa-east-1.amazonaws.com/fodev/img/icons/browserconfig.xml">
 
     <!-- Minified and concatenated CSS -->
-    <link href="/app.min.css" rel="stylesheet">
+    <link href="/app.min.css?v=1.1" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -104,19 +104,18 @@
             <span class="sr-only">Toggle navigation</span><i class="fa fa-bars"></i>
           </button>
 
-          <span>
-            <button class="btn btn-primary navbar-btn" ng-click="openBasket()" ng-if="$storage.basket.products.length">
-              Cesta 
-              <span class="label label-success" ng-bind="getBasketProductsAmount()"></span>
-            </button>
-            
-            <a class="navbar-brand" href="/" hreflang="pt-br">
-              <img ng-src="https://feiraorganica.com/cdn/image/46/?url=https://s3-sa-east-1.amazonaws.com/fodev/img/global/logo_transparent.png">
-            </a>
-          </span>
+          <a class="navbar-brand" href="/" hreflang="pt-br">
+            <img ng-src="https://feiraorganica.com/cdn/image/46/?url=https://s3-sa-east-1.amazonaws.com/fodev/img/global/logo_transparent.png">
+          </a>
           
-          <a href="/feira" class="btn btn-success navbar-btn visible-xs-inline-block pull-right">Feira</a>
-          
+          <a href="#" class="navbar-brand" ng-click="openBasket()">
+            <i class="fa fa-shopping-cart fa-2x"></i> 
+            <small class="fa-embed-text" ng-bind="getBasketProductsAmount()"></small>
+          </a>
+
+          <div class="navbar-text navbar-right">
+            <a href="/feira" class="btn btn-success visible-xs-inline-block">Feira</a>
+          </div>
           
         </div>
         <div id="navbar" class="collapse navbar-collapse" collapse="isCollapsed">
@@ -367,7 +366,7 @@
 
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/satellizer/satellizer.min.js"></script>
-    <script src="/app.min.js?v=1"></script>
+    <script src="/app.min.js?v=1.1"></script>
     <script src="/config/env_config.js"></script>
 
     <script>

@@ -30,10 +30,8 @@ body {
 
 /** Navbar divider **/
 .navbar .divider-vertical {
-height: 50px;
-margin: 0 9px;
-border-right: 1px solid #ffffff;
-border-left: 1px solid #f2f2f2;
+    height: 50px;
+    margin: 0 9px;
 }
 
 .navbar-inverse .divider-vertical {
@@ -45,6 +43,20 @@ border-left-color: #111111;
 .navbar-collapse .nav > .divider-vertical {
     display: none;
   }
+}
+
+/* navbar icons 2x */
+.navbar .navbar-brand .fa-2x{
+    margin-top:-8px;
+    color:#415B76;
+}
+.navbar .navbar-brand .fa-2x + .fa-embed-text{
+    position: relative;
+    left: -27px;
+    bottom:12px;
+    color: #fff;
+    font-size: 11px;
+    font-weight:bold;
 }
 
 /** Estilo do rodape **/

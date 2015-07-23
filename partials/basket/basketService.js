@@ -82,9 +82,9 @@ angular.module('myApp').service('basketService', ['$modal', '$localStorage', '$f
                     close: function (result) {
                         $modalInstance.dismiss('cancel');
                     },
-                    goToFair: function(){
-                        $location.path('/feira');
-                        $modalInstance.dismiss('fair');
+                    goTo: function(location){
+                        $location.path(location);
+                        $modalInstance.dismiss(location);
                     },
                     clearBasket: function(){
                         var modalOptions = {

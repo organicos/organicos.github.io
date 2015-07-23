@@ -1,12 +1,13 @@
-<div class="modal-header">
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
-  <h3>Minha cesta orgânica</h3>
-</div>
 <div class="modal-body">
-  
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="modalOptions.close()"><span aria-hidden="true">&times;</span></button>
 	<div ng-if="!basket.products.length">
-		<h4>A sua cesta está vazia!</h4>
-		<p>Vá até a <a href="/feira">Feira</a> e adicione novos produtos clicando no botão "Colocar na cesta".</p>
+		<h3>A sua cesta está vazia!</h3>
+    <p>Mas você pode continuar suas compras em nossa feira.
+    <p>O preço e a disponibilidade dos itens estão sujeitos a alterações.</p>
+    <p>A cesta orgânica é um local temporário para armazenar uma lista de seus itens da feira e reflete o preço mais recente de cada um deles.</p>
+    <p>Caso já tenha uma conta, <a href="/entrar" ng-click="modalOptions.goTo('/entrar')">Faça o login</a> para ver seu carrinho.</p></p>
+		<p>Vá até a <a href="/feira" ng-click="modalOptions.goTo('/fair')">Feira</a> e adicione novos produtos clicando no botão "Colocar na cesta".</p>
+		<button type="button" class="btn btn-primary btn-block btn-lg" ng-click="modalOptions.goTo('/fair')">Continuar comprando</button>
 	</div>
 	
 	<div ng-if="basket.products.length">
@@ -62,12 +63,10 @@
     </div>
 
 </div>
-<div class="modal-footer">
+<div class="modal-footer" ng-if="basket.products.length">
   Compra 100% segura.
   <br>
   <button type="button" class="btn btn-danger" ng-click="modalOptions.clearBasket()">Esvaziar cesta</button>
   <button type="button" class="btn btn-primary" ng-click="modalOptions.goToFair()">Feira</button>
-  <button class="btn btn-success" ng-click="modalOptions.ok();" 
-    ng-disabled="basket.total < 35"
-  >Revisar e finalizar meu pedido</button>
+  <button class="btn btn-success" ng-click="modalOptions.ok();" ng-disabled="basket.total < 35">Revisar e finalizar meu pedido</button>
 </div>
