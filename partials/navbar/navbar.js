@@ -5,9 +5,6 @@ angular.module('myApp').controller('NavBarCtrl', function($scope, $localStorage,
     $scope.user = $localStorage.user;
     
     $scope.$on('$routeChangeSuccess', function(){
-        
-        console.log($location.path())
-        
         $scope.location = $location;
         $scope.isCollapsed = true;
     });

@@ -156,7 +156,7 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
   }
 }]);
 
-order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, HtmlMetaTagService) {
+order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', '$modal', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, HtmlMetaTagService, $modal) {
   
   $scope.order
   $scope.statuses = statuses;
