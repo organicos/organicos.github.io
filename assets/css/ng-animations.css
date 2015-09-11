@@ -1,0 +1,17 @@
+.container {
+  position: relative;
+  margin-top: 25px;
+  height: 110px;
+}
+.country {
+  position: absolute;
+  -webkit-transition: top 500ms ease;
+  -moz-transition: top 500ms ease;
+  -o-transition: top 500ms ease;
+  transition: top 500ms ease;
+}
+.country-name {
+  display: inline-block;
+  width: 100px;
+  margin-left: 50px;
+}

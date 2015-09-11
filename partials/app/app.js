@@ -5,7 +5,6 @@ var $scope, $location;
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
   'ngRoute',
-  'newrelic-timing',
   'ui.bootstrap',
   'ngStorage',
   'ngAnimate',
