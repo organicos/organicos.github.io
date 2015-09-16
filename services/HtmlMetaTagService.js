@@ -9,7 +9,7 @@ angular.module('myApp').service('HtmlMetaTagService', ['$location', function($lo
     return {
         resetData: function() {
             metaData = {
-                title: 'Feira orgânica Delivery - Produtos orgânicos entregues em sua porta.'
+                title: 'Feira Orgânica Delivery - Produtos orgânicos entregues em sua porta.'
             };
             return HtmlMetaTagService;
         },
