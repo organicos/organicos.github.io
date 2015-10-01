@@ -20,15 +20,9 @@ AngularJS v1.2+
 ###Browser support
 
 
-Chrome  ![ok](http://i.imgur.com/CK8qxk1.png)
-
-Firefox ![ok](http://i.imgur.com/CK8qxk1.png)
-
-Safari ![ok](http://i.imgur.com/CK8qxk1.png)
-
-Opera ![ok](http://i.imgur.com/CK8qxk1.png)
-
-IE    ![mmm](http://i.imgur.com/iAIwqCL.png)
+![Chrome](https://raw.github.com/alrra/browser-logos/master/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/firefox/firefox_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/internet-explorer/internet-explorer_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/opera/opera_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/safari/safari_48x48.png)
+--- | --- | --- | --- | --- |
+ ✔ | ✔ | IE9 + | ✔ | ✔ |
 
 
 ## Load
@@ -45,15 +39,20 @@ To use the directive, include the angular socialshare's javascript file in your 
 </html>
 ```
 
-##Install
+##Installation
 
-###Bower installation
+####Bower
 
 ```
 $ bower install angularjs-socialshare --save
 ```
+####Npm
 
-_then load the js files in your html_
+```
+$ npm install angular-socialshare --save
+```
+
+_then [load](https://github.com/720kb/angular-socialshare#load) it in your html_
 
 ###Add module dependency
 Add the 720kb.socialshare module dependency
@@ -84,16 +83,16 @@ Angular socialshare allows you to use some options via `attribute` data
 ####Sharing Provider
 You can set the social platform you want to share on using the `socialshare-provider=""` attribute.
 
-###Providers:
+#####Providers:
 
 - facebook
 - twitter
 - linkedin
 - google+
 - pinterest
-- tumbler
+- tumblr
 - reddit
-- stubmleupon
+- stumbleupon
 - buffer
 - digg
 - delicious
@@ -131,8 +130,9 @@ socialshare-text="720kb is enough!">
 Share me
 </a>
 ```
+
 ####Sharing media
-You can set the media source to share using the `socialshare-media=""` attribute (for example, you will use it for pinterest)
+You can set the media source to share using the `socialshare-media=""` attribute
 
 ```html
 <a href="#"
@@ -156,8 +156,8 @@ Share me
 </a>
 ```
 
-####Sharing "via"
-You can set the twitter via (actually no other social is allowing this tag) to share using the `socialshare-via=""` attribute
+####Sharing via
+You can set the twitter via to share using the `socialshare-via=""` attribute
 
 ```html
 <a href="#"
@@ -169,6 +169,39 @@ socialshare-hashtags="woa, wonderful, interesting">
 Share me
 </a>
 ```
+
+####Sharing type
+You can set the type of sharing window using the `socialshare-type=""` attribute
+
+At the moment this option is only supported for Facebook feed dialog.
+
+_Note: when you are using `socialshare-type="feed"` you must also supply your facebook app id using `socialshare-via`, and a redirect uri using `socialshare-redirect-uri`._
+
+#####Facebook _Dialog_:
+
+Available options:
+
+```html
+<a href="#"
+socialshare
+socialshare-provider="facebook"
+socialshare-type="feed"
+socialshare-via="145634995501895"
+socialshare-to=""
+socialshare-from=""
+socialshare-ref=""
+socialshare-display="popup"
+socialshare-media="https://avatars0.githubusercontent.com/u/7762645?v=3&s=200"
+socialshare-source=""
+socialshare-description="Yes it's super awesome, seriously!"
+socialshare-text="720kb"
+socialshare-caption="720kb is awesome"
+socialshare-url="http://720kb.net"
+socialshare-redirect-uri="https://developers.facebook.com/tools/explorer">
+Share with Fb Dialog
+</a>
+```
+_For more details see https://developers.facebook.com/docs/sharing/reference/feed-dialog/v2.4_
 
 ####Sharing Event Trigger
 You can choose to bind a different event trigger for showing up the sharer popup using the `socialshare-trigger=""` attribute (you can use any angular `element.bind()` event you want)
@@ -208,10 +241,26 @@ socialshare-popup-width="800">
 Share with a bigger popup
 </a>
 ```
+#### Sharing to a subreddit
+You can set `socialshare-subreddit` to specify the subreddit you want to share to. Example:
+
+```html
+<a href='#'
+socialshare
+socialshare-provider="reddit"
+socialshare-subreddit="technology"
+socialshare-url="http://720kb.net"
+socialshare-text="Sharing it!"
+socialshare-popup-height="900"
+socialshare-popup-width="650">
+</a>
+```
+
+**Note**: Minimum popup resolution for reddit popups is 900 x 650 pixels since the reddit submission page is not responsive and is broken on lesser widths.
 
 ## Example
 
-###[Live demo](https://720kb.github.io/angular-socialshare)
+####[Live demo](https://720kb.github.io/angular-socialshare)
 
 
 ##Contributing
