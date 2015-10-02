@@ -20,6 +20,7 @@ blog.controller('BlogArticlesCtrl', ['$scope','$http', '$filter', '$routeParams'
   $scope.articles = [];
   $scope.selectedFilter = '';
   $scope.selectedOrder = 'updated';
+  $scope.loadingArticles = true;
 
   $http.get(myConfig.apiUrl+'/articles')
   .success(function(res){
@@ -34,6 +35,10 @@ blog.controller('BlogArticlesCtrl', ['$scope','$http', '$filter', '$routeParams'
           title: "Não foi possível acessar a lista de artigos. Verifique o motivo abaixo:"
       });
   
+  }).finally(function(res){
+    
+    $scope.loadingArticles = false;
+    
   });
 
   $scope.selectFilter = function (value) {

@@ -36,6 +36,7 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
 	$scope.products = [];
 	$scope.selectedCategory = $routeParams.category ? $routeParams.category : '';
 	$scope.selectedOrder = "name";
+	$scope.loadingProducts = true;
 
   $http.get(myConfig.apiUrl + '/products')
   .success(function(resp) {
@@ -46,6 +47,10 @@ fair.controller('FairCtrl', ['$scope','$http', '$routeParams', '$filter', '$loca
     
       console.error('ERR', err);
 
+  }).finally(function(res){
+    
+    $scope.loadingProducts = false;
+    
   });
 
   $scope.selectCategory = function (category) {

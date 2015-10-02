@@ -1,6 +1,8 @@
 <br>
 
-<div class="row">
+<p class="text-center" ng-if="loadingProducts">Buscando produtos <i class="fa fa-cog fa-spin"></i></p>
+
+<div class="row" ng-if="!loadingProducts" ng-cloak>
     <div class="col-sm-22 col-sm-offset-1">
 
 		<form class="ng-cloak form-inline text-right">
