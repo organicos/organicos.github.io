@@ -27,7 +27,7 @@
                     
                     <br>
                     
-                    <img class="img-responsive" alt="{{::product.name}}" ng-src="{{product.images[0].url}}" ></img>
+                    <img class="img-responsive" alt="{{::product.name}}" ng-src="{{product.images[0].url}}" src="assets/img/global/no_image.jpeg"></img>
                     
                     <button class="btn btn-success btn-block" ng-click="addToBasket(product)">
                         Colocar na cesta
@@ -81,7 +81,7 @@
 		
 				<div class="thumbnail">
 					<a href="/feira/{{product.encoded_url}}" hreflang="pt-br">
-						<img class="img-responsive img-responsive-wide img-centered" alt="{{::product.name}}" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.images[0].url}}" ng-dblclick="addToBasket(product)">
+						<img class="img-responsive img-responsive-wide img-centered" alt="{{::product.name}}" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.images[0].url}}" ng-dblclick="addToBasket(product)" src="assets/img/global/no_image.jpeg">
 					</a>
 					<hr>
 					<div style="height:100px;">
