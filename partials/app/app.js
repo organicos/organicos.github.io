@@ -35,6 +35,7 @@ var app = angular.module('myApp', [
   'myApp.categories',
   'myApp.shipping',
   'myApp.custom-filters',
+  'myApp.discounts',
   'chart.js'
 ]);
 
