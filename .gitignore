@@ -37,7 +37,7 @@ build/Release
 config/env_config.js
 
 # Grunt file
-Gruntfile.js
+# Gruntfile.js
 
 # App concatenated and With Annotations
 app.concat.js
