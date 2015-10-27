@@ -36,12 +36,12 @@ order.config(['$routeProvider', function($routeProvider) {
 }]);
 
 var statuses = [
-  {name: 'Não pago', desc: 'Aguardando pagamento.'},
-  {name: 'Pago', desc: 'Aguardando entrega.'},
-  {name: 'Entregue', desc: 'Cesta entregue ao cliente.'},
-  {name: 'Cancelado', desc: 'Pedido cancelado por falta de pagamento.'},
-  {name: 'Problemas', desc: 'Problemas com o Pagseguro.'},
-  {name: 'Inválido', desc: 'Pedidos que não respeitam a política do negócio.'}
+  {id: 0, name: 'Pagamento pendente', desc: 'Aguardando pagamento.'},
+  {id: 1, name: 'Pago', desc: 'Aguardando entrega.'},
+  {id: 2, name: 'Entregue', desc: 'Cesta entregue ao cliente.'},
+  {id: 3, name: 'Cancelado', desc: 'Pedido cancelado por falta de pagamento.'},
+  {id: 4, name: 'Problemas', desc: 'Problemas com o Pagseguro.'},
+  {id: 5, name: 'Inválido', desc: 'Pedidos que não respeitam a política do negócio.'}
 ];
 
 order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'HtmlMetaTagService', '$modal', function($scope, $http, $filter, $routeParams, myConfig, HtmlMetaTagService, $modal) {
@@ -117,8 +117,6 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
     var condensedList = [];
     var checkedOrders = ($filter('filter')($scope.orders, {checked: true}, false));
     
-    console.log(condensedList.length);
-    console.log(checkedOrders.length);
 
     angular.forEach(checkedOrders, function(order, orderIndex) {
       angular.forEach(order.products, function(product, productIndex) {
@@ -132,7 +130,6 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
       });
     });
 
-    console.log(condensedList.length);
 
     return $modal.open({
       backdrop: true,
@@ -158,10 +155,9 @@ order.controller('OrdersCtrl', ['$scope','$http', '$filter', '$routeParams', 'my
 
 order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myConfig', 'confirmModalService', 'HtmlMetaTagService', '$modal', function($scope, $http, $filter, $routeParams, myConfig, confirmModalService, HtmlMetaTagService, $modal) {
   
-  $scope.order
+  $scope.order = {};
   $scope.statuses = statuses;
   $scope.changingStatus = false;
-  $scope.newStatus = 0;
   
   if($routeParams.id){
 
@@ -171,7 +167,6 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
         HtmlMetaTagService.tag('title', 'Pedido ' + res._id);
     
         $scope.order = res;
-        $scope.newStatus = res.status;
   
     }).error(function(err, response) {
   
@@ -188,29 +183,76 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
     });
     
   }
-  
-  $scope.changeStatus = function(newStatus){
-    
+
+  $scope.orderTotal = function(){
+
+    var total = 0;
+
+    angular.forEach($scope.order.products, function(product, index){
+      if(!product.unavaiable)
+        total += product.prices[0].price * product.quantity;
+    });
+
+    return total;
+
+  }
+
+  $scope.refreshRefoundValue = function(){
+
+    var total = 0;
+
+    angular.forEach($scope.order.products, function(product, index){
+      if(product.unavaiable){
+        total += product.prices[0].price * product.quantity;
+      }
+    });
+
+    if($scope.order.refound){
+      $scope.order.refound.value = total;
+    }
+
+    return total;
+
+  }
+
+  $scope.changeStatus = function(newStatus, oldStatus){
+
+    var hasRefound = $scope.refreshRefoundValue() > 0 ;
+    var refounOptionNotSelected = $scope.order.refound.option.length == 0;
+
+    if(hasRefound && refounOptionNotSelected){
+
+      $scope.$emit('alert', {
+        kind: 'danger',
+        title: 'Alguns produtos não foram entregues.',
+        msg: ['Selecione a forma de reembolso antes de continuar.']
+      });
+
+      $scope.order.status = oldStatus;
+
+      return false;
+
+    }
+
     $scope.changingStatus = true;
 
     var modalOptions = {
         closeButtonText: 'Cancelar',
         actionButtonText: 'Alterar status do pedido',
         actionButtonKind: 'btn-danger',
-        headerText: 'Alterar status do pedido para ' + statuses[newStatus].name + "?",
-        bodyText: 'Deseja realmente alterar status do pedido para ' + statuses[newStatus].name + "?"
+        headerText: 'Alterar status do pedido para ' + statuses[$scope.order.status].name + "?",
+        bodyText: 'Deseja realmente alterar status do pedido para ' + statuses[$scope.order.status].name + "?"
     };
 
     confirmModalService.showModal({}, modalOptions)
     .then(function (confirmed) {
       
       if(confirmed){
+
+        $scope.order.status = $scope.order.status;
         
-        $http.put(myConfig.apiUrl + '/order/'+$scope.order._id, {status: newStatus})
+        $http.put(myConfig.apiUrl + '/order/'+$scope.order._id, $scope.order)
         .success(function(res) {
-          
-          $scope.order.status = newStatus;
-          $scope.newStatus = newStatus;
     
           $scope.$emit('alert', {
               kind: 'success',
@@ -220,6 +262,8 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
     
         })
         .error( function(resp) {
+
+          $scope.order.status = oldStatus;
           
           var error_list = [];
     
@@ -250,7 +294,6 @@ order.controller('OrderCtrl', ['$scope','$http', '$filter', '$routeParams', 'myC
 
   $scope.showDepositInstructionsModal = function(){
     
-      console.log('iuhiuhiu');
       return $modal.open({
           backdrop: true,
           keyboard: true,
@@ -495,7 +538,7 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
 
     }
     
-    $scope.$storage.basket.total += parseFloat(product.price);
+    $scope.$storage.basket.total += parseFloat(product.prices[0].price);
     
   };
 
@@ -511,11 +554,11 @@ order.controller('OrderReviewCtrl', ['$scope','$http', '$filter', '$routeParams'
         
         product.quantity -= decreasingAmount;
         
-        $scope.$storage.basket.total -= product.price * decreasingAmount;
+        $scope.$storage.basket.total -= product.prices[0].price * decreasingAmount;
         
       } else {
         
-        $scope.$storage.basket.total -= parseFloat(product.price) * product.quantity;
+        $scope.$storage.basket.total -= parseFloat(product.prices[0].price) * product.quantity;
         
         $scope.$storage.basket.products.splice(productIndex, 1);   
         

@@ -3,7 +3,10 @@
 var home = angular.module('myApp.home', ['ngRoute']);
 
 home.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/', { templateUrl: 'ngViewChildrenAsTemplateDirective.html', controller: 'HomeCtrl' });
+  $routeProvider.when('/', {
+    templateUrl: '/partials/home/home.html',
+    controller: 'HomeCtrl'
+  });
 }]);
 
 home.controller('HomeCtrl', ['$scope', '$http', 'myConfig', '$location', 'anchorSmoothScrollService', 'HtmlMetaTagService', function($scope, $http, myConfig, $location, anchorSmoothScrollService, HtmlMetaTagService) {

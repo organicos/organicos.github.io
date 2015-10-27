@@ -74,6 +74,9 @@
     <!-- Minified and concatenated CSS -->
     <link href="/app.min.css?v=1.1" rel="stylesheet">
 
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -159,172 +162,34 @@
     </div>
 
     <!--[if lt IE 7]>
-      <p class="browsehappy">You are us
-      ing an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <p class="browsehappy text-center background-green text-white">Você está utilizando um navegador <strong>antigo</strong>. Por favor <a href="https://browsehappy.com/">atualize seu navegador</a> para ter uma melhor experiência na Feira Orgânica Delivery.</p>
     <![endif]-->
 
-    <div ng-view-children-as-template ng-view class="container-fluid main-container" autoscroll="true">
+    <div ng-view class="container-fluid main-container" autoscroll="true">
       
-      <h1 class="hide">Feira Orgânica Delivery</h1>
-      
-      <div class="row no-gutter" id="bg-topo-home">
-      	<div class="col-xs-offset-4 col-xs-16 col-sm-offset-5 col-sm-14 col-md-offset-6 col-md-12">
-      
-      		<img class="img-responsive img-centered img-responsive-wide" ng-src="https://s3-sa-east-1.amazonaws.com/fodev/img/global/marca.png">
-      		<br><br class="hidden-xs hidden-sm">
-      		<p class="text-center">
-      			<a href="/feira"  hreflang="pt-br" class="btn btn-primary">
-      				<span class="visible-xs-inline">
-      					Montar minha cesta orgânica
-      				</span>
-      				<span class="visible-sm-inline font-30">
-      					Montar minha cesta orgânica
-      				</span>
-      				<span class="visible-md-inline font-40">
-      					Montar minha cesta orgânica
-      				</span>
-      				<span class="visible-lg-inline font-40">
-      					Montar minha cesta orgânica
-      				</span>
-      			</a>			
-      		</p>
-      		<br><br class="hidden-xs hidden-sm">
-      	</div>
+      <div class="row text-center background-green text-white">
+        <div class="col-xs-24">
+          <h1>Feira Orgânica Delivery</h1>
+
+            <h2>Olá,</h2>
+            <h3>Fique a vontade em nossa feira. Estamos preparando as coisas para lhe atender direitinho.</h4>
+            <h3>A feira estará pronta logo, logo...
+              <i class="fa fa-spinner fa-spin"></i>
+            </h3>
+
+        </div>
       </div>
-      
-      <div id="como-funciona" class="row background-green text-white">
-      	<div class="col-xs-24">
-      
-      		<h2 class="text-center">Como funciona</h2>
-      		<br>
-      
-      		<div class="row">
-      			<div class="col-sm-8 text-center">
-      				<h3 class="text-yellow"><a class="text-yellow" hreflang="pt-br" href="/montar_cesta">1 - Monte sua cesta.</a></h3>
-      				<p>Em nossa feira você encontra somente produtos que foram produzidos com muito amor e respeito a você e ao meio ambiente.</p>
-      				<i class="fa fa-shopping-cart font-200"></i>
-      			</div>
-      			<div class="col-sm-8 text-center">
-      				<h3 class="text-yellow">2 - Efetue o pagamento.</h3>
-      				<p>Compra 100% segura! Você escolhe a melhor forma de pagar. Aceitamos cartões de crédito e débito, transferência e boleto bancário.</p>
-      				<i class="fa fa-credit-card font-200"></i>
-      			</div>
-      			<div class="col-sm-8 text-center">
-      				<h3 class="text-yellow">3 - Receba o produto.</h3>
-      				<p>Fazemos o que chamamos de Entrega Inteligente. Muita logística, menor custo, baixa emissão de carbono e horários alternativos.</p>
-      				<i class="fa fa-truck fa-flip-horizontal font-200"></i>
-      			</div>
-      		</div>
-      
-      		<br></br>
-      		
-      		<p class="text-right"><a class="text-white" href="/blog/termos" hreflang="pt-br">Saiba mais aqui...</a></p>
-      		
-      		<br>
-      	</div>
-      </div>
-      
-      <div class="row ng-cloak">
-      	<div class="col-xs-24">
-      	  
-      		<h2 class="text-center">Destaques da semana</h2>
-      		<br><br>
-      
-      		<div class="row">
-      			<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" ng-repeat="product in highlightProducts">
-      		
-      		
-      				<div class="thumbnail">
-      					<a href="/feira/{{product.encoded_url}}" hreflang="pt-br">
-      						<img class="img-responsive img-responsive-wide img-centered" alt="{{::product.name}}" ng-src="https://feiraorganica.com/cdn/image/200x200/?url={{product.images[0].url}}" ng-dblclick="addToBasket(product)" src="assets/img/global/no_image.jpeg">
-      					</a>
-      					<hr>
-      					<div style="height:100px;">
-      						<p>
-      							<span class="text-success" ng-bind="product.prices[0].price | currency:'R$':2"></span> <span ng-if="product.prices[1].price > product.prices[0].price"><i class="fa fa-arrow-down text-success"></i> <del><small class="text-muted text-danger" ng-bind="product.prices[1].price | currency:'R$':2"></small></del></span>
-      						</p>
-      						<h4 class="text-violet"><a href="/feira/{{product.encoded_url}}" ng-bind="product.name" hreflang="pt-br"></a></h4>
-      					</div>
-      		
-      					<button class="btn btn-success btn-block" ng-click="addToBasket(product)">Colocar na cesta 
-      						<span class="label label-warning" ng-repeat="buttonProduct in $storage.basket.products | filter : {_id: product._id}" ng-bind="buttonProduct.quantity"></span>
-      					</button>
-      		
-      				</div>
-      		
-      		
-      			</div>
-      			<div class="col-xs-24" ng-if="!highlightProducts.length">Nesta semana não temos nenhum produto em destaque!
-      				<br></br>
-      			</div>
-      		</div>
-      		
-      		<br>
-      		<p class="text-center">
-      		  <a href="/feira" class="btn btn-primary btn-lg" hreflang="pt-br">
-      				<span class="visible-xs-inline">
-      					Ver todos os produtos
-      				</span>
-      				<span class="visible-sm-inline font-30">
-      					Ver todos os produtos
-      				</span>
-      				<span class="visible-md-inline font-40">
-      					Ver todos os produtos
-      				</span>
-      				<span class="visible-lg-inline font-40">
-      					Ver todos os produtos
-      				</span>
-      		  </a>
-      		</p>
-      		<br>
-      		
-      	</div>
-      </div>
-      
+
     </div>
-    
-    <div class="container-fluid background-blue text-white text-center" ng-if="!$storage.user.token">
 
-    		<h2>Receba semanalmente nossa lista de produtos e preços.</h2>
-
-    		<br>
-    
-    		<div class="row">
-    			
-    			<div class="col-xs-24 col-sm-offset-2 col-sm-20 col-md-offset-4 col-md-16 col-lg-offset-5 col-lg-14">
-    				
-    				<form class="form" role="form" class="lead_form" ng-submit="signupToNewsletter()">
-    					<div class="input-group input-group-lg">
-    						<input type="email" class="form-control" name="email" placeholder="Informe seu e-mail" ng-model="signupToNewsletter.mail" />
-				        <span class="input-group-btn">
-				            <button type="submit" id="filter" class="btn btn-primary btn-block">Enviar</button>
-				        </span>
-    					</div>
-    				</form>
-    				
-    				<p class="text-left">
-      				* A Feira Orgânica Delivery respeita sua privacidade e em nenhuma hipóteste seu endereço de e-mail será fornecido a terceiros.
-      				<br>
-      				** A Feira Orgânica Delivery enviará apenas 1 e-mail por semana.
-      				<br>
-      				*** A qualquer momento você poderá descadastrar-se. Basta acessar <a href="/eu" hreflang="pt-br">seus dados</a> e desmarcar a opção "Desejo receber semanalmente a lista de produtos e promoções".
-    				</p>
-    				
-
-    			</div>			
-    
-    		</div>
-    		
-    </div>
-    
     <br></br>
 
     <div class="container-fluid clearfix footer small">
-      
+
       <br>
-      
+
       <p class="text-center"><span class="text-violet">Próxima entrega:</span> <span ng-bind="followingShippingDate"></span></p>
-       
+
       <div class="row">
         <div class="col-xs-offset-1 col-xs-22">
           <div class="row">
@@ -335,7 +200,7 @@
               <p>Florianópolis: R$6,00</p>
               <p>Palhoça: R$15,00</p>
               <p>São José: R$12,00</p>
-              
+
             </div>
             <div class="col-sm-5 text-muted">
               <h4 class="text-center">Pagamento</h4>
@@ -352,7 +217,7 @@
             <div class="col-sm-5 text-muted">
               <h4 class="text-center">Termos e Condições</h4>
               <p>Ao utilizar o site feiraorgânica.com você concorda com os <a href="/blog/termos" hreflang="pt-br">Termos e Condições de Uso.</a>
-              <p>A lista de produtos e preços é atualizada semanalmente sem aviso prévio.</p>
+                <p>A lista de produtos e preços é atualizada semanalmente sem aviso prévio.</p>
               </p>
             </div>
             <div class="col-sm-4 text-muted">
@@ -407,6 +272,3 @@
 
   </body>
 </html>
-
-<!-- Font awesome -->
-<link async rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">

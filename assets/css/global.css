@@ -145,7 +145,7 @@ a.text-orange{ color:#F27935;}
 a.text-red{ color:#D64541;}
 a.text-white{ color:white !Important;}
 a.text-violet{ color:#A348A3;}
-
+.text-del{text-decoration: line-through;}
 /** Font sizes **/
 .font-20{ font-size: 20px !important;}
 .font-30{ font-size: 30px !important;}

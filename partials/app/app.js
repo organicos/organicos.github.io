@@ -4,14 +4,16 @@ var $scope, $location;
 
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
-  'ngRoute',
-  'ui.bootstrap',
-  'ngStorage',
   'ngAnimate',
+  'ngFileUpload',
+  'ngRoute',
+  'ngStorage',
+  'ngSanitize',
+  '720kb.socialshare',
   'angular.filter',
   'satellizer',
-  'ngSanitize',
-  'ngFileUpload',
+  'ui.bootstrap',
+  'chart.js',
   'myApp.home',
   'myApp.fair',
   'myApp.tickets',
@@ -24,7 +26,6 @@ var app = angular.module('myApp', [
   'myApp.config',
   'myApp.certification',
   'myApp.susteinable',
-  '720kb.socialshare',
   'myApp.about',
   'myApp.addresses',
   'myApp.groups',
@@ -35,8 +36,7 @@ var app = angular.module('myApp', [
   'myApp.categories',
   'myApp.shipping',
   'myApp.custom-filters',
-  'myApp.discounts',
-  'chart.js'
+  'myApp.discounts'
 ]);
 
 app.config(['$routeProvider', '$httpProvider', '$authProvider', '$locationProvider', function($routeProvider, $httpProvider, $authProvider, $locationProvider) {
